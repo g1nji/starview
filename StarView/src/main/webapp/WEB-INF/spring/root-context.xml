@@ -32,7 +32,7 @@
 				<value>classpath:/hyeri/dao/**/*Mapper.xml</value>
 				<value>classpath:/jeonghwa/dao/**/*Mapper.xml</value>
 				<value>classpath:/jiwon/dao/**/*Mapper.xml</value>
-				<value>classpath:/seulgi/dao/**/*Mapper.xml</value>
+				<value>classpath:/seulgi/**/dao/**/*Mapper.xml</value>
 				<value>classpath:/sharon/dao/**/*Mapper.xml</value>
 				<value>classpath:/ydg/dao/**/*Mapper.xml</value>
 				<value>classpath:/yewon/dao/**/*Mapper.xml</value>
@@ -44,7 +44,7 @@
 	<!-- 마이바티스를 이용하는 인터페이스 설정( DAO 설정 ) -->
 	<!-- 	-> Mapper XML의 namespace속성과 일치하는 인터페이스를 찾는다 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="hyeri.dao, jeonghwa.dao, jiwon.dao, seulgi.dao, sharon.dao, ydg.dao, yewon.dao" />
+		<property name="basePackage" value="hyeri.dao, jeonghwa.dao, jiwon.dao, seulgi.**.dao, sharon.dao, ydg.dao, yewon.dao" />
 	</bean>
 	
 	<!-- 트랜잭션 매니저 스프링 빈 설정 -->
