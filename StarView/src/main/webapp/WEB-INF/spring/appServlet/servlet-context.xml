@@ -21,7 +21,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="s.t.ar, hyeri.controller, hyeri.service, jeonghwa.controller, jeonghwa.service, jiwon.controller, jiwon.service, seulgi.controller, seulgi.service, sharon.controller, sharon.service, ydg.controller, ydg.service, yewon.controller, yewon.service" />
+	<context:component-scan base-package="s.t.ar, hyeri.controller, hyeri.service, jeonghwa.controller, jeonghwa.service, jiwon.controller, jiwon.service, seulgi.**.controller, seulgi.**.service, sharon.controller, sharon.service, ydg.controller, ydg.service, yewon.controller, yewon.service" />
 	
 	
 	
