@@ -15,6 +15,34 @@
 		<level value="info" />
 	</logger>
 	
+	<logger name="hyeri">
+		<level value="info" />
+	</logger>
+	
+	<logger name="jeonghwa">
+		<level value="info" />
+	</logger>
+	
+	<logger name="jiwon">
+		<level value="info" />
+	</logger>
+	
+	<logger name="seulgi">
+		<level value="info" />
+	</logger>
+	
+	<logger name="sharon">
+		<level value="info" />
+	</logger>
+	
+	<logger name="ydg">
+		<level value="info" />
+	</logger>
+	
+	<logger name="yewon">
+		<level value="info" />
+	</logger>
+	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
 		<level value="info" />
