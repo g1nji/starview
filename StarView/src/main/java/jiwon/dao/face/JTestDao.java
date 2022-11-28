@@ -1,6 +1,6 @@
 package jiwon.dao.face;
 
-public interface TestDao {
+public interface JTestDao {
 
 	public void insert();
 }

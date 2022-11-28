@@ -1,6 +1,6 @@
 package jiwon.service.face;
 
-public interface TestService {
+public interface JTestService {
 
 	public void test();
 	

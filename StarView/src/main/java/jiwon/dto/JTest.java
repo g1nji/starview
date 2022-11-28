@@ -1,6 +1,6 @@
 package jiwon.dto;
 
-public class Test {
+public class JTest {
 	
 	private String test;
 
