@@ -7,4 +7,8 @@
 
 <mapper namespace="seulgi.dao.face.AdminProductDao">
 
+	<select id="selectAll" resultType="seulgi.dto.AdminProduct">
+		SELECT * FROM Goods
+	</select>
+
 </mapper>
