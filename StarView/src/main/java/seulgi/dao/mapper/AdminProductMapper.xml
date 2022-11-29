@@ -8,7 +8,12 @@
 <mapper namespace="seulgi.dao.face.AdminProductDao">
 
 	<select id="selectAll" resultType="seulgi.dto.AdminProduct">
-		SELECT * FROM Goods
+		SELECT * FROM goods
 	</select>
+	
+	<insert id="insert" parameterType="seulgi.dto.AdminProduct">
+		INSERT INTO goods (g_id, g_price)
+		VALUES (goods_seq.nextval, #{g_price })
+	</insert>
 
 </mapper>

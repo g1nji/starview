@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class AdminProduct {
 	
+	//상품
 	private int gId;
 	private String gName;
 	private int gPrice;
@@ -11,6 +12,11 @@ public class AdminProduct {
 	private Date regDate;
 	private String gDetail;
 	private int delPrice;
+	
+	//상품 이미지
+	//private int imgId;
+	//private String fileName;
+	//private String fileType;
 	
 	public AdminProduct() {}
 

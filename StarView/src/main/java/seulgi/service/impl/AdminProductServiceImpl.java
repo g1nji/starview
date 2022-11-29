@@ -27,4 +27,11 @@ public class AdminProductServiceImpl implements AdminProductService {
 		
 		return adminProductDao.selectAll();
 	}
+	
+	@Override
+	public AdminProduct upload(AdminProduct product) {
+		logger.info("upload() 사용");
+		
+		return adminProductDao.insert(product);
+	}
 }
