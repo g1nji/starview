@@ -44,14 +44,11 @@ public class AdminProductController {
 	
 	//상품 업로드
 	@RequestMapping(value="/insert", method = RequestMethod.POST)
-	//public void insertProdProc(AdminProduct product, Model model) {
 	public void insertProdProc(AdminProduct product) {
 		logger.info("/insert 주소 연결 - [POST]");
 		logger.info("상품 정보: {}", product);
 		
-		//product = adminProductService.upload(product);
-		
-		//model.addAttribute("product", product);
+		adminProductService.upload(product);
 	}
 	
 }

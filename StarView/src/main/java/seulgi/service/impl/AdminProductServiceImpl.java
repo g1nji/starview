@@ -29,9 +29,9 @@ public class AdminProductServiceImpl implements AdminProductService {
 	}
 	
 	@Override
-	public AdminProduct upload(AdminProduct product) {
+	public void upload(AdminProduct product) {
 		logger.info("upload() 사용");
 		
-		return adminProductDao.insert(product);
+		adminProductDao.insert(product);
 	}
 }

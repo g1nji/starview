@@ -17,8 +17,7 @@ public interface AdminProductDao {
 	 * 상품 업로드하기
 	 * 
 	 * @param product - 업로드할 상품 정보
-	 * @return 업로드된 상품 정보
 	 */
-	public AdminProduct insert(AdminProduct product);
+	public void insert(AdminProduct product);
 
 }

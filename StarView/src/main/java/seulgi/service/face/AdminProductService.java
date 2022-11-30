@@ -19,6 +19,6 @@ public interface AdminProductService {
 	 * @param product - 업로드할 상품 정보
 	 * @return 업로드된 상품 정보
 	 */
-	public AdminProduct upload(AdminProduct product);
+	public void upload(AdminProduct product);
 
 }

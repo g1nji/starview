@@ -12,7 +12,9 @@
 <hr>
 
 <form action="./insert" method="post">
+	<label>상품명 <input type="text" name="gName"></label><br>
 	<label>상품가격 <input type="text" name="gPrice"></label><br>
+	<label>상품설명 <input type="text" name="gDetail"></label><br>
 	
 	<button>업로드</button>
 </form>
