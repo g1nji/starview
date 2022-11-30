@@ -20,4 +20,11 @@ public interface GalleryDao {
 	 */
 	public List<Gallery> selectList(Paging paging);
 
+	/**
+	 * 
+	 * @param writeParam
+	 */
+	public void uploadPhoto(Gallery writeParam);
+
+	
 }

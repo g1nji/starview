@@ -21,4 +21,10 @@ public interface GalleryService {
 	 */
 	public List<Gallery> list(Paging paging);
 
+	/**
+	 * 
+	 * @param writeParam
+	 */
+	public void write(Gallery writeParam);
+
 }

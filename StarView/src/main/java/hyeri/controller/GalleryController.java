@@ -44,8 +44,11 @@ public class GalleryController {
 	}
 	
 	@PostMapping("/write")
-	public String writeProc() {
+	public String writeProc(Gallery writeParam) {
 		logger.info("/write [POST]");
+		logger.info("{}", writeParam);
+		
+		galleryService.write(writeParam);
 		
 		return "redirect:/";
 	}

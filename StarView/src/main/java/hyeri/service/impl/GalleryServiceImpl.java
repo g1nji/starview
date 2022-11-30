@@ -36,4 +36,9 @@ public class GalleryServiceImpl implements GalleryService {
 		return galleryDao.selectList(paging);
 	}
 
+	@Override
+	public void write(Gallery writeParam) {
+		galleryDao.uploadPhoto(writeParam);
+	}
+	
 }
