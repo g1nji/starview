@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class JTestController {
+public class StarPlaceController {
 
 	//로그
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());

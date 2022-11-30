@@ -1,8 +1,8 @@
 package jiwon.service.impl;
 
-import jiwon.service.face.JTestService;
+import jiwon.service.face.StarPlaceService;
 
-public class JTestServiceImpl implements JTestService {
+public class StarPlaceServiceImpl implements StarPlaceService {
 
 	@Override
 	public void test() {

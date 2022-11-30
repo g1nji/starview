@@ -1,6 +1,6 @@
 package jiwon.dto;
 
-public class JTest {
+public class StarPlace {
 	
 	private String test;
 
