@@ -68,23 +68,23 @@ html {
 }
 
 #mainDiv {
-	width: 1200px;
+	width: 80%;
 	border: 1px solid black;
 	margin: 0 auto;
 }
 
-table{
-	width: 800px;
+h4 {
 	margin: 0 auto;
+	text-align: left;
+	padding-left: 35%;
 }
 
-th, td {
-	height: 20px;
+input {
+	width: 350px;
+	height: 40px; 
+	margin: 10px;
 }
 
-td {
-	width: 300px;
-}
 
 </style>
 
@@ -100,109 +100,53 @@ td {
 
 <form action="./join" method="post">
 
-<table>
+<div id="idDiv" class="formDiv">
+<h4><label for="uId"></label>아이디</h4>
+<input type="text" id="uId" name="uId">
+</div>
 
-<tr>
-	<th>이름: </th>
-	<td><input type="text" name="uName"></td>
-</tr>
+<div id="pwDiv" class="formDiv">
+<h4><label for="uPw"></label>비밀번호</h4>
+<input type="password" id="uPw" name="uPw">
+</div>
 
-<tr>
-	<th></th>
-</tr>
+<div id="pwchcDiv" class="formDiv">
+<h4><label for="uPwchc"></label>비밀번호 확인</h4>
+<input type="password" id="uPwchc" name="uPwchc">
+</div>
 
-<tr>
-	<th>아이디: </th>
-	<td><input type="text" name="uId"></td>
-	<td><button>중복 확인</button></td>
-</tr>
+<div id="nameDiv" class="formDiv">
+<h4><label for="uName"></label>이름</h4>
+<input type="text" id="uName" name="uName">
+</div>
 
-<tr>
-	<th></th>
-</tr>
- 
-<tr>
-	<th>비밀번호: </th>
-	<td><input type="password" name="uPwcheck"></td>
-</tr>
-
-<tr>
-	<th></th>
-</tr>
- 
-<tr>
-	<th>비밀번호 확인: </th>
-	<td><input type="password" name="uPw"></td>
-</tr>
-
-<tr>
-	<th></th>
-</tr>
- 
-<tr>
-	<th>닉네임: </th>
-	<td><input type="text" name="uNick"></td>
-	<td><button>중복 확인</button></td>
-</tr>
-
-<tr>
-	<th></th>
-</tr>
- 
-<tr>
-	<th>이메일: </th>
-	<td><input type="text" id="email_id" name="uEmail" placeholder="이메일 형식을 사용해주세요"></td>
-	<td>0000@000.000형식</td>
-	
-</tr>
-
-<tr>
-	<th></th>
-</tr>
- 
-<tr>
-	<th>성별: </th>
-	<td>남: <input type="radio" name="uGender" value="남자"> 여: <input type="radio" name="uGender" value="여자"></td>
-</tr>
-
-<tr>
-	<th></th>
-</tr>
- 
-<tr>
-	<th>생일: </th>
-	<td><input type="date"></td>
-</tr>
-
-<tr>
-	<th></th>
-</tr>
- 
-<tr>
-	<th>주소: </th>
-	<td><input type="text" id="sample6_postcode" placeholder="우편번호">
-<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
-<input type="text" id="sample6_address" placeholder="주소">
+<div id="addDiv" class="formDiv">
+<h4><label for="uAddress"></label>주소</h4>
+<input type="text" id="sample6_postcode" placeholder="우편번호" style="width:270px;">
+<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="width:80px; font-size: 10px;"><br>
+<input type="text" id="sample6_address" placeholder="주소"><br>
 <input type="text" id="sample6_detailAddress" placeholder="상세주소">
-<input type="text" id="sample6_extraAddress" placeholder="참고항목">
+</div>
 
-</td>
-</tr>
+<div id="birthDiv" class="formDiv">
+<h4><label for="uBirth"></label>생년월일</h4>
+<input type="text" id="uBirth" name="uBirth">
+</div>
 
-<tr>
-	<th></th>
-</tr>
- 
-<tr>
-	<th>전화번호: </th>
-	<td><input type="text"></td>
-</tr>
+<div id="nameDiv" class="formDiv">
+<h4><label for="uGender"></label>성별</h4>
+남<input type="radio" name="uGender" value="남자" style="width: 20px; height: 20px;">, 여<input type="radio" name="uGender" value="여자" style="width: 20px; height: 20px;">
+</div>
 
-<tr>
-	<th></th>
-</tr>
+<div id="nameDiv" class="formDiv">
+<h4><label for="uName"></label>이메일</h4>
+<input type="text" id="uName" name="uName">
+</div>
 
-</table>
+<div id="nameDiv" class="formDiv">
+<h4><label for="uName"></label>휴대전화</h4>
+<input type="text" id="uName" name="uName">
+</div>
 
 </form>
 
