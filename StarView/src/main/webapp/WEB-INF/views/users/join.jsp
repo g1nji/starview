@@ -31,6 +31,20 @@ input {
 	margin: 10px;
 }
 
+.resultDiv {
+	font-size: 10px;
+	color: red;
+	margin: 0 auto;
+    padding-left: 35%;
+    text-align: left;
+}
+
+select {
+    width: 100px;
+    height: 40px;
+    font-size: 20px;
+}
+
 </style>
 
 <!-- jQuery 2.2.4 -->
@@ -92,84 +106,57 @@ input {
 //회원가입 버튼
 $(document).ready(function() {
 	$('#btngo').click(function() {
-		
 		//빈칸 검사
 		if($('input[name="uId"]').val() == '') {
-			alert('아이디를 입력하세요.');
 			$('input[name="uId"]').focus();
 			return false;
 			} 
-		
 		if ($('input[name="uPw"]').val() == '') {
-				alert('비밀번호를 입력하세요.');
 				$('input[name="uPw"]').focus();
 				return false;
 			} else {
-				
 				if(validatePass($('#uPw').val())){
-					
 					if( $('#uPw').val() !== $('#uPwchc').val() ) {
-						
-						alert("비밀번호가 다릅니다.");
 						$('input[name="uPw"]').focus();
 						return false;
 					} 
-					
 				} else {
-					alert("특수문자/문자/숫자 포함 8~15자리를 입력하세요");
 						$('input[name="uPw"]').focus();
 						return false;
 				}
-				
 			}
-		
 		if ($('input[name="uName"]').val() == '') {
-				alert('이름을 입력하세요.');
 				$('input[name="uName"]').focus();
 				return false;
 			}
-		
 		if ($('input[name="uNick"]').val() == '') {
-				alert('닉네임을 입력하세요.');
 				$('input[name="uNick"]').focus();
 				return false;
 			} 
-		
 		if ($('input[name="uAdd1"]').val() == '') {
 				alert('주소 찾기를 통해 주소를 입력하세요.');
 				$('input[name="uAdd1"]').focus();
 				return false;
 			}
-		
 		if ($('input[name="uAdd2"]').val() == '') {
-				alert('상세주소를 입력하세요.');
 				$('input[name="uAdd2"]').focus();
 				return false;
 			} 
-		
 		if ($('input[name="uBirth"]').val() == '') {
-				alert('생년월일를 입력하세요.');
 				$('input[name="uBirth"]').focus();
 				return false;
 			} 
-		
 		if ($('input[name="uPhone"]').val() == '') {
-				alert('전화번호를 입력하세요.');
 				$('input[name="uPhone"]').focus();
 				return false;
 			} 
-	
 		if ($('input[name="uBirth"]').val() == '') {
-				alert('생년월일를 입력하세요.');
 				$('input[name="uBirth"]').focus();
 				return false;
 			}
-		
 		if ($.trim($('#uEmail').val()).length == 0) {
-			alert('이메일을 작성해주세요');
 			e.preventDefault();
 		}
-		
 		//이메일 유효성 검사
 		if (validateEmail($('#uEmail').val())) {
 			$('form').submit();
@@ -177,11 +164,11 @@ $(document).ready(function() {
 			alert('잘못된 이메일입니다');
 			e.preventDefault();
 		}
-		
 		//주소 파라미터 값 추가하기
 		$('#uAddress').val($('#sample6_address').val() + " " + $('#sample6_detailAddress').val());
 		
 		//생년월일 폼 정하기
+		
 		
 		//전화번호 폼 정하기
 		
@@ -192,7 +179,74 @@ $(document).ready(function() {
 	
 //중복확인 버튼
 
-
+//div에 정보 전달
+$('#uId').blur(function() {
+	if($('#uId').val() === '') {
+		$('#resultId').html("아이디를 입력하세요");
+	} else {
+		$('#resultId').html("");
+	}
+})
+$('#uPw').blur(function() {
+	if($('#uPw').val() === ''){
+		$('#resultPw').html("비밀번호를 입력하세요");
+	} else if(validatePass($('#uPw').val())) {
+		$('#resultPw').html("");
+	} else {
+		$('#resultPw').html("특수문자, 숫자, 문자 8~16자리");
+	}
+})
+$('#uPwchc').blur(function() {
+	if($('#uPwchc').val() === ''){
+		$('#resultPwchc').html("비밀번호를 재입력하세요");
+	} else if( $('#uPw').val() !== $('#uPwchc').val() ) {
+			$('#resultPwchc').html("입력한 비밀번호가 다릅니다.");
+	} else {
+		$('#resultPwchc').html("");
+	}
+})
+$('#uName').blur(function() {
+	if($('#uName').val() === '') {
+		$('#resultName').html("이름을 입력하세요");
+	} else {
+		$('#resultName').html("");
+	}
+})
+$('#sample6_detailAddress').blur(function() {
+	if($('#sample6_detailAddress').val() === '') {
+		$('#add2Div').html("상세주소를 입력하세요");
+	} else {
+		$('#add2Div').html("");
+	}
+})
+$('#uNick').blur(function() {
+	if($('#uNick').val() === ''){
+		$('#resultNick').html("닉네임을 입력하세요");
+	} else {
+		$('#resultNick').html("");
+	}
+})
+$('#uBirth').blur(function() {
+	if($('#uBirth').val() === ''){
+		$('#resultBirth').html("생년월일을 입력하세요");
+	} else {
+		$('#resultBirth').html("");
+	}
+})
+$('#uEmail').blur(function() {
+	if($('#uEmail').val() === ''){
+		$('#resultEmail').html("이메일을 입력하세요");
+	} else {
+		$('#resultEmail').html("");
+	}
+})
+$('#uPhone').blur(function() {
+	if($('#uPhone').val() === ''){
+		$('#resultPhone').html("전화번호를 입력하세요");
+	} else {
+		$('#resultPhone').html("");
+	}
+})
 
 	
 });
@@ -221,6 +275,53 @@ function validatePass(password){
 
 </script>
 
+<!-- 생년월일 스크립트 -->
+<script type="text/javascript">
+$(document).ready(function(){            
+    var now = new Date();
+    var year = now.getFullYear();
+    var mon = (now.getMonth() + 1) > 9 ? ''+(now.getMonth() + 1) : '0'+(now.getMonth() + 1); 
+    var day = (now.getDate()) > 9 ? ''+(now.getDate()) : '0'+(now.getDate());           
+    //년도 selectbox만들기               
+    for(var i = 1900 ; i <= year ; i++) {
+        $('#year').append('<option value="' + i + '">' + i + '년</option>');    
+    }
+
+    // 월별 selectbox 만들기            
+    for(var i=1; i <= 12; i++) {
+        var mm = i > 9 ? i : "0"+i ;            
+        $('#month').append('<option value="' + mm + '">' + mm + '월</option>');    
+    }
+    
+    // 일별 selectbox 만들기
+    for(var i=1; i <= 31; i++) {
+        var dd = i > 9 ? i : "0"+i ;            
+        $('#day').append('<option value="' + dd + '">' + dd+ '일</option>');    
+    }
+    $("#year  > option[value="+year+"]").attr("selected", "true");        
+    $("#month  > option[value="+mon+"]").attr("selected", "true");    
+    $("#day  > option[value="+day+"]").attr("selected", "true");     
+    
+    var yyyy = $('#year').val();
+    var mmmm = $('#month').val();
+    var dddd = $('#day').val();
+    
+    var uBirth = yyyy+"-"+mmmm+"-"+dddd;
+    
+    $('#uBirth').val(uBirth)
+  
+})
+</script>
+
+<!-- 휴대전화 입력 유효성 검사 -->
+<script type="text/javascript">
+const autoHyphen2 = (target) => {
+	 target.value = target.value
+	   .replace(/[^0-9]/g, '')
+	  .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+	}
+</script>
+
 </head>
 <body>
 
@@ -235,34 +336,38 @@ function validatePass(password){
 
 <div id="idDiv" class="formDiv">
 <h4><label for="uId"></label>아이디</h4>
+<div id="resultId" class="resultDiv"></div>
 <input type="text" id="uId" name="uId" style="width:250px;">
 <input type="button" style="width:80px; font-size: 10px;" value="중복 검사">
 </div>
-<div id="resultId">사용가능한 아이디입니다</div>
 
 <div id="pwDiv" class="formDiv">
 <h4><label for="uPw"></label>비밀번호</h4>
+<div id="resultPw" class="resultDiv"></div>
 <input type="password" id="uPw" name="uPw">
 </div>
-<div id="resultPw"></div>
 
 <div id="pwchcDiv" class="formDiv">
 <h4><label for="uPwchc"></label>비밀번호 확인</h4>
+<div id="resultPwchc" class="resultDiv"></div>
 <input type="password" id="uPwchc" name="uPwchc">
 </div>
 
 <div id="nameDiv" class="formDiv">
 <h4><label for="uName"></label>이름</h4>
+<div id="resultName" class="resultDiv"></div>
 <input type="text" id="uName" name="uName">
 </div>
 
 <div id="nickDiv" class="formDiv">
 <h4><label for="uNick"></label>닉네임</h4>
+<div id="resultNick" class="resultDiv"></div>
 <input type="text" id="uNick" name="uNick">
 </div>
 
 <div id="addDiv" class="formDiv">
 <h4><label for="uAddress"></label>주소</h4>
+<div id="add2Div" class="resultDiv"></div>
 <input type="text" id="sample6_postcode" placeholder="우편번호" style="width:250px;" disabled="disabled">
 <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="width:80px; font-size: 10px;"><br>
 <input type="text" id="sample6_address" name="uAdd1" placeholder="주소" disabled="disabled"><br>
@@ -273,7 +378,11 @@ function validatePass(password){
 
 <div id="birthDiv" class="formDiv">
 <h4><label for="uBirth"></label>생년월일</h4>
-<input type="text" id="uBirth" name="uBirth">
+<div id="resultBirth" class="resultDiv"></div>
+<select name="yy" id="year"></select>년
+<select name="mm" id="month"></select>월
+<select name="dd" id="day"></select>일
+<input type="text" id="uBirth" name="uBirth" hidden="hidden">
 </div>
 
 <div id="genderDiv" class="formDiv">
@@ -283,12 +392,16 @@ function validatePass(password){
 
 <div id="emailDiv" class="formDiv">
 <h4><label for="uEmail"></label>이메일</h4>
+<div id="resultEmail" class="resultDiv"></div>
 <input type="text" id="uEmail" name="uEmail" placeholder="이메일 형식에 맞춰 작성하세요">
 </div>
 
 <div id="phoneDiv" class="formDiv">
-<h4><label for="uPhone"></label>휴대전화</h4>
-<input type="text" id="uPhone" name="uPhone">
+<h4><label for="uPhone"></label>전화번호</h4>
+<div id="resultPhone" class="resultDiv"></div>
+<input type="text" id="uPhone" name="uPhone" oninput="autoHyphen2(this)" maxlength="13" placeholder="전화번호를 입력해보세요!">
+
+
 </div>
 
 <button>뒤로가기</button>

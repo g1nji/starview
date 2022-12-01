@@ -7,5 +7,9 @@
 
 <mapper namespace="ydg.dao.face.UsersDao">
 
-</mapper>
+	<insert id="insertUser" parameterType="ydg.dto.Users">
+		INSERT INTO users (u_id, u_no, u_pw, u_name, u_gender, u_birth, u_email, u_phone, u_address, u_nick)
+		VALUES (#{uId}, users_seq.nextval, #{uPw}, #{uName}, #{uGender}, #{uBirth}, #{uEmail}, #{uPhone}, #{uAddress}, #{uNick})
+	</insert>
 
+</mapper>

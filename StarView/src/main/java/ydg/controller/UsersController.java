@@ -17,7 +17,7 @@ public class UsersController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@Autowired UsersService userService;
+	@Autowired UsersService usersService;
 	
 	@GetMapping("/login")
 	public void login() {
@@ -48,6 +48,7 @@ public class UsersController {
 		logger.info("Users " + users);
 		
 		//회원가입 정보 DB에 저장
+		Users user = usersService.insert(users);
 		
 	}
 	
