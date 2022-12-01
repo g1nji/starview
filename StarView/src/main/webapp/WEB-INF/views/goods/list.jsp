@@ -4,10 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
+<c:import url="../layout/header.jsp" />
+
 <title>::: 굿즈샵 :::</title>
 
 <style type="text/css">
@@ -17,6 +15,8 @@ width: 1300px;
 margin: 0 auto;
 }
 
+header {
+	padding-top: 100px; }
 ul {  
  	list-style: none;  
 	display: block;
@@ -43,8 +43,6 @@ a {
 dd {
 	margin: 15px 0;
 }
-
-.more { float: right;}
 
 
 </style>
@@ -86,5 +84,9 @@ dd {
 </div>
 
 </section>
-</body>
-</html>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+<c:import url="../layout/footer.jsp" />
+
