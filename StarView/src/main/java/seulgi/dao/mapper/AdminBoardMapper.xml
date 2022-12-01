@@ -7,4 +7,8 @@
 
 <mapper namespace="seulgi.dao.face.AdminBoardDao">
 
+	<select id="selectAll" resultType="seulgi.dto.AdminBoard">
+		SELECT * FROM gallery
+	</select>
+
 </mapper>
