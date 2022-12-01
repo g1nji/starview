@@ -1,9 +1,12 @@
 package ydg.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,14 +45,21 @@ public class UsersController {
 	}
 	
 	@PostMapping("/join")
-	public void joinResult(Users users, String uAdd1, String uAdd2, String email_domain) {
+	public void joinResult(Users users, Model model) {
 		logger.info("/users/join [POST]");
 		
 		logger.info("Users " + users);
 		
 		//회원가입 정보 DB에 저장
-		Users user = usersService.insert(users);
+		usersService.insert(users);
 		
+	}
+	
+	@RequestMapping("/checkid")
+	public void checkId(String uId, HttpServletRequest req ) {
+		logger.info("uId {}", uId);
+		String uId2 = req.getParameter(uId);
+		logger.info("uId2 {}", uId2);
 	}
 	
 }

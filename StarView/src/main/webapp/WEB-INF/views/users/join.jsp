@@ -248,6 +248,32 @@ $('#uPhone').blur(function() {
 	}
 })
 
+//아이디 중복 검사 버튼
+$('#checkId').click(function() {
+	
+		console.log("#checkId click")
+		
+		$.ajax({
+			type: "get"
+			, url: "/users/checkid"
+			, data: {"uId": $("#uid").val()}
+			, dataType: "html"
+			, success: function(res) {
+				console.log("AJAX 성공")
+				
+				//응답 데이터 출력
+				console.log( res )
+				
+				$("#resultCheckId").html( res )
+				
+			}
+			, error: function() {
+				console.log("AJAX 실패")
+				
+			}
+		})
+		
+	})
 	
 });
 
@@ -338,7 +364,8 @@ const autoHyphen2 = (target) => {
 <h4><label for="uId"></label>아이디</h4>
 <div id="resultId" class="resultDiv"></div>
 <input type="text" id="uId" name="uId" style="width:250px;">
-<input type="button" style="width:80px; font-size: 10px;" value="중복 검사">
+<input type="button" id="checkId" style="width:80px; font-size: 10px;" value="중복 검사">
+<div id="resultCheckId"></div>
 </div>
 
 <div id="pwDiv" class="formDiv">
