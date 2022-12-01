@@ -29,7 +29,10 @@
 		   		ORDER BY g.reg_date DESC
 	        ) t
 	    ) GOODS
-	    WHERE rnum < 8
+	    WHERE rnum <= 8
     ]]>
+    
+<!--     총 상품개수(totalCount). 한번에 보여질 상품개수(listCount). 시작번호(startNo). 끝번호(endNo)-->
     </select>
     </mapper>
+
