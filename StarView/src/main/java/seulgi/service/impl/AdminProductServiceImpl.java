@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import seulgi.dao.face.AdminProductDao;
 import seulgi.dto.AdminProduct;
 import seulgi.service.face.AdminProductService;
+import seulgi.util.Paging;
 
 @Service
 public class AdminProductServiceImpl implements AdminProductService {
@@ -21,17 +22,40 @@ public class AdminProductServiceImpl implements AdminProductService {
 	@Autowired
 	private AdminProductDao adminProductDao; 
 	
+	//페이징 처리
 	@Override
-	public List<AdminProduct> list() {
-		logger.info("list() 사용");
+	public Paging getPaging(int curPage) {
+		//총 게시글 수 조회
+		int totalCount = adminProductDao.selectCntAll();
 		
-		return adminProductDao.selectAll();
+		//페이징 계산
+		Paging paging = new Paging(totalCount, curPage);
+		
+		return paging;
 	}
 	
+	//상품 리스트
 	@Override
-	public void upload(AdminProduct product) {
+	public List<AdminProduct> list(Paging paging) {
+		logger.info("list() 사용");
+		
+		return adminProductDao.selectAll(paging);
+	}
+	
+	//상품 상세 조회
+	@Override
+	public AdminProduct view(AdminProduct viewProd) {
+		logger.info("view() 사용");
+		
+		return adminProductDao.selectProd(viewProd);
+	}
+	
+	//상품 업로드
+	@Override
+	public void upload(AdminProduct prod) {
 		logger.info("upload() 사용");
 		
-		adminProductDao.insert(product);
+		adminProductDao.insert(prod);
 	}
+	
 }

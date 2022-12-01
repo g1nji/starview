@@ -8,7 +8,22 @@
 <mapper namespace="seulgi.dao.face.AdminBoardDao">
 
 	<select id="selectAll" resultType="seulgi.dto.AdminBoard">
-		SELECT * FROM gallery
+		SELECT * FROM (
+			SELECT rownum rnum, G.* FROM (
+				SELECT * FROM gallery
+			) G
+		) gallery
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
 	</select>
 
+	<select id="selectCntAll" resultType="int">
+		SELECT count(*) FROM gallery
+	</select>
+	
+	<select id="selectBoard" resultType="seulgi.dto.AdminBoard" parameterType="seulgi.dto.AdminBoard">
+		SELECT * FROM gallery
+		WHERE gallery_no = #{galleryNo}
+	</select>
+	
+	
 </mapper>

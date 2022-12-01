@@ -3,28 +3,36 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<c:import url="../layout/header.jsp" />
+
+<style type="text/css">
+table {
+	table-layout: fixed;
+}
+
+table, th {
+	text-align: center;
+}
+
+td:nth-child(2) {
+	text-align: left;
+}
+</style>
 
 <h1>게시글 리스트</h1>
 <hr>
 
-<table>
+<table class="table table-striped table-hover table-condensed">
 <thead>
 	<tr>
-		<th>게시글 번호</th>
-		<th>작성자</th>
-		<th>제목</th>
-		<th>내용</th>
-		<th>등록일</th>
-		<th>조회수</th>
-		<th>추천수</th>
-		<th>사진 번호</th>
+		<th style="width: 10%;">번호</th>
+		<th style="width: 10%;">작성자</th>
+		<th style="width: 10%;">제목</th>
+		<th style="width: 30%;">내용</th>
+		<th style="width: 10%;">등록일</th>
+		<th style="width: 10%;">조회수</th>
+		<th style="width: 10%;">추천수</th>
+		<th style="width: 10%;">사진번호</th>
 	</tr>
 </thead>	
 <tbody>
@@ -32,7 +40,7 @@
 	<tr>
 		<td>${b.galleryNo }</td>
 		<td>${b.uId }</td>
-		<td>${b.galleryTitle }</td>
+		<td><a href="./view?galleryNo=${b.galleryNo }">${b.galleryTitle }</a></td>
 		<td>${b.galleryContent }</td>
 		<td><fmt:formatDate value="${b.galleryDate }" pattern="yy-MM-dd HH:mm:ss"/></td>
 		<td>${b.galleryHit }</td>
@@ -43,5 +51,8 @@
 </tbody>
 </table>
 
-</body>
-</html>
+<span class="pull-right">total : ${paging.totalCount }</span>
+
+<c:import url="../layout/paging.jsp" />
+
+<c:import url="../layout/footer.jsp" />
