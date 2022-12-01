@@ -45,21 +45,9 @@ public class UsersController {
 	public void joinResult(Users users, String uAdd1, String uAdd2, String email_domain) {
 		logger.info("/users/join [POST]");
 		
-		logger.info("uId {}", users.getuId());
-		logger.info("uPw {}", users.getuPw());
-		logger.info("uName {}", users.getuName());
-		logger.info("uAdd1 {}", uAdd1);
-		logger.info("uAdd2 {}", uAdd2);
-		String address = uAdd1 + " " + uAdd2;
-		users.setuAddress(address);
+		logger.info("Users " + users);
 		
-		logger.info("uAddress {}", users.getuAddress());
-		logger.info("uBirth {}", users.getuBirth());
-		logger.info("uGender {}", users.getuGender());
-		logger.info("uEmail {}", users.getuEmail());
-		logger.info("uphone {}", users.getuPhone());
-		
-		
+		//회원가입 정보 DB에 저장
 		
 	}
 	

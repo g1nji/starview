@@ -88,6 +88,8 @@ input {
 </script>
 
 <script type="text/javascript">
+
+//회원가입 버튼
 $(document).ready(function() {
 	$('#btngo').click(function() {
 		
@@ -96,47 +98,72 @@ $(document).ready(function() {
 			alert('아이디를 입력하세요.');
 			$('input[name="uId"]').focus();
 			return false;
-			} else if (
-				$('input[name="uPw"]').val() == '') {
+			} 
+		
+		if ($('input[name="uPw"]').val() == '') {
 				alert('비밀번호를 입력하세요.');
 				$('input[name="uPw"]').focus();
 				return false;
-			} else if (
-					$('input[name="uName"]').val() == '') {
+			} else {
+				
+				if(validatePass($('#uPw').val())){
+					
+					if( $('#uPw').val() !== $('#uPwchc').val() ) {
+						
+						alert("비밀번호가 다릅니다.");
+						$('input[name="uPw"]').focus();
+						return false;
+					} 
+					
+				} else {
+					alert("특수문자/문자/숫자 포함 8~15자리를 입력하세요");
+						$('input[name="uPw"]').focus();
+						return false;
+				}
+				
+			}
+		
+		if ($('input[name="uName"]').val() == '') {
 				alert('이름을 입력하세요.');
 				$('input[name="uName"]').focus();
 				return false;
-			} else if (
-					$('input[name="uNick"]').val() == '') {
+			}
+		
+		if ($('input[name="uNick"]').val() == '') {
 				alert('닉네임을 입력하세요.');
 				$('input[name="uNick"]').focus();
 				return false;
-			} else if (
-					$('input[name="uAdd1"]').val() == '') {
+			} 
+		
+		if ($('input[name="uAdd1"]').val() == '') {
 				alert('주소 찾기를 통해 주소를 입력하세요.');
 				$('input[name="uAdd1"]').focus();
 				return false;
-			} else if (
-					$('input[name="uAdd2"]').val() == '') {
+			}
+		
+		if ($('input[name="uAdd2"]').val() == '') {
 				alert('상세주소를 입력하세요.');
 				$('input[name="uAdd2"]').focus();
 				return false;
-			} else if (
-					$('input[name="uBirth"]').val() == '') {
+			} 
+		
+		if ($('input[name="uBirth"]').val() == '') {
 				alert('생년월일를 입력하세요.');
 				$('input[name="uBirth"]').focus();
 				return false;
-			} else if (
-					$('input[name="uPhone"]').val() == '') {
+			} 
+		
+		if ($('input[name="uPhone"]').val() == '') {
 				alert('전화번호를 입력하세요.');
 				$('input[name="uPhone"]').focus();
 				return false;
-			} else if (
-					$('input[name="uBirth"]').val() == '') {
+			} 
+	
+		if ($('input[name="uBirth"]').val() == '') {
 				alert('생년월일를 입력하세요.');
 				$('input[name="uBirth"]').focus();
 				return false;
-			} else {}
+			}
 		
 		if ($.trim($('#uEmail').val()).length == 0) {
 			alert('이메일을 작성해주세요');
@@ -151,13 +178,23 @@ $(document).ready(function() {
 			e.preventDefault();
 		}
 		
-		//휴대전화 유효성 검사
+		//주소 파라미터 값 추가하기
+		$('#uAddress').val($('#sample6_address').val() + " " + $('#sample6_detailAddress').val());
 		
-		//비밀번호 검사
+		//생년월일 폼 정하기
+		
+		//전화번호 폼 정하기
+		
+		$('form').submit();
 		
 		
-	
 	})
+	
+//중복확인 버튼
+
+
+
+	
 });
 
 function validateEmail(remail) {
@@ -171,22 +208,16 @@ function validateEmail(remail) {
 	
 }
 
-</script>
-
-<script type="text/javascript">
-var password = document.getElementById("uPw")
-var confirm_password = document.getElementById("uPwchc");
-
-function validatePassword(){
-if(password.value != confirm_password.value) {
-  confirm_password.setCustomValidity("Passwords Don't Match");
-} else {
-  confirm_password.setCustomValidity(''); // 오류가 없으면 메시지를 빈 문자열로 설정해야한다. 오류 메시지가 비어 있지 않은 한 양식은 유효성 검사를 통과하지 않고 제출되지 않는다.
+function validatePass(password){
+	var regExp = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+	
+	if( regExp.test(password) ) {
+		return true;
+	} else {
+		return false;
+	}
+	
 }
-}
-
-password.onchange = validatePassword();
-confirm_password.onkeyup = validatePassword();
 
 </script>
 
@@ -207,11 +238,13 @@ confirm_password.onkeyup = validatePassword();
 <input type="text" id="uId" name="uId" style="width:250px;">
 <input type="button" style="width:80px; font-size: 10px;" value="중복 검사">
 </div>
+<div id="resultId">사용가능한 아이디입니다</div>
 
 <div id="pwDiv" class="formDiv">
 <h4><label for="uPw"></label>비밀번호</h4>
 <input type="password" id="uPw" name="uPw">
 </div>
+<div id="resultPw"></div>
 
 <div id="pwchcDiv" class="formDiv">
 <h4><label for="uPwchc"></label>비밀번호 확인</h4>
@@ -235,6 +268,7 @@ confirm_password.onkeyup = validatePassword();
 <input type="text" id="sample6_address" name="uAdd1" placeholder="주소" disabled="disabled"><br>
 <input type="text" id="sample6_detailAddress" name="uAdd2" placeholder="상세주소"><br>
 <input type="text" id="sample6_extraAddress" placeholder="참고항목">
+<input type="text" id="uAddress" name="uAddress" hidden="hidden">
 </div>
 
 <div id="birthDiv" class="formDiv">
