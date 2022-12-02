@@ -1,6 +1,7 @@
 package yewon.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,17 +16,26 @@ import yewon.service.face.GoodsService;
 public class GoodsServiceImpl implements GoodsService {
 
 	@Autowired GoodsDao goodsDao;
-	private List<Goods> goodslist;
 	
 	//로그 객체
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
 	public List<Goods> getGoodsList() {
-		
-		goodslist = goodsDao.selectAllGoods();
-		
+		List<Goods> goodslist = goodsDao.selectAllGoods();
 		return goodslist;
+	}
+
+	@Override
+	public List<Goods> getMoreGoods(Map<String, Integer> map) {
+		List<Goods> moreGoods = goodsDao.selectMoreGoods(map); 
+		return moreGoods;
+	}
+
+	@Override
+	public int totalCount() {
+		int totalCount = goodsDao.selectCntAll();
+		return totalCount;
 	}
 
 }
