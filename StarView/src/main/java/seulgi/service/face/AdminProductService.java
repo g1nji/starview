@@ -2,7 +2,10 @@ package seulgi.service.face;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import seulgi.dto.AdminProduct;
+import seulgi.dto.AdminProductImage;
 import seulgi.util.Paging;
 
 public interface AdminProductService {
@@ -36,10 +39,18 @@ public interface AdminProductService {
 	public AdminProduct view(AdminProduct viewProd);
 
 	/**
-	 * 상품 업로드하기
+	 * 상품, 첨부파일 업로드하기
 	 * 
-	 * @param prod - 업로드할 상품 정보
-	 * @return 업로드된 상품 정보
+	 * @param prod - 업로드할 상품 정보 객체
+	 * @param file - 첨부파일 정보 객체
 	 */
-	public void upload(AdminProduct prod);
+	public void upload(AdminProduct prod, MultipartFile file);
+
+	/**
+	 * 상품 번호를 이용하여 업로드된 파일 정보 조회하기
+	 * 
+	 * @param viewProd - 조회할 상품 객체
+	 * @return 첨부파일 정보 객체
+	 */
+	public AdminProductImage getAttachFile(AdminProduct viewProd);
 }

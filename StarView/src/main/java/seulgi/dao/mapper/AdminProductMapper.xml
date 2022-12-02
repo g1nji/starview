@@ -25,8 +25,18 @@
 		WHERE g_id = #{gId}
 	</select>
 
-	<insert id="insert" parameterType="seulgi.dto.AdminProduct">
+	<insert id="insertProd" parameterType="seulgi.dto.AdminProduct">
 		INSERT INTO goods (g_id, g_name, g_price, g_detail)
 		VALUES (goods_seq.nextval, #{gName }, #{gPrice }, #{gDetail })
 	</insert>
+	
+	<insert id="insertFile" parameterType="seulgi.dto.AdminProductImage">
+		INSERT INTO goods_img ( img_id, g_id, file_name)
+		VALUES ( goods_img_seq.nextval, #{gId }, #{fileName })
+	</insert>
+
+	<select id="selectImageFile" resultType="seulgi.dto.AdminProductImage" parameterType="seulgi.dto.AdminProduct">
+		SELECT * FROM goods_img
+		WHERE g_id = #{gId}
+	</select>
 </mapper>

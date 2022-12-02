@@ -10,8 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import seulgi.dto.AdminProduct;
+import seulgi.dto.AdminProductImage;
 import seulgi.service.face.AdminProductService;
 import seulgi.util.Paging;
 
@@ -63,6 +65,10 @@ public class AdminProductController {
 		//모델값 전달
 		model.addAttribute("viewProd", viewProd);
 		
+		//첨부파일 모델값 전달
+		AdminProductImage imagefile = adminProductService.getAttachFile(viewProd);
+		model.addAttribute("imagefile", imagefile);
+		
 		return "admin/prod/view";
 	}
 	
@@ -75,11 +81,12 @@ public class AdminProductController {
 	
 	//상품 업로드
 	@RequestMapping(value="/insert", method = RequestMethod.POST)
-	public void insertProdProc(AdminProduct prod) {
+	public void insertProdProc(AdminProduct prod, MultipartFile file) {
 		logger.info("/insert 주소 연결 - [POST]");
 		logger.info("상품 정보: {}", prod);
 		
-		adminProductService.upload(prod);
+		//게시글, 첨부파일 처리
+		adminProductService.upload(prod, file);
 	}
 	
 }
