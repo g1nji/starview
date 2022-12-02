@@ -78,13 +78,9 @@ $(function(){
     });
 });
 
-
 function logout() {
-	
 	location.href="/users/logout";
-	
 }
-
 </script>
 
 </head>
@@ -103,20 +99,17 @@ function logout() {
 
 <label><input type="checkbox" id="rememberID" name="rememberID">Save ID</label><br><br>
 
-
 <input type="submit" value=로그인>
 <button type="button" onclick="logout();">로그아웃 임시버튼임 메인페이지 세션구현되면 수정해야함!</button>
 <%-- 아이디 저장까진 잘되는데 체크 해제후 로그인 후 로그아웃하면 안되는 문제 해결해야할 듯. --%>
 
 </form>
 
-
 <br>
 
 <button type="button" id="btnSocial">소셜 로그인</button><br><br>
 
 <a>아이디 찾기</a> | <a>비밀번호 찾기</a> | <a href="/users/agree">회원가입</a>
-
 
 </body>
 </html>
