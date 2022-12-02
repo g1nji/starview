@@ -1,5 +1,7 @@
 package ydg.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -30,22 +32,28 @@ public class UsersController {
 	}
 	
 	@PostMapping("/login")
-	public String loginResult(Users users, HttpSession session) {
+	public String loginResult(Users users, HttpSession session, HttpServletResponse reps) {
 		logger.info("/users/login [POST]");
 		
 		logger.info("users {}", users);
 		
-		//id,pw 있는지 검사후 있으면 세션처리
 		boolean loginResult = usersService.login(users);
 		logger.info("loginResult : {}", loginResult);
 		
 		if(loginResult) {
 			logger.info("로그인 성공");
 			
+			//세션 저장
 			session.setAttribute("login", loginResult);
 			session.setAttribute("uId", users.getuId());
 			session.setAttribute("uNick", users.getuNick());
 			session.setAttribute("uName", users.getuName());
+			
+			//쿠키 저장
+			Cookie cookie = new Cookie("userInputId", users.getuId());
+			
+			reps.addCookie(cookie);
+			
 			return "redirect:/";
 			
 		} else {
@@ -56,8 +64,15 @@ public class UsersController {
 			return "redirect:/users/login";
 		}
 		
-		//없으면 에러
 		
+	}
+	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		
+		session.invalidate();
+		
+		return "redirect:/";
 	}
 	
 	@RequestMapping("/agree")

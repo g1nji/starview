@@ -106,6 +106,12 @@ select {
 //회원가입 버튼
 $(document).ready(function() {
 	
+	$('#btnBack').click(function() {
+		console.log("btnBack click")
+		location.href = '/users/login';
+		
+	})
+	
 	$('#btngo').click(function() {
 		//빈칸 검사
 		if($('input[name="uId"]').val() == '') {
@@ -276,6 +282,8 @@ $('#checkId').click(function() {
 	
 });
 
+
+
 function validateEmail(remail) {
 	var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 	
@@ -430,7 +438,7 @@ const autoHyphen2 = (target) => {
 
 </div>
 
-<button>뒤로가기</button>
+<button type="button" id="btnBack">뒤로가기</button>
 <button type="button" id="btngo">회원가입</button>
 
 </form>
