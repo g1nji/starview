@@ -5,41 +5,65 @@
 
 <c:import url="../layout/header.jsp" />
 
-<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<!-- <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script> -->
+<!-- <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" /> -->
 
-<h1>게시글 작성</h1>
+<!-- <script type="text/javascript"> -->
+<!-- // import Tagify from '@yaireo/tagify' -->
+
+<!-- // var tagify = new Tagify(...) -->
+<!-- </script> -->
+
+<!-- <script> -->
+
+<!-- </script> -->
+
+<!-- <style type="text/css"> -->
+
+<!-- /* .tagify__tag + .tagify__input::before{ opacity:0; } */ -->
+
+
+<!-- /* .tagify:not(.tagify--noTags){ */ -->
+<!-- /*   --placeholder-color: transparent; */ -->
+<!-- /*   --placeholder-color-focus: transparent; */ -->
+
+<!-- </style> -->
+
+<!-- <h1>Tagify 데모</h1> -->
+<!-- <input placeholder="type tags"> -->
+
+<!-- <script> -->
+<!-- // var input = document.querySelector('input') -->
+<!-- // var tagify = new Tagify(input); -->
+  
+<!-- // // 태그가 추가되면 이벤트 발생 -->
+<!-- // tagify.on('add', function() { -->
+<!-- //   console.log(tagify.value); // 입력된 태그 정보 객체 -->
+<!-- // }) -->
+
+
+<!-- </script> -->
+
+<div class="container">
+
+<h1>글쓰기</h1>
 <hr>
 
-<form action="./write" method="post">
-제목 <input type="text" name="title"><br>
-<hr>
-사진 첨부<br>
-<div id="editor">
-</div>
-<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-<script>
-  var quill = new Quill('#editor', {
-    theme: 'snow'
-  });
-</script>
-<hr>
-장소 입력<br>
-태그 입력<br>
+<form action="/gallery/write" method="post" enctype="multipart/form-data">
+<label for="galleryTitle">제목</label>
+<input type="text" id="galleryTitle" name="galleryTitle" class="form-control">
 
-<button>업로드</button>
+<label for="galleryContent">본문</label>
+<textarea rows="10" style="width: 100%;" id="galleryContent" name="galleryContent"></textarea>
+
+<label for="file">첨부파일</label>
+<input type="file" id="file" name="file">
+
+<button class="btn btn-primary" id="btnWrite">작성</button>
 </form>
 
-<div id="map" style="width:500px;height:400px;"></div>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=20cf40fb73ac79f33afff5fbb10f920f"></script>
+</div><!-- .container end -->
 
-<script>
-	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-	var options = { //지도를 생성할 때 필요한 기본 옵션
-		center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-		level: 3 //지도의 레벨(확대, 축소 정도)
-	};
-	
-	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-</script>
 
 <c:import url="../layout/footer.jsp" />

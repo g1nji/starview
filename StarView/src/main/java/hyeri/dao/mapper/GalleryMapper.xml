@@ -24,4 +24,14 @@
 <!-- 		WHERE rnum BETWEEN #{startNo } AND #{endNo } -->
 <!-- 	</select> -->
 
+	<insert id="uploadPhoto" parameterType="hyeri.dto.Gallery">
+		INSERT INTO gallery ( gallery_no, gallery_title, gallery_content)
+		VALUES ( gallery_seq.nextval, #{galleryTitle }, #{galleryContent })
+	</insert>
+
+<!-- 	<insert id="insertPhoto" parameterType="hyeri.dto.GalleryFile"> -->
+<!-- 		INSERT INTO gallery_file ( photo_no, gallery_no, stored_name, origin_name ) -->
+<!-- 		VALUES ( gallery_file_seq.nextval, gallery_seq.nextval, #{storedName }, #{originName }) -->
+<!-- 	</insert> -->
+
 </mapper>
