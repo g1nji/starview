@@ -10,6 +10,8 @@ public interface UsersDao {
 	 * @param users 입력받은 정보
 	 * @return
 	 */
-	public Users insertUser(Users users);
+	public int insertUser(Users users);
+
+	public int selectByuId(String uId);
 
 }

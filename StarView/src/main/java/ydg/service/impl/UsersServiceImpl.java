@@ -18,8 +18,14 @@ public class UsersServiceImpl implements UsersService {
 	@Autowired UsersDao usersDao;
 	
 	@Override
-	public Users insert(Users users) {
+	public int insert(Users users) {
 		return usersDao.insertUser(users);
+	}
+	
+	@Override
+	public int idcheck(String uId) {
+		
+		return usersDao.selectByuId(uId);
 	}
 	
 }

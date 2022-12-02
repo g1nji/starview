@@ -3,14 +3,19 @@
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div>
+<style type="text/css">
+p {
+	margin: 0 auto;
+}
 
-<c:out value="${uId }" />
+</style>
 
-<c:set var="uId" value="${data.uId }" />
+<c:if test="${count>0}">
+<p>중복된 아이디가 있습니다<p>
 
-${uId }
+</c:if>
 
-<hr>
+<c:if test="${count eq 0 }">
+<p>사용가능한 아이디입니다.<p>
 
-</div>
+</c:if>

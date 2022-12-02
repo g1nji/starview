@@ -105,6 +105,7 @@ select {
 
 //회원가입 버튼
 $(document).ready(function() {
+	
 	$('#btngo').click(function() {
 		//빈칸 검사
 		if($('input[name="uId"]').val() == '') {
@@ -167,17 +168,13 @@ $(document).ready(function() {
 		//주소 파라미터 값 추가하기
 		$('#uAddress').val($('#sample6_address').val() + " " + $('#sample6_detailAddress').val());
 		
-		//생년월일 폼 정하기
 		
-		
-		//전화번호 폼 정하기
 		
 		$('form').submit();
 		
 		
 	})
 	
-//중복확인 버튼
 
 //div에 정보 전달
 $('#uId').blur(function() {
@@ -253,27 +250,29 @@ $('#checkId').click(function() {
 	
 		console.log("#checkId click")
 		
+		var uId = $('#uId').val();
+		
 		$.ajax({
 			type: "get"
-			, url: "/users/checkid"
-			, data: {"uId": $("#uid").val()}
+			, url: "/users/checkid?uId="+uId
+			, data: {}
 			, dataType: "html"
+			, contentType: "application/json; charset=UTF-8"
 			, success: function(res) {
-				console.log("AJAX 성공")
 				
-				//응답 데이터 출력
-				console.log( res )
+				console.log("AJAX 성공");
 				
-				$("#resultCheckId").html( res )
+				console.log(res);
+		        $("#resultId").html(res);
 				
 			}
 			, error: function() {
 				console.log("AJAX 실패")
 				
 			}
-		})
+		});
 		
-	})
+	});
 	
 });
 

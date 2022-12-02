@@ -1,7 +1,5 @@
 package ydg.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ydg.dto.Users;
 import ydg.service.face.UsersService;
@@ -56,10 +56,23 @@ public class UsersController {
 	}
 	
 	@RequestMapping("/checkid")
-	public void checkId(String uId, HttpServletRequest req ) {
-		logger.info("uId {}", uId);
-		String uId2 = req.getParameter(uId);
-		logger.info("uId2 {}", uId2);
+    public String idcheck(String uId, Model model) {
+        
+        logger.info("userId : {}",uId);
+ 
+        int count = usersService.idcheck(uId);
+        logger.info("count, {}", count);
+        
+        model.addAttribute("count", count );
+        
+        return "/users/doneid";
+    }
+	
+	@RequestMapping("/doneid")
+	public void doneid() {
+		
 	}
+	
+	
 	
 }

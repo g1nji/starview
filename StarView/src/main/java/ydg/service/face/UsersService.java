@@ -10,6 +10,8 @@ public interface UsersService {
 	 * @param users 입력받은 정보
 	 * @return
 	 */
-	public Users insert(Users users);
+	public int insert(Users users);
+
+	public int idcheck(String uId);
 
 }
