@@ -2,6 +2,8 @@ package hyeri.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import hyeri.dto.Gallery;
 import hyeri.service.face.GalleryService;
@@ -44,11 +47,17 @@ public class GalleryController {
 	}
 	
 	@PostMapping("/write")
-	public String writeProc(Gallery writeParam) {
+	public String writeProc(Gallery writeParam, MultipartFile file, HttpSession session) {
 		logger.info("/write [POST]");
 		logger.info("{}", writeParam);
+		logger.info("{}", file);
 		
-		galleryService.write(writeParam);
+		//작성자 정보 추가
+		writeParam.setUserId( (String) session.getAttribute("id") );
+		logger.info("{}", writeParam);
+		
+		//게시글, 첨부파일 처리
+		galleryService.write(writeParam, file);
 		
 		return "redirect:/";
 	}
