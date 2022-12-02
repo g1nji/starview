@@ -113,7 +113,7 @@ function logout() {
 
 <br>
 
-<button>소셜 로그인</button><br><br>
+<button type="button" id="btnSocial">소셜 로그인</button><br><br>
 
 <a>아이디 찾기</a> | <a>비밀번호 찾기</a> | <a href="/users/agree">회원가입</a>
 
