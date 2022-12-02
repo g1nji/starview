@@ -5,6 +5,34 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="yewon.dao.face.GoodsDao">
+    <mapper namespace="yewon.dao.face.GoodsDao">
+    
+    <resultMap type="yewon.dto.Goods" id="Goods">
+    <id column="g_id" property="gId" />
+    <result column="g_name" property="gName" />
+    <result column="g_price" property="gPrice" />
+    <result column="file_name" property="fileName" />
+<!--     <association property="goodsImg" javaType="GoodsImg" > -->
+<!--     	<result column="file_type" property="fileType" /> -->
+<!--     </association>	 -->
+    </resultMap>
+    
+    
+    <select id="selectAllGoods" resultMap="Goods">
+    <![CDATA[
+	SELECT * FROM (
+	    SELECT ROWNUM rnum, t.* FROM (
+	      SELECT g.*, i.file_name 
+	    	FROM goods g, goods_img i
+		    	WHERE g.g_id = i.g_id
+		    	AND i.file_type = 'main_img'
+		   		ORDER BY g.reg_date DESC
+	        ) t
+	    ) GOODS
+	    WHERE rnum <= 8
+    ]]>
+    
+<!--     총 상품개수(totalCount). 한번에 보여질 상품개수(listCount). 시작번호(startNo). 끝번호(endNo)-->
+    </select>
+    </mapper>
 
-</mapper>
