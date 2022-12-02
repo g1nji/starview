@@ -16,5 +16,15 @@
 		SELECT count(*) FROM users
 		WHERE u_id = #{uId}
 	</select>
+	
+	<select id="selectCntUsers" resultType="int" parameterType="ydg.dto.Users">
+		SELECT count(*) FROM users
+		WHERE u_id = #{uId} AND u_pw = #{uPw}
+	</select>
+	
+	<select id="selectCntById" resultType="int" parameterType="ydg.dto.Users">
+		SELECT count(*) FROM users
+		WHERE u_id = #{uId}
+	</select>
 
 </mapper>

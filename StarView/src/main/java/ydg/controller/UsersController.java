@@ -1,5 +1,7 @@
 package ydg.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +30,33 @@ public class UsersController {
 	}
 	
 	@PostMapping("/login")
-	public void loginResult(Users users) {
+	public String loginResult(Users users, HttpSession session) {
 		logger.info("/users/login [POST]");
 		
 		logger.info("users {}", users);
+		
+		//id,pw 있는지 검사후 있으면 세션처리
+		boolean loginResult = usersService.login(users);
+		logger.info("loginResult : {}", loginResult);
+		
+		if(loginResult) {
+			logger.info("로그인 성공");
+			
+			session.setAttribute("login", loginResult);
+			session.setAttribute("uId", users.getuId());
+			session.setAttribute("uNick", users.getuNick());
+			session.setAttribute("uName", users.getuName());
+			return "redirect:/";
+			
+		} else {
+			logger.info("로그인 실패");
+			
+			session.invalidate();
+			
+			return "redirect:/users/login";
+		}
+		
+		//없으면 에러
 		
 	}
 	
@@ -53,11 +78,18 @@ public class UsersController {
 		logger.info("Users " + users);
 		
 		//회원가입 정보 DB에 저장
-//		usersService.insert(users);
+		boolean joinResult = usersService.insert(users);
 		
-		model.addAttribute("users", users);
+		if( joinResult ) {
+			logger.info("회원가입 성공");
+			model.addAttribute("users", users);
+			return "/users/doneid";
+		} else {
+			logger.info("회원가입 실패");
+			return "redirect:/member/join";
+		}
 		
-		return "/users/doneid";
+		
 	}
 	
 	@RequestMapping("/checkid")

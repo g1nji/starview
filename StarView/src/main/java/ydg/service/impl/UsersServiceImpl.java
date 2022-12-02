@@ -18,14 +18,35 @@ public class UsersServiceImpl implements UsersService {
 	@Autowired UsersDao usersDao;
 	
 	@Override
-	public int insert(Users users) {
-		return usersDao.insertUser(users);
+	public boolean insert(Users users) {
+		
+		if( usersDao.selectCntById(users) > 0) {
+			return false;
+		}
+		
+		usersDao.insertUser(users);
+		
+		if(usersDao.selectCntById(users) > 0 ) {
+			
+			return true;
+		}
+		return false;
+		
 	}
 	
 	@Override
 	public int idcheck(String uId) {
 		
 		return usersDao.selectByuId(uId);
+	}
+	
+	@Override
+	public boolean login(Users users) {
+		int loginChk = usersDao.selectCntUsers(users);
+		logger.info("loginChk : {}", loginChk);
+		
+		if( loginChk > 0 ) return true;
+		return false;
 	}
 	
 }
