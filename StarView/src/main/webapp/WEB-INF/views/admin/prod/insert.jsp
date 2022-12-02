@@ -1,25 +1,52 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<h1>상품 업로드 페이지</h1>
+<c:import url="../layout/header.jsp" />
+
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$("#btnUpload").click(function() {
+		
+		$("form").submit();
+	})
+	
+})
+
+</script>
+
+<h1>상품 업로드</h1>
 <hr>
 
-<form action="./insert" method="post">
-	<label>상품명 <input type="text" name="gName"></label><br>
-	<label>상품가격 <input type="text" name="gPrice"></label><br>
-	<label>상품설명 <input type="text" name="gDetail"></label><br>
-	
-	<button>업로드</button>
+<!-- <form action="./insert" method="post"> -->
+<form action="./insert" method="post" enctype="multipart/form-data">
+
+<div class="form-group">
+	<label for="gName">상품명</label>
+	<input type="text" id="gName" name="gName" class="form-control">
+</div>
+<div class="form-group">
+	<label for="gPrice">상품 가격</label>
+	<input type="text" id="gPrice" name="gPrice" class="form-control">
+</div>
+
+<div class="form-group">
+	<label for="gDetail">상품 내용</label>
+	<textarea rows="10" style="width: 100%;" id="gDetail" name="gDetail"></textarea>
+</div>
+
+<div class="form-group">
+	<label for="file">상품 이미지 첨부</label>
+	 <input type="file" id="file" name="file">
+</div>
+
+<div class="text-center">
+	<button class="btn btn-primary" id="btnUpload">업로드</button>
+	<input type="reset" id="cancel" class="btn btn-danger" value="작성 취소">
+</div>
 </form>
 
 
-
-</body>
-</html>
+<c:import url="../layout/footer.jsp" />
