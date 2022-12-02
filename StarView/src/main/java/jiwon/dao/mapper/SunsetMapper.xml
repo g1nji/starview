@@ -7,5 +7,4 @@
     
 <mapper namespace="jiwon.dao.face.SunsetDao">
 
-
 </mapper>

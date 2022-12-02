@@ -1,5 +1,10 @@
 package jiwon.service.impl;
 
-public class SunsetServiceImpl {
+import org.springframework.stereotype.Service;
+
+import jiwon.service.face.SunsetService;
+
+@Service
+public class SunsetServiceImpl implements SunsetService {
 
 }
