@@ -28,8 +28,10 @@ public class UsersController {
 	}
 	
 	@PostMapping("/login")
-	public void loginResult() {
+	public void loginResult(Users users) {
 		logger.info("/users/login [POST]");
+		
+		logger.info("users {}", users);
 		
 	}
 	
@@ -45,18 +47,21 @@ public class UsersController {
 	}
 	
 	@PostMapping("/join")
-	public void joinResult(Users users, Model model) {
+	public String joinResult(Users users, Model model) {
 		logger.info("/users/join [POST]");
 		
 		logger.info("Users " + users);
 		
 		//회원가입 정보 DB에 저장
-		usersService.insert(users);
+//		usersService.insert(users);
 		
+		model.addAttribute("users", users);
+		
+		return "/users/doneid";
 	}
 	
 	@RequestMapping("/checkid")
-    public String idcheck(String uId, Model model) {
+    public void idcheck(String uId, Model model) {
         
         logger.info("userId : {}",uId);
  
@@ -65,7 +70,6 @@ public class UsersController {
         
         model.addAttribute("count", count );
         
-        return "/users/doneid";
     }
 	
 	@RequestMapping("/doneid")
