@@ -3,6 +3,7 @@ package hyeri.dao.face;
 import java.util.List;
 
 import hyeri.dto.Gallery;
+import hyeri.dto.GalleryFile;
 import hyeri.util.Paging;
 
 public interface GalleryDao {
@@ -25,6 +26,8 @@ public interface GalleryDao {
 	 * @param writeParam
 	 */
 	public void uploadPhoto(Gallery writeParam);
+
+	public void insertPhoto(GalleryFile galleryFile);
 
 	
 }

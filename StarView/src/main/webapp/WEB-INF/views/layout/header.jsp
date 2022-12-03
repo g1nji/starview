@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html></html>
+
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 <style type="text/css">
 
@@ -88,7 +91,7 @@ ul.nav > li:hover > ul {
 <div id="sub-menu">
 	<div id="logo"><a href="/">별 보러 가자</a></div>
 	<ul class="subnav">
-		<li><button>로그인/회원가입</button></li>
+		<li><button type="button" onclick="location.href='/users/login';">로그인/회원가입</button></li>
 		<li><button>장바구니</button>
 	</ul>
 </div>
@@ -106,7 +109,7 @@ ul.nav > li:hover > ul {
 			</ul>
 		</li>
 		<li><a href="/gallery/list">갤러리</a></li>
-		<li><a href="">굿즈샵</a></li>
+		<li><a href="/goods/list">굿즈샵</a></li>
 		<li><a href="">스케줄러</a></li>
 	</ul>
 </div>
