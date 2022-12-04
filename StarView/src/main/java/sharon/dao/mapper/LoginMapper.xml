@@ -5,28 +5,35 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-<mapper namespace="login.dao.face.LoginDao">
+<mapper namespace="sharon.dao.face.LoginDao">
 
-	<insert id="insert" parameterType="login.dto.Login">
-		INSERT INTO logintb (id,pw,email,phone)
-		VALUES (#{id },#{pw },#{email },#{phone })	
+	<insert id="insert" parameterType="ydg.dto.Users">
+		INSERT INTO Users (id,pw,email,phone)
+		VALUES (#{uId },#{uPw },#{uEmail },#{uPhone })	
 	</insert>
 
-	<select id="selectCntByIdPW" resultType="int" parameterType="login.dto.Login">
-		SELECT count(*) FROM logintb
-		WHERE id=#{id } AND pw =#{pw }
+	<select id="selectCntByIdPW" resultType="int" parameterType="ydg.dto.Users">
+		SELECT count(*) FROM Users
+		WHERE u_id=#{uId } AND u_pw =#{uPw }
 	</select>
 	
-	<select id="selectLoginById" resultType="login.dto.Login" parameterType="string">
-		SELECT id,pw,email,phone
-		FROM logintb
-		WHERE id =#{id }
+	<select id="selectLoginById" resultType="ydg.dto.Users" parameterType="string">
+		SELECT u_id, u_pw, u_name, u_gender, u_birth, u_email, u_phone, u_address, u_nick
+		FROM Users
+		WHERE u_id =#{uId }
 	</select>
 	
 	<delete id="delete">
-		DELETE FROM logintb
-		WHERE id=#{id}
+		DELETE FROM Users
+		WHERE u_id=#{uId}
 	
 	</delete>
+	
+	<update id="update">
+		UPDATE Users
+		SET u_pw = #{uPw}, u_name=#{uName}, u_email = #{uEmail}, u_phone=#{uPhone},u_address=#{uAddress},u_nick=#{uNick}
+		WHERE u_id=#{uId}
+	</update>
+	
 
 </mapper>

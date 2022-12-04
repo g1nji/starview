@@ -5,4 +5,26 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<mapper namespace="ydg.dao.face.UsersDao">
 
+	<insert id="insertUser" parameterType="ydg.dto.Users">
+		INSERT INTO users (u_id, u_no, u_pw, u_name, u_gender, u_birth, u_email, u_phone, u_address, u_nick)
+		VALUES (#{uId}, users_seq.nextval, #{uPw}, #{uName}, #{uGender}, #{uBirth}, #{uEmail}, #{uPhone}, #{uAddress}, #{uNick})
+	</insert>
+	
+	<select id="selectByuId" resultType="int" parameterType="string">
+		SELECT count(*) FROM users
+		WHERE u_id = #{uId}
+	</select>
+	
+	<select id="selectCntUsers" resultType="int" parameterType="ydg.dto.Users">
+		SELECT count(*) FROM users
+		WHERE u_id = #{uId} AND u_pw = #{uPw}
+	</select>
+	
+	<select id="selectCntById" resultType="int" parameterType="ydg.dto.Users">
+		SELECT count(*) FROM users
+		WHERE u_id = #{uId}
+	</select>
+
+</mapper>

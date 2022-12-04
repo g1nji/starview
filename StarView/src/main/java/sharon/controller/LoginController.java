@@ -17,6 +17,7 @@ import sharon.service.face.LoginService;
 import ydg.dto.Users;
 
 @Controller
+@RequestMapping("/mypage")
 public class LoginController {
 	
 	//로그 객체(자기참조:this를 사용한다면 static없애고 하면 된다)
@@ -27,71 +28,92 @@ public class LoginController {
 		@Autowired private LoginDao loginDao;
 		
 		
-		@RequestMapping("/login/main")
+		@RequestMapping("/main")
 		public void main() {
 			logger.info("/login/main [GET]");
 		}
 		
-		@GetMapping("/login/join")
+		@GetMapping("/join")
 		public void join() {
 			logger.info("/login/join [GET]");
 		}
 		
-		@PostMapping("/login/join")
-		public String joinProc(Login joinParam) {
+		@PostMapping("/join")
+		public String joinProc(Users joinParam) {
 			logger.info("/login/join [POST]");
 			logger.info("{}",joinParam);
 			
 			loginService.join(joinParam);
 			
-			return "redirect:/login/main";
+			return "redirect:/main";
 		}
 		
 		
-		  @GetMapping("/login/login")
+		  @GetMapping("/login")
 		  public void login() {
 			  logger.info("/login/login [GET]");
 		  }
 		  
-		  @PostMapping("/login/login") 
-		  public String loginProc(Login loginParam,HttpSession session) {
+		  @PostMapping("/login") 
+		  public String loginProc(Users usersParam,HttpSession session) {
 		  logger.info("/login/login [POST]");
-		  logger.info("{}",loginParam);
+		  logger.info("{}",usersParam);
 		  
-		  boolean isLogin=loginService.login(loginParam);
+		  boolean isLogin=loginService.login(usersParam);
 		  logger.info("isLogin:{}",isLogin);
 		  
 		  if(isLogin) { //로그인 성공
 			  session.setAttribute("isLogin", isLogin);
-			  session.setAttribute("loginid", loginParam.getId()); //꼭 pk를 넣는다
+			  session.setAttribute("loginid", usersParam.getuId()); //꼭 pk를 넣는다
 		  }else {//로그인 실패
 			session.invalidate();  
 		  }
-		  return "redirect:/login/main";
+		  return "redirect:/mypage/main";
 		  
 		  }
-		  @RequestMapping("/login/logout")
+		  @RequestMapping("/logout")
 		  public String logout(HttpSession session) {
 			  logger.info("/login/logout");
 			  
 			  session.invalidate();
 			  
-			  return "redirect:/login/main";
+			  return "redirect:/mypage/main";
 		  }
 		  
-		  @RequestMapping("/mypage/mypage")
+		  @RequestMapping("/mypage")
 		  public void mypage(HttpSession session,Model model) {
-			  logger.info("/mypage/mypage");
+			  logger.info("/login/mypage");
 			  
 			  String loginid=(String) session.getAttribute("loginid");
 			  logger.info("loginid:{}",loginid);
 			  
-			  Login info=loginService.info(loginid);
+			  Users info=loginService.info(loginid);
 			  logger.info("조회결과:{}",info);
 			  
 			  model.addAttribute("info",info);
 			  
 		  }
+		  
+		  @GetMapping("/update")
+		  public String update(HttpSession session,Model model,Users users) {
+			  logger.info("/login/update [get]");
+			  //회원정보 조회
+//			  String loginid=(String) session.getAttribute("loginid");
+//			  Login info=loginService.info(loginid);
+			  model.addAttribute("users",loginService.info((String)session.getAttribute("loginid")));
+			  logger.info("users.model");
+			  
+			  return "/mypage/update";
+		  }
+		  @PostMapping("/update")
+		  public String updateProc(Users users) {
+			  logger.info("/login/update [post]");
+			  
+			  loginService.update(users);
+			  return "redirect:/mypage/mypage";
+		  }
+		  
+		  
 		  
 		  @RequestMapping("/delete")
 		    public String delete(Users users, HttpSession session) {
@@ -102,6 +124,7 @@ public class LoginController {
 
 		        return "/mypage/delete";
 		    }
+
 
 
 }

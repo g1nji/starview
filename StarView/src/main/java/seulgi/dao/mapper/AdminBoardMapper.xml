@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="seulgi.dao.face.AdminBoardDao">
+
+	<select id="selectAll" resultType="seulgi.dto.AdminBoard">
+		SELECT * FROM (
+			SELECT rownum rnum, G.* FROM (
+				SELECT * FROM gallery
+			) G
+		) gallery
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
+
+	<select id="selectCntAll" resultType="int">
+		SELECT count(*) FROM gallery
+	</select>
+	
+	<select id="selectBoard" resultType="seulgi.dto.AdminBoard" parameterType="seulgi.dto.AdminBoard">
+		SELECT * FROM gallery
+		WHERE gallery_no = #{galleryNo}
+	</select>
+	
+	
+</mapper>

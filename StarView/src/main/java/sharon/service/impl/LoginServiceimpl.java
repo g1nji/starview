@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import sharon.dao.face.LoginDao;
 import sharon.dto.Login;
 import sharon.service.face.LoginService;
+import ydg.dto.Users;
 @Service
 public class LoginServiceimpl implements LoginService{
 
@@ -16,24 +17,24 @@ public class LoginServiceimpl implements LoginService{
 	@Autowired private LoginDao loginDao;
 
 	@Override
-	public void join(Login joinParam) {
+	public void join(Users joinParam) {
 		logger.info("join()-{}",joinParam);
 
 		loginDao.insert(joinParam);
 	}
 
 	@Override
-	public boolean login(Login loginParam) {
-		logger.info("login()-{}",loginParam);
+	public boolean login(Users usersParam) {
+		logger.info("login()-{}",usersParam);
 		
-		if(loginDao.selectCntByIdPW(loginParam)>0) {
+		if(loginDao.selectCntByIdPW(usersParam)>0) {
 			return true; //로그인 인증 성공
 		}
 		return false; //로그인 인증 실패
 	}
 
 	@Override
-	public Login info(String loginid) {
+	public Users info(String loginid) {
 		logger.info("info()-{}",loginid);
 		
 		return loginDao.selectLoginById(loginid);
@@ -43,6 +44,12 @@ public class LoginServiceimpl implements LoginService{
 	public void delete(String loginid) {
 		logger.info("delete()-{}",loginid);
 		loginDao.delete(loginid);
+	}
+	
+	@Override
+	public void update(Users users) {
+		logger.info("update()-{}",users);
+		loginDao.update(users);
 	}
 
 	

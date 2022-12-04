@@ -1,6 +1,6 @@
 package sharon.service.face;
 
-import sharon.dto.Login;
+import ydg.dto.Users;
 
 public interface LoginService {
 
@@ -9,7 +9,7 @@ public interface LoginService {
 	 * 
 	 * @param joinParam -회원가입할 사용자 정보
 	 */
-	public void join(Login joinParam);
+	public void join(Users joinParam);
 
 	/**
 	 * 로그인 인증 처리
@@ -20,7 +20,7 @@ public interface LoginService {
 	 * 	ture-로그인 인증 성공
 	 * 	false-로그인 인증 실패
 	 */
-	public boolean login(Login loginParam);
+	public boolean login(Users usersParam);
 	
 	
 	/**
@@ -29,8 +29,10 @@ public interface LoginService {
 	 * @param loginid -조회할 사용자의 id
 	 * @return -조회된 사용자 정보
 	 */
-	public Login info(String loginid);
+	public Users info(String loginid);
 
 	public void delete(String loginid);
+	
+	public void update(Users users);
 
 }

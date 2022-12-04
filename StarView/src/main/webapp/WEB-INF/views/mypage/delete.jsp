@@ -3,5 +3,5 @@
 
 <script>
 alert("탈퇴가 완료되었습니다."); 
-location.href = "/login/main";
+location.href = "/mypage/main";
 </script>

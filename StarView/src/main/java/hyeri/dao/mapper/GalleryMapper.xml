@@ -6,4 +6,32 @@
 	
 <mapper namespace="hyeri.dao.face.GalleryDao">
 
+<!-- 	<select id="selectCntAll" resultType="int"> -->
+<!-- 		SELECT count(*) FROM gallery -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="selectList" resultType="Gallery" parameterType="Paging"> -->
+<!-- 		SELECT * FROM ( -->
+<!-- 			SELECT rownum rnum, G.* FROM ( -->
+<!-- 				SELECT -->
+<!-- 					gallery_no, gallery_title, galley_content, -->
+<!-- 					gallery_date, gallery_hit, gallery_like, -->
+<!-- 					user_id, photo_no -->
+<!-- 				FROM gallery -->
+<!-- 				ORDER BY gallery_no DESC -->
+<!-- 			) G -->
+<!-- 		) GALLERY -->
+<!-- 		WHERE rnum BETWEEN #{startNo } AND #{endNo } -->
+<!-- 	</select> -->
+
+	<insert id="uploadPhoto" parameterType="hyeri.dto.Gallery">
+		INSERT INTO gallery ( gallery_no, gallery_title, gallery_content)
+		VALUES ( gallery_seq.nextval, #{galleryTitle }, #{galleryContent })
+	</insert>
+
+<!-- 	<insert id="insertPhoto" parameterType="hyeri.dto.GalleryFile"> -->
+<!-- 		INSERT INTO gallery_file ( photo_no, gallery_no, stored_name, origin_name ) -->
+<!-- 		VALUES ( gallery_file_seq.nextval, gallery_seq.nextval, #{storedName }, #{originName }) -->
+<!-- 	</insert> -->
+
 </mapper>
