@@ -1,11 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:import url="../layout/header.jsp" />
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+html {
+	text-align: center;
+	margin: 0 auto;
+	padding: 0 auto;
+}
+</style>
+
 <script type="text/javascript">
 function del(){
 	if(confirm("탈퇴하시겠습니까?")){
@@ -19,6 +29,7 @@ function up(){
 	}
 	}
 </script>
+
 </head>
 <body>
 
@@ -40,3 +51,4 @@ function up(){
 <input type="button" id="btnup" value="수정" onclick='up()'>
 </body>
 </html>
+<c:import url="../layout/footer.jsp" />
