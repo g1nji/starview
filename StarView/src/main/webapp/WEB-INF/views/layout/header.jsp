@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html></html>
 
@@ -7,9 +8,23 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<!-- jQuery 2.2.4 -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <style type="text/css">
+
+/* 웹폰트(NotoSans) */
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 100;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 300;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 400;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 500;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 700;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 900;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.otf) format('opentype');}
+body, h1, h2, h3, h4, h5, h6, input, textarea, select {
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* ----------------- */
 
 body {
 	margin: 0;
@@ -24,7 +39,8 @@ body {
 }
 
 ul.subnav {
-	padding: 0;
+	padding: 0 5px 0 0;
+	height: 20px;
 }
 
 ul.subnav > li {
@@ -36,41 +52,42 @@ ul.subnav > li {
 	height: 40px;
 }
 
-ul.nav {
+ul.mainnav {
 	padding: 0;
 }
 
-ul.nav > li {
+ul.mainnav > li {
 	float: left;
 	position: relative;
-	width: 100px;
+	width: 150px;
 	height: 30px;
 	text-align: center;
 	padding: 5px 10px;
 	list-style-type: none;
 }
 
-ul.nav > li > a {
+ul.mainnav > li > a {
 	text-decoration: none;
 }
 
-ul.nav > li > ul {
+ul.mainnav > li > ul {
 	position: absolute;
 	display: none;
 	padding: 5px 10px;
-	width: 100px;
+	width: 150px;
 }
 
-ul.nav > li > ul > li {
+ul.mainnav > li > ul > li {
 	list-style-type: none;
 	text-align: left;
+	padding: 5px 0 0 20px;
 }
 
-ul.nav > li > ul > li > a {
+ul.mainnav > li > ul > li > a {
 	text-decoration: none;
 }
 
-ul.nav > li:hover > ul {
+ul.mainnav > li:hover > ul {
 	display: block;
 }
 
@@ -89,7 +106,6 @@ ul.nav > li:hover > ul {
 <header>
 
 <div id="sub-menu">
-	<div id="logo"><a href="/">별 보러 가자</a></div>
 	<ul class="subnav">
 		<li><button type="button" onclick="location.href='/users/login';">로그인/회원가입</button></li>
 		<li><button>장바구니</button>
@@ -97,7 +113,8 @@ ul.nav > li:hover > ul {
 </div>
 
 <div id="main-menu">
-	<ul class="nav">
+	<ul class="mainnav">
+		<li id="logo"><a href="/">*별 보러 가자*</a></li>
 		<li>
 			<a href="">별 정보 확인</a>
 			<ul>

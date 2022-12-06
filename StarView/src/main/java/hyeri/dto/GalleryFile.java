@@ -66,5 +66,5 @@ public class GalleryFile {
 	public void setOriginName(String originName) {
 		this.originName = originName;
 	}
-	
+
 }
