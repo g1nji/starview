@@ -46,7 +46,6 @@ public class GalleryController {
 		
 		//게시글 조회
 		viewGallery = galleryService.view(viewGallery);
-		logger.info("조회된 게시글 {}", viewGallery);
 		
 		//모델값 전달
 		model.addAttribute("viewGallery", viewGallery);
@@ -76,7 +75,7 @@ public class GalleryController {
 		//게시글, 첨부파일 처리
 		galleryService.write(gallery, file);
 		
-		return "redirect:/";
+		return "redirect:/list";
 	}
 
 }

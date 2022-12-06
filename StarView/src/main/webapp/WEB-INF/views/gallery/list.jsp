@@ -62,10 +62,13 @@ $(document).ready(function() {
 			</td>
 		</tr>
 		<tr>
-			<td>날짜</td>
-			<td>조회수</td>
-<%-- 			<td><fmt:formatDate value="${gallery.galleryDate }" pattern="yy-MM-dd HH:mm:ss" /></td></td> --%>
-<%-- 			<td>${gallery.hit }</td> --%>
+			<td>작성자</td>
+		</tr>
+		<tr>
+			<td><fmt:formatDate value="${gallery.galleryDate }" pattern="yyyy-MM-dd" /></td>
+			<td>덧글수</td>
+<%-- 			<td>조회수 ${gallery.galleryHit }</td> --%>
+			<td>좋아요수</td>
 		</tr>
 		</table>
 	</c:forEach>
