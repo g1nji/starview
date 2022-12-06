@@ -53,41 +53,22 @@ span {
 	cursor: pointer;
 }
 
-.check {
-	width:20px; 
-	height: 20px; 
-	display: hidden;
+.sort {
+	color: #999; 
 }
+
+/* .check { */
+/* 	width:20px;  */
+/* 	height: 20px;  */
+/* } */
+	
+/* #hide { */
+/*  	display: none;  */
+/* } */
 	
 </style>
 </head>
 <body>
-
-<section id="goods-box">
-	<div class="header">
-		<h2>굿즈샵</h2>
-		<p style="float: left;"> 총 ${totalCount }개의 상품</p>
-		<p style="float: right;">
-			<span id="latest"><img class="check" src="/resources/image/checkicon.png">최신등록순</span> | 
-			<span id="lowPrice">낮은가격순</span> | 
-			<span id="highPrice">높은가격순</span></p>
-	</div>
-		<div class="clear"></div>
-		
-<div class="list">
-	<c:forEach items="${goodsList }" var="goods">
-		<ul class="items">
-			<li><a href="/goods/detail.jsp?gId=${goods.gId }"><img class="thumb" src="${goods.fileName }"></li>
-			<li class="title">${goods.gName}</a></li>
-			<li class="price"><fmt:formatNumber value="${goods.gPrice}" type="number" groupingUsed="true" />원</li>
-		</ul>
-	</c:forEach>
-		<div class="more"></div>
-</div>
-
-	<div id="btn"><button id="moreBtn">상품 더보기</button></div>
-
-</section>
 
 <!-- 버튼 클릭시 추가상품을 화면에 보여준다 -->
 
@@ -132,14 +113,20 @@ $(document).ready(function() {
 	}) //-- .click() 
 	
 	$('#latest').click(function() {
+		$('#latest').css('color', 'black');
 		sortByDate();
 	})
 	
 	$('#lowPrice').click(function() {
+		$('.sort').css('color', '#999');
+		$('#lowPrice').css('color', 'black');
+		
 		sortByLowPrice();
 	})
 	
 	$('#highPrice').click(function() {
+		$('.sort').css('color', '#999');
+		$('#highPrice').css('color', 'black');
 		sortByHighPrice();
 	})
 	
@@ -148,15 +135,62 @@ $(document).ready(function() {
 	}
 	
 	function sortByLowPrice(){
-		
+		$.ajax({
+			type: "get"
+			, url: "/goods/lowPrice"
+			, data: {}
+			, dataType: "html"
+			, success: function( res ) {
+				console.log("AJAX 성공")
+				$('.list').html( res );
+			}
+		})
 	}
 	
 	function sortByHighPrice(){
+		$.ajax({
+			type: "get"
+			, url: "/goods/highPrice"
+			, data: {}
+			, dataType: "html"
+			, success: function( res ) {
+				console.log("AJAX 성공")
+				$('.list').html( res );
+			}
+		})
 		
 	}
 })
 
 </script>
+
+
+<section id="goods-box">
+	<div class="header">
+		<h2>굿즈샵</h2>
+		<p style="float: left;"> 총 ${totalCount }개의 상품</p>
+		<p style="float: right;">
+			<span class="sort" id="latest" style="color: black;">최신등록순</span> | 
+			<span class="sort" id="lowPrice">낮은가격순</span> | 
+			<span class="sort" id="highPrice">높은가격순</span></p>
+	</div>
+		<div class="clear"></div>
+		
+<div class="list">
+	<c:forEach items="${goodsList }" var="goods">
+		<ul class="items">
+			<li><a href="/goods/detail.jsp?gId=${goods.gId }"><img class="thumb" src="${goods.fileName }"></li>
+			<li class="title">${goods.gName}</a></li>
+			<li class="price"><fmt:formatNumber value="${goods.gPrice}" type="number" groupingUsed="true" />원</li>
+		</ul>
+	</c:forEach>
+		<div class="more"></div>
+	<div id="btn"><button id="moreBtn">상품 더보기</button></div>
+</div>
+
+
+</section>
+
 
 <br><br><br><br>
 
