@@ -15,7 +15,7 @@
 	</properties>
 		
 		
-	<!-- 추가 저장소 설정 -->
+	<!-- ODJCB6 라이브러리를 위한 추가 저장소 -->
 	<repositories>
 		<repository>
 			<id>oracle</id>

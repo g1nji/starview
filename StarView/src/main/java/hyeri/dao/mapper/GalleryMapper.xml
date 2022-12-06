@@ -6,32 +6,49 @@
 	
 <mapper namespace="hyeri.dao.face.GalleryDao">
 
-<!-- 	<select id="selectCntAll" resultType="int"> -->
-<!-- 		SELECT count(*) FROM gallery -->
-<!-- 	</select> -->
+	<select id="selectCntAll" resultType="int">
+		SELECT count(*) FROM gallery
+	</select>
 	
-<!-- 	<select id="selectList" resultType="Gallery" parameterType="Paging"> -->
-<!-- 		SELECT * FROM ( -->
-<!-- 			SELECT rownum rnum, G.* FROM ( -->
-<!-- 				SELECT -->
-<!-- 					gallery_no, gallery_title, galley_content, -->
-<!-- 					gallery_date, gallery_hit, gallery_like, -->
-<!-- 					user_id, photo_no -->
-<!-- 				FROM gallery -->
-<!-- 				ORDER BY gallery_no DESC -->
-<!-- 			) G -->
-<!-- 		) GALLERY -->
-<!-- 		WHERE rnum BETWEEN #{startNo } AND #{endNo } -->
-<!-- 	</select> -->
+	<select id="selectList" resultType="hyeri.dto.Gallery" parameterType="hyeri.util.Paging">
+		SELECT * FROM (
+			SELECT rownum rnum, G.* FROM (
+				SELECT
+					gallery_no, gallery_title, gallery_content,
+<!-- 					gallery_date, gallery_hit, gallery_like,  -->
+<!-- 					user_id,  -->
+<!-- 					photo_no -->
+				FROM gallery
+				ORDER BY gallery_no DESC
+			) G
+		) GALLERY
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
+	
+	<update id="updateHit" parameterType="hyeri.dto.Gallery">
+		UPDATE gallery
+		SET gallery_hit = gallery_hit + 1
+		WHERE gallery_no = #{galleryNo}
+	</update>
+	
+	<select id="selectGallery" resultType="hyeri.dto.Gallery" parameterType="hyeri.dto.Gallery">
+		SELECT
+			gallery_no, gallery_title, gallery_content
+		FROM gallery
+		WHERE gallery_no = #{gallery_no}
+	</select>
 
 	<insert id="uploadPhoto" parameterType="hyeri.dto.Gallery">
+		<selectKey order="BEFORE" resultType="int" keyProperty="galleryNo">
+			SELECT gallery_seq.nextval FROM dual
+		</selectKey>
 		INSERT INTO gallery ( gallery_no, gallery_title, gallery_content)
-		VALUES ( gallery_seq.nextval, #{galleryTitle }, #{galleryContent })
+		VALUES ( #{galleryNo }, #{galleryTitle }, #{galleryContent })
 	</insert>
 
-<!-- 	<insert id="insertPhoto" parameterType="hyeri.dto.GalleryFile"> -->
-<!-- 		INSERT INTO gallery_file ( photo_no, gallery_no, stored_name, origin_name ) -->
-<!-- 		VALUES ( gallery_file_seq.nextval, gallery_seq.nextval, #{storedName }, #{originName }) -->
-<!-- 	</insert> -->
+	<insert id="insertPhoto" parameterType="hyeri.dto.GalleryFile">
+		INSERT INTO gallery_file ( photo_no, gallery_no, stored_name, origin_name )
+		VALUES ( gallery_file_seq.nextval, #{galleryNo }, #{storedName }, #{originName })
+	</insert>
 
 </mapper>

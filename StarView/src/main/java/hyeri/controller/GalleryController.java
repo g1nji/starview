@@ -40,6 +40,19 @@ public class GalleryController {
 		
 	}
 	
+	@RequestMapping("/view")
+	public void view(Gallery viewGallery, Model model) {
+		logger.info("/view");
+		
+		//게시글 조회
+		viewGallery = galleryService.view(viewGallery);
+		logger.info("조회된 게시글 {}", viewGallery);
+		
+		//모델값 전달
+		model.addAttribute("viewGallery", viewGallery);
+		
+	}
+	
 	@GetMapping("/write")
 	public void write() {
 		logger.info("/write [GET]");
@@ -47,17 +60,21 @@ public class GalleryController {
 	}
 	
 	@PostMapping("/write")
-	public String writeProc(Gallery writeParam, MultipartFile file, HttpSession session) {
+	public String writeProc(
+			Gallery gallery,
+			MultipartFile file
+//			,HttpSession session
+			) {
 		logger.info("/write [POST]");
-		logger.info("{}", writeParam);
+		logger.info("{}", gallery);
 		logger.info("{}", file);
 		
 		//작성자 정보 추가
-		writeParam.setUserId( (String) session.getAttribute("id") );
-		logger.info("{}", writeParam);
+//		writeParam.setUserId( (String) session.getAttribute("id") );
+//		logger.info("{}", writeParam);
 		
 		//게시글, 첨부파일 처리
-		galleryService.write(writeParam, file);
+		galleryService.write(gallery, file);
 		
 		return "redirect:/";
 	}

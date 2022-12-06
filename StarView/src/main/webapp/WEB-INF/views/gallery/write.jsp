@@ -51,8 +51,9 @@
 <hr>
 
 <form action="/gallery/write" method="post" enctype="multipart/form-data">
+
 <label for="galleryTitle">제목</label>
-<input type="text" id="galleryTitle" name="galleryTitle" class="form-control">
+<input type="text" id="galleryTitle" name="galleryTitle" class="gallerytitle" placeholder="제목을 입력하세요">
 
 <label for="galleryContent">본문</label>
 <textarea rows="10" style="width: 100%;" id="galleryContent" name="galleryContent"></textarea>

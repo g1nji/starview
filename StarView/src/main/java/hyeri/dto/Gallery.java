@@ -99,4 +99,8 @@ public class Gallery {
 		this.photoNo = photoNo;
 	}
 	
+	
+	
+
+	
 }
