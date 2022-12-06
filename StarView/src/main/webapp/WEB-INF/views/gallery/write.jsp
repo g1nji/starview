@@ -5,66 +5,67 @@
 
 <c:import url="../layout/header.jsp" />
 
-<!-- <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script> -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script> -->
-<!-- <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" /> -->
+<script src="https://unpkg.com/@yaireo/tagify"></script>
+<!--<script src="https://unpkg.com/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>-->
+<link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
 
-<!-- <script type="text/javascript"> -->
-<!-- // import Tagify from '@yaireo/tagify' -->
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
-<!-- // var tagify = new Tagify(...) -->
-<!-- </script> -->
+<script type="text/javascript">
+$(document).ready(function() {
+	var input = document.querySelector('.tag')
+	var tagify = new Tagify(input);
 
-<!-- <script> -->
+	// 태그가 추가되면 이벤트 발생
+	tagify.on('add', function() {
+	  console.log(tagify.value); // 입력된 태그 정보 객체
+	})
+	
+  var quill = new Quill('#editor', {
+	    theme: 'snow'
+	  })
+})
+</script>
 
-<!-- </script> -->
+<style type="text/css">
+.wrap {
+	width: 1350px;
+	margin: 0 auto;
+	padding: 20px 0;
+}
 
-<!-- <style type="text/css"> -->
+#galleryTitle {
+	border: none;
+	font-size: 22px;
+}
 
-<!-- /* .tagify__tag + .tagify__input::before{ opacity:0; } */ -->
+#galleryContent {
+	border: none;
+}
+</style>
 
-
-<!-- /* .tagify:not(.tagify--noTags){ */ -->
-<!-- /*   --placeholder-color: transparent; */ -->
-<!-- /*   --placeholder-color-focus: transparent; */ -->
-
-<!-- </style> -->
-
-<!-- <h1>Tagify 데모</h1> -->
-<!-- <input placeholder="type tags"> -->
-
-<!-- <script> -->
-<!-- // var input = document.querySelector('input') -->
-<!-- // var tagify = new Tagify(input); -->
-  
-<!-- // // 태그가 추가되면 이벤트 발생 -->
-<!-- // tagify.on('add', function() { -->
-<!-- //   console.log(tagify.value); // 입력된 태그 정보 객체 -->
-<!-- // }) -->
-
-
-<!-- </script> -->
-
-<div class="container">
-
-<h1>글쓰기</h1>
-<hr>
+<div class="wrap">
 
 <form action="/gallery/write" method="post" enctype="multipart/form-data">
 
-<label for="galleryTitle">제목</label>
-<input type="text" id="galleryTitle" name="galleryTitle" class="gallerytitle" placeholder="제목을 입력하세요">
+<input type="text" style="width: 100%;" id="galleryTitle" name="galleryTitle" class="gallerytitle" placeholder="제목을 입력하세요">
+<hr>
 
-<label for="galleryContent">본문</label>
-<textarea rows="10" style="width: 100%;" id="galleryContent" name="galleryContent"></textarea>
+<div id="editor" style="height:400px;">
+</div>
 
-<label for="file">첨부파일</label>
-<input type="file" id="file" name="file">
+<input type="file" id="file" name="file"><br>
+
+<span>지도 추가</span><br>
+
+<input placeholder="type tags" class="tag"><br>
 
 <button class="btn btn-primary" id="btnWrite">작성</button>
 </form>
 
-</div><!-- .container end -->
+</div>
 
+</div><!-- .container end -->
 
 <c:import url="../layout/footer.jsp" />
