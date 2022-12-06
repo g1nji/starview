@@ -76,6 +76,13 @@
 			<version>12.1.0.2</version>
 		</dependency>
 		
+		<!-- XML을 JSON으로 변환 -->
+		<dependency>
+		   <groupId>org.json</groupId>
+		   <artifactId>json</artifactId>
+		   <version>20180130</version>
+		</dependency>
+		
 		<!-- Javax Annotation API - @Resource를위해 필요 -->
 		<dependency>
 		    <groupId>javax.annotation</groupId>
