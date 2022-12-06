@@ -11,7 +11,7 @@ public class Users {
 	private String uGender;
 	private Date ubirth;
 	private String uEmail;
-	private int uPhone;
+	private String uPhone;
 	private String uAddress;
 	private String uNick;
 	
@@ -21,7 +21,7 @@ public class Users {
 	}
 
 
-	public Users(String uId, int uNo, String uPw, String uName, String uGender, Date ubirth, String uEmail, int uPhone,
+	public Users(String uId, int uNo, String uPw, String uName, String uGender, Date ubirth, String uEmail, String uPhone,
 			String uAddress, String uNick) {
 		super();
 		this.uId = uId;
@@ -115,12 +115,12 @@ public class Users {
 	}
 
 
-	public int getuPhone() {
+	public String getuPhone() {
 		return uPhone;
 	}
 
 
-	public void setuPhone(int uPhone) {
+	public void setuPhone(String uPhone) {
 		this.uPhone = uPhone;
 	}
 
