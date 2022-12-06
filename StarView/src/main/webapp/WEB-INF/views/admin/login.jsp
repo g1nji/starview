@@ -12,8 +12,8 @@
 <hr>
 
 <form action="./login" method="post">
-	<label>아이디</label> <input type="text" name="id"> <br>
-	<label>비밀번호</label> <input type="text" name="pw"> <br>
+	<label>아이디</label> <input type="text" name="uId" placeholder="아이디를 입력하세요" required="required"> <br>
+	<label>비밀번호</label> <input type="password" name="uPw" placeholder="비밀번호를 입력하세요" required="required"> <br>
 	
 	<button>로그인</button>
 </form>
