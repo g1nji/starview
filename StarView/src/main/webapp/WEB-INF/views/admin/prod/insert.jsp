@@ -23,6 +23,11 @@ $(document).ready(function() {
 <!-- <form action="./insert" method="post"> -->
 <form action="./insert" method="post" enctype="multipart/form-data">
 
+<!-- <div class="form-group">
+	<label for="gId">상품번호</label>
+	<input type="text" id="gId" name="gId" class="form-control">
+</div> -->
+
 <div class="form-group">
 	<label for="gName">상품명</label>
 	<input type="text" id="gName" name="gName" class="form-control">

@@ -22,8 +22,12 @@
 	
 	<select id="selectBoard" resultType="seulgi.dto.AdminBoard" parameterType="seulgi.dto.AdminBoard">
 		SELECT * FROM gallery
-		WHERE gallery_no = #{galleryNo}
+		WHERE gallery_no = #{galleryNo }
 	</select>
 	
+	<select id="selectPhotoFile" resultType="seulgi.dto.AdminBoardPhoto" parameterType="seulgi.dto.AdminBoard">
+		SELECT * FROM gallery_file
+		WHERE gallery_no = #{galleryNo }
+	</select>
 	
 </mapper>

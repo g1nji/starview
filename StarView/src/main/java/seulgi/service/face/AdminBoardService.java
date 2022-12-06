@@ -3,6 +3,7 @@ package seulgi.service.face;
 import java.util.List;
 
 import seulgi.dto.AdminBoard;
+import seulgi.dto.AdminBoardPhoto;
 import seulgi.util.Paging;
 
 public interface AdminBoardService {
@@ -34,5 +35,13 @@ public interface AdminBoardService {
 	 * @return 조회된 게시글 정보
 	 */
 	public AdminBoard view(AdminBoard viewBoard);
+
+	/**
+	 * 게시글 번호를 이용하여 업로드된 사진 정보 조회하기
+	 * 
+	 * @param viewBoard - 조회할 게시글 객체
+	 * @return 첨부파일 정보 객체
+	 */
+	public AdminBoardPhoto getAttachFile(AdminBoard viewBoard);
 
 }

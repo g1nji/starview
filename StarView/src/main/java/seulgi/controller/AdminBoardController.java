@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import seulgi.dto.AdminBoard;
-import seulgi.dto.AdminProduct;
+import seulgi.dto.AdminBoardPhoto;
 import seulgi.service.face.AdminBoardService;
 import seulgi.util.Paging;
 
 @Controller
-@RequestMapping(value="/admin/board")
+@RequestMapping(value="/admin")
 public class AdminBoardController {
 	
 	//로그 객체
@@ -27,7 +27,7 @@ public class AdminBoardController {
 	private AdminBoardService adminBoardService;
 	
 	//갤러리
-	@RequestMapping(value="/list")
+	@RequestMapping(value="/gallery/list")
 	public void getBoardList(Model model, @RequestParam(defaultValue = "0") int curPage) {
 		logger.info("/list 주소 연결");
 		
@@ -45,15 +45,14 @@ public class AdminBoardController {
 		model.addAttribute("boardList", boardList);
 	}
 	
-	//파일 추가
 	//게시글 상세 페이지
-	@RequestMapping("/view")
+	@RequestMapping("/gallery/view")
 	public String viewBoard(AdminBoard viewBoard, Model model) {
 		logger.info("/view 주소 연결");
 
 		//잘못된 게시글 번호 처리
 		if( viewBoard.getGalleryNo() < 0 ) {
-			return "redirect:admin/board/list";
+			return "redirect:admin/gallery/list";
 		}
 		
 		//게시글 상세 조회
@@ -63,6 +62,12 @@ public class AdminBoardController {
 		//모델값 전달
 		model.addAttribute("viewBoard", viewBoard);
 		
-		return "admin/board/view";
+		//첨부파일 모델값 전달
+		AdminBoardPhoto photofile = adminBoardService.getAttachFile(viewBoard);
+		model.addAttribute("photofile", photofile);
+		
+		return "admin/gallery/view";
 	}
+	
+	
 }

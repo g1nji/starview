@@ -3,6 +3,7 @@ package seulgi.dao.face;
 import java.util.List;
 
 import seulgi.dto.AdminBoard;
+import seulgi.dto.AdminBoardPhoto;
 import seulgi.util.Paging;
 
 public interface AdminBoardDao {
@@ -28,4 +29,12 @@ public interface AdminBoardDao {
 	 * @return 조회된 게시글 정보
 	 */
 	public AdminBoard selectBoard(AdminBoard viewBoard);
+
+	/**
+	 * 게시글 번호를 이용하여 첨부파일 정보 조회하기
+	 * 
+	 * @param viewBoard - 조회할 게시글 번호
+	 * @return 조회된 첨부파일 정보
+	 */
+	public AdminBoardPhoto selectPhotoFile(AdminBoard viewBoard);
 }

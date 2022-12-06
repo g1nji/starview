@@ -26,8 +26,12 @@
 	</select>
 
 	<insert id="insertProd" parameterType="seulgi.dto.AdminProduct">
+		<selectKey order="BEFORE" resultType="int" keyProperty="gId">
+			SELECT goods_seq.nextval FROM dual
+		</selectKey>
+	
 		INSERT INTO goods (g_id, g_name, g_price, g_detail)
-		VALUES (goods_seq.nextval, #{gName }, #{gPrice }, #{gDetail })
+		VALUES (#{gId }, #{gName }, #{gPrice }, #{gDetail })
 	</insert>
 	
 	<insert id="insertFile" parameterType="seulgi.dto.AdminProductImage">
@@ -39,4 +43,5 @@
 		SELECT * FROM goods_img
 		WHERE g_id = #{gId}
 	</select>
+	
 </mapper>
