@@ -18,7 +18,7 @@
 </head>
 <body>
 
-<h1>일몰 시간 확인하기</h1>
+<h1>지역 입력</h1>
 
 <form action="./time" method="get">
 <label>지역 <input type="text" name="loc"></label><br>
