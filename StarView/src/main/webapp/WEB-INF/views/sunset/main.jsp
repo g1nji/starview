@@ -20,32 +20,10 @@
 
 <h1>일몰 시간 확인하기</h1>
 
-<table>
-
-<thead>
-<tr>
-	<th style="idth: 10%;">날짜</th>
-	<th style="idth: 10%;">지역</th>
-	<th style="idth: 10%;">일몰 시간</th>
-	<th style="idth: 45%;">위도</th>
-	<th style="idth: 10%;">경도</th>
-</tr>
-</thead>
-<tbody>
-<c:forEach items="${sunset }" var="sunset">
-
-
-	<tr>
-	   <td>${sunset.sunsetNum }</td>
-	   <td>${sunset.latitudeNum }</td>
-	   <td>${sunset.longitudeNum }</td>
-	   <td>${sunset.locdate }</td>
-	   <td>${sunset.location }</td>
-	</tr>
-	
-</c:forEach>
-</tbody>
-</table>
+<form action="./time" method="get">
+<label>지역 <input type="text" name="loc"></label><br>
+<button>확인</button>
+</form>
 
 </body>
 </html>

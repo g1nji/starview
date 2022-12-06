@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.json.JSONObject;
+import org.json.XML;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +37,16 @@ public class SunsetController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired private SunsetService sunsetService;
+	
+	@RequestMapping(value="/sunset/main", method=RequestMethod.GET)
+	public void sunsetmain() {
+		logger.info("/sunset/time - [GET]");
+	}
 
 	@RequestMapping(value="/sunset/time", method=RequestMethod.GET)
 	public void sunsetview(@RequestParam String loc) throws IOException {
+		
+		logger.info("/sunset/time - [POST]");
 		
 		// 현재 날짜를 원하는 문자열 포맷으로 변환
 		Date date = Calendar.getInstance().getTime();  
@@ -52,7 +61,7 @@ public class SunsetController {
 		//서비스키 추가하기
 		urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8") + "=" + serviceKey);
 		
-		// 오늘 날짜 (yyyymmdd)
+		// 날짜 (yyyyMMdd)
 		urlBuilder.append("&" + URLEncoder.encode("locdate", "UTF-8") + "=" + URLEncoder.encode(strDate, "UTF-8"));
 		// 조회 위치
 		urlBuilder.append("&" + URLEncoder.encode("location", "UTF-8") + "=" + URLEncoder.encode(loc, "UTF-8"));
@@ -64,7 +73,7 @@ public class SunsetController {
 		
 		
 		
-		//get방식으로 전송해서 파라미터 받아오기
+		//POST방식으로 전송해서 파라미터 받아오기
 		URL url = new URL(urlBuilder.toString());
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setRequestMethod("GET");
@@ -93,14 +102,14 @@ public class SunsetController {
 		logger.info(sb.toString());
 		
 		// XML을 JSON으로 변환
-//		JSONObject xmlObject = XML.toJSONObject(sb.toString());
-//		String xmlJsonString = xmlObject.toString();
+		JSONObject xmlObject = XML.toJSONObject(sb.toString());
+		String xmlJsonString = xmlObject.toString();
 		
 		ObjectMapper objectMapper = new ObjectMapper();
         Map<String, Object> resultMap = new HashMap<>();
         
         //typereference이용해서 map객체로 변환
-//        resultMap = objectMapper.readValue(xmlJsonString, new TypeReference<Map<String, Object>>(){});
+        resultMap = objectMapper.readValue(xmlJsonString, new TypeReference<Map<String, Object>>(){});
         Map<String, Object> dataResponse = (Map<String, Object>) resultMap.get("response");
         Map<String, Object> body = (Map<String, Object>) dataResponse.get("body");
         LinkedHashMap<String, Object> items  = (LinkedHashMap<String, Object>) body.get("items");
