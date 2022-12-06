@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import seulgi.dao.face.AdminBoardDao;
 import seulgi.dto.AdminBoard;
+import seulgi.dto.AdminBoardPhoto;
 import seulgi.service.face.AdminBoardService;
 import seulgi.util.Paging;
 
@@ -48,5 +49,11 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 		logger.info("view() 사용");
 		
 		return adminBoardDao.selectBoard(viewBoard);
+	}
+	
+	//첨부파일 정보 얻어오기
+	@Override
+	public AdminBoardPhoto getAttachFile(AdminBoard viewBoard) {
+		return adminBoardDao.selectPhotoFile(viewBoard);
 	}
 }

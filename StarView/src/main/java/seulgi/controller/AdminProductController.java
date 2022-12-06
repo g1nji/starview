@@ -47,7 +47,6 @@ public class AdminProductController {
 		model.addAttribute("prodList", prodList);
 	}
 	
-	//파일 추가
 	//상품 상세 페이지
 	@RequestMapping("/view")
 	public String viewProd(AdminProduct viewProd, Model model) {
@@ -72,7 +71,6 @@ public class AdminProductController {
 		return "admin/prod/view";
 	}
 	
-	//파일 추가
 	//상품 업로드 페이지
 	@RequestMapping(value="/insert", method = RequestMethod.GET)
 	public void insertProd() {
