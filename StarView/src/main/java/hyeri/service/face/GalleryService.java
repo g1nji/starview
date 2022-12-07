@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import hyeri.dto.Gallery;
+import hyeri.dto.GalleryFile;
 import hyeri.util.Paging;
 
 public interface GalleryService {
@@ -29,6 +30,8 @@ public interface GalleryService {
 	 */
 	public List<Gallery> list(Paging paging);
 
+	public List<GalleryFile> listf(Paging paging);
+
 	/**
 	 * 게시글 정보, 첨부파일을 함께 처리한다
 	 * 
@@ -44,5 +47,14 @@ public interface GalleryService {
 	 * @return 조회된 상세 게시글 객체
 	 */
 	public Gallery view(Gallery viewGallery);
+
+	/**
+	 * 게시글 번호를 이용하여 업로드된 파일 정보를 조회한다
+	 * 
+	 * @param viewGallery - 조회할 게시글 번호 객체
+	 * @return 첨부 파일 정보
+	 */
+	public GalleryFile getAttachFile(Gallery viewGallery);
+
 
 }

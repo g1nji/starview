@@ -23,6 +23,8 @@ public interface GalleryDao {
 	 */
 	public List<Gallery> selectList(Paging paging);
 
+	public List<GalleryFile> selectListF(Paging paging);
+
 	/**
 	 * 조회하려는 게시글의 조회수를 1 증가시킨다
 	 * 
@@ -51,6 +53,15 @@ public interface GalleryDao {
 	 * @param galleryFile - 삽입할 첨부파일 정보
 	 */
 	public void insertPhoto(GalleryFile galleryFile);
+
+	/**
+	 * 파일 번호를 이용하여 첨부파일 정보를 조회한다
+	 * 
+	 * @param viewGallery - 조회할 첨부파일 객체
+	 * @return 조회된 첨부파일 정보
+	 */
+	public GalleryFile selectGalleryFileByGalleryNo(Gallery viewGallery);
+
 
 
 	

@@ -46,6 +46,11 @@ public class GalleryServiceImpl implements GalleryService {
 	}
 	
 	@Override
+	public List<GalleryFile> listf(Paging paging) {
+		return galleryDao.selectListF(paging);
+	}
+	
+	@Override
 	public Gallery view(Gallery viewGallery) {
 		
 		//조회수 증가
@@ -54,6 +59,11 @@ public class GalleryServiceImpl implements GalleryService {
 		//상세보기 조회 결과 리턴
 		return galleryDao.selectGallery(viewGallery);
 		
+	}
+	
+	@Override
+	public GalleryFile getAttachFile(Gallery viewGallery) {
+		return galleryDao.selectGalleryFileByGalleryNo(viewGallery);
 	}
 
 	@Override
