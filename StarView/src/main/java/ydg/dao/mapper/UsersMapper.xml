@@ -26,5 +26,15 @@
 		SELECT count(*) FROM users
 		WHERE u_id = #{uId}
 	</select>
+	
+	<select id="selectByphone" resultType="ydg.dto.Users" parameterType="ydg.dto.Users">
+		SELECT u_id, u_no, u_pw, u_name, u_gender, u_birth, u_email, u_phone, u_address, u_nick FROM users
+		WHERE u_name = #{uName} AND u_phone = #{uPhone}
+	</select>
+
+	<select id="selectByEmail" resultType="ydg.dto.Users" parameterType="ydg.dto.Users">
+		SELECT u_id, u_no, u_pw, u_name, u_gender, u_birth, u_email, u_phone, u_address, u_nick FROM users
+		WHERE u_name = #{uName} AND u_email = #{uEmail}
+	</select>
 
 </mapper>

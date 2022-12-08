@@ -1,6 +1,7 @@
 package ydg.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -171,6 +172,27 @@ public class UsersController {
 		
 	}
 	
+	@PostMapping("/findid")
+	public String findidResult(String find, String phoneName, String mailName, Users users, Model model) {
+		logger.info("/users/findid [POST]");
+		
+		List<Users> userId = usersService.findId(find, phoneName, mailName, users);
+		
+		model.addAttribute("find", find);
+		model.addAttribute("userId", userId);
+		
+		return "/users/findidresult";
+	}
+	
+	@RequestMapping("/findidresult")
+	public void findidresult() {
+		
+	}
+	
+	@GetMapping("/findpw")
+	public void findpw() {
+		
+	}
 	
 	
 }

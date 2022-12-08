@@ -8,6 +8,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -167,5 +168,25 @@ public class UsersServiceImpl implements UsersService {
 		}
 		return userInfo;
 	}
+	
+	@Override
+	public List<Users> findId(String find, String phoneName, String mailName, Users users) {
+		
+		if(find.equals("phone")) {
+			users.setuName(phoneName);
+			List<Users> userId = usersDao.selectByphone(users);
+			
+			return userId;
+		} else if (find.equals("email")) {
+			users.setuName(mailName);
+			List<Users> userId = usersDao.selectByEmail(users);
+			
+			return userId;
+		} else {
+			return null;
+		}
+	}
+	
+	
 	
 }

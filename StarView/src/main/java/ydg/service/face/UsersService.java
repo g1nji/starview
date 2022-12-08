@@ -1,6 +1,7 @@
 package ydg.service.face;
 
 import java.util.HashMap;
+import java.util.List;
 
 import ydg.dto.Users;
 
@@ -44,5 +45,18 @@ public interface UsersService {
 	 * @return
 	 */
 	public HashMap<String, Object> getUserInfo(String access_Token);
+
+	/**
+	 * 아이디찾기
+	 * 
+	 * @param find
+	 * @param phoneName
+	 * @param mailName
+	 * @param users
+	 * @return
+	 */
+	public List<Users> findId(String find, String phoneName, String mailName, Users users);
+
+
 
 }

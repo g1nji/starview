@@ -1,5 +1,7 @@
 package ydg.dao.face;
 
+import java.util.List;
+
 import ydg.dto.Users;
 
 public interface UsersDao {
@@ -35,6 +37,23 @@ public interface UsersDao {
 	 * @return
 	 */
 	public int selectCntUsers(Users users);
+
+	/**
+	 * 전화번호로 찾기
+	 * 
+	 * @param users
+	 * @return
+	 */
+	public List<Users> selectByphone(Users users);
+
+	/**
+	 * 이메일로 찾기
+	 * 
+	 * @param users
+	 * @return
+	 */
+	public List<Users> selectByEmail(Users users);
+
 
 
 
