@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import hyeri.dto.GTag;
 import hyeri.dto.Gallery;
 import hyeri.dto.GalleryFile;
 import hyeri.service.face.GalleryService;
@@ -36,10 +37,6 @@ public class GalleryController {
 		List<Gallery> list = galleryService.list(paging);
 //		for( Gallery g : list ) logger.info("{}", g);
 		model.addAttribute("list", list);
-		
-		List<GalleryFile> listf = galleryService.listf(paging);
-		for( GalleryFile g : listf ) logger.info("{}", g);
-		model.addAttribute("listf", listf);
 		
 	}
 	
@@ -69,20 +66,22 @@ public class GalleryController {
 	@PostMapping("/write")
 	public String writeProc(
 			Gallery gallery,
-			MultipartFile file
+			MultipartFile file,
 //			,HttpSession session
+			GTag gTag
 			) {
 		logger.info("/write [POST]");
 		logger.info("{}", gallery);
 		logger.info("{}", file);
+		logger.info("{}", gTag);
 		
 		//작성자 정보 추가
 //		writeParam.setUserId( (String) session.getAttribute("id") );
 //		logger.info("{}", writeParam);
 		
-		//게시글, 첨부파일 처리
+		//게시글, 첨부파일, 태그 처리
 		galleryService.write(gallery, file);
-		
+//		
 		logger.info("{}", gallery);
 		logger.info("{}", file);
 

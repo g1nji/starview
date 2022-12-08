@@ -25,20 +25,20 @@ $(document).ready(function() {
 	function quilljsediterInit(){
 	    var option = {
 	        modules: {
-	            toolbar: [
-	            	  [{ 'header': [1, 2, 3, false] }],
-	            	  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+            toolbar: [
+            	  [{ 'header': [1, 2, 3, false] }],
+            	  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
 
-	            	  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+            	  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
 
-	            	  [{ 'align': [] }],
-	            	  
-	            	  [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-	            	  [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+            	  [{ 'align': [] }],
+            	  
+            	  [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            	  [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
 
-	            	  ['blockquote']
+            	  ['blockquote']
 
-	            	 ]
+            	 ]
 	        },
 	        placeholder: '자세한 내용을 입력해 주세요!',
 	        theme: 'snow'
@@ -56,9 +56,12 @@ $(document).ready(function() {
 		
 		//에디터에 작성된 내용을 #galleryContent에 반영
 		var delta = quill.getContents();
-		
+
 		$("form").submit();
 	})
+	
+	var input = document.querySelector('input[name=gTag]')
+	new Tagify(input)
 	
 })
 </script>
@@ -97,7 +100,7 @@ $(document).ready(function() {
 <br>
 <br>
 
-<input placeholder="type tags" class="tag" name="galleryTag"><br>
+<input placeholder="type tags" class="tag" type="hidden" name="gTag"><br>
 
 <button class="btn btn-primary" id="btnWrite">작성</button>
 </form>

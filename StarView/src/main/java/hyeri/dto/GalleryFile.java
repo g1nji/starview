@@ -6,7 +6,7 @@ public class GalleryFile {
 	
 	private int photoNo;
 	private int galleryNo;
-	private String userId;
+	private String uId;
 	private String storedName;
 	private String originName;
 	
@@ -16,14 +16,14 @@ public class GalleryFile {
 		super();
 		this.photoNo = photoNo;
 		this.galleryNo = galleryNo;
-		this.userId = userId;
+		this.uId = userId;
 		this.storedName = storedName;
 		this.originName = originName;
 	}
 
 	@Override
 	public String toString() {
-		return "GalleryFile [photoNo=" + photoNo + ", galleryNo=" + galleryNo + ", userId=" + userId + ", storedName="
+		return "GalleryFile [photoNo=" + photoNo + ", galleryNo=" + galleryNo + ", userId=" + uId + ", storedName="
 				+ storedName + ", originName=" + originName + "]";
 	}
 
@@ -44,11 +44,11 @@ public class GalleryFile {
 	}
 
 	public String getUserId() {
-		return userId;
+		return uId;
 	}
 
 	public void setUserId(String userId) {
-		this.userId = userId;
+		this.uId = userId;
 	}
 
 	public String getStoredName() {

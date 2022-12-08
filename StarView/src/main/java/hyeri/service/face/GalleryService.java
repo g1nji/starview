@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import hyeri.dto.GTag;
 import hyeri.dto.Gallery;
 import hyeri.dto.GalleryFile;
 import hyeri.util.Paging;
@@ -29,8 +30,6 @@ public interface GalleryService {
 	 * @return 페이징이 적용된 게시글 목록
 	 */
 	public List<Gallery> list(Paging paging);
-
-	public List<GalleryFile> listf(Paging paging);
 
 	/**
 	 * 게시글 정보, 첨부파일을 함께 처리한다

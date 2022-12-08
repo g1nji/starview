@@ -2,6 +2,7 @@ package hyeri.dao.face;
 
 import java.util.List;
 
+import hyeri.dto.GTag;
 import hyeri.dto.Gallery;
 import hyeri.dto.GalleryFile;
 import hyeri.util.Paging;
@@ -22,8 +23,6 @@ public interface GalleryDao {
 	 * @return 페이징이 적용된 게시글 목록
 	 */
 	public List<Gallery> selectList(Paging paging);
-
-	public List<GalleryFile> selectListF(Paging paging);
 
 	/**
 	 * 조회하려는 게시글의 조회수를 1 증가시킨다
@@ -61,6 +60,7 @@ public interface GalleryDao {
 	 * @return 조회된 첨부파일 정보
 	 */
 	public GalleryFile selectGalleryFileByGalleryNo(Gallery viewGallery);
+
 
 
 

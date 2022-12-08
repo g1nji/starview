@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import hyeri.dao.face.GalleryDao;
+import hyeri.dto.GTag;
 import hyeri.dto.Gallery;
 import hyeri.dto.GalleryFile;
 import hyeri.service.face.GalleryService;
@@ -43,11 +44,6 @@ public class GalleryServiceImpl implements GalleryService {
 	@Override
 	public List<Gallery> list(Paging paging) {
 		return galleryDao.selectList(paging);
-	}
-	
-	@Override
-	public List<GalleryFile> listf(Paging paging) {
-		return galleryDao.selectListF(paging);
 	}
 	
 	@Override

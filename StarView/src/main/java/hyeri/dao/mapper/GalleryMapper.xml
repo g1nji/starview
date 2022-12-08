@@ -26,18 +26,6 @@
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
 	</select>
 	
-	<select id="selectListF" resultType="hyeri.dto.GalleryFile" parameterType="hyeri.util.Paging">
-		SELECT * FROM (
-			SELECT rownum rnum, G.* FROM (
-				SELECT
-					photo_no, gallery_no, stored_name, origin_name
-				FROM gallery_file
-				ORDER BY photo_no DESC
-			) G
-		) GALLERY_FILE
-		WHERE rnum BETWEEN #{startNo } AND #{endNo }
-	</select>
-	
 	<update id="updateHit" parameterType="hyeri.dto.Gallery">
 		UPDATE gallery
 		SET gallery_hit = gallery_hit + 1
@@ -66,7 +54,7 @@
 		INSERT INTO gallery_file ( photo_no, gallery_no, stored_name, origin_name )
 		VALUES ( gallery_file_seq.nextval, #{galleryNo}, #{storedName }, #{originName })
 	</insert>
-	
+
 	<select id="selectGalleryFileByGalleryNo" resultType="hyeri.dto.GalleryFile" parameterType="hyeri.dto.Gallery">
 		SELECT 
 			photo_no, gallery_no, stored_name, origin_name
