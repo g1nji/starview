@@ -1,5 +1,7 @@
 package ydg.service.face;
 
+import java.util.HashMap;
+
 import ydg.dto.Users;
 
 public interface UsersService {
@@ -27,5 +29,20 @@ public interface UsersService {
 	 * @return
 	 */
 	public boolean login(Users users);
+
+	/**
+	 * 카카오 로그인 토큰 받기
+	 * 
+	 * @param code
+	 * @return
+	 */
+	public String getAccessToken(String code);
+
+	/**
+	 * 
+	 * @param access_Token
+	 * @return
+	 */
+	public HashMap<String, Object> getUserInfo(String access_Token);
 
 }

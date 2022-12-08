@@ -84,34 +84,8 @@ function logout() {
 }
 </script>
 
-<script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script type="text/javascript">
 
-	window.Kakao.init("e4702fe0a1cbdf475d612d19ffa2f6ff");
-	
-	function kakaoLogin() {
-		window.Kakao.Auth.login({
-			scope:'profile_nickname, account_email, gender, age_range, birthday',
-			success: function(authObj) {
-				console.log(authObj);
-				window.Kakao.API.request({
-					url:'/v2/user/me',
-					success: res => {
-						const kakao_account = res.kakao_account;
-						console.log(kakao_account);
-						console.log(kakao_account.email);
-						console.log(kakao_account.email);
-						console.log(kakao_account.email);
-						console.log(kakao_account.email);
-					}
-				});
-// 				window.location.href='/';
-			}
-		});
-	}
-
-</script>
-
+  
 </head>
 <body>
 <h1>별보러가자</h1>
@@ -134,14 +108,25 @@ function logout() {
 
 </form>
 
-<br>
+<!-- 카카오 로그인 -->
+	<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=40bfbca47f825701e600575bf0bc7082&redirect_uri=http://localhost:8888/users/oauth&response_type=code">
+	<!-- REST_API키 및 REDIRECT_URi는 본인걸로 수정하세요 -->
+	<!-- 저는 redirect_uri을 http://localhost:8080/member/kakaoLogin로 했습니다. -->
+	<!-- 본인걸로 수정 시 띄어쓰기 절대 하지 마세요. 오류납니다. -->
+	
+		<img src="https://www.gb.go.kr/Main/Images/ko/member/certi_kakao_login.png" style="height:60px">
+      		<!-- 이미지는 카카오 개발자센터에서 제공하는 login 이미지를 사용했습니다. -->
 
-<a href="javascript:kakaoLogin();"><img src="https://www.gb.go.kr/Main/Images/ko/member/certi_kakao_login.png" style="height: 30px;width: 100px;"></a>
-<a href="https://developers.kakao.com/logout">로그아웃</a>
+	</a>
+	
+	
+
+	<button class="api-btn" onclick="kakaoLogout()">로그아웃</button>
+
 
 <button type="button" id="btnSocial">소셜 로그인</button><br><br>
 
-<a>아이디 찾기</a> | <a>비밀번호 찾기</a> | <a href="/users/agree">회원가입</a>
+<a href="/users/findid">아이디 찾기</a> | <a>비밀번호 찾기</a> | <a href="/users/agree">회원가입</a>
 
 <br><br><br><br><br><br><br><br>
 
