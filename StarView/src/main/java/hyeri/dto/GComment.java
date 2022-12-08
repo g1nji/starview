@@ -7,7 +7,7 @@ public class GComment {
 	private int cmNo;
 	private String cmContent;
 	private Date cmDate;
-	private String userId;
+	private String uId;
 	private int galleryNo;
 	
 	public GComment() {}
@@ -17,13 +17,13 @@ public class GComment {
 		this.cmNo = cmNo;
 		this.cmContent = cmContent;
 		this.cmDate = cmDate;
-		this.userId = userId;
+		this.uId = userId;
 		this.galleryNo = galleryNo;
 	}
 
 	@Override
 	public String toString() {
-		return "GComment [cmNo=" + cmNo + ", cmContent=" + cmContent + ", cmDate=" + cmDate + ", userId=" + userId
+		return "GComment [cmNo=" + cmNo + ", cmContent=" + cmContent + ", cmDate=" + cmDate + ", userId=" + uId
 				+ ", galleryNo=" + galleryNo + "]";
 	}
 
@@ -52,11 +52,11 @@ public class GComment {
 	}
 
 	public String getUserId() {
-		return userId;
+		return uId;
 	}
 
 	public void setUserId(String userId) {
-		this.userId = userId;
+		this.uId = userId;
 	}
 
 	public int getGalleryNo() {

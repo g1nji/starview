@@ -5,6 +5,29 @@
 
 <c:import url="../layout/header.jsp" />
 
-<h1>${viewGallery.galleryTitle }</h1>
+<h2>${viewGallery.galleryTitle }</h2>
+작성자
+
+<!-- 게시글 작성자가 아닐 때 -->
+좋아요
+
+<!-- 게시글 작성자일 때 -->
+<a href="">수정</a>
+<a href="">삭제</a>
+
+<br>
+
+<fmt:formatDate value="${viewGallery.galleryDate }" pattern="yyyy-MM-dd" />
+<hr>
+
+<img src="/imagepath/${galleryFile.storedName }">
+${viewGallery.galleryContent }
+
+<span>장소</span>
+<span>태그</span>
+
+<hr>
+
+덧글
 
 <c:import url="../layout/footer.jsp" />
