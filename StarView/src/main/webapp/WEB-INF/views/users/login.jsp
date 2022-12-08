@@ -78,17 +78,46 @@ $(function(){
     });
 });
 
+//임시로 로그아웃 세션 구현해둔것
 function logout() {
 	location.href="/users/logout";
 }
 </script>
 
+<script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script type="text/javascript">
+
+	window.Kakao.init("e4702fe0a1cbdf475d612d19ffa2f6ff");
+	
+	function kakaoLogin() {
+		window.Kakao.Auth.login({
+			scope:'profile_nickname, account_email, gender, age_range, birthday',
+			success: function(authObj) {
+				console.log(authObj);
+				window.Kakao.API.request({
+					url:'/v2/user/me',
+					success: res => {
+						const kakao_account = res.kakao_account;
+						console.log(kakao_account);
+						console.log(kakao_account.email);
+						console.log(kakao_account.email);
+						console.log(kakao_account.email);
+						console.log(kakao_account.email);
+					}
+				});
+// 				window.location.href='/';
+			}
+		});
+	}
+
+</script>
+
 </head>
 <body>
 <h1>별보러가자</h1>
-<hr>
+<br>
 <h3>로그인</h3>
-<hr>
+<br>
 <br>
 
 <form action="./login" method="post">
@@ -107,9 +136,13 @@ function logout() {
 
 <br>
 
+<a href="javascript:kakaoLogin();"><img src="https://www.gb.go.kr/Main/Images/ko/member/certi_kakao_login.png" style="height: 30px;width: 100px;"></a>
+<a href="https://developers.kakao.com/logout">로그아웃</a>
+
 <button type="button" id="btnSocial">소셜 로그인</button><br><br>
 
 <a>아이디 찾기</a> | <a>비밀번호 찾기</a> | <a href="/users/agree">회원가입</a>
 
-</body>
-</html>
+<br><br><br><br><br><br><br><br>
+
+<c:import url="../layout/footer.jsp" />
