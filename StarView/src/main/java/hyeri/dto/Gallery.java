@@ -10,7 +10,7 @@ public class Gallery {
 	private Date galleryDate;
 	private int galleryHit;
 	private int galleryLike;
-	private String userId;
+	private String uId;
 	private int photoNo;
 	
 	public Gallery() {}
@@ -24,7 +24,7 @@ public class Gallery {
 		this.galleryDate = galleryDate;
 		this.galleryHit = galleryHit;
 		this.galleryLike = galleryLike;
-		this.userId = userId;
+		this.uId = userId;
 		this.photoNo = photoNo;
 	}
 
@@ -32,7 +32,7 @@ public class Gallery {
 	public String toString() {
 		return "Gallery [galleryNo=" + galleryNo + ", galleryTitle=" + galleryTitle + ", galleryContent="
 				+ galleryContent + ", galleryDate=" + galleryDate + ", galleryHit=" + galleryHit + ", galleryLike="
-				+ galleryLike + ", userId=" + userId + ", photoNo=" + photoNo + "]";
+				+ galleryLike + ", userId=" + uId + ", photoNo=" + photoNo + "]";
 	}
 
 	public int getGalleryNo() {
@@ -84,11 +84,11 @@ public class Gallery {
 	}
 
 	public String getUserId() {
-		return userId;
+		return uId;
 	}
 
 	public void setUserId(String userId) {
-		this.userId = userId;
+		this.uId = userId;
 	}
 
 	public int getPhotoNo() {

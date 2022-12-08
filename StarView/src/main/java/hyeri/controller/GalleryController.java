@@ -2,8 +2,6 @@ package hyeri.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import hyeri.dto.GTag;
 import hyeri.dto.Gallery;
+import hyeri.dto.GalleryFile;
 import hyeri.service.face.GalleryService;
 import hyeri.util.Paging;
 
@@ -35,7 +35,7 @@ public class GalleryController {
 		model.addAttribute("paging", paging);
 		
 		List<Gallery> list = galleryService.list(paging);
-		for( Gallery g : list ) logger.info("{}", g);
+//		for( Gallery g : list ) logger.info("{}", g);
 		model.addAttribute("list", list);
 		
 	}
@@ -46,10 +46,14 @@ public class GalleryController {
 		
 		//게시글 조회
 		viewGallery = galleryService.view(viewGallery);
-		logger.info("조회된 게시글 {}", viewGallery);
 		
 		//모델값 전달
 		model.addAttribute("viewGallery", viewGallery);
+		
+		//첨부파일 모델값 전달
+		GalleryFile galleryFile = galleryService.getAttachFile(viewGallery);
+		logger.info("{}", galleryFile);
+		model.addAttribute("galleryFile", galleryFile);
 		
 	}
 	
@@ -62,21 +66,26 @@ public class GalleryController {
 	@PostMapping("/write")
 	public String writeProc(
 			Gallery gallery,
-			MultipartFile file
+			MultipartFile file,
 //			,HttpSession session
+			GTag gTag
 			) {
 		logger.info("/write [POST]");
 		logger.info("{}", gallery);
 		logger.info("{}", file);
+		logger.info("{}", gTag);
 		
 		//작성자 정보 추가
 //		writeParam.setUserId( (String) session.getAttribute("id") );
 //		logger.info("{}", writeParam);
 		
-		//게시글, 첨부파일 처리
+		//게시글, 첨부파일, 태그 처리
 		galleryService.write(gallery, file);
-		
-		return "redirect:/";
+//		
+		logger.info("{}", gallery);
+		logger.info("{}", file);
+
+		return "redirect:./list";
 	}
 
 }

@@ -5,12 +5,6 @@
 
 <c:import url="../layout/header.jsp" />
 
-
-<!-- 부트스트랩 3 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
 <script type="text/javascript">
 $(document).ready(function() {
 	$("#btnWrite").click(function() {
@@ -20,10 +14,14 @@ $(document).ready(function() {
 </script>
 
 <style type="text/css">
+.title {
+	text-align: center;
+}
+
 .gallerylist {
 	float: left;
 	margin: 0 0 20px 5px;
-	width: 285px;
+	width: 280px;
 	border: 1px solid #ccc;
 }
 
@@ -38,9 +36,11 @@ $(document).ready(function() {
 
 </style>
 
-<h1>갤러리</h1>
+<h2 class="title">갤러리</h2>
 <button id="btnWrite">글쓰기</button>
+<div class="clearfix"></div>
 <hr>
+<div class="clearfix"></div>
 
 <!-- 게시글이 존재하지 않을 때 -->
 <c:if test="${empty list}">
@@ -48,8 +48,8 @@ $(document).ready(function() {
 </c:if>
 
 <!-- 게시글 존재 -->
-<!-- 게시글이 8개 이하일 경우 리스트 갯수만큼 반환 -->
-<c:if test="${list.size() < 8 }">
+<!-- 게시글이 12개 이하일 경우 리스트 갯수만큼 반환 -->
+<c:if test="${list.size() < 12 }">
 	<c:forEach items="${list }" var="gallery">
 		<table class="gallerylist">
 		<tr class="img">
@@ -62,18 +62,45 @@ $(document).ready(function() {
 			</td>
 		</tr>
 		<tr>
-			<td>날짜</td>
-			<td>조회수</td>
-<%-- 			<td><fmt:formatDate value="${gallery.galleryDate }" pattern="yy-MM-dd HH:mm:ss" /></td></td> --%>
-<%-- 			<td>${gallery.hit }</td> --%>
+			<td>작성자</td>
+		</tr>
+		<tr>
+			<td><fmt:formatDate value="${gallery.galleryDate }" pattern="yyyy-MM-dd" /></td>
+			<td>덧글수</td>
+<%-- 			<td>조회수 ${gallery.galleryHit }</td> --%>
+			<td>좋아요수</td>
 		</tr>
 		</table>
 	</c:forEach>
 </c:if>
 
+<!-- 게시글이 12개 이상일 경우 한 페이지에 12개만 보이기 -->
+<c:forEach items="${list }" var="gallery">
+	<table class="gallerylist">
+	<tr class="img">
+		<td></td>
+	</tr>
+	<tr>
+		<td>
+			<a href="/gallery/view?galleryNo=${gallery.galleryNo }">${gallery.galleryTitle }
+			<img src="/imagepath/${galleryFile.originName }"></a>
+		</td>
+	</tr>
+	<tr>
+		<td>작성자</td>
+	</tr>
+	<tr>
+		<td><fmt:formatDate value="${gallery.galleryDate }" pattern="yyyy-MM-dd" /></td>
+		<td>덧글수</td>
+		<td>조회수 ${gallery.galleryHit }</td>
+		<td>좋아요수</td>
+	</tr>
+	</table>
+</c:forEach>
+
 <div class="clearfix"></div>
 
-
+<div class="search">검색</div>
 
 <c:import url="../layout/paging.jsp" />
 
