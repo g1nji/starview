@@ -1,51 +1,128 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="../layout/header.jsp" />
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>일몰 시간</title>
 
-<!-- jQeury 2.2.4 -->
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+
+
 <script type="text/javascript">
+//날짜 선택
+
+$(function() {
+	$( "#Date" ).datepicker({
+	    	format:'yyyy-mm-dd',
+	    	autoclose: true,
+	    })
+})
+
+$("#location option:selected").val()
+
+var getFormattedDate = ( d )=>{
+	d = new Date( d )
+	
+	y = '' + d.getFullYear()
+	m = ('0' + (d.getMonth()+1)).slice(-2, 3)
+	dat = ('0' + d.getDate()).slice(-2, 3)
+	
+	return y + m + dat
+}
+
+$(document).ready(() => {
+		
+	$("#btn").click(() => {
+		console.log("#btn click")
+	
+		console.log($("#Date").val())
+		console.log($("#location option:selected").val())
+		
+		$.ajax({
+			type: "get",
+			url: "http://apis.data.go.kr/B090041/openapi/service/RiseSetInfoService/getAreaRiseSetInfo",
+			data: {
+				type: "xml"
+				,locdate: getFormattedDate( $("#Date").val() )
+				,location: $("#location option:selected").val()
+			,ServiceKey: "uej3x/SsIAytAndt4BMIKuPLeCRuvBJL1aMC+iIe3gzxsas6kdk0hv7SLipcQPprTnEOdxDKToBjNSPqXw2nrQ=="
+			},
+			dataType:"xml",
+			success: res => {
+				console.log("AJAX 성공")
+				console.log( res )
+				
+				var $rows = $(res).find("item");
+				console.log( $rows )
+				
+				resultLayout.innerHTML = ''
+				
+				var $table = $("<table>")
+				var tHead = "<tr>"
+					+ "<th>날짜</th>"
+					+ "<th>지역</th>"
+					+ "<th>경도</th>"
+					+ "<th>위도</th>"
+					+ "<th>일몰 시간</th>"
+				$table.html( tHead )
+				
+				$rows.each(( i, row )=> {
+					console.log( i, row)
+					
+					$("<tr>")
+					.append( $("<td>").html($(row).find("locdate").text() ) )
+					.append( $("<td>").html($(row).find("location").text() ) )
+					.append( $("<td>").html($(row).find("longitude").text() ) )
+					.append( $("<td>").html($(row).find("latitude").text() ) )
+					.append( $("<td>").html($(row).find("sunset").text() ) )
+				.appendTo( $table )
+					
+				})
+				
+				$table.appendTo( $("#resultLayout"))
+			},
+			error: ()=> {
+				console.log("AJAX 실패")
+			}
+		})
+	})
+})
+	
 
 </script>
-
 </head>
 <body>
 
-<h1>일몰 시간 확인하기</h1>
+<h1>일몰 시간 나타내기</h1>
 
-<table>
+날짜 선택 : <input type="text" id="Date">
+<select id="location">
+	<option>강릉</option>
+	<option>강화도</option>
+	<option>대관령</option>
+	<option>대구</option>
+	<option>부산</option>
+	<option>서울</option>
+	<option>양양</option>
+	<option>양평</option>
+	<option>울릉도</option>
+	<option>제주</option>
+	<option>주문진</option>
+</select>
+<!-- 지역 선택 : <input type="text" id="location"> -->
+<button id="btn">조회</button>
 
-<thead>
-<tr>
-	<th style="idth: 10%;">날짜</th>
-	<th style="idth: 10%;">지역</th>
-	<th style="idth: 10%;">일몰 시간</th>
-	<th style="idth: 45%;">위도</th>
-	<th style="idth: 10%;">경도</th>
-</tr>
-</thead>
-<tbody>
-<c:forEach items="${sunset }" var="sunset">
-
-
-	<tr>
-	   <td>${sunset.sunsetNum }</td>
-	   <td>${sunset.latitudeNum }</td>
-	   <td>${sunset.longitudeNum }</td>
-	   <td>${sunset.locdate }</td>
-	   <td>${sunset.location }</td>
-	</tr>
-	
-</c:forEach>
-</tbody>
-</table>
+<div id="resultLayout"></div>
 
 </body>
 </html>
