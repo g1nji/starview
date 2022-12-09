@@ -39,21 +39,21 @@ public interface AdminBoardDao {
 	public AdminBoardPhoto selectPhotoFile(AdminBoard viewBoard);
 
 	/**
-	 * 게시글 정보를 수정한다
+	 * 게시글 정보를 수정하기
 	 * 
 	 * @param board - 수정할 게시글 정보
 	 */
 	public void updateBoard(AdminBoard board);
 
 	/**
-	 * 게시글을 참조하고 있는 모든 첨부파일 삭제
+	 * 게시글이 참조하고 있는 모든 첨부파일 삭제하기
 	 * 
 	 * @param board - 첨부파일을 삭제할 게시글 번호
 	 */
 	public void deleteFile(AdminBoard board);
 
 	/**
-	 * 첨부파일 정보를 삽입한다
+	 * 첨부파일 정보 삽입하기
 	 * 
 	 * @param boardFile
 	 */

@@ -47,16 +47,18 @@ public interface AdminBoardService {
 	public AdminBoardPhoto getAttachFile(AdminBoard viewBoard);
 
 	/**
-	 * 게시글 정보, 첨부파일을 함께 처리한다
+	 * 게시글 정보, 첨부파일 함께 처리하기
 	 * 
-	 * @param board - 게시글 정보 객체
+	 * @param board - 수정할 게시글 정보 객체
 	 * @param file - 첨부파일 정보 객체
 	 */
 	public void update(AdminBoard board, MultipartFile file);
 
+	//수정하기
 	/**
-	 * 게시글 정보만 처리한다
-	 * @param board
+	 * 게시글 정보만 처리하기
+	 * 
+	 * @param board - 수정할 게시글 정보 객체
 	 */
 	public void update(AdminBoard board);
 

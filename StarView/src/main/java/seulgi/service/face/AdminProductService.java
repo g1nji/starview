@@ -53,4 +53,20 @@ public interface AdminProductService {
 	 * @return 첨부파일 정보 객체
 	 */
 	public AdminProductImage getAttachFile(AdminProduct viewProd);
+
+	/**
+	 * 상품 정보, 첨부파일을 함께 처리한다
+	 * 
+	 * @param prod - 상품 정보 객체
+	 * @param file - 첨부파일 정보 객체
+	 */
+	public void update(AdminProduct prod, MultipartFile file);
+	
+	//수정하기
+	/**
+	 * 상품 정보, 첨부파일을 함께 처리한다
+	 * 
+	 * @param prod - 상품 정보 객체
+	 */
+	public void update(AdminProduct prod);
 }

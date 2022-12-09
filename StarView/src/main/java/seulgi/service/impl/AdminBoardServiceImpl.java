@@ -64,21 +64,23 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 	//첨부파일 정보 얻어오기
 	@Override
 	public AdminBoardPhoto getAttachFile(AdminBoard viewBoard) {
+		logger.info("getAttachFile() 사용");
+		
 		return adminBoardDao.selectPhotoFile(viewBoard);
 	}
 	
 	@Override
 	public void update(AdminBoard board, MultipartFile file) {
+		logger.info("update() 사용");
 		
-		//게시글 처리
+		//게시글 업데이트
 		if("".equals(board.getGalleryTitle())) {
 			board.setGalleryTitle("(제목없음)");
+		} else {
+			adminBoardDao.updateBoard(board);
 		}
 		
-		adminBoardDao.updateBoard(board);
-		
-		//첨부파일 처리
-		
+		//첨부파일 업데이트
 		//빈 파일일 경우
 		if(file.getSize() <= 0) {
 			return ;

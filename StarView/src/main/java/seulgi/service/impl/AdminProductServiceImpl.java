@@ -105,16 +105,86 @@ public class AdminProductServiceImpl implements AdminProductService {
 		}
 		
 		//첨부파일 정보 DB 기록
-		AdminProductImage imagefile = new AdminProductImage();
-		imagefile.setgId(prod.getgId());
-		imagefile.setFileName(fileName);
+		AdminProductImage prodFile = new AdminProductImage();
+		prodFile.setgId(prod.getgId());
+		prodFile.setFileName(fileName);
 		
-		adminProductDao.insertFile(imagefile);
+		adminProductDao.insertFile(prodFile);
 	}
 	
 	//첨부파일 정보 얻어오기
 	@Override
 	public AdminProductImage getAttachFile(AdminProduct viewProd) {
+		logger.info("getAttachFile() 사용");
+		
 		return adminProductDao.selectImageFile(viewProd);
+	}
+	
+	@Override
+	public void update(AdminProduct prod, MultipartFile file) {
+		logger.info("upload() 사용");
+		
+		//상품 업데이트
+		if("".equals(prod.getgName())) {
+			prod.setgName("(상품명 없음)");
+		} else {
+			adminProductDao.updateProd(prod);
+		}
+		
+		//첨부파일 업데이트
+		//파일의 크기가 0일 때 파일 업로드 처리 중단
+		if( file.getSize() <= 0 ) {
+			return;
+		}
+		
+		//파일 저장될 경로
+		String storedPath = context.getRealPath("prodimage");
+		
+		//파일 저장할 폴더 만들기(prodimage 폴더)
+		File storedFolder = new File(storedPath);
+		if( !storedFolder.exists() ) {
+			storedFolder.mkdir();
+		}
+		
+		//파일 이름
+		String fileName = file.getOriginalFilename();
+		
+		//저장될 이름 추가(dto, DB)
+		
+		//실제 저장될 파일 객체
+		File dest = new File(storedFolder, fileName);
+		
+		try {
+			//업로드된 파일을 폴더에 저장하기
+			file.transferTo(dest);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		//첨부파일 정보 DB 기록
+		AdminProductImage prodFile = new AdminProductImage();
+		prodFile.setgId(prod.getgId());
+		prodFile.setFileName(fileName);
+
+		//기존에 상품에 연결된 첨부파일을 삭제한다
+		adminProductDao.deleteFile(prod);
+		
+		//새로운 첨부파일을 삽입한다
+		adminProductDao.insertFile(prodFile);
+	}
+	
+	@Override
+	public void update(AdminProduct prod) {
+		logger.info("upload() 사용");
+		
+		//상품 업데이트
+		if("".equals(prod.getgName())) {
+			prod.setgName("(상품명 없음)");
+		} else {
+			adminProductDao.updateProd(prod);
+		}
+		
 	}
 }

@@ -34,16 +34,16 @@ public interface AdminProductDao {
 	/**
 	 * 상품 업로드하기
 	 * 
-	 * @param product - 업로드할 상품 정보
+	 * @param prod - 업로드할 상품 정보
 	 */
 	public void insertProd(AdminProduct prod);
 
 	/**
 	 * 첨부파일 업로드하기
 	 * 
-	 * @param imagefile - 업로드할 첨부파일 정보
+	 * @param prodFile - 업로드할 첨부파일 정보
 	 */
-	public void insertFile(AdminProductImage imagefile);
+	public void insertFile(AdminProductImage prodFile);
 
 	/**
 	 * 상품 번호를 이용하여 첨부파일 정보 조회하기
@@ -52,4 +52,18 @@ public interface AdminProductDao {
 	 * @return 조회된 첨부파일 정보
 	 */
 	public AdminProductImage selectImageFile(AdminProduct viewProd);
+
+	/**
+	 * 상품 수정하기
+	 * 
+	 * @param prod - 수정할 상품 정보
+	 */
+	public void updateProd(AdminProduct prod);
+
+	/**
+	 * 상품이 참조하고 있는 모든 첨부파일 삭제하기
+	 * 
+	 * @param prod - 첨부파일을 삭제할 상품 번호
+	 */
+	public void deleteFile(AdminProduct prod);
 }

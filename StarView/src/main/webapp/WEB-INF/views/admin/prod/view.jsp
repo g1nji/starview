@@ -11,6 +11,14 @@ $(document).ready(function() {
 	$("#btnList").click(function() {
 		location.href = "./list"
 	})
+	
+	$("#btnUpdate").click(function() {
+		location.href = "./update?gId=${viewProd.gId }"
+	})
+	
+	$("#btnDelete").click(function() {
+		location.href = "./delete?gId=${viewProd.gId }"
+	})
 })
 </script>
 
@@ -51,6 +59,10 @@ table {
 
 <div class="text-center">
 	<button id="btnList" class="btn btn-default">목록</button>
+	
+	<!-- 아이디 추가 -->
+	<button id="btnUpdate" class="btn btn-primary">수정</button>
+	<button id="btnDelete" class="btn btn-danger">삭제</button>
 </div>
 
 <c:import url="../layout/footer.jsp" />
