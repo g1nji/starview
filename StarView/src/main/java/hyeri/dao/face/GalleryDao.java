@@ -24,6 +24,8 @@ public interface GalleryDao {
 	 */
 	public List<Gallery> selectList(Paging paging);
 
+	public List<GalleryFile> selectListFile(Paging paging);
+	
 	/**
 	 * 조회하려는 게시글의 조회수를 1 증가시킨다
 	 * 
@@ -60,6 +62,35 @@ public interface GalleryDao {
 	 * @return 조회된 첨부파일 정보
 	 */
 	public GalleryFile selectGalleryFileByGalleryNo(Gallery viewGallery);
+
+	/**
+	 * 게시글 정보 수정
+	 * 
+	 * @param viewGallery - 수정할 게시글 정보
+	 */
+	public void updatePhoto(Gallery viewGallery);
+	
+	/**
+	 * 게시글을 참조하고 있는 모든 첨부파일 삭제ㅔ
+	 * 
+	 * @param viewGallery - 첨부파일을 삭제할 게시글 번호
+	 */
+	public void deleteFile(Gallery viewGallery);
+
+	/**
+	 * 게시글 삭제
+	 * 
+	 * @param gallery - 삭제할 게시글 번호
+	 */
+	public void delete(Gallery gallery);
+
+	/**
+	 * 
+	 * @param tagList
+	 */
+	public void insertTag(List<GTag> tagList);
+
+
 
 
 

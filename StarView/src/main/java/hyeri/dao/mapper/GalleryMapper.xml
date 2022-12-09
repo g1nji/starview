@@ -16,13 +16,24 @@
 				SELECT
 					gallery_no, gallery_title, gallery_content,
 					gallery_date, gallery_hit
-					, gallery_like, 
+					, gallery_like
 <!-- 					user_id,  -->
-					photo_no
 				FROM gallery
 				ORDER BY gallery_no DESC
 			) G
 		) GALLERY
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
+	
+	<select id="selectListFile" resultType="hyeri.dto.GalleryFile" parameterType="hyeri.util.Paging">
+		SELECT * FROM (
+			SELECT rownum rnum, G.* FROM (
+				SELECT
+					photo_no, gallery_no, stored_name, origin_name
+				FROM gallery_file
+				ORDER BY photo_no DESC
+			) G
+		) GALLERY_FILE
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
 	</select>
 	
@@ -51,15 +62,40 @@
 	</insert>
 	
 	<insert id="insertPhoto" parameterType="hyeri.dto.GalleryFile">
+		<selectKey order="BEFORE" resultType="int" keyProperty="photoNo">
+			SELECT gallery_file_seq.nextval FROM dual
+		</selectKey>
 		INSERT INTO gallery_file ( photo_no, gallery_no, stored_name, origin_name )
-		VALUES ( gallery_file_seq.nextval, #{galleryNo}, #{storedName }, #{originName })
+		VALUES ( #{photoNo }, #{galleryNo }, #{storedName }, #{originName })
 	</insert>
 
 	<select id="selectGalleryFileByGalleryNo" resultType="hyeri.dto.GalleryFile" parameterType="hyeri.dto.Gallery">
 		SELECT 
 			photo_no, gallery_no, stored_name, origin_name
 		FROM gallery_file
-		WHERE photo_no = #{photoNo }
+		WHERE gallery_no = #{galleryNo }
 	</select>
+	
+	<update id="updatePhoto" parameterType="hyeri.dto.Gallery">
+		UPDATE gallery
+		SET gallery_title = #{galleryTitle }
+			, gallery_content = #{galleryContent }
+		WHERE gallery_no = #{galleryNo }
+	</update>
+	
+	<delete id="deleteFile" parameterType="hyeri.dto.GalleryFile">
+		DELETE gallery_file
+		WHERE gallery_no = #{galleryNo }
+	</delete>
+	
+	<delete id="delete" parameterType="hyeri.dto.Gallery">
+		DELETE gallery
+		WHERE gallery_no = #{galleryNo }
+	</delete>
+	
+	<insert id="insertTag" parameterType="hyeri.dto.GTag">
+		INSERT INTO g_tag ( tag_no, tag_name )
+		VALUES ( g_tag_seq.nextval, #{tagName } )
+	</insert>
 
 </mapper>
