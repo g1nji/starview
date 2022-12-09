@@ -7,7 +7,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.out{
+	text-align: center;
 
+}
+
+#resultLayout{
+margin:0 auto;
+margin-bottom:10px;
+width:1200px;
+height:450px;
+}
+
+</style>
 <!-- jQeury 2.2.4 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
@@ -76,7 +89,7 @@ $(document).ready(() => {
                + "<th>천문현상명</th>"
                + "<th>천문현상시간</th>"
                + "<th>천문현상</th>"
-               + "<th>비고</th>"
+//               + "<th>비고</th>"
                + "<tr>"
                $table.html( tHead )
                
@@ -92,7 +105,7 @@ $(document).ready(() => {
                      .append($("<td>").html($(item).find("astroTitle").text() ) )
                      .append($("<td>").html($(item).find("astroTime").text() ) )
                      .append($("<td>").html($(item).find("astroEvent").text() ) )
-                     .append($("<td>").html($(item).find("remarks").text() ) )
+//                     .append($("<td>").html($(item).find("remarks").text() ) )
                   .appendTo( $table )
 
                })
@@ -123,9 +136,8 @@ var func2 = (a, b) => {
 
 </head>
 <body>
-
+<div class="out">
 <h1>이달의 천문현상</h1>
-<h3>12월</h3>
 <hr>
 <div class="box">
 	<input type="text" name="Year" id="Year">년
@@ -176,11 +188,11 @@ var func2 = (a, b) => {
 		<option value="30">30일</option>
 		<option value="31">31일</option>
 	</select>
+<button id="btn">실행</button>
 	
 
 </div>
-
-<button id="btn">실행</button>
+</div>
 
 <div id="resultLayout"></div>
 

@@ -32,6 +32,18 @@ function init(){
 	$("#Day").val(day);
 }
 
+function photo() {
+    var moon=10.5;
+    var img_src="";
+    for(var i=0.0; i<=28.5; i+=0.1) {
+    	console.log(i.toFixed(1))
+            if(moon ==(i.toFixed(1))) {
+            img_src = '\/resources\/img\/월령 '+ i.toFixed(1) + ' 달 이미지.png';
+            }
+        }
+        return img_src;
+    }
+
 
 $(document).ready(() => {
 	init();
@@ -186,6 +198,10 @@ var func2 = (a, b) => {
 <button id="btn">확인</button>
 
 <div id="resultLayout"></div>
+<div>
+<img id="photo" src="">
+	 <script>document.querySelector('#photo').src=photo()</script>
+</div>
 
 </body>
 </html>
