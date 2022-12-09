@@ -36,7 +36,7 @@ public class SunsetController {
 	//로그
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@Autowired private SunsetService sunsetService;
+//	@Autowired private SunsetService sunsetService;
 	
 	@RequestMapping("/sunset/time")
 	public void sunsettime() {
@@ -49,9 +49,7 @@ public class SunsetController {
 	
 	
 	
-	
-	
-	//controller에서 api 가져오는 방법
+	//controller로 api 가져오기 (model객체로 바꾸기)
 	@RequestMapping(value="/sunset/test", method=RequestMethod.GET)
 	public void sunsetview(@RequestParam String loc) throws IOException {
 		
