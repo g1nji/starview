@@ -13,6 +13,8 @@ public class AdminBoard {
 	private int galleryLike;
 	private String uId;
 	private int photoNo;
+	private String galleryLoc;
+	private String galleryTag;
 	
 	//상품 리뷰
 	//private int rId;
@@ -30,7 +32,7 @@ public class AdminBoard {
 	public AdminBoard() {}
 
 	public AdminBoard(int galleryNo, String galleryTitle, String galleryContent, Date galleryDate, int galleryHit,
-			int galleryLike, String uId, int photoNo) {
+			int galleryLike, String uId, int photoNo, String galleryLoc, String galleryTag) {
 		super();
 		this.galleryNo = galleryNo;
 		this.galleryTitle = galleryTitle;
@@ -40,13 +42,16 @@ public class AdminBoard {
 		this.galleryLike = galleryLike;
 		this.uId = uId;
 		this.photoNo = photoNo;
+		this.galleryLoc = galleryLoc;
+		this.galleryTag = galleryTag;
 	}
 
 	@Override
 	public String toString() {
 		return "AdminBoard [galleryNo=" + galleryNo + ", galleryTitle=" + galleryTitle + ", galleryContent="
 				+ galleryContent + ", galleryDate=" + galleryDate + ", galleryHit=" + galleryHit + ", galleryLike="
-				+ galleryLike + ", uId=" + uId + ", photoNo=" + photoNo + "]";
+				+ galleryLike + ", uId=" + uId + ", photoNo=" + photoNo + ", galleryLoc=" + galleryLoc + ", galleryTag="
+				+ galleryTag + "]";
 	}
 
 	public int getGalleryNo() {
@@ -111,6 +116,22 @@ public class AdminBoard {
 
 	public void setPhotoNo(int photoNo) {
 		this.photoNo = photoNo;
+	}
+
+	public String getGalleryLoc() {
+		return galleryLoc;
+	}
+
+	public void setGalleryLoc(String galleryLoc) {
+		this.galleryLoc = galleryLoc;
+	}
+
+	public String getGalleryTag() {
+		return galleryTag;
+	}
+
+	public void setGalleryTag(String galleryTag) {
+		this.galleryTag = galleryTag;
 	}
 
 }

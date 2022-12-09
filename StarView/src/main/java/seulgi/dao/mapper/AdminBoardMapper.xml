@@ -30,4 +30,21 @@
 		WHERE gallery_no = #{galleryNo }
 	</select>
 	
+	<update id="updateBoard" parameterType="seulgi.dto.AdminBoard">
+		UPDATE gallery
+		SET gallery_title = #{galleryTitle }
+			, gallery_content = #{galleryContent }
+		WHERE gallery_no = #{galleryNo }
+	</update>
+
+	<delete id="deleteFile" parameterType="seulgi.dto.AdminBoard">
+		DELETE gallery_file
+		WHERE gallery_no = #{galleryNo }	
+	</delete>
+	
+	<insert id="insertFile" parameterType="seulgi.dto.AdminBoardPhoto">
+		INSERT INTO gallery_file ( photo_no, gallery_no, origin_name, stored_name)
+		VALUES ( gallery_file_seq.nextval, #{galleryNo }, #{originName }, #{storedName } )
+	</insert>
+	
 </mapper>
