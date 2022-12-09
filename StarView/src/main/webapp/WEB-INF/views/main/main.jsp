@@ -26,10 +26,13 @@ var hour = function() {
 	var hh = today.getHours();
 	if(hh>=7 && hh<=16) {
 		document.getElementById("day").style.backgroundImage = "url('/resources/image/day1.png')";
+		document.getElementById("logoimg").src="/resources/image/logo1.png";
 	} else if(hh>16 && hh<=19) {
 		document.getElementById("day").style.backgroundImage = "url('/resources/image/day2.png')";
+		document.getElementById("logoimg").src="/resources/image/logo2.png";
 	} else {
 		document.getElementById("day").style.backgroundImage = "url('/resources/image/day3.png')";
+		document.getElementById("logoimg").src="/resources/image/logo1.png";
 	}
 	
 }
@@ -179,7 +182,7 @@ ul.mainnav > li:hover > ul {
 
 <div id="menu">
 	<ul class="mainnav">
-		<li id="logo"><a href="/"><img src="/resources/image/logo.png" style="width:150px; margin-top: 5px;"></a></li>
+		<li id="logo"><a href="/"><img id="logoimg" src="" style="width:150px; margin-top: 5px;"></a></li>
 		<li>
 			<a href="">별 정보 확인</a>
 			<ul>
