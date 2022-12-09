@@ -36,17 +36,24 @@ public class SunsetController {
 	//로그
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@Autowired private SunsetService sunsetService;
+//	@Autowired private SunsetService sunsetService;
 	
-	@RequestMapping(value="/sunset/main", method=RequestMethod.GET)
-	public void sunsetmain() {
+	@RequestMapping("/sunset/time")
+	public void sunsettime() {
 		logger.info("/sunset/time - [GET]");
 	}
 
-	@RequestMapping(value="/sunset/time", method=RequestMethod.GET)
+	
+	
+	
+	
+	
+	
+	//controller로 api 가져오기 (model객체로 바꾸기)
+	@RequestMapping(value="/sunset/test", method=RequestMethod.GET)
 	public void sunsetview(@RequestParam String loc) throws IOException {
 		
-		logger.info("/sunset/time - [POST]");
+		logger.info("/sunset/test - [GET]");
 		
 		// 현재 날짜를 원하는 문자열 포맷으로 변환
 		Date date = Calendar.getInstance().getTime();  

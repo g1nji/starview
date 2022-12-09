@@ -3,16 +3,17 @@ package jiwon.dto;
 public class StarPlace {
 	
 	private int arrivalNum;	//도착지(번호로 구분)
-	private int eLttd;	//도착지 위도
-	private int eLngtd;	//도착지 경도
-	private int sLttd;	//출발지 위도
-	private int sLngtd;	//출발지 경도
+	private double eLttd;	//도착지 위도
+	private double eLngtd;	//도착지 경도
+	private double sLttd;	//출발지 위도
+	private double sLngtd;	//출발지 경도
 	private String departure;	//출발지 이름
 	private String arrival;	//도착지 이름
 	
 	public StarPlace() {	}
 
-	public StarPlace(int arrivalNum, int eLttd, int eLngtd, int sLttd, int sLngtd, String departure, String arrival) {
+	public StarPlace(int arrivalNum, double eLttd, double eLngtd, double sLttd, double sLngtd, String departure,
+			String arrival) {
 		super();
 		this.arrivalNum = arrivalNum;
 		this.eLttd = eLttd;
@@ -26,7 +27,8 @@ public class StarPlace {
 	@Override
 	public String toString() {
 		return "StarPlace [arrivalNum=" + arrivalNum + ", eLttd=" + eLttd + ", eLngtd=" + eLngtd + ", sLttd=" + sLttd
-				+ ", sLngtd=" + sLngtd + ", departure=" + departure + ", arrival=" + arrival + "]";
+				+ ", sLngtd=" + sLngtd + ", departure=" + departure + ", arrival=" + arrival + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
 
 	public int getArrivalNum() {
@@ -37,35 +39,35 @@ public class StarPlace {
 		this.arrivalNum = arrivalNum;
 	}
 
-	public int geteLttd() {
+	public double geteLttd() {
 		return eLttd;
 	}
 
-	public void seteLttd(int eLttd) {
+	public void seteLttd(double eLttd) {
 		this.eLttd = eLttd;
 	}
 
-	public int geteLngtd() {
+	public double geteLngtd() {
 		return eLngtd;
 	}
 
-	public void seteLngtd(int eLngtd) {
+	public void seteLngtd(double eLngtd) {
 		this.eLngtd = eLngtd;
 	}
 
-	public int getsLttd() {
+	public double getsLttd() {
 		return sLttd;
 	}
 
-	public void setsLttd(int sLttd) {
+	public void setsLttd(double sLttd) {
 		this.sLttd = sLttd;
 	}
 
-	public int getsLngtd() {
+	public double getsLngtd() {
 		return sLngtd;
 	}
 
-	public void setsLngtd(int sLngtd) {
+	public void setsLngtd(double sLngtd) {
 		this.sLngtd = sLngtd;
 	}
 
@@ -84,7 +86,7 @@ public class StarPlace {
 	public void setArrival(String arrival) {
 		this.arrival = arrival;
 	}
-	
-	
+
+
 
 }

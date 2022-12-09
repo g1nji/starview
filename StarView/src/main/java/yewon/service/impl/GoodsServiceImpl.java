@@ -38,4 +38,27 @@ public class GoodsServiceImpl implements GoodsService {
 		return totalCount;
 	}
 
+	@Override
+	public List<Goods> sortByLowPrice() {
+		List<Goods> lowPriceList = goodsDao.selectByLowPrice();
+		return lowPriceList;
+	}
+
+	@Override
+	public List<Goods> lowPriceMore(Map<String, Integer> map) {
+		List<Goods> moreGoods = goodsDao.lowPriceMore(map); 
+		return moreGoods;	
+	}
+
+	@Override
+	public List<Goods> sortByHighPrice() {
+		List<Goods> highPriceList = goodsDao.selectByHighPrice();
+		return highPriceList;
+	}
+
+	@Override
+	public List<Goods> highPriceMore(Map<String, Integer> map) {
+		List<Goods> moreGoods = goodsDao.highPriceMore(map); 
+		return moreGoods;	
+	}
 }

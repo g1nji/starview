@@ -2,6 +2,7 @@ package hyeri.dao.face;
 
 import java.util.List;
 
+import hyeri.dto.GTag;
 import hyeri.dto.Gallery;
 import hyeri.dto.GalleryFile;
 import hyeri.util.Paging;
@@ -51,6 +52,16 @@ public interface GalleryDao {
 	 * @param galleryFile - 삽입할 첨부파일 정보
 	 */
 	public void insertPhoto(GalleryFile galleryFile);
+
+	/**
+	 * 파일 번호를 이용하여 첨부파일 정보를 조회한다
+	 * 
+	 * @param viewGallery - 조회할 첨부파일 객체
+	 * @return 조회된 첨부파일 정보
+	 */
+	public GalleryFile selectGalleryFileByGalleryNo(Gallery viewGallery);
+
+
 
 
 	

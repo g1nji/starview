@@ -15,9 +15,10 @@
 			SELECT rownum rnum, G.* FROM (
 				SELECT
 					gallery_no, gallery_title, gallery_content,
-<!-- 					gallery_date, gallery_hit, gallery_like,  -->
+					gallery_date, gallery_hit
+					, gallery_like, 
 <!-- 					user_id,  -->
-<!-- 					photo_no -->
+					photo_no
 				FROM gallery
 				ORDER BY gallery_no DESC
 			) G
@@ -35,20 +36,30 @@
 		SELECT
 			gallery_no, gallery_title, gallery_content
 		FROM gallery
-		WHERE gallery_no = #{gallery_no}
+		WHERE gallery_no = #{galleryNo}
 	</select>
 
 	<insert id="uploadPhoto" parameterType="hyeri.dto.Gallery">
 		<selectKey order="BEFORE" resultType="int" keyProperty="galleryNo">
 			SELECT gallery_seq.nextval FROM dual
 		</selectKey>
-		INSERT INTO gallery ( gallery_no, gallery_title, gallery_content)
-		VALUES ( #{galleryNo }, #{galleryTitle }, #{galleryContent })
+		INSERT INTO gallery ( 
+			gallery_no, gallery_title, gallery_content
+<!-- 			, user_id -->
+			)
+		VALUES ( #{galleryNo}, #{galleryTitle }, #{galleryContent } )
 	</insert>
-
+	
 	<insert id="insertPhoto" parameterType="hyeri.dto.GalleryFile">
 		INSERT INTO gallery_file ( photo_no, gallery_no, stored_name, origin_name )
-		VALUES ( gallery_file_seq.nextval, #{galleryNo }, #{storedName }, #{originName })
+		VALUES ( gallery_file_seq.nextval, #{galleryNo}, #{storedName }, #{originName })
 	</insert>
+
+	<select id="selectGalleryFileByGalleryNo" resultType="hyeri.dto.GalleryFile" parameterType="hyeri.dto.Gallery">
+		SELECT 
+			photo_no, gallery_no, stored_name, origin_name
+		FROM gallery_file
+		WHERE photo_no = #{photoNo }
+	</select>
 
 </mapper>

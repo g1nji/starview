@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import hyeri.dao.face.GalleryDao;
+import hyeri.dto.GTag;
 import hyeri.dto.Gallery;
 import hyeri.dto.GalleryFile;
 import hyeri.service.face.GalleryService;
@@ -54,6 +55,11 @@ public class GalleryServiceImpl implements GalleryService {
 		//상세보기 조회 결과 리턴
 		return galleryDao.selectGallery(viewGallery);
 		
+	}
+	
+	@Override
+	public GalleryFile getAttachFile(Gallery viewGallery) {
+		return galleryDao.selectGalleryFileByGalleryNo(viewGallery);
 	}
 
 	@Override
