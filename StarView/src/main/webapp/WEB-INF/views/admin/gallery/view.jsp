@@ -11,6 +11,14 @@ $(document).ready(function() {
 	$("#btnList").click(function() {
 		location.href = "./list"
 	})
+	
+	$("#btnUpdate").click(function() {
+		location.href = "./update?galleryNo=${viewBoard.galleryNo }"
+	})
+	
+	$("#btnDelete").click(function() {
+		location.href = "./delete?galleryNo=${viewBoard.galleryNo }"
+	})
 })
 </script>
 
@@ -52,7 +60,8 @@ table {
 	<td colspan="2" height="200" valign="top" style="padding:20px; line-height:160%">
 		<div id="file">
 			<div>
-				<img src='주소를 다시/${photofile.originName }' style="width: 200px; height: 200px;" /><br>
+				<!-- 주소를 다시 제대로 -->
+				<img src='/boardphoto/${photofile.originName }' style="width: 200px; height: 200px;" /><br>
 			</div>
 			${photofile.storedName }
 		</div>
@@ -62,6 +71,10 @@ table {
 
 <div class="text-center">
 	<button id="btnList" class="btn btn-default">목록</button>
+	
+	<!-- 아이디 추가 -->
+	<button id="btnUpdate" class="btn btn-primary">수정</button>
+	<button id="btnDelete" class="btn btn-danger">삭제</button>
 </div>
 
 <c:import url="../layout/footer.jsp" />

@@ -44,4 +44,17 @@
 		WHERE g_id = #{gId}
 	</select>
 	
+	<update id="updateProd" parameterType="seulgi.dto.AdminProduct">
+		UPDATE goods
+		SET g_name = #{gName }
+			, g_price = #{gPrice }
+			, g_detail = #{gDetail }
+		WHERE g_id = #{gId }
+	</update>
+
+	<delete id="deleteFile" parameterType="seulgi.dto.AdminProduct">
+		DELETE goods_img
+		WHERE g_id = #{gId}	
+	</delete>
+	
 </mapper>

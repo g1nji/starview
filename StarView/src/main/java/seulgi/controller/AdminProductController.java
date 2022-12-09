@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import seulgi.dto.AdminBoard;
 import seulgi.dto.AdminProduct;
 import seulgi.dto.AdminProductImage;
 import seulgi.service.face.AdminProductService;
@@ -86,5 +87,41 @@ public class AdminProductController {
 		//게시글, 첨부파일 처리
 		adminProductService.upload(prod, file);
 	}
+	
+	//상품 수정
+	@RequestMapping(value="/update", method = RequestMethod.GET)
+	public String updateProd(AdminProduct prod, Model model) {
+		logger.info("/update 주소 연결 - [GET]");
+		
+		//잘못된 상품 번호 처리
+		if( prod.getgId() < 0 ) {
+			return "redirect:admin/prod/list";
+		}
+		
+		//상품 상세 조회
+		prod = adminProductService.view(prod);
+		logger.info("조회된 상품: {}", prod);
+		
+		//첨부파일 모델값 전달
+		AdminProductImage imagefile = adminProductService.getAttachFile(prod);
+		model.addAttribute("imagefile", imagefile);
+		
+		//모델값 전달
+		model.addAttribute("updateProd", prod);
+		
+		return "admin/prod/update";
+	}
+
+	@RequestMapping(value="/update", method = RequestMethod.POST)
+	public String updateProdProc(AdminProduct prod, MultipartFile file) {
+		logger.info("/update 주소 연결 - [POST]");
+		
+		adminProductService.update(prod);
+		//adminProductService.update(prod, file);
+		
+		return "redirect:/admin/prod/view?gId=" + prod.getgId();
+	}
+	
+	
 	
 }
