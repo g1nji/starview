@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <!DOCTYPE html>
-<html></html>
+<html>
 
 <head>
 <meta charset="UTF-8">
@@ -13,7 +13,7 @@
 
 <!-- 부트스트랩 3 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <style type="text/css">
@@ -35,17 +35,24 @@ body {
 	margin: 0;
 }
 
+a {
+	color: black;
+}
+
+a:hover {
+	color: #FFB703;
+	text-decoration: underline;
+}
+
+/* ----------------- */
+
 #logo {
-	width: 200px;
-	background-color: lightgray;
-	z-index: 9999;
-	margin: 0 auto;
-	text-align: center;
+	height: 100px;
+	padding: 0;
 }
 
 ul.subnav {
-	padding: 0 5px 0 0;
-	height: 20px;
+	padding: 0 100px 0 0;
 }
 
 ul.subnav > li {
@@ -53,12 +60,8 @@ ul.subnav > li {
 	list-style-type: none;
 }
 
-#main-menu {
-	height: 40px;
-}
-
-ul.mainnav {
-	padding: 0;
+#menu {
+	height: 100px;
 }
 
 ul.mainnav > li {
@@ -67,25 +70,33 @@ ul.mainnav > li {
 	width: 150px;
 	height: 30px;
 	text-align: center;
-	padding: 5px 10px;
+	padding: 50px 10px 5px 10px;
 	list-style-type: none;
+}
+
+ul.subnav > li {
+	padding: 50px 5px 5px 5px;
 }
 
 ul.mainnav > li > a {
 	text-decoration: none;
+    font-size: 17px;
+    font-weight: 400;
 }
 
 ul.mainnav > li > ul {
 	position: absolute;
 	display: none;
-	padding: 5px 10px;
+	padding: 10px 0px;
 	width: 150px;
+	background-color: #FFF2CC;
+	border-radius: 10px;
 }
 
 ul.mainnav > li > ul > li {
 	list-style-type: none;
 	text-align: left;
-	padding: 5px 0 0 20px;
+	padding: 0 0 10px 20px;
 }
 
 ul.mainnav > li > ul > li > a {
@@ -102,28 +113,20 @@ ul.mainnav > li:hover > ul {
 	font-size: 12px;
 	text-align: center;
 }
-
 </style>
-
 </head>
+
 <body>
 
 <header>
 
-<div id="sub-menu">
-	<ul class="subnav">
-		<li><button type="button" onclick="location.href='/users/login';">로그인/회원가입</button></li>
-		<li><button>장바구니</button>
-	</ul>
-</div>
-
-<div id="main-menu">
+<div id="menu">
 	<ul class="mainnav">
-		<li id="logo"><a href="/">*별 보러 가자*</a></li>
+		<li id="logo"><a href="/"><img src="/resources/image/logo.png" style="width:100px;"></a></li>
 		<li>
 			<a href="">별 정보 확인</a>
 			<ul>
-				<li><a href="">일몰시간</a></li>
+				<li><a href="/sunset/time">일몰시간</a></li>
 				<li><a href="">날씨</a></li>
 				<li><a href="">달 모양</a></li>
 				<li><a href="">별 사진 명소</a></li>
@@ -133,6 +136,10 @@ ul.mainnav > li:hover > ul {
 		<li><a href="/gallery/list">갤러리</a></li>
 		<li><a href="/goods/list">굿즈샵</a></li>
 		<li><a href="">스케줄러</a></li>
+	</ul>
+	<ul class="subnav">
+		<li><a href="/users/login"><img src="/resources/image/user.png" style="height:25px;"></a></li>
+		<li><a href=""><img src="/resources/image/shopping-cart.png" style="height:25px;"></a></li>
 	</ul>
 </div>
 

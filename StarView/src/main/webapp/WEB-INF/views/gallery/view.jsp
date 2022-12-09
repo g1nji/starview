@@ -12,8 +12,8 @@
 좋아요
 
 <!-- 게시글 작성자일 때 -->
-<a href="">수정</a>
-<a href="">삭제</a>
+<a href="./update?galleryNo=${viewGallery.galleryNo }">수정</a>
+<a href="./delete?galleryNo=${viewGallery.galleryNo }">삭제</a>
 
 <br>
 

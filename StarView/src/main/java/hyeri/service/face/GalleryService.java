@@ -31,13 +31,16 @@ public interface GalleryService {
 	 */
 	public List<Gallery> list(Paging paging);
 
+	public List<GalleryFile> listFile(Paging paging);
+	
 	/**
 	 * 게시글 정보, 첨부파일을 함께 처리한다
 	 * 
 	 * @param writeParam - 게시글 정보 객체
 	 * @param file - 첨부파일 정보 객체
+	 * @param tagList - 태그 정보 객체
 	 */
-	public void write(Gallery gallery, MultipartFile file);
+	public void write(Gallery gallery, MultipartFile file, List<GTag> tagList);
 
 	/**
 	 * 게시글 상세보기
@@ -55,5 +58,19 @@ public interface GalleryService {
 	 */
 	public GalleryFile getAttachFile(Gallery viewGallery);
 
+	/**
+	 * 게시글 정보, 첨부파일 수정
+	 * 
+	 * @param viewGallery - 게시글 정보 객체
+	 * @param file - 첨부파일 정보 객체
+	 */
+	public void update(Gallery viewGallery, MultipartFile file);
+
+	/**
+	 * 게시글 삭제
+	 * 
+	 * @param gallery - 게시글 정보 객체
+	 */
+	public void delete(Gallery gallery);
 
 }

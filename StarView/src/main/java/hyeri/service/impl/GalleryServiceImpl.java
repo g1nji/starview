@@ -2,7 +2,9 @@ package hyeri.service.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -47,6 +49,11 @@ public class GalleryServiceImpl implements GalleryService {
 	}
 	
 	@Override
+	public List<GalleryFile> listFile(Paging paging) {
+		return galleryDao.selectListFile(paging);
+	}
+	
+	@Override
 	public Gallery view(Gallery viewGallery) {
 		
 		//조회수 증가
@@ -63,7 +70,7 @@ public class GalleryServiceImpl implements GalleryService {
 	}
 
 	@Override
-	public void write(Gallery gallery, MultipartFile file) {
+	public void write(Gallery gallery, MultipartFile file, List<GTag> tagList) {
 		
 		//게시글 처리
 		if( "".equals( gallery.getGalleryTitle() ) ) {
@@ -115,6 +122,78 @@ public class GalleryServiceImpl implements GalleryService {
 		
 		galleryDao.insertPhoto(galleryFile);
 		
+		//---------------------------------------------------
+		
+		galleryDao.insertTag(tagList);
+		
+	}
+	
+	@Override
+	public void update(Gallery viewGallery, MultipartFile file) {
+		
+		//게시글 처리
+		if( "".equals( viewGallery.getGalleryTitle() ) ) {
+			viewGallery.setGalleryTitle("(무제)");
+		}
+		
+		galleryDao.updatePhoto(viewGallery);
+		
+		//---------------------------------------------------
+		
+		//첨부파일 처리
+		
+		//빈 파일일 경우
+		if( file.getSize() <= 0 ) {
+			return;
+		}
+		
+		//파일이 저장될 경로
+		String storedPath = context.getRealPath("upload");
+		File storedFolder = new File( storedPath );
+		if( !storedFolder.exists() ) {
+			storedFolder.mkdir();
+		}
+		
+		//파일이 저장될 이름
+		String originName = file.getOriginalFilename();
+		String storedName = originName + UUID.randomUUID().toString().split("-")[4];
+		
+		//저장할 파일의 정보 객체
+		File dest = new File( storedFolder, storedName );
+		
+		try {
+			file.transferTo(dest);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		//---------------------------------------------------
+		
+		//첨부파일 정보 DB 기록
+		
+		GalleryFile galleryFile = new GalleryFile();
+		galleryFile.setGalleryNo( viewGallery.getGalleryNo() );
+		galleryFile.setUserId( viewGallery.getUserId() );
+		galleryFile.setOriginName(originName);
+		galleryFile.setStoredName(storedName);
+		
+		//기존에 게시글에 연결된 첨부파일 삭제
+		galleryDao.deleteFile(viewGallery);
+		
+		galleryDao.insertPhoto(galleryFile);
+		
+	}
+	
+	@Override
+	public void delete(Gallery gallery) {
+
+		//첨부파일 삭제
+		galleryDao.deleteFile(gallery);
+		
+		//게시글 삭제
+		galleryDao.delete(gallery);
 	}
 	
 }

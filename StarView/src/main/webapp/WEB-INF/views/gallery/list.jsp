@@ -37,7 +37,7 @@ $(document).ready(function() {
 </style>
 
 <h2 class="title">갤러리</h2>
-<button id="btnWrite">글쓰기</button>
+<button id="btnWrite" class="btn btn-primary">글쓰기</button>
 <div class="clearfix"></div>
 <hr>
 <div class="clearfix"></div>
@@ -58,16 +58,18 @@ $(document).ready(function() {
 		<tr>
 			<td>
 				<a href="/gallery/view?galleryNo=${gallery.galleryNo }">${gallery.galleryTitle }
-				<img src="/imagepath/${galleryFile.originName }"></a>
+				<img src="/imagepath/${galleryFile.storedName }">
+				</a>
 			</td>
 		</tr>
 		<tr>
+			<td>${gallery.galleryNo }</td>
 			<td>작성자</td>
 		</tr>
 		<tr>
 			<td><fmt:formatDate value="${gallery.galleryDate }" pattern="yyyy-MM-dd" /></td>
 			<td>덧글수</td>
-<%-- 			<td>조회수 ${gallery.galleryHit }</td> --%>
+			<td>조회수 ${gallery.galleryHit }</td>
 			<td>좋아요수</td>
 		</tr>
 		</table>
@@ -75,28 +77,32 @@ $(document).ready(function() {
 </c:if>
 
 <!-- 게시글이 12개 이상일 경우 한 페이지에 12개만 보이기 -->
-<c:forEach items="${list }" var="gallery">
-	<table class="gallerylist">
-	<tr class="img">
-		<td></td>
-	</tr>
-	<tr>
-		<td>
-			<a href="/gallery/view?galleryNo=${gallery.galleryNo }">${gallery.galleryTitle }
-			<img src="/imagepath/${galleryFile.originName }"></a>
-		</td>
-	</tr>
-	<tr>
-		<td>작성자</td>
-	</tr>
-	<tr>
-		<td><fmt:formatDate value="${gallery.galleryDate }" pattern="yyyy-MM-dd" /></td>
-		<td>덧글수</td>
-		<td>조회수 ${gallery.galleryHit }</td>
-		<td>좋아요수</td>
-	</tr>
-	</table>
-</c:forEach>
+<c:if test="${list.size() > 12 }">
+	<c:forEach items="${list }" var="gallery">
+		<table class="gallerylist">
+		<tr class="img">
+			<td></td>
+		</tr>
+		<tr>
+			<td>
+				<a href="/gallery/view?galleryNo=${gallery.galleryNo }">${gallery.galleryTitle }
+				<img src="/imagepath/${galleryFile.storedName }">
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>${gallery.galleryNo }</td>
+			<td>작성자</td>
+		</tr>
+		<tr>
+			<td><fmt:formatDate value="${gallery.galleryDate }" pattern="yyyy-MM-dd" /></td>
+			<td>덧글수</td>
+			<td>조회수 ${gallery.galleryHit }</td>
+			<td>좋아요수</td>
+		</tr>
+		</table>
+	</c:forEach>
+</c:if>
 
 <div class="clearfix"></div>
 
