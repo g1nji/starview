@@ -15,7 +15,6 @@
 }
 
 .wrap {
-	width: 1350px;
 	margin: 0 auto;
 }
 

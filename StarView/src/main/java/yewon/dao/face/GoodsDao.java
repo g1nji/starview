@@ -13,4 +13,12 @@ public interface GoodsDao {
 
 	public int selectCntAll();
 
+	public List<Goods> selectByLowPrice();
+
+	public List<Goods> lowPriceMore(Map<String, Integer> map);
+
+	public List<Goods> selectByHighPrice();
+
+	public List<Goods> highPriceMore(Map<String, Integer> map);
+
 }
