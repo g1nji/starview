@@ -1,27 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%-- <c:import url="../layout/header.jsp" /> --%>
+<c:import url="../layout/header.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-@import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
+
+#Year, #Mon, #Day{
+    position: relative;
+    width: 90px;
+    height: 40px;
+    border: solid 1px #dadada;
+    background: #fff;
+    box-sizing: border-box;
+    margin-top:7px;
+}
 
 #resultLayout, #result{
 width:1200px;
 margin:0 auto;
 }
 .moonTitle{
-font-family: 'Poor Story', cursive;
 text-align:center;
 padding:0 auto;
 }
 
 .moonContent{
-font-family: 'Poor Story', cursive;
 margin:0 auto;
 margin-top:20px;
 text-align:center;
@@ -31,10 +38,9 @@ font-size: 20px;
 display: block;
 margin:0 auto;
 margin-top:20px;
-width:400px;
+width:350px;
 }
 #resultmoon{
-font-family: 'Poor Story', cursive;
 margin:0 auto;
 margin-top:20px;
 text-align:center;
@@ -42,10 +48,28 @@ font-size: 20px;
 }
 
 .box{
-font-family: 'Poor Story', cursive;
 margin:0 auto;
 margin-top:20px;
 text-align:center;
+
+}
+
+#btn{
+	font-family: 'Noto Sans KR', sans-serif;
+    border-radius: 5px;
+	display: inline-block;
+    position: relative;
+    padding: 10px 20px;
+    margin-bottom:10px;
+    border: 1px solid #fff;
+    background-color:#ffd66d;
+    text-align: center;
+    text-decoration: none;
+}
+
+#btn:hover{
+background-color: #F2D7D9;
+    color: black;
 
 }
 </style>
@@ -226,7 +250,7 @@ $(document).ready(() => {
 <body>
 <div class="moonTitle">
 
-<h1>오늘의 달모양</h1>
+<h1>오늘의 달모양🌝</h1>
 <hr>
 </div>
 
@@ -297,4 +321,4 @@ $(document).ready(() => {
 <div id="resultmoon"></div>
 </body>
 </html>
-<%-- <c:import url="../layout/footer.jsp" /> --%>
+<c:import url="../layout/footer.jsp" />
