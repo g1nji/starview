@@ -7,7 +7,7 @@
 <c:forEach items="${highPriceMore }" var="res">
 
 	<ul class="items">
-		<li><a href="/goods/detail.jsp?gId=${res.gId }"><img class="thumb" src="${res.fileName }"></li>
+		<li><a href="/goods/view?gId=${res.gId }"><img class="thumb" src="${res.fileName }"></li>
 		<li class="title">${res.gName }</a></li>
 		<li class="price"><fmt:formatNumber value="${res.gPrice }" type="number" groupingUsed="true" />원</li>
 	</ul>

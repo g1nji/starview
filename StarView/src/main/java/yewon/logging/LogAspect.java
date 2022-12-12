@@ -16,12 +16,12 @@ public class LogAspect {
 
 	@Before("execution(* *..controller..*.*(..)) || execution(* *..service..*.*(..))")
 	public void logBefore(JoinPoint joinPoint) {
-		logger.debug("##### {} 시작", joinPoint.getSignature().toShortString());
+		logger.info("##### {} 시작", joinPoint.getSignature().toShortString());
 	}
 	
-	@After("execution(* *..controller..*.*(..)) || execution(* *..service..*.*(..))")
-	public void logAfter(JoinPoint joinPoint) {
-		logger.debug("##### {} 종료", joinPoint.getSignature().toShortString());
-	}
+//	@After("execution(* *..controller..*.*(..)) || execution(* *..service..*.*(..))")
+//	public void logAfter(JoinPoint joinPoint) {
+//		logger.info("##### {} 종료", joinPoint.getSignature().toShortString());
+//	}
 	
 }
