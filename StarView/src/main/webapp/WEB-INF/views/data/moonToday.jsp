@@ -8,7 +8,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-
+body {
+  margin: 0;
+  background: linear-gradient(45deg, #49a09d, #5f2c82);
+  font-weight: 100;
+}
 #Year, #Mon, #Day{
     position: relative;
     width: 90px;
@@ -20,12 +24,12 @@
 }
 
 #resultLayout, #result{
-width:1200px;
 margin:0 auto;
 }
 .moonTitle{
 text-align:center;
 padding:0 auto;
+color: #fff;
 }
 
 .moonContent{
@@ -38,7 +42,7 @@ font-size: 20px;
 display: block;
 margin:0 auto;
 margin-top:20px;
-width:350px;
+height:450px;
 }
 #resultmoon{
 margin:0 auto;
@@ -70,7 +74,13 @@ text-align:center;
 #btn:hover{
 background-color: #F2D7D9;
     color: black;
-
+}
+.moonbox{
+background-color: rgba(255,255,255,0.3);
+width:350px;
+margin:0 auto;
+color: #fff;
+padding:0 auto;
 }
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -251,7 +261,6 @@ $(document).ready(() => {
 <div class="moonTitle">
 
 <h1>오늘의 달모양🌝</h1>
-<hr>
 </div>
 
 <div class="box">
@@ -309,16 +318,18 @@ $(document).ready(() => {
 </div>
 
 <div class="moonContent">
-<div id="resultLayout"></div>
-<div id="result"></div>
-<div id="moonName"></div>
 <div>
-</div>
 </div>
 <img id="moonimg" src=""/>
 <!-- <img id="photo" src="">
 	 <script>document.querySelector('#photo').src=photo()</script> -->
+<div class="moonbox">
+<div id="resultLayout"></div>
+<div id="result"></div>
+</div>
 <div id="resultmoon"></div>
+<div id="moonName"></div>
+</div>
 </body>
 </html>
 <c:import url="../layout/footer.jsp" />

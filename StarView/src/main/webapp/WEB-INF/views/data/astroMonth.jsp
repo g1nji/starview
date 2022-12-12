@@ -23,16 +23,15 @@
     margin-top:7px;
 }
 #resultLayout{
-background-color:#fff;
 margin-bottom:5%;
 height:600px;
+
 }
 
 #astroEvent{
 width:800px;
 margin-left: 25px;
-font-size: 14px;
-
+font-size: 16px;
 }
 
 #btn{
@@ -55,47 +54,54 @@ background-color: #F2D7D9;
 }
 
 #title{
-text-align: left;
-width:50%;
+text-align: center;
 }
 table{
 	border-collapse: collapse;
   	border-radius: 1em;
   	overflow: hidden;
     border-radius: 10px;
- 	border-top: 1px solid #444444;
+ 	width:1200px;
+  	box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  	height:600px;
  }
-
-th{
-/* background-color:#FFFFE8; */
-	background-color:#393E46;
-	font-size: 20px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	text-align:center;
-	font-size: 600;
-    color: white;
-    border-bottom: 1px solid #444444;
-} 
-td{
-background-color:#FFFBEB;
- border-bottom: 1px solid #444444;
-}
-
-h4{
-padding:10px;
-border-radius:10px;
-padding-left:10px;
-font-family: 'Noto Sans KR', sans-serif;
-font-size: 15px;
-
-}
+ 
 
 .box{
 text-align: right;
-margin-right: 20px;
+/* margin-right: 20px; */
 }
 
+#space{
+width:600px;
+margin-left: 250px;
+}
+
+
+body {
+  margin: 0;
+  background: linear-gradient(45deg, #49a09d, #5f2c82);
+  font-family: sans-serif;
+  font-weight: 100;
+}
+
+
+th,td {
+  padding: 15px;
+  background-color: rgba(255,255,255,0.2);
+  color: #fff;
+}
+
+th {
+background-color: #55608f;
+font-size: 17px;
+text-align:center;
+font-size: 600;
+}
+
+tr:hover {
+      background-color: rgba(255,255,255,0.3);
+    }
 </style>
 
 <!-- jQeury 2.2.4 -->
@@ -206,7 +212,8 @@ $(document).ready(() => {
 
 <div class="out">
 
-<h2 id="title">이달의 천문현상🌟</h2>
+<div id="title">
+<h2 style="color:white">이달의 천문현상🌟</h2>
 <div class="box">
 <input type="text" name="Year" id="Year">년
 	<select id="Mon">
@@ -226,7 +233,10 @@ $(document).ready(() => {
 	<button id="btn">검색</button>
 </div>
 </div>
-<div id="resultLayout"></div>
+</div>
+<div id="resultLayout" class="resultLayout">
+<img id="space" src="/resources/img/spacepenguin.png">
+</div>
 
 </body>
 </html>
