@@ -20,16 +20,21 @@
 
 <!-- JS -->
 <script type="text/javascript">
+
 var hour = function() {
 	var fname = "";
 	var today = new Date();
 	var hh = today.getHours();
-	if(hh>=7 && hh<=16) {
+	
+	/* 오전 7시부터 오후 3시 59분까지 낮 이미지 */
+	if(hh>=7 && hh<16) {
 		document.getElementById("day").style.backgroundImage = "url('/resources/image/day1.png')";
 		document.getElementById("logoimg").src="/resources/image/logo1.png";
-	} else if(hh>16 && hh<=19) {
+	/* 오후 4시부터 오후 7시 59분까지 저녁 이미지 */
+	} else if(hh>=16 && hh<=19) {
 		document.getElementById("day").style.backgroundImage = "url('/resources/image/day2.png')";
 		document.getElementById("logoimg").src="/resources/image/logo2.png";
+	/* 오후 8시부터 오전 6시 58분까지 밤 이미지 */
 	} else {
 		document.getElementById("day").style.backgroundImage = "url('/resources/image/day3.png')";
 		document.getElementById("logoimg").src="/resources/image/logo1.png";
@@ -198,8 +203,20 @@ ul.mainnav > li:hover > ul {
 		<li><a href="">스케줄러</a></li>
 	</ul>
 	<ul class="subnav">
-		<li><a href="/users/login"><img src="/resources/image/user.png" style="height:25px;"></a></li>
-		<li><a href=""><img src="/resources/image/shopping-cart.png" style="height:25px;"></a></li>
+	
+		<!-- 비로그인 상태 -->
+		<c:if test="${empty login }">
+			<li><a href="/users/login">로그인/회원가입</a></li>
+			<li><a href=""><img src="/resources/image/shopping-cart.png" style="height:25px;"></a></li>
+		</c:if>
+		
+		<!-- 로그인 상태 -->
+		<c:if test="${not empty login }">
+			<li><a href="/users/logout">로그아웃</a></li>
+			<li><a href="/mypage/mypage"><img src="/resources/image/user.png" style="height:25px;"></a></li>
+			<li><a href=""><img src="/resources/image/shopping-cart.png" style="height:25px;"></a></li>
+		</c:if>
+		
 	</ul>
 </div>
 

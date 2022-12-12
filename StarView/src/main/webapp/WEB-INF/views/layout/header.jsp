@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 
@@ -138,8 +140,20 @@ ul.mainnav > li:hover > ul {
 		<li><a href="">스케줄러</a></li>
 	</ul>
 	<ul class="subnav">
-		<li><a href="/users/login"><img src="/resources/image/user.png" style="height:25px;"></a></li>
-		<li><a href=""><img src="/resources/image/shopping-cart.png" style="height:25px;"></a></li>
+	
+		<!-- 비로그인 상태 -->
+		<c:if test="${empty login }">
+			<li><a href="/users/login">로그인/회원가입</a></li>
+			<li><a href=""><img src="/resources/image/shopping-cart.png" style="height:25px;"></a></li>
+		</c:if>
+		
+		<!-- 로그인 상태 -->
+		<c:if test="${not empty login }">
+			<li><a href="/users/logout">로그아웃</a></li>
+			<li><a href="/mypage/mypage"><img src="/resources/image/user.png" style="height:25px;"></a></li>
+			<li><a href=""><img src="/resources/image/shopping-cart.png" style="height:25px;"></a></li>
+		</c:if>
+
 	</ul>
 </div>
 
