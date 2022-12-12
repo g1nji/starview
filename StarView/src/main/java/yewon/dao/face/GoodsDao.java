@@ -21,4 +21,15 @@ public interface GoodsDao {
 
 	public List<Goods> highPriceMore(Map<String, Integer> map);
 
+	public List<Goods> selectByDate();
+
+	public List<Goods> latestMore(Map<String, Integer> map);
+
+	public Goods selectGoods(Map<String, Object> map);
+
+	public int selectLikeCnt(Map<String, Object> map);
+
+	public void likeCntUp(Map<String, Object> map);
+
+	public void likeCntDown(Map<String, Object> map);
 }

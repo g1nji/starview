@@ -12,11 +12,11 @@ public class Goods {
 	private Date regDate;
 	private int delPrice;
 	private String fileName;
-//	private GoodsImg goodsImg;
+	private int likeCnt;
 
 	public Goods() {}
 
-	public Goods(int gId, String gName, int gPrice, Date delivery, String gDetail, Date regDate, int delPrice, String fileName) {
+	public Goods(int gId, String gName, int gPrice, Date delivery, String gDetail, Date regDate, int delPrice, String fileName, int likeCnt) {
 		super();
 		this.gId = gId;
 		this.gName = gName;
@@ -26,12 +26,22 @@ public class Goods {
 		this.regDate = regDate;
 		this.delPrice = delPrice;
 		this.fileName = fileName;
+		this.likeCnt = likeCnt;
 	}
 
 	@Override
 	public String toString() {
 		return "Goods [gId=" + gId + ", gName=" + gName + ", gPrice=" + gPrice + ", delivery=" + delivery + ", gDetail="
-				+ gDetail + ", regDate=" + regDate + ", delPrice=" + delPrice  + "]";
+				+ gDetail + ", regDate=" + regDate + ", delPrice=" + delPrice + ", fileName=" + fileName + ", likeCnt="
+				+ likeCnt + "]";
+	}
+
+	public int getLikeCnt() {
+		return likeCnt;
+	}
+
+	public void setLikeCnt(int likeCnt) {
+		this.likeCnt = likeCnt;
 	}
 
 	public int getgId() {

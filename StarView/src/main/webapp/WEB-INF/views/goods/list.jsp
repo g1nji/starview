@@ -113,6 +113,7 @@ $(document).ready(function() {
 	}) //-- .click() 
 	
 	$('#latest').click(function() {
+		$('.sort').css('color', '#999');
 		$('#latest').css('color', 'black');
 		sortByDate();
 	})
@@ -131,6 +132,16 @@ $(document).ready(function() {
 	})
 	
 	function sortByDate(){
+		$.ajax({
+			type: "get"
+			, url: "/goods/latest"
+			, data: {}
+			, dataType: "html"
+			, success: function( res ) {
+				console.log("AJAX 성공")
+				$('.list').html( res );
+			}
+		})
 		
 	}
 	
@@ -179,7 +190,7 @@ $(document).ready(function() {
 <div class="list">
 	<c:forEach items="${goodsList }" var="goods">
 		<ul class="items">
-			<li><a href="/goods/detail.jsp?gId=${goods.gId }"><img class="thumb" src="${goods.fileName }"></li>
+			<li><a href="/goods/view?gId=${goods.gId }"><img class="thumb" src="${goods.fileName }"></li>
 			<li class="title">${goods.gName}</a></li>
 			<li class="price"><fmt:formatNumber value="${goods.gPrice}" type="number" groupingUsed="true" />원</li>
 		</ul>
@@ -190,7 +201,6 @@ $(document).ready(function() {
 
 
 </section>
-
 
 <br><br><br><br>
 
