@@ -50,7 +50,7 @@ fieldset{
 <h3>아이디는 ${users.uId }입니다.</h3>
 <br><br>
 
-<button type="button" onclick="location.href=''">메인화면</button>
+<button type="button" onclick="location.href='/'">메인화면</button>
 <button type="button" onclick="location.href='/users/login' ">로그인하기</button>
 
 

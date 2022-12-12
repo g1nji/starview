@@ -1,5 +1,8 @@
 package ydg.controller;
 
+import java.util.HashMap;
+import java.util.List;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import ydg.dto.Users;
 import ydg.service.face.UsersService;
@@ -124,7 +126,73 @@ public class UsersController {
 		
 	}
 	
+	@RequestMapping("/oauth")
+	public String kakaoLogin(@RequestParam(value="code", required = false) String code, Users users, HttpSession session) {
+		logger.info("/users/oauth");
+		
+		logger.info("########" + code);
+		
+		String access_Token = usersService.getAccessToken(code);
+		logger.info("###access_Token### : " + access_Token);
+		
+		HashMap<String, Object> userInfo = usersService.getUserInfo(access_Token);
+		logger.info("###access_Token#### : " + access_Token);
+		logger.info("###nickname#### : " + userInfo.get("nickname"));
+		logger.info("###email#### : " + userInfo.get("email"));
+		logger.info("###gender#### : " + userInfo.get("gender"));
+		
+		String email = (String) userInfo.get("email");
+		String[] emailSpl = email.split("@");
+		String id = emailSpl[0];
+		String gender = (String) userInfo.get("gender");
+		logger.info("id {}", id);
+		
+		users.setuId(id);
+		users.setuEmail(email);
+		users.setuGender(gender);
+		
+		boolean joinResult = usersService.insert(users);
+		
+		if(joinResult) {
+			logger.info("가입완료");
+		} else {
+			logger.info("이미 존재하는 아이디");
+		}
+		
+		session.setAttribute("login", true);
+		session.setAttribute("uId", users.getuId());
+		
+		return "redirect:/";
+	}
 	
+	@GetMapping("/findid")
+	public void findid() {
+		logger.info("/users/findid [GET]");
+		
+		
+	}
+	
+	@PostMapping("/findid")
+	public String findidResult(String find, String phoneName, String mailName, Users users, Model model) {
+		logger.info("/users/findid [POST]");
+		
+		List<Users> userId = usersService.findId(find, phoneName, mailName, users);
+		
+		model.addAttribute("find", find);
+		model.addAttribute("userId", userId);
+		
+		return "/users/findidresult";
+	}
+	
+	@RequestMapping("/findidresult")
+	public void findidresult() {
+		
+	}
+	
+	@GetMapping("/findpw")
+	public void findpw() {
+		
+	}
 	
 	
 }
