@@ -16,6 +16,8 @@
 	<!-- DTO클래스의 별칭 적용 -->
 <!-- 	<typeAliases> -->
 <!-- 		<package name=""/> -->
+
 <!-- 	</typeAliases> -->
+
 
 </configuration>
