@@ -16,7 +16,7 @@ $(document).ready(function() {
 
 </script>
 
-<h1>상품 업로드</h1>
+<h1>게시글(공지사항?) 업로드</h1>
 <hr>
 
 <!-- <form action="./insert" method="post"> -->
@@ -28,21 +28,26 @@ $(document).ready(function() {
 </div> -->
 
 <div class="form-group">
-	<label for="gName">상품명</label>
-	<input type="text" id="gName" name="gName" class="form-control">
+	<label for="galleryTitle">제목</label>
+	<input type="text" id="galleryTitle" name="galleryTitle" class="form-control">
 </div>
 <div class="form-group">
-	<label for="gPrice">상품 가격</label>
-	<input type="text" id="gPrice" name="gPrice" class="form-control">
-</div>
-
-<div class="form-group">
-	<label for="gDetail">상품 내용</label>
-	<textarea rows="10" style="width: 100%;" id="gDetail" name="gDetail"></textarea>
+	<label for="galleryContent">내용</label>
+	<textarea rows="10" style="width: 100%;" id="galleryContent" name="galleryContent"></textarea>
 </div>
 
 <div class="form-group">
-	<label for="file">상품 이미지 첨부</label>
+	<label for="galleryLoc">위치</label>
+	<input type="text" id="galleryLoc" name="galleryLoc" class="form-control">
+</div>
+
+<div class="form-group">
+	<label for="galleryTag">태그</label>
+	<input type="text" id="galleryTag" name="galleryTag" class="form-control">
+</div>
+
+<div class="form-group">
+	<label for="file">게시글 사진 첨부</label>
 	 <input type="file" id="file" name="file">
 </div>
 

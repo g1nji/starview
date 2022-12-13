@@ -25,7 +25,26 @@
 		WHERE gallery_no = #{galleryNo }
 	</select>
 	
-	<select id="selectPhotoFile" resultType="seulgi.dto.AdminBoardPhoto" parameterType="seulgi.dto.AdminBoard">
+	<insert id="insertBoard" parameterType="seulgi.dto.AdminBoard">
+		<!-- <selectKey order="BEFORE" resultType="int" keyProperty="galleryNo ">
+			SELECT gallery_seq.nextval FROM dual
+		</selectKey> -->
+	
+		INSERT INTO gallery (gallery_no, gallery_title, gallery_content, gallery_loc, gallery_tag)
+		VALUES (gallery_seq.nextval, #{galleryTitle }, #{galleryContent }, #{galleryLoc }, #{galleryTag })
+	</insert>
+	
+	<insert id="insertFile" parameterType="seulgi.dto.AdminBoardFile">
+		INSERT INTO gallery_file ( photo_no, gallery_no, origin_name, stored_name)
+		VALUES ( gallery_file_seq.nextval, #{galleryNo }, #{originName }, #{storedName } )
+	</insert>
+	
+	<select id="selectFileByBoard" resultType="seulgi.dto.AdminBoardFile" parameterType="seulgi.dto.AdminBoard">
+		SELECT * FROM gallery_file
+		WHERE gallery_no = #{galleryNo }
+	</select>
+	
+	<select id="selectFileByFile" resultType="seulgi.dto.AdminBoardFile" parameterType="seulgi.dto.AdminBoardFile">
 		SELECT * FROM gallery_file
 		WHERE gallery_no = #{galleryNo }
 	</select>
@@ -42,9 +61,5 @@
 		WHERE gallery_no = #{galleryNo }	
 	</delete>
 	
-	<insert id="insertFile" parameterType="seulgi.dto.AdminBoardPhoto">
-		INSERT INTO gallery_file ( photo_no, gallery_no, origin_name, stored_name)
-		VALUES ( gallery_file_seq.nextval, #{galleryNo }, #{originName }, #{storedName } )
-	</insert>
 	
 </mapper>
