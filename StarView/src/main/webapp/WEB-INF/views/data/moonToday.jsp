@@ -1,40 +1,67 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%-- <c:import url="../layout/header.jsp" /> --%>
+<c:import url="../layout/header.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-@import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
+body {
+  margin: 0;
+  background: linear-gradient(45deg, #49a09d, #5f2c82);
+  font-weight: 100;
+}
+#Year, #Mon, #Day{
+    position: relative;
+    width: 90px;
+    height: 40px;
+    border: solid 1px #dadada;
+    background: #fff;
+    box-sizing: border-box;
+    margin-top:7px;
+}
 
 #resultLayout, #result{
-width:1200px;
-margin:0 auto;
+	margin-top: 10px;
+    font-size: 19px;
+    font-weight: 500;
 }
 .moonTitle{
-font-family: 'Poor Story', cursive;
 text-align:center;
 padding:0 auto;
+color: #fff;
 }
 
 .moonContent{
-font-family: 'Poor Story', cursive;
 margin:0 auto;
 margin-top:20px;
 text-align:center;
 font-size: 20px;
+background-color: rgba(255,255,255,0.3);
+height: 470px;
+padding:50px;
+margin:0 auto;
+margin-bottom:20px;
+width:600px;
+border-radius: 10px;
 }
 #moonimg{
 display: block;
 margin:0 auto;
 margin-top:20px;
-width:400px;
+height:300px;
+border-radius: 50%;
+box-shadow:20px 20px 10px rgba(0,0,0,0.2);
 }
+#moonimg:hover{
+transition:0.5s;
+box-shadow:20px 20px 10px rgba(0,0,0,0.4);
+transform:scale(1.05,1.05);
+}
+
 #resultmoon{
-font-family: 'Poor Story', cursive;
 margin:0 auto;
 margin-top:20px;
 text-align:center;
@@ -42,11 +69,33 @@ font-size: 20px;
 }
 
 .box{
-font-family: 'Poor Story', cursive;
 margin:0 auto;
-margin-top:20px;
 text-align:center;
 
+}
+
+#btn{
+	font-family: 'Noto Sans KR', sans-serif;
+    border-radius: 5px;
+	display: inline-block;
+    position: relative;
+    padding: 10px 20px;
+    margin-bottom:10px;
+    border: 1px solid #fff;
+    background-color:#ffd66d;
+    text-align: center;
+    text-decoration: none;
+}
+
+#btn:hover{
+background-color: #F2D7D9;
+    color: black;
+}
+.moonbox{
+width:350px;
+margin:0 auto;
+color: #fff;
+padding:0 auto;
 }
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -96,19 +145,13 @@ function init(){
 
 $(document).ready(() => {
 	init();
-	
    $("#btn").click(() => {
       console.log("#btn click")      
       
-      $.ajax({
+      /* $.ajax({
          type: "get",
          url: "http://apis.data.go.kr/B090041/openapi/service/LunPhInfoService/getLunPhInfo",
          data: {
-            //Decoding 키로 인증키 사용할 것 
-//            , type: "xml"
-//             , pageNo: "1"
-//            , pageNo: page.value
-//            , numOfRows: "10"
 			solYear:$("#Year").val()
 			,solMonth:$("#Mon").val()
 			,solDay:$("#Day").val()
@@ -129,19 +172,11 @@ $(document).ready(() => {
             var lunAge=$rows.find("lunAge").text();
             $("#resultmoon").append("월령: "+lunAge);             
 
-            /* var solYear=$rows.find("solYear").text();
-            var solMonth=$rows.find("solMonth").text();
-            var solDay=$rows.find("solDay").text();
-            console.log(solYear+solMonth+solDay)
-            
-            var view=solYear+"년"+solMonth+"월"+solDay+"일";
-            $("#resultLayout").append("양력: "+view);      */        
-            
          },
          error: () => {
             console.log("AJAX 실패")
          }
-      })
+      }) */
       
       //--------------------음력---------------
       $.ajax({
@@ -191,7 +226,7 @@ $(document).ready(() => {
 
             //달 모양 이미지 출력
             var img_src="";
-            for(var i=1; i<=29; i++) {
+            for(var i=1; i<=30; i++) {
                     if(lunDay == i) {
                     img_src = '\/resources\/img\/'+ i + '.png';
                     }
@@ -217,7 +252,7 @@ $(document).ready(() => {
       })
       
    })
-   
+	$("#btn").trigger("click");  
 })
 
 </script>
@@ -226,8 +261,7 @@ $(document).ready(() => {
 <body>
 <div class="moonTitle">
 
-<h1>오늘의 달모양</h1>
-<hr>
+<h1>오늘의 달모양🌝</h1>
 </div>
 
 <div class="box">
@@ -285,16 +319,15 @@ $(document).ready(() => {
 </div>
 
 <div class="moonContent">
-<div id="resultLayout"></div>
-<div id="result"></div>
-<div id="moonName"></div>
 <div>
 </div>
-</div>
 <img id="moonimg" src=""/>
-<!-- <img id="photo" src="">
-	 <script>document.querySelector('#photo').src=photo()</script> -->
-<div id="resultmoon"></div>
+<div class="moonbox">
+<div id="resultLayout"></div>
+<div id="result"></div>
+</div>
+<!-- <div id="resultmoon"></div> -->
+</div>
 </body>
 </html>
-<%-- <c:import url="../layout/footer.jsp" /> --%>
+<c:import url="../layout/footer.jsp" />

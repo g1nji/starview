@@ -36,6 +36,11 @@ public class DataController {
 		logger.info("/data/weather");
 	}
 	
+	@RequestMapping("/data/data3")
+	public void weather() {
+		logger.info("/data/data3");
+	}
+	
 	
 
 }

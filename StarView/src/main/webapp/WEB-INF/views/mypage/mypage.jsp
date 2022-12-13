@@ -18,16 +18,18 @@ html {
 
 <script type="text/javascript">
 function del(){
-	if(confirm("탈퇴하시겠습니까?")){
-		location.href="/mypage/delete";		
+	if(confirm("사용하고 계신 아이디(${info.uId })를 탈퇴하시면 복구가 불가하오니 신중하게 선택하시기 바랍니다. 탈퇴하시겠습니까?")){
+		location.href="./predelete";		
 	}
 	}
 	
 function up(){
-	if(confirm("수정?")){
-		location.href="/mypage/update";		
+	if(confirm("회원정보를 수정하시겠습니까?")){
+		location.href="./preupdate";		
 	}
 	}
+	
+
 </script>
 
 </head>
@@ -47,8 +49,10 @@ function up(){
 <h3>전화번호:${info.uPhone }</h3>
 
 <a href="./main"><button>메인</button></a>
-<!-- <a href="/delete"> --><input type="button" id="btn" value="탈퇴" onclick='del()'><!-- </a> -->
-<input type="button" id="btnup" value="수정" onclick='up()'>
+<input type="button" id="btn" value="탈퇴" onclick='del()'>
+<input type="button" id="savebtn" value="수정" onclick='up()'>
+
+
 </body>
 </html>
 <c:import url="../layout/footer.jsp" />

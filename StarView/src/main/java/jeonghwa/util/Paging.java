@@ -1,4 +1,4 @@
-package hyeri.util;
+package jeonghwa.util;
 
 public class Paging {
 
@@ -59,7 +59,7 @@ public class Paging {
 		
 		//기본값 설정
 		if(curPage == 0)	this.curPage = 1; //첫 페이지를 기본 페이지로 설정한다
-		if(listCount == 0)	this.listCount = 12; //화면에 보여질 게시글 수를 12개로 설정
+		if(listCount == 0)	this.listCount = 10; //화면에 보여질 게시글 수를 10개로 설정
 		if(pageCount == 0)	this.pageCount = 10; //화면에 보여질 페이징 수를 10개로 설정
 		
 		//------------------------------------

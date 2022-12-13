@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import sharon.dao.face.LoginDao;
-import sharon.dto.Login;
 import sharon.service.face.LoginService;
 import ydg.dto.Users;
 
@@ -20,110 +19,108 @@ import ydg.dto.Users;
 @RequestMapping("/mypage")
 public class LoginController {
 	
-	//로그 객체(자기참조:this를 사용한다면 static없애고 하면 된다)
 	private final Logger logger= LoggerFactory.getLogger(this.getClass());
 
 		//서비스 객체
 		@Autowired private LoginService loginService;
 		@Autowired private LoginDao loginDao;
 		
-		
-		@RequestMapping("/main")
-		public void main() {
-			logger.info("/login/main [GET]");
-		}
-		
-		@GetMapping("/join")
-		public void join() {
-			logger.info("/login/join [GET]");
-		}
-		
-		@PostMapping("/join")
-		public String joinProc(Users joinParam) {
-			logger.info("/login/join [POST]");
-			logger.info("{}",joinParam);
+		//마이페이지 회원정보
+	  @RequestMapping("/mypage")
+	  public void mypage(HttpSession session,Model model) {			  
+		  logger.info("/mypage");
+			  
+		 String loginid=(String) session.getAttribute("uId");
+		 logger.info("loginid:{}",loginid);
+			  
+		 Users info=loginService.info(loginid);
+		 logger.info("조회결과:{}",info);
+			  
+		 model.addAttribute("info",info);
+			  
+}
+
+		  //회원정보 수정 전 비밀번호 확인
+		  @GetMapping("/preupdate")
+		  public String pwCheck1(HttpSession session,Model model,Users users) {
+			  logger.info("/preupdate [get]");
 			
-			loginService.join(joinParam);
-			
-			return "redirect:/main";
-		}
-		
-		
-		  @GetMapping("/login")
-		  public void login() {
-			  logger.info("/login/login [GET]");
+			  
+			  model.addAttribute("users",loginService.info((String)session.getAttribute("uId")));
+			  logger.info("users.model");
+			  
+			  return "/mypage/preupdate";
 		  }
 		  
-		  @PostMapping("/login") 
-		  public String loginProc(Users usersParam,HttpSession session) {
-		  logger.info("/login/login [POST]");
-		  logger.info("{}",usersParam);
-		  
-		  boolean isLogin=loginService.login(usersParam);
-		  logger.info("isLogin:{}",isLogin);
-		  
-		  if(isLogin) { //로그인 성공
-			  session.setAttribute("isLogin", isLogin);
-			  session.setAttribute("loginid", usersParam.getuId()); //꼭 pk를 넣는다
-		  }else {//로그인 실패
-			session.invalidate();  
-		  }
-		  return "redirect:/mypage/main";
-		  
-		  }
-		  @RequestMapping("/logout")
-		  public String logout(HttpSession session) {
-			  logger.info("/login/logout");
+		  @PostMapping("/preupdate")
+		  public String pwCheck2(HttpSession session,Model model,Users users,Users usersParam) {
+			  logger.info("/preupdate [post]");
 			  
-			  session.invalidate();
-			  
-			  return "redirect:/mypage/main";
-		  }
-		  
-		  @RequestMapping("/mypage")
-		  public void mypage(HttpSession session,Model model) {
-			  logger.info("/login/mypage");
-			  
-			  String loginid=(String) session.getAttribute("loginid");
-			  logger.info("loginid:{}",loginid);
-			  
-			  Users info=loginService.info(loginid);
-			  logger.info("조회결과:{}",info);
-			  
-			  model.addAttribute("info",info);
+			  boolean res=loginService.pwCheck(usersParam);
+
+			  if(res) {
+				  logger.info("비번일치");
+				  model.addAttribute("users",loginService.info((String)session.getAttribute("uId")));
+				  return "/mypage/update";
+			  }else {
+				  logger.info("비번불일치");
+				  model.addAttribute("msg","비밀번호 불일치");
+				  return "/mypage/preupdate";
+			  }
 			  
 		  }
 		  
+		  //회원정보 수정
 		  @GetMapping("/update")
 		  public String update(HttpSession session,Model model,Users users) {
-			  logger.info("/login/update [get]");
-			  //회원정보 조회
-//			  String loginid=(String) session.getAttribute("loginid");
-//			  Login info=loginService.info(loginid);
-			  model.addAttribute("users",loginService.info((String)session.getAttribute("loginid")));
+			  logger.info("/update [get]");
+			  
+			  model.addAttribute("users",loginService.info((String)session.getAttribute("uId")));
 			  logger.info("users.model");
 			  
 			  return "/mypage/update";
 		  }
 		  @PostMapping("/update")
 		  public String updateProc(Users users) {
-			  logger.info("/login/update [post]");
+			  logger.info("/update [post]");
 			  
 			  loginService.update(users);
 			  return "redirect:/mypage/mypage";
 		  }
 		  
 		  
-		  
-		  @RequestMapping("/delete")
-		    public String delete(Users users, HttpSession session) {
+		//회원정보 탈퇴 전 비밀번호 확인
+		  @GetMapping("/predelete")
+		  public String predelete(HttpSession session,Model model,Users users) {
+			  logger.info("/preupdate [get]");
+			
 			  
-			  String loginid=(String) session.getAttribute("loginid");
-			  loginService.delete(loginid);
-		      session.invalidate();
+			  model.addAttribute("users",loginService.info((String)session.getAttribute("uId")));
+			  logger.info("users.model");
+			  
+			  return "/mypage/predelete";
+		  }
+		  
+		  @PostMapping("/predelete")
+		  public String predelete(HttpSession session,Model model,Users users,Users usersParam) {
+			  logger.info("/preupdate [post]");
+			  
+			  boolean res=loginService.pwCheck(usersParam);
 
-		        return "/mypage/delete";
-		    }
+			  if(res) {
+				  logger.info("비번일치");
+				  String loginid=(String) session.getAttribute("uId");
+				  loginService.delete(loginid);
+			      session.invalidate();
+				  return "/mypage/delete";
+			  }else {
+				  logger.info("비번불일치");
+				  model.addAttribute("msg","비밀번호 불일치");
+				  return "/mypage/predelete";
+			  }
+			  
+		  }
+		  
 
 
 

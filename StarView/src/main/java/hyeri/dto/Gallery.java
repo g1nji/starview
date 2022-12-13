@@ -11,12 +11,14 @@ public class Gallery {
 	private int galleryHit;
 	private int galleryLike;
 	private String uId;
-	private int photoNo;
+	private String uNick;
+	private String galleryLoc;
+	private String tag;
 	
 	public Gallery() {}
 
 	public Gallery(int galleryNo, String galleryTitle, String galleryContent, Date galleryDate, int galleryHit,
-			int galleryLike, String userId, int photoNo) {
+			int galleryLike, String uId, String uNick, String galleryLoc, String tag) {
 		super();
 		this.galleryNo = galleryNo;
 		this.galleryTitle = galleryTitle;
@@ -24,15 +26,18 @@ public class Gallery {
 		this.galleryDate = galleryDate;
 		this.galleryHit = galleryHit;
 		this.galleryLike = galleryLike;
-		this.uId = userId;
-		this.photoNo = photoNo;
+		this.uId = uId;
+		this.uNick = uNick;
+		this.galleryLoc = galleryLoc;
+		this.tag = tag;
 	}
 
 	@Override
 	public String toString() {
 		return "Gallery [galleryNo=" + galleryNo + ", galleryTitle=" + galleryTitle + ", galleryContent="
 				+ galleryContent + ", galleryDate=" + galleryDate + ", galleryHit=" + galleryHit + ", galleryLike="
-				+ galleryLike + ", userId=" + uId + ", photoNo=" + photoNo + "]";
+				+ galleryLike + ", uId=" + uId + ", uNick=" + uNick + ", galleryLoc=" + galleryLoc + ", tag=" + tag
+				+ "]";
 	}
 
 	public int getGalleryNo() {
@@ -83,24 +88,36 @@ public class Gallery {
 		this.galleryLike = galleryLike;
 	}
 
-	public String getUserId() {
+	public String getuId() {
 		return uId;
 	}
 
-	public void setUserId(String userId) {
-		this.uId = userId;
+	public void setuId(String uId) {
+		this.uId = uId;
 	}
 
-	public int getPhotoNo() {
-		return photoNo;
+	public String getuNick() {
+		return uNick;
 	}
 
-	public void setPhotoNo(int photoNo) {
-		this.photoNo = photoNo;
+	public void setuNick(String uNick) {
+		this.uNick = uNick;
 	}
-	
-	
-	
 
-	
+	public String getGalleryLoc() {
+		return galleryLoc;
+	}
+
+	public void setGalleryLoc(String galleryLoc) {
+		this.galleryLoc = galleryLoc;
+	}
+
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+
 }
