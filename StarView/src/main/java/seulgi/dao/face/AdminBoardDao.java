@@ -3,7 +3,7 @@ package seulgi.dao.face;
 import java.util.List;
 
 import seulgi.dto.AdminBoard;
-import seulgi.dto.AdminBoardPhoto;
+import seulgi.dto.AdminBoardFile;
 import seulgi.util.Paging;
 
 public interface AdminBoardDao {
@@ -31,13 +31,35 @@ public interface AdminBoardDao {
 	public AdminBoard selectBoard(AdminBoard viewBoard);
 
 	/**
+	 * 게시글 업로드하기
+	 * 
+	 * @param board - 업로드할 게시글 정보
+	 */
+	public void insertBoard(AdminBoard board);
+	
+	/**
+	 * 첨부파일 정보 삽입하기
+	 * 
+	 * @param boardFile - 업로드할 첨부파일 정보
+	 */
+	public void insertFile(AdminBoardFile boardFile);
+	
+	/**
 	 * 게시글 번호를 이용하여 첨부파일 정보 조회하기
 	 * 
 	 * @param viewBoard - 조회할 게시글 번호
 	 * @return 조회된 첨부파일 정보
 	 */
-	public AdminBoardPhoto selectPhotoFile(AdminBoard viewBoard);
+	public AdminBoardFile selectFileByBoard(AdminBoard viewBoard);
 
+	/**
+	 * 파일 번호를 이용하여 첨부파일 정보를 조회한다
+	 * 
+	 * @param boardFile - 조회할 첨부파일 객체
+	 * @return 조회된 첨부파일 정보
+	 */
+	public AdminBoardFile selectFileByFile(AdminBoardFile boardFile);
+	
 	/**
 	 * 게시글 정보를 수정하기
 	 * 
@@ -52,10 +74,4 @@ public interface AdminBoardDao {
 	 */
 	public void deleteFile(AdminBoard board);
 
-	/**
-	 * 첨부파일 정보 삽입하기
-	 * 
-	 * @param boardFile
-	 */
-	public void insertFile(AdminBoardPhoto boardFile);
 }

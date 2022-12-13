@@ -7,4 +7,32 @@
 
 <mapper namespace="yewon.dao.face.WishDao">
 
+    <resultMap type="yewon.dto.Wish" id="Wish">
+    <id column="w_id" property="wId" />
+    <result column="g_id" property="gId" />
+    <result column="u_id" property="uId" />
+<!--     <result column="like_check" property="likeCheck" /> -->
+    </resultMap>
+    
+    <select id="selectLikeCntAll" resultType="int">
+   	select count(*) from wishlist
+   	where g_id = #{gId }
+    </select>
+    
+    <select id="findLike" resultType="int">
+   	select count(*) from wishlist
+   	where g_id = #{gId } and u_id = #{uId }
+    </select>
+   		
+	<insert id="insertLike">
+	insert into wishlist ( w_id, g_id, u_id )
+	values ( wishlist_seq.nextval, #{gId}, #{uId} )
+	</insert>
+	
+	<delete id="deleteLike">
+	delete from wishlist
+	where g_id = #{gId } and u_id = #{uId }
+	</delete>
+	
+	
 </mapper>

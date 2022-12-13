@@ -31,8 +31,6 @@ public interface GalleryService {
 	 */
 	public List<Gallery> list(Paging paging);
 
-	public List<GalleryFile> listFile(Paging paging);
-	
 	/**
 	 * 게시글 정보, 첨부파일을 함께 처리한다
 	 * 
@@ -41,6 +39,8 @@ public interface GalleryService {
 	 * @param tagList - 태그 정보 객체
 	 */
 	public void write(Gallery gallery, MultipartFile file, List<GTag> tagList);
+
+	public void write2(Gallery gallery, MultipartFile file);
 
 	/**
 	 * 게시글 상세보기
@@ -72,5 +72,14 @@ public interface GalleryService {
 	 * @param gallery - 게시글 정보 객체
 	 */
 	public void delete(Gallery gallery);
+
+	/**
+	 * 게시글 검색
+	 * 
+	 * @param keywordInput
+	 * @return
+	 */
+	public List<Gallery> search(String keywordInput);
+
 
 }

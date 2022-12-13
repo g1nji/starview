@@ -12,28 +12,17 @@
 	
 	<select id="selectList" resultType="hyeri.dto.Gallery" parameterType="hyeri.util.Paging">
 		SELECT * FROM (
-			SELECT rownum rnum, G.* FROM (
-				SELECT
-					gallery_no, gallery_title, gallery_content,
-					gallery_date, gallery_hit
-					, gallery_like
-<!-- 					user_id,  -->
-				FROM gallery
-				ORDER BY gallery_no DESC
-			) G
-		) GALLERY
-		WHERE rnum BETWEEN #{startNo } AND #{endNo }
-	</select>
-	
-	<select id="selectListFile" resultType="hyeri.dto.GalleryFile" parameterType="hyeri.util.Paging">
-		SELECT * FROM (
-			SELECT rownum rnum, G.* FROM (
-				SELECT
-					photo_no, gallery_no, stored_name, origin_name
-				FROM gallery_file
-				ORDER BY photo_no DESC
-			) G
-		) GALLERY_FILE
+			SELECT rownum rnum, gu.* FROM (
+		        SELECT
+		            g.gallery_no, g.gallery_title, g.gallery_content,
+		            g.gallery_date, g.gallery_like, g.gallery_loc,
+		            g.gallery_hit, g.u_id AS guid, u.u_id AS uuid, u.u_nick
+		        FROM gallery g
+		        INNER JOIN users u
+		        ON g.u_id = u.u_id
+		        ORDER BY g.gallery_no DESC
+			)gu
+		)
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
 	</select>
 	
@@ -45,9 +34,14 @@
 	
 	<select id="selectGallery" resultType="hyeri.dto.Gallery" parameterType="hyeri.dto.Gallery">
 		SELECT
-			gallery_no, gallery_title, gallery_content
-		FROM gallery
+            g.gallery_no, g.gallery_title, g.gallery_content,
+            g.gallery_date, g.gallery_like, g.gallery_loc,
+            g.gallery_hit, g.u_id AS guid, u.u_id AS uuid, u.u_nick
+        FROM gallery g
+        INNER JOIN users u
+        ON g.u_id = u.u_id
 		WHERE gallery_no = #{galleryNo}
+        ORDER BY g.gallery_no DESC
 	</select>
 
 	<insert id="uploadPhoto" parameterType="hyeri.dto.Gallery">
@@ -55,18 +49,16 @@
 			SELECT gallery_seq.nextval FROM dual
 		</selectKey>
 		INSERT INTO gallery ( 
-			gallery_no, gallery_title, gallery_content
-<!-- 			, user_id -->
-			)
-		VALUES ( #{galleryNo}, #{galleryTitle }, #{galleryContent } )
+			gallery_no, gallery_title, gallery_content, gallery_loc, u_id)
+		VALUES ( #{galleryNo}, #{galleryTitle }, #{galleryContent }, #{galleryLoc }, #{uId })
 	</insert>
 	
 	<insert id="insertPhoto" parameterType="hyeri.dto.GalleryFile">
 		<selectKey order="BEFORE" resultType="int" keyProperty="photoNo">
 			SELECT gallery_file_seq.nextval FROM dual
 		</selectKey>
-		INSERT INTO gallery_file ( photo_no, gallery_no, stored_name, origin_name )
-		VALUES ( #{photoNo }, #{galleryNo }, #{storedName }, #{originName })
+		INSERT INTO gallery_file ( photo_no, gallery_no, stored_name, origin_name, filepath )
+		VALUES ( #{photoNo }, #{galleryNo }, #{storedName }, #{originName }, #{filepath })
 	</insert>
 
 	<select id="selectGalleryFileByGalleryNo" resultType="hyeri.dto.GalleryFile" parameterType="hyeri.dto.Gallery">
@@ -97,5 +89,12 @@
 		INSERT INTO g_tag ( tag_no, tag_name )
 		VALUES ( g_tag_seq.nextval, #{tagName } )
 	</insert>
+
+	<select id="selectByKeyword" resultType="hyeri.dto.Gallery" parameterType="String">
+		SELECT * FROM gallery
+		WHERE gallery_title LIKE #{keywordInput }
+			or gallery_content LIKE #{keywordInput }
+		ORDER BY gallery_no DESC
+	</select>
 
 </mapper>
