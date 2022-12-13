@@ -33,9 +33,9 @@ $("#location option:selected").val()
 var getFormattedDate = ( d )=>{
 	d = new Date( d )
 	
-	y = '' + d.getFullYear()
-	m = ('0' + (d.getMonth()+1)).slice(-2, 3)
-	dat = ('0' + d.getDate()).slice(-2, 3)
+	var y = '' + d.getFullYear()
+	var m = ('0' + (d.getMonth()+1)).slice(-2, 3)
+	var dat = ('0' + d.getDate()).slice(-2, 3)
 	
 	return y + m + dat
 }
@@ -60,19 +60,22 @@ $(document).ready(() => {
 			dataType:"xml",
 			success: res => {
 				console.log("AJAX 성공")
-				console.log( res )
+// 				console.log( res )
 				
+				//<item>태그 추출하기
 				var $rows = $(res).find("item");
-				console.log( $rows )
+// 				console.log( $rows )
 				
+				//결과화면 지우기
 				resultLayout.innerHTML = ''
+				
 				
 				var $table = $("<table>")
 				var tHead = "<tr>"
 					+ "<th>날짜</th>"
 					+ "<th>지역</th>"
-					+ "<th>경도</th>"
-					+ "<th>위도</th>"
+// 					+ "<th>경도</th>"
+// 					+ "<th>위도</th>"
 					+ "<th>일몰 시간</th>"
 				$table.html( tHead )
 				
@@ -82,8 +85,8 @@ $(document).ready(() => {
 					$("<tr>")
 					.append( $("<td>").html($(row).find("locdate").text() ) )
 					.append( $("<td>").html($(row).find("location").text() ) )
-					.append( $("<td>").html($(row).find("longitude").text() ) )
-					.append( $("<td>").html($(row).find("latitude").text() ) )
+// 					.append( $("<td>").html($(row).find("longitude").text() ) )
+// 					.append( $("<td>").html($(row).find("latitude").text() ) )
 					.append( $("<td>").html($(row).find("sunset").text() ) )
 				.appendTo( $table )
 					
