@@ -24,7 +24,9 @@ body {
 }
 
 #resultLayout, #result{
-margin:0 auto;
+	margin-top: 10px;
+    font-size: 19px;
+    font-weight: 500;
 }
 .moonTitle{
 text-align:center;
@@ -37,13 +39,28 @@ margin:0 auto;
 margin-top:20px;
 text-align:center;
 font-size: 20px;
+background-color: rgba(255,255,255,0.3);
+height: 470px;
+padding:50px;
+margin:0 auto;
+margin-bottom:20px;
+width:600px;
+border-radius: 10px;
 }
 #moonimg{
 display: block;
 margin:0 auto;
 margin-top:20px;
-height:450px;
+height:300px;
+border-radius: 50%;
+box-shadow:20px 20px 10px rgba(0,0,0,0.2);
 }
+#moonimg:hover{
+transition:0.5s;
+box-shadow:20px 20px 10px rgba(0,0,0,0.4);
+transform:scale(1.05,1.05);
+}
+
 #resultmoon{
 margin:0 auto;
 margin-top:20px;
@@ -53,7 +70,6 @@ font-size: 20px;
 
 .box{
 margin:0 auto;
-margin-top:20px;
 text-align:center;
 
 }
@@ -76,7 +92,6 @@ background-color: #F2D7D9;
     color: black;
 }
 .moonbox{
-background-color: rgba(255,255,255,0.3);
 width:350px;
 margin:0 auto;
 color: #fff;
@@ -130,19 +145,13 @@ function init(){
 
 $(document).ready(() => {
 	init();
-	
    $("#btn").click(() => {
       console.log("#btn click")      
       
-      $.ajax({
+      /* $.ajax({
          type: "get",
          url: "http://apis.data.go.kr/B090041/openapi/service/LunPhInfoService/getLunPhInfo",
          data: {
-            //Decoding 키로 인증키 사용할 것 
-//            , type: "xml"
-//             , pageNo: "1"
-//            , pageNo: page.value
-//            , numOfRows: "10"
 			solYear:$("#Year").val()
 			,solMonth:$("#Mon").val()
 			,solDay:$("#Day").val()
@@ -163,19 +172,11 @@ $(document).ready(() => {
             var lunAge=$rows.find("lunAge").text();
             $("#resultmoon").append("월령: "+lunAge);             
 
-            /* var solYear=$rows.find("solYear").text();
-            var solMonth=$rows.find("solMonth").text();
-            var solDay=$rows.find("solDay").text();
-            console.log(solYear+solMonth+solDay)
-            
-            var view=solYear+"년"+solMonth+"월"+solDay+"일";
-            $("#resultLayout").append("양력: "+view);      */        
-            
          },
          error: () => {
             console.log("AJAX 실패")
          }
-      })
+      }) */
       
       //--------------------음력---------------
       $.ajax({
@@ -225,7 +226,7 @@ $(document).ready(() => {
 
             //달 모양 이미지 출력
             var img_src="";
-            for(var i=1; i<=29; i++) {
+            for(var i=1; i<=30; i++) {
                     if(lunDay == i) {
                     img_src = '\/resources\/img\/'+ i + '.png';
                     }
@@ -251,7 +252,7 @@ $(document).ready(() => {
       })
       
    })
-   
+	$("#btn").trigger("click");  
 })
 
 </script>
@@ -321,14 +322,11 @@ $(document).ready(() => {
 <div>
 </div>
 <img id="moonimg" src=""/>
-<!-- <img id="photo" src="">
-	 <script>document.querySelector('#photo').src=photo()</script> -->
 <div class="moonbox">
 <div id="resultLayout"></div>
 <div id="result"></div>
 </div>
-<div id="resultmoon"></div>
-<div id="moonName"></div>
+<!-- <div id="resultmoon"></div> -->
 </div>
 </body>
 </html>
