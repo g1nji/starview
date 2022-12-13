@@ -74,6 +74,7 @@ public class UsersController {
 		
 		session.invalidate();
 		
+		logger.info("로그아웃");
 		return "redirect:/";
 	}
 	

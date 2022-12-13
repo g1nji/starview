@@ -3,6 +3,8 @@ package hyeri.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,19 +35,15 @@ public class GalleryController {
 	
 	@RequestMapping("/list")
 	public void list(@RequestParam(defaultValue = "0") int curPage, Model model,
-			Gallery viewGallery/* , GalleryFile gFile */) {
+			Gallery viewGallery) {
 		
 		Paging paging = galleryService.getPaging(curPage);
 		logger.info("{}", paging);
 		model.addAttribute("paging", paging);
 		
 		List<Gallery> list = galleryService.list(paging);
-//		for( Gallery g : list ) logger.info("{}", g);
+		for( Gallery g : list ) logger.info("{}", g);
 		model.addAttribute("list", list);
-		
-//		List<GalleryFile> listFile = galleryService.listFile(paging);
-//		for( GalleryFile g : listFile ) logger.info("{}", g);
-//		model.addAttribute("listFile", listFile);
 		
 	}
 	
@@ -55,6 +53,7 @@ public class GalleryController {
 		
 		//게시글 조회
 		viewGallery = galleryService.view(viewGallery);
+		logger.info("{}", viewGallery);
 		
 		//모델값 전달
 		model.addAttribute("viewGallery", viewGallery);
@@ -76,33 +75,46 @@ public class GalleryController {
 	public String writeProc(
 			Gallery gallery,
 			MultipartFile file,
-//			HttpSession session,
+			HttpSession session,
 			String tag
 			) {
 		
 		logger.info("/write [POST]");
 		
-		JsonArray jsonArray = JsonParser.parseString(tag).getAsJsonArray();
-		logger.info("jsonArray {}", jsonArray );
+		logger.info("gallery : {}", gallery);
+		logger.info("file : {}", file);
+
+		logger.info("{}", tag);
 		
-		List<GTag> tagList = new ArrayList<GTag>();
-		for( int i=0; i<jsonArray.size(); i++) {
-			String t = jsonArray.get(i).getAsJsonObject().get("value").getAsString();
-			logger.info("t {}", t);
+		if( tag != null && !tag.equals("") ) {
 			
-			tagList.add( new GTag(0, t) );
+			JsonArray jsonArray = JsonParser.parseString(tag).getAsJsonArray();
+			logger.info("jsonArray {}", jsonArray );
+			
+			List<GTag> tagList = new ArrayList<GTag>();
+			
+			for( int i=0; i<jsonArray.size(); i++) {
+				String t = jsonArray.get(i).getAsJsonObject().get("value").getAsString();
+				logger.info("t {}", t);
+				
+				tagList.add( new GTag(0, t) );
+			}
+			
+			logger.info("tagList {}", tagList);
+			
+			//게시글, 첨부파일, 태그
+			galleryService.write(gallery, file, tagList);
+			
+			
+			
+		} else {
+			galleryService.write2(gallery, file);
 		}
-		
-		logger.info("tagList {}", tagList);
-//		logger.info("{}", gallery);
-//		logger.info("{}", file);
+	
 		
 		//작성자 정보 추가
-//		writeParam.setUId( (String) session.getAttribute("id") );
-//		logger.info("{}", writeParam);
+		logger.info("{}", gallery);
 		
-		//게시글, 첨부파일, 태그
-		galleryService.write(gallery, file, tagList);
 		
 		return "redirect:./list";
 	}
@@ -142,6 +154,27 @@ public class GalleryController {
 		galleryService.delete(gallery);
 		
 		return "redirect:./list";
+	}
+	
+	@PostMapping("/search")
+	public String search(String keywordInput, Model model) {
+		
+		logger.info("{}", "/search");
+		logger.info("{}", keywordInput);
+		
+		if( keywordInput != null && !keywordInput.equals("") ) {
+			
+			List<Gallery> gallery = galleryService.search(keywordInput);
+			
+			model.addAttribute("gallery", gallery);
+			
+			return "redirect:./search_list";
+
+		} else {
+		
+			return "redirect:./search_not-found";
+		}
+		
 	}
 
 }

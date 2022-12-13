@@ -8,7 +8,7 @@
 
 	<%-- 첫 페이지로 이동 --%>
 	<c:if test="${paging.curPage ne 1 }">
-		<li><a href="/board/list">&larr; 처음</a></li>	
+		<li><a href="/gallery/list">&larr; 처음</a></li>	
 	</c:if>
 	
 	<%-- 이전 페이징 리스트로 이동 --%>

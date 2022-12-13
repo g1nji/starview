@@ -9,22 +9,24 @@ public class GalleryFile {
 	private String uId;
 	private String storedName;
 	private String originName;
+	private String filepath;
 	
 	public GalleryFile() {}
 
-	public GalleryFile(int photoNo, int galleryNo, String userId, String storedName, String originName) {
+	public GalleryFile(int photoNo, int galleryNo, String uId, String storedName, String originName, String filepath) {
 		super();
 		this.photoNo = photoNo;
 		this.galleryNo = galleryNo;
-		this.uId = userId;
+		this.uId = uId;
 		this.storedName = storedName;
 		this.originName = originName;
+		this.filepath = filepath;
 	}
 
 	@Override
 	public String toString() {
-		return "GalleryFile [photoNo=" + photoNo + ", galleryNo=" + galleryNo + ", userId=" + uId + ", storedName="
-				+ storedName + ", originName=" + originName + "]";
+		return "GalleryFile [photoNo=" + photoNo + ", galleryNo=" + galleryNo + ", uId=" + uId + ", storedName="
+				+ storedName + ", originName=" + originName + ", filepath=" + filepath + "]";
 	}
 
 	public int getPhotoNo() {
@@ -43,12 +45,12 @@ public class GalleryFile {
 		this.galleryNo = galleryNo;
 	}
 
-	public String getUserId() {
+	public String getuId() {
 		return uId;
 	}
 
-	public void setUserId(String userId) {
-		this.uId = userId;
+	public void setuId(String uId) {
+		this.uId = uId;
 	}
 
 	public String getStoredName() {
@@ -65,6 +67,14 @@ public class GalleryFile {
 
 	public void setOriginName(String originName) {
 		this.originName = originName;
+	}
+
+	public String getFilepath() {
+		return filepath;
+	}
+
+	public void setFilepath(String filepath) {
+		this.filepath = filepath;
 	}
 
 }

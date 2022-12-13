@@ -6,11 +6,23 @@
 <c:import url="../layout/header.jsp" />
 
 <script type="text/javascript">
-$(document).ready(function() {
+$(document).ready(function(){
+	
+	var uid = '<%=session.getAttribute("uId") %>'
+	
 	$("#btnWrite").click(function() {
-		location.href = "/gallery/write"
+		
+		if( uid=="null" ) {
+			console.log("비로그인상태")
+			alert("로그인 후 이용가능합니다");
+			location.href = "/users/login"
+		} else {
+			console.log("로그인상태")
+			location.href = "/gallery/write"
+		}
 	})
 })
+
 </script>
 
 <style type="text/css">
@@ -33,7 +45,6 @@ $(document).ready(function() {
 	float: right;
 }
 
-
 </style>
 
 <h2 class="title">갤러리</h2>
@@ -53,18 +64,14 @@ $(document).ready(function() {
 	<c:forEach items="${list }" var="gallery">
 		<table class="gallerylist">
 		<tr class="img">
-			<td></td>
+			<td><img src="/imagepath/${galleryFile.originName }"></td>
 		</tr>
 		<tr>
-			<td>
-				<a href="/gallery/view?galleryNo=${gallery.galleryNo }">${gallery.galleryTitle }
-				<img src="/imagepath/${galleryFile.storedName }">
-				</a>
-			</td>
+			<td><a href="/gallery/view?galleryNo=${gallery.galleryNo }">${gallery.galleryTitle }</a></td>
 		</tr>
 		<tr>
 			<td>${gallery.galleryNo }</td>
-			<td>작성자</td>
+			<td>${gallery.uNick }</td>
 		</tr>
 		<tr>
 			<td><fmt:formatDate value="${gallery.galleryDate }" pattern="yyyy-MM-dd" /></td>
@@ -77,6 +84,7 @@ $(document).ready(function() {
 </c:if>
 
 <!-- 게시글이 12개 이상일 경우 한 페이지에 12개만 보이기 -->
+<c:if test="${list.size() >= 12 }">
 <c:forEach items="${list }" var="gallery">
 	<table class="gallerylist">
 	<tr class="img">
@@ -85,13 +93,13 @@ $(document).ready(function() {
 	<tr>
 		<td>
 			<a href="/gallery/view?galleryNo=${gallery.galleryNo }">${gallery.galleryTitle }
-			<img src="/imagepath/${galleryFile.storedName }">
+			<img src="/imagepath/${galleryFile.originName }">
 			</a>
 		</td>
 	</tr>
 	<tr>
 		<td>${gallery.galleryNo }</td>
-		<td>작성자</td>
+		<td>${gallery.uNick }</td>
 	</tr>
 	<tr>
 		<td><fmt:formatDate value="${gallery.galleryDate }" pattern="yyyy-MM-dd" /></td>
@@ -101,10 +109,18 @@ $(document).ready(function() {
 	</tr>
 	</table>
 </c:forEach>
+</c:if>
 
 <div class="clearfix"></div>
 
-<div class="search">검색</div>
+<div class="search">
+	<form action="/gallery/search" method="post">
+		<input type="text" placeholder="검색어를 입력하세요" id="keyword" name="keywordInput">
+		<button class="btn_search" onclick="location.href='/gallery/search'">
+		검색
+		</button>
+	</form>
+</div>
 
 <c:import url="../layout/paging.jsp" />
 

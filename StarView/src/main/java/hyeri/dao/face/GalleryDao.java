@@ -23,8 +23,6 @@ public interface GalleryDao {
 	 * @return 페이징이 적용된 게시글 목록
 	 */
 	public List<Gallery> selectList(Paging paging);
-
-	public List<GalleryFile> selectListFile(Paging paging);
 	
 	/**
 	 * 조회하려는 게시글의 조회수를 1 증가시킨다
@@ -86,9 +84,16 @@ public interface GalleryDao {
 
 	/**
 	 * 
-	 * @param tagList
+	 * @param gTag
 	 */
-	public void insertTag(List<GTag> tagList);
+	public void insertTag(GTag gTag);
+
+	/**
+	 * 
+	 * @param keywordInput
+	 * @return
+	 */
+	public List<Gallery> selectByKeyword(String keywordInput);
 
 
 
