@@ -310,7 +310,7 @@ function validatePass(password){
 
 <!-- 생년월일 스크립트 -->
 <script type="text/javascript">
-$(document).ready(function(){            
+/* $(document).ready(function(){            
     var now = new Date();
     var year = now.getFullYear();
     var mon = (now.getMonth() + 1) > 9 ? ''+(now.getMonth() + 1) : '0'+(now.getMonth() + 1); 
@@ -343,7 +343,7 @@ $(document).ready(function(){
     
     $('#uBirth').val(uBirth)
   
-})
+}) */
 </script>
 
 <!-- 휴대전화 입력 유효성 검사 -->
@@ -413,10 +413,10 @@ const autoHyphen2 = (target) => {
 <div id="birthDiv" class="formDiv">
 <h4><label for="uBirth"></label>생년월일</h4>
 <div id="resultBirth" class="resultDiv"></div>
-<select name="yy" id="year"></select>년
+<!-- <select name="yy" id="year"></select>년
 <select name="mm" id="month"></select>월
-<select name="dd" id="day"></select>일
-<input type="text" id="uBirth" name="uBirth" hidden="hidden">
+<select name="dd" id="day"></select>일 -->
+<input type="date" id="uBirth" name="uBirth">
 </div>
 
 <div id="genderDiv" class="formDiv">

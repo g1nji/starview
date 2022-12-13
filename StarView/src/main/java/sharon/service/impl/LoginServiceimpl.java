@@ -17,23 +17,6 @@ public class LoginServiceimpl implements LoginService{
 	@Autowired private LoginDao loginDao;
 
 	@Override
-	public void join(Users joinParam) {
-		logger.info("join()-{}",joinParam);
-
-		loginDao.insert(joinParam);
-	}
-
-	@Override
-	public boolean login(Users usersParam) {
-		logger.info("login()-{}",usersParam);
-		
-		if(loginDao.selectCntByIdPW(usersParam)>0) {
-			return true; //로그인 인증 성공
-		}
-		return false; //로그인 인증 실패
-	}
-
-	@Override
 	public Users info(String loginid) {
 		logger.info("info()-{}",loginid);
 		
@@ -50,6 +33,17 @@ public class LoginServiceimpl implements LoginService{
 	public void update(Users users) {
 		logger.info("update()-{}",users);
 		loginDao.update(users);
+	}
+
+	@Override
+	public boolean pwCheck(Users usersParam) {
+		logger.info("pwCheck()-{}",usersParam);
+		
+		int res= loginDao.selectCntByIdPW(usersParam);
+		
+		if(res>0) 	return true;
+		else		return false;
+		
 	}
 
 	

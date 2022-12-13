@@ -1,60 +1,107 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:import url="./mouse.jsp" />
+<%-- <c:import url="./mouse.jsp" /> --%>
+<c:import url="../layout/header.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-/* @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap'); */
-/* @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap'); */
-@import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
-body{
-font-family: 'Poor Story', cursive;
-/* font-family: 'Do Hyeon', sans-serif; */
-/* font-family: 'Nanum Gothic', sans-serif; */
-}
+
 .out{
-	text-align: center;
-
+/* background-color:#FFFFE8; */
 }
-
+#Year, #Mon{
+    position: relative;
+    width: 90px;
+    height: 40px;
+    border: solid 1px #dadada;
+    background: #fff;
+    box-sizing: border-box;
+    margin-top:7px;
+}
 #resultLayout{
-margin:0 auto;
-margin-bottom:10px;
-width:1200px;
-height:450px;
-}
+margin-bottom:5%;
+height:600px;
 
-table{
-margin:0 auto;
-margin-top:30px;
-border-radius:10px;
-padding-left:10px;
-background-color:#fff0f5;
-
-}
-
-h4{
-width:700px;
-margin-left: 25px;
 }
 
 #astroEvent{
-margin-left: 20px;
-
-}
-th{
-font-size: 20px;
-padding-top: 20px;
-padding-bottom: 10px;
+width:800px;
+margin-left: 25px;
+font-size: 16px;
 }
 
+#btn{
+	font-family: 'Noto Sans KR', sans-serif;
+    border-radius: 5px;
+	display: inline-block;
+    position: relative;
+    padding: 10px 20px;
+    margin-bottom:10px;
+    border: 1px solid #fff;
+    background-color:#ffd66d;
+    text-align: center;
+    text-decoration: none;
+}
+
+#btn:hover{
+background-color: #F2D7D9;
+    color: black;
+
+}
+
+#title{
+text-align: center;
+}
+table{
+	border-collapse: collapse;
+  	border-radius: 1em;
+  	overflow: hidden;
+    border-radius: 10px;
+ 	width:1200px;
+  	box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  	height:600px;
+ }
+ 
+
+.box{
+text-align: right;
+/* margin-right: 20px; */
+}
+
+#space{
+width:600px;
+margin-left: 250px;
+}
 
 
+body {
+  margin: 0;
+  background: linear-gradient(45deg, #49a09d, #5f2c82);
+  font-family: sans-serif;
+  font-weight: 100;
+}
 
+
+th,td {
+  padding: 15px;
+  background-color: rgba(255,255,255,0.2);
+  color: #fff;
+}
+
+th {
+background-color: #55608f;
+font-size: 17px;
+text-align:center;
+font-size: 600;
+}
+
+tr:hover {
+      background-color: rgba(255,255,255,0.3);
+    }
 </style>
 
 <!-- jQeury 2.2.4 -->
@@ -118,8 +165,8 @@ $(document).ready(() => {
                 + "<th>날짜</th>"
 //                + "<th>순번</th>"
                 + "<th>시간</th>"
-                + "<th>대표현상</th>"
                 + "<th>천문현상</th>"
+                + "<th>대표현상</th>"
 //                + "<th>비고</th>"
                 + "<tr>"
                 $table.html( tHead )
@@ -131,11 +178,11 @@ $(document).ready(() => {
 //                    console.log(i, row)
                    
                    $("<tr>")
-                      .append($("<td>").html('<h3 id="locdate" >'+$(item).find("locdate").text()+'</h3>' ) )
+                      .append($("<td>").html('<h4 id="locdate" >'+$(item).find("locdate").text()+'</h4>' ) )
    //                   .append($("<td>").html($(item).find("seq").text() ) )
-                      .append($("<td>").html('<h3 id="astroTime">'+$(item).find("astroTime").text()+'</h3>' ) )
-                      .append($("<td>").html('<h3 id="astroTitle">'+$(item).find("astroTitle").text()+'</h3>' ) )
+                      .append($("<td>").html('<h4 id="astroTime">'+$(item).find("astroTime").text()+'</h4>' ) )
                       .append($("<td>").html('<h4 id="astroEvent">'+$(item).find("astroEvent").text()+'</h4>' ) )
+                      .append($("<td>").html('<h4 id="astroTitle">'+$(item).find("astroTitle").text()+'</h4>' ) )
 //                      .append($("<td>").html($(item).find("astroEvent").text() ) )
 //                      .append($("<td>").html($(item).find("remarks").text() ) )
                    .appendTo( $table )
@@ -164,11 +211,11 @@ $(document).ready(() => {
 <body>
 
 <div class="out">
-<h1 id="title">이달의 천문현상</h1>
 
-<hr>
+<div id="title">
+<h2 style="color:white">이달의 천문현상🌟</h2>
 <div class="box">
-	<input type="text" name="Year" id="Year">년
+<input type="text" name="Year" id="Year">년
 	<select id="Mon">
 		<option value="01">1월</option>
 		<option value="02">2월</option>
@@ -183,14 +230,14 @@ $(document).ready(() => {
 		<option value="11">11월</option>
 		<option value="12">12월</option>
 	</select>
-	<button id="btn">실행</button>
-	
-
+	<button id="btn">검색</button>
 </div>
 </div>
-<div id="content"></div>
-<div id="resultLayout"></div>
+</div>
+<div id="resultLayout" class="resultLayout">
+<img id="space" src="/resources/img/spacepenguin.png">
+</div>
 
 </body>
 </html>
-<%-- <c:import url="../layout/footer.jsp" /> --%>
+<c:import url="../layout/footer.jsp" />

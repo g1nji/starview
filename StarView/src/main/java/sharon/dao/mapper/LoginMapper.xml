@@ -7,11 +7,6 @@
     
 <mapper namespace="sharon.dao.face.LoginDao">
 
-	<insert id="insert" parameterType="ydg.dto.Users">
-		INSERT INTO Users (id,pw,email,phone)
-		VALUES (#{uId },#{uPw },#{uEmail },#{uPhone })	
-	</insert>
-
 	<select id="selectCntByIdPW" resultType="int" parameterType="ydg.dto.Users">
 		SELECT count(*) FROM Users
 		WHERE u_id=#{uId } AND u_pw =#{uPw }
