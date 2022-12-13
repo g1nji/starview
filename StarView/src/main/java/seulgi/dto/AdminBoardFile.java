@@ -1,6 +1,6 @@
 package seulgi.dto;
 
-public class AdminBoardPhoto {
+public class AdminBoardFile {
 	
 	private int photoNo;
 	private int galleryNo;
@@ -8,9 +8,9 @@ public class AdminBoardPhoto {
 	private String originName;
 	private String storedName;
 	
-	public AdminBoardPhoto() {}
+	public AdminBoardFile() {}
 
-	public AdminBoardPhoto(int photoNo, int galleryNo, String uId, String originName, String storedName) {
+	public AdminBoardFile(int photoNo, int galleryNo, String uId, String originName, String storedName) {
 		super();
 		this.photoNo = photoNo;
 		this.galleryNo = galleryNo;

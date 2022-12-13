@@ -61,4 +61,40 @@ public class GoodsServiceImpl implements GoodsService {
 		List<Goods> moreGoods = goodsDao.highPriceMore(map); 
 		return moreGoods;	
 	}
+
+	@Override
+	public List<Goods> sortByDate() {
+		List<Goods> latestList = goodsDao.selectByDate();
+		return latestList;
+	}
+
+	@Override
+	public List<Goods> latestMore(Map<String, Integer> map) {
+		List<Goods> moreGoods = goodsDao.latestMore(map); 
+		return moreGoods;	
+	}
+
+	@Override
+	public Goods viewGoods(Map<String, Object> map) {
+		Goods goodsInfo = goodsDao.selectGoods(map);
+		return goodsInfo;
+	}
+
+	@Override
+	public int getLikeCnt(Map<String, Object> map) {
+		int likeCnt = goodsDao.selectLikeCnt(map);
+		return likeCnt;
+	}
+
+	@Override
+	public void likeCntUp(Map<String, Object> map) {
+		goodsDao.likeCntUp(map);
+	}
+
+	@Override
+	public void likeCntDown(Map<String, Object> map) {
+		goodsDao.likeCntDown(map);
+	}
+
+
 }
