@@ -81,6 +81,8 @@ public class AdminProductServiceImpl implements AdminProductService {
 		//파일 저장될 경로
 		String storedPath = context.getRealPath("prodimage");
 		
+		logger.info("주소>>>" + storedPath);
+		
 		//파일 저장할 폴더 만들기(prodimage 폴더)
 		File storedFolder = new File(storedPath);
 		if( !storedFolder.exists() ) {
