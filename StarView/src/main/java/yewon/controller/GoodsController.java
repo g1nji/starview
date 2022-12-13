@@ -9,26 +9,28 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import yewon.dto.Goods;
 import yewon.service.face.GoodsService;
+import yewon.service.face.WishService;
 
 @Controller
+@RequestMapping("/goods")
 public class GoodsController {
 
 	@Autowired private GoodsService goodsService;
+	@Autowired private WishService wishService;
 	
 	//로그 객체
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	//상품목록 조회
-	@RequestMapping("/goods/list")
+	@RequestMapping("/list")
 	public void goodslist(Model model) {
-		logger.info("/board/list [GET]");
 		
 		List<Goods> goodsList = goodsService.getGoodsList();
 		
@@ -39,9 +41,8 @@ public class GoodsController {
 	}
 	
 	//상품 더보기
-	@RequestMapping(value = "/goods/more", produces = "application/text;charset=UTF-8", method=RequestMethod.POST)
+	@RequestMapping(value = "/more", produces = "application/text;charset=UTF-8", method=RequestMethod.POST)
 	public void moreGoodslist(@RequestBody Map<String, String> param, Model model) {
-		logger.info("/board/more [GET]");
 		
 		Map<String, Integer> map = new HashMap<>();
 		
@@ -59,9 +60,8 @@ public class GoodsController {
 	}
 	
 	//낮은가격순 정렬
-	@RequestMapping("/goods/lowPrice")
+	@RequestMapping("/lowPrice")
 	public void sortByLowPrice(Model model) {
-		logger.info("/board/lowPrice [GET]");
 		
 		List<Goods> lowPriceList = goodsService.sortByLowPrice();
 		
@@ -72,16 +72,14 @@ public class GoodsController {
 	}
 	
 	//낮은가격순 더보기
-	@RequestMapping(value = "/goods/more2", produces = "application/text;charset=UTF-8", method=RequestMethod.POST)
+	@RequestMapping(value = "/more2", produces = "application/text;charset=UTF-8", method=RequestMethod.POST)
 	public void lowPriceMore(@RequestBody Map<String, String> param, Model model) {
-		logger.info("/board/more2 [GET]");
 		
 		Map<String, Integer> map = new HashMap<>();
 		
 		map.put("startIdx", Integer.parseInt(param.get("startIdx")));
 		map.put("endIdx", Integer.parseInt(param.get("endIdx")));
 		map.put("step", Integer.parseInt(param.get("step")));
-		
 		
 		System.out.println(map);
 		
@@ -91,9 +89,8 @@ public class GoodsController {
 	}
 	
 	//높은가격순 정렬
-	@RequestMapping("/goods/highPrice")
+	@RequestMapping("/highPrice")
 	public void sortByHighPrice(Model model) {
-		logger.info("/board/highPrice [GET]");
 		
 		List<Goods> highPriceList = goodsService.sortByHighPrice();
 		
@@ -104,9 +101,8 @@ public class GoodsController {
 	}
 	
 	//높은가격순 더보기
-	@RequestMapping(value = "/goods/more3", produces = "application/text;charset=UTF-8", method=RequestMethod.POST)
+	@RequestMapping(value = "/more3", produces = "application/text;charset=UTF-8", method=RequestMethod.POST)
 	public void highPriceMore(@RequestBody Map<String, String> param, Model model) {
-		logger.info("/board/more3 [GET]");
 		
 		Map<String, Integer> map = new HashMap<>();
 		
@@ -114,11 +110,65 @@ public class GoodsController {
 		map.put("endIdx", Integer.parseInt(param.get("endIdx")));
 		map.put("step", Integer.parseInt(param.get("step")));
 		
-		
 		System.out.println(map);
 		
 		List<Goods> highPriceMore = goodsService.highPriceMore(map);
 		
 		model.addAttribute("highPriceMore", highPriceMore);
+	}
+	
+	//최신등록순 정렬
+	@RequestMapping("/latest")
+	public void sortByDate(Model model) {
+		
+		List<Goods> latestList = goodsService.sortByDate();
+		
+		int totalCount = goodsService.totalCount();
+		
+		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("latestList", latestList);
+	}
+	
+	//최신등록순 더보기
+	@RequestMapping(value = "/more4", produces = "application/text;charset=UTF-8", method=RequestMethod.POST)
+	public void latestMore(@RequestBody Map<String, String> param, Model model) {
+		
+		Map<String, Integer> map = new HashMap<>();
+		
+		map.put("startIdx", Integer.parseInt(param.get("startIdx")));
+		map.put("endIdx", Integer.parseInt(param.get("endIdx")));
+		map.put("step", Integer.parseInt(param.get("step")));
+		
+		System.out.println(map);
+		
+		List<Goods> latestMore = goodsService.latestMore(map);
+		
+		model.addAttribute("latestMore", latestMore);
+	}
+	
+	
+	@RequestMapping("/view")
+	public void viewGoods(@RequestParam Map<String, Object> map, Model model) {
+		
+		System.out.println(map);
+		
+		Goods goodsInfo = goodsService.viewGoods(map);
+		
+		//wishlist tb에서 사용자가 해당 상품에 좋아요를 눌렀는지 확인
+		int findLike = wishService.findLike(map);
+		int likeCntAll = wishService.getLikeCntAll(map);
+		logger.info("likeCntAll: {}", likeCntAll);
+		
+		//좋아요를 한번도 누른적이 없으면 wishlist tb에 데이터가 없으므로 null반환
+//		if(findLike == null) {
+//			model.addAttribute("likeCheck", 0);
+//		} else {
+//			model.addAttribute("likeCheck", findLike.get("likeCheck"));
+//		}
+		
+		model.addAttribute("goodsInfo", goodsInfo);
+		model.addAttribute("findLike", findLike);
+		model.addAttribute("likeCntAll", likeCntAll);
+		
 	}
 }

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -49,6 +51,7 @@ a:hover {
 #logo {
 	height: 100px;
 	padding: 0;
+	margin-right: 20px;
 }
 
 ul.subnav {
@@ -88,8 +91,8 @@ ul.mainnav > li > ul {
 	position: absolute;
 	display: none;
 	padding: 10px 0px;
+	background-color: #FFEBBA;
 	width: 150px;
-	background-color: #FFF2CC;
 	border-radius: 10px;
 }
 
@@ -113,6 +116,43 @@ ul.mainnav > li:hover > ul {
 	font-size: 12px;
 	text-align: center;
 }
+
+.wrap {
+	margin: 0 auto;
+}
+
+.monthly {
+	width: 55%;
+	height: 200px;
+	margin: 15px 30px 15px 0;
+	border: 1px solid black;
+	display: inline-block;
+}
+
+.weather {
+	width: 20%;
+	height: 200px;
+	margin: 0 20px 0 0;
+	border: 1px solid black;
+	display: inline-block;
+}
+
+.moon {
+	width: 20%;
+	height: 200px;
+	border: 1px solid black;
+	display: inline-block;
+}
+
+#day {
+	width:80%;
+	height: 450px;
+	margin: 0 auto;
+	background-size: 100%;
+	border-radius: 100px;
+	background-size : cover;
+}
+
 </style>
 </head>
 
@@ -122,7 +162,7 @@ ul.mainnav > li:hover > ul {
 
 <div id="menu">
 	<ul class="mainnav">
-		<li id="logo"><a href="/"><img src="/resources/image/logo.png" style="width:100px;"></a></li>
+		<li id="logo"><a href="/"><img src="/resources/image/logo.png" style="width:150px; margin-top: 5px;"></a></li>
 		<li>
 			<a href="">별 정보 확인</a>
 			<ul>
@@ -138,8 +178,20 @@ ul.mainnav > li:hover > ul {
 		<li><a href="">스케줄러</a></li>
 	</ul>
 	<ul class="subnav">
-		<li><a href="/users/login"><img src="/resources/image/user.png" style="height:25px;"></a></li>
-		<li><a href=""><img src="/resources/image/shopping-cart.png" style="height:25px;"></a></li>
+	
+		<!-- 비로그인 상태 -->
+		<c:if test="${empty login }">
+			<li style="padding-top: 53px;"><a href="/users/login">로그인/회원가입</a></li>
+			<li><a href=""><img src="/resources/image/shopping-cart.png" style="height:25px;"></a></li>
+		</c:if>
+		
+		<!-- 로그인 상태 -->
+		<c:if test="${not empty login }">
+			<li style="padding-top: 53px;"><a href="/users/logout">로그아웃</a></li>
+			<li><a href="/mypage/mypage"><img src="/resources/image/user.png" style="height:25px;"></a></li>
+			<li><a href=""><img src="/resources/image/shopping-cart.png" style="height:25px;"></a></li>
+		</c:if>
+
 	</ul>
 </div>
 

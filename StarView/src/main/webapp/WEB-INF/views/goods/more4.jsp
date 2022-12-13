@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:forEach items="${moreGoods }" var="res">
+<c:forEach items="${latestMore }" var="res">
 
 	<ul class="items">
 		<li><a href="/goods/view?gId=${res.gId }"><img class="thumb" src="${res.fileName }"></li>

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import seulgi.dto.AdminBoard;
-import seulgi.dto.AdminBoardPhoto;
+import seulgi.dto.AdminBoardFile;
 import seulgi.util.Paging;
 
 public interface AdminBoardService {
@@ -34,18 +34,34 @@ public interface AdminBoardService {
 	 * 게시글 번호 이용하여 게시글 상세 조회하기
 	 * 
 	 * @param viewProd - 상세 조회하려는 게시글 번호
-	 * @return 조회된 게시글 정보
+	 * @return 조회된 게시글 정보 객체
 	 */
 	public AdminBoard view(AdminBoard viewBoard);
 
+	/**
+	 * 게시글, 첨부파일 업로드하기
+	 * 
+	 * @param board - 업로드할 게시글 정보 객체
+	 * @param file - 첨부파일 정보 객체
+	 */
+	public void upload(AdminBoard board, MultipartFile file);
+	
 	/**
 	 * 게시글 번호를 이용하여 업로드된 사진 정보 조회하기
 	 * 
 	 * @param viewBoard - 조회할 게시글 객체
 	 * @return 첨부파일 정보 객체
 	 */
-	public AdminBoardPhoto getAttachFile(AdminBoard viewBoard);
+	public AdminBoardFile getAttachFile(AdminBoard viewBoard);
 
+	/**
+	 * 파일 번호를 이용하여 업로드된 파일 정보를 조회한다
+	 * 
+	 * @param photofile - 조회할 파일 번호 객체
+	 * @return 첨부 파일 정보 객체
+	 */
+	public AdminBoardFile getFile(AdminBoardFile photofile);
+	
 	/**
 	 * 게시글 정보, 첨부파일 함께 처리하기
 	 * 
@@ -61,5 +77,7 @@ public interface AdminBoardService {
 	 * @param board - 수정할 게시글 정보 객체
 	 */
 	public void update(AdminBoard board);
+
+
 
 }

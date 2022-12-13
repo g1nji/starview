@@ -49,11 +49,6 @@ public class GalleryServiceImpl implements GalleryService {
 	}
 	
 	@Override
-	public List<GalleryFile> listFile(Paging paging) {
-		return galleryDao.selectListFile(paging);
-	}
-	
-	@Override
 	public Gallery view(Gallery viewGallery) {
 		
 		//조회수 증가
@@ -116,15 +111,78 @@ public class GalleryServiceImpl implements GalleryService {
 		
 		GalleryFile galleryFile = new GalleryFile();
 		galleryFile.setGalleryNo( gallery.getGalleryNo() );
-		galleryFile.setUserId( gallery.getUserId() );
+		galleryFile.setuId( gallery.getuId() );
 		galleryFile.setOriginName(originName);
 		galleryFile.setStoredName(storedName);
+		galleryFile.setFilepath(storedPath);
 		
 		galleryDao.insertPhoto(galleryFile);
 		
 		//---------------------------------------------------
 		
-		galleryDao.insertTag(tagList);
+		GTag gTag = new GTag();
+		for( int i=0; i<tagList.size(); i++ ) {
+			String t= tagList.get(i).getTagName();
+			gTag.setTagName(t);
+		}
+		
+		galleryDao.insertTag(gTag);
+		
+	}
+	
+	@Override
+	public void write2(Gallery gallery, MultipartFile file) {
+
+		//게시글 처리
+		if( "".equals( gallery.getGalleryTitle() ) ) {
+			gallery.setGalleryTitle("(무제)");
+		}
+		
+		galleryDao.uploadPhoto(gallery);
+		
+		//---------------------------------------------------
+		
+		//첨부파일 처리
+		
+		//빈 파일일 경우
+		if( file.getSize() <= 0 ) {
+			return;
+		}
+		
+		//파일이 저장될 경로
+		String storedPath = context.getRealPath("upload");
+		File storedFolder = new File( storedPath );
+		if( !storedFolder.exists() ) {
+			storedFolder.mkdir();
+		}
+		
+		//파일이 저장될 이름
+		String originName = file.getOriginalFilename();
+		String storedName = originName + UUID.randomUUID().toString().split("-")[4];
+		
+		//저장할 파일의 정보 객체
+		File dest = new File( storedFolder, storedName );
+		
+		try {
+			file.transferTo(dest);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		//---------------------------------------------------
+		
+		//첨부파일 정보 DB 기록
+		
+		GalleryFile galleryFile = new GalleryFile();
+		galleryFile.setGalleryNo( gallery.getGalleryNo() );
+		galleryFile.setuId( gallery.getuId() );
+		galleryFile.setOriginName(originName);
+		galleryFile.setStoredName(storedName);
+		galleryFile.setFilepath(storedPath);
+		
+		galleryDao.insertPhoto(galleryFile);
 		
 	}
 	
@@ -175,7 +233,7 @@ public class GalleryServiceImpl implements GalleryService {
 		
 		GalleryFile galleryFile = new GalleryFile();
 		galleryFile.setGalleryNo( viewGallery.getGalleryNo() );
-		galleryFile.setUserId( viewGallery.getUserId() );
+		galleryFile.setuId( viewGallery.getuId() );
 		galleryFile.setOriginName(originName);
 		galleryFile.setStoredName(storedName);
 		
@@ -194,6 +252,12 @@ public class GalleryServiceImpl implements GalleryService {
 		
 		//게시글 삭제
 		galleryDao.delete(gallery);
+	}
+	
+	@Override
+	public List<Gallery> search(String keywordInput) {
+		
+		return galleryDao.selectByKeyword(keywordInput);
 	}
 	
 }

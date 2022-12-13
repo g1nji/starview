@@ -12,6 +12,7 @@
     <result column="g_name" property="gName" />
     <result column="g_price" property="gPrice" />
     <result column="file_name" property="fileName" />
+<!--     <result column="like_cnt" property="likeCnt" /> -->
 <!--     <association property="goodsImg" javaType="GoodsImg" > -->
 <!--     	<result column="file_type" property="fileType" /> -->
 <!--     </association>	 -->
@@ -112,5 +113,49 @@
 	    WHERE rnum BETWEEN #{startIdx} AND #{endIdx} + #{step}
     ]]>
     </select>
+    
+	<select id="selectByDate" resultMap="Goods">
+    <![CDATA[
+	SELECT * FROM (
+	    SELECT ROWNUM rnum, t.* FROM (
+	      SELECT g.*, i.file_name 
+	    	FROM goods g, goods_img i
+		    	WHERE g.g_id = i.g_id
+		    	AND i.file_type = 'main_img'
+		   		ORDER BY g.reg_date DESC
+	        ) t
+	    ) GOODS
+	    WHERE rnum <= 8
+    ]]>
+	</select>
+
+    <select id="latestMore" resultMap="Goods" parameterType="map">
+    <![CDATA[
+	SELECT * FROM (
+	    SELECT ROWNUM rnum, t.* FROM (
+	      SELECT g.*, i.file_name 
+	    	FROM goods g, goods_img i
+		    	WHERE g.g_id = i.g_id
+		    	AND i.file_type = 'main_img'
+		   		ORDER BY g.reg_date DESC
+	        ) t
+	    ) GOODS
+	    WHERE rnum BETWEEN #{startIdx} AND #{endIdx} + #{step}
+    ]]>
+    </select>
+    
+    <select id="selectGoods" resultMap="Goods" parameterType="map">
+    SELECT g.*, i.file_name 
+    	FROM goods g, goods_img i
+	    	WHERE g.g_id = i.g_id
+	    	AND i.file_type = 'main_img'
+    		AND g.g_id = #{gId }
+    </select>
+    
+    <select id="selectLikeCnt" resultType="int" parameterType="map">
+	   	select NVL(like_cnt, 0) as likeCnt from goods
+	   	where g_id = #{gId }
+    </select>
+
     </mapper>
 

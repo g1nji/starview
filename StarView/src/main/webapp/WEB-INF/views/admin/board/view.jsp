@@ -52,9 +52,9 @@ table {
 	<td colspan="2" height="200" valign="top" style="padding:20px; line-height:160%">
 		<div id="file">
 			<div>
-				<img src='주소를 다시/${photofile.originName }' style="width: 200px; height: 200px;" /><br>
+				<img src='주소를 다시/${boardFile.originName }' style="width: 200px; height: 200px;" /><br>
 			</div>
-			${photofile.storedName }
+			${boardFile.storedName }
 		</div>
 	</td>
 </tr>

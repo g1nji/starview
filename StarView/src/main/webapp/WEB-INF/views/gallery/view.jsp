@@ -12,15 +12,17 @@
 좋아요
 
 <!-- 게시글 작성자일 때 -->
-<a href="./update?galleryNo=${viewGallery.galleryNo }">수정</a>
-<a href="./delete?galleryNo=${viewGallery.galleryNo }">삭제</a>
+<c:if test="${uId } == ${viewGallery.uId }">
+	<a href="./update?galleryNo=${viewGallery.galleryNo }">수정</a>
+	<a href="./delete?galleryNo=${viewGallery.galleryNo }">삭제</a>
+</c:if>
 
 <br>
 
 <fmt:formatDate value="${viewGallery.galleryDate }" pattern="yyyy-MM-dd" />
 <hr>
 
-<img src="/imagepath/${galleryFile.storedName }">
+<img src="/imagepath/${galleryFile.storedName }" style="width:100%;">
 ${viewGallery.galleryContent }
 
 <span>장소</span>
@@ -28,6 +30,8 @@ ${viewGallery.galleryContent }
 
 <hr>
 
-덧글
+<div class="comment">
+
+</div>
 
 <c:import url="../layout/footer.jsp" />

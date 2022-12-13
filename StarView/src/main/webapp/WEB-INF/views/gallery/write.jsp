@@ -72,11 +72,10 @@ $(document).ready(function() {
 </script>
 
 
-
 <style type="text/css">
 .wrap {
 	margin: 0 auto;
-	padding: 20px 0;
+	padding: 60px 0;
 }
 
 #galleryTitle {
@@ -94,9 +93,12 @@ $(document).ready(function() {
 
 <form action="/gallery/write" method="post" enctype="multipart/form-data">
 
+<input type="text" name="uId" value="<%= session.getAttribute("uId") %>" style="display:none;">
+
 <!-- 제목 -->
 <input type="text" style="width: 100%;" id="galleryTitle" name="galleryTitle" class="gallerytitle" placeholder="제목을 입력하세요">
 <hr>
+
 
 <!-- 파일첨부 -->
 <input type="file" id="file" name="file"><br>
@@ -108,7 +110,7 @@ $(document).ready(function() {
 <br>
 
 <span>장소 추가</span>
-<input type="text" id="address_kakao" name="address" readonly />
+<input type="text" id="address_kakao" name="galleryLoc" readonly />
 <!-- <input type="text" name="address_detail" /> -->
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
