@@ -7,4 +7,18 @@
 
 <mapper namespace="yewon.dao.face.CartDao">
 
+   <resultMap type="yewon.dto.Cart" id="Cart">
+    <id column="c_id" property="cId" />
+    <result column="g_id" property="gId" />
+    <result column="u_id" property="uId" />
+    </resultMap>
+    
+    <insert id="insertCart" parameterType="Cart">
+    insert into cart (c_id, g_id, u_id) 
+    values ( cart_seq.nextval, #{gId}, #{uId} )
+    </insert>
+    
+    <delete id="deleteCart" parameterType="Cart">
+    delete from cart where g_id = #{gId } and u_id = #{uId }
+    </delete>
 </mapper>
