@@ -56,7 +56,6 @@ td { width: 70px; }
 #cart {
     background-color: #f8e6e0;
     color: #6e6e6e;
-    margin-left: 5px;
 }
 
 .likebox {
@@ -75,65 +74,7 @@ td { width: 70px; }
 	position: absolute;
 	line-height: 29px;
 	left: 23px;
-	font-size: 8px;
 }
-
-/* 모달창 */
-.black-bg { /* 시작스타일 */
-    width : 100%;
-    height : 100%;
-    position : fixed;
-    background : rgba(0,0,0,0.5);
-    z-index : 5;
-    padding: 30px;
-    visibility: hidden; 
-    opacity: 0;
-    transition: all 1s;
-    /* 모든 css속성이 변할때 1초에 걸쳐서 변한다 */
-     top: 50%; 
-	 left: 50%; 
-	 -webkit-transform: translate(-50%, -50%); 
-	 -moz-transform: translate(-50%, -50%); 
-	 -ms-transform: translate(-50%, -50%); 
-	 -o-transform: translate(-50%, -50%); 
-	 transform: translate(-50%, -50%); 
-	 
-	 display: flex;
-  }
-
-.white-bg {
-	width: 500px;
-	height: 220px;
-	background: white;
-	border-radius: 5px;
-	padding: 50px 30px;
-	text-align: center; 
-	margin: auto;
-
-} 
-
-.show-modal { /*최종 스타일 */
-	visibility: visible;
-	opacity: 1;
-}
-
-.modalBtn {
-	padding: 12px 30px;
-/* 	border-radius: 15px; */
-	border: none;
-	font-weight: 500;
-    font-family: 'Noto Sans KR', sans-serif;
-}
-  
-#keep-on {
-	background-color: gray;
-	color: white;
-}  
-#goto-cart {
-	background-color: black;
-	color: white;
-	margin-left: 10px;
-}  
 </style>
 
 <script type="text/javascript">
@@ -178,26 +119,6 @@ function like_func(){
 			}
 		})
 	}
-	
-	$('#cart').click(function() {
-	   $('.black-bg').addClass('show-modal')
-
-	   $('#keep-on').on('click', function() {
-	   		$('.black-bg').toggleClass('show-modal')
-	   })
-		
-		$('#goto-cart').on('click', function() {
-	    	location.href="./cart"
-		})
-	
-	})
-	
-	$('.black-bg').on('click', function(e) {
-   		if ( e.target == document.querySelector('.black-bg') ){
-   		document.querySelector('.black-bg').classList.remove('show-modal');
-   		}
-	})
-	
 })
 </script>
 
@@ -261,16 +182,6 @@ function like_func(){
 
 <div class="detail-img">
 </div>
-
-<div class="black-bg">
-  <div class="white-bg">
-	<h4>선택하신 상품이<br>
-	SHOPPING BAG에 추가되었습니다.</h4><br>
-	  <button class="modalBtn" id="keep-on">쇼핑 계속하기</button>
-	  <button class="modalBtn" id="goto-cart">쇼핑백 확인</button>
-  </div>
-</div>
-
 </section>
 
 <br><br><br><br>
