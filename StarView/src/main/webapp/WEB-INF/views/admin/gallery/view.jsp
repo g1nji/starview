@@ -57,17 +57,23 @@ table {
 	<td class="info">사진번호</td><td>${viewBoard.photoNo }</td>
 </tr>
 <tr>
-	<td colspan="2" height="200" valign="top" style="padding:20px; line-height:160%">
+	<td class="info">위치</td><td>${viewBoard.galleryLoc }</td>
+</tr>
+<tr>
+	<td class="info">태그</td><td>${viewBoard.galleryTag }</td>
+</tr>
+<tr>
+	<td colspan="2">
 		<div id="file">
 			<div>
-				<!-- 주소를 다시 제대로 -->
-				<img src='/boardphoto/${photofile.originName }' style="width: 200px; height: 200px;" /><br>
+				<img src='/boardFile/${boardFile.storedName }' style="width: 200px; height: 200px;" /><br>
 			</div>
-			${photofile.storedName }
 		</div>
 	</td>
 </tr>
 </table>
+
+<a href="admin/gallery/download?photoNo=${boardFile.photoNo }">${boardFile.storedName } 다운로드</a>
 
 <div class="text-center">
 	<button id="btnList" class="btn btn-default">목록</button>

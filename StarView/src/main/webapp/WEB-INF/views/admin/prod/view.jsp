@@ -48,14 +48,12 @@ table {
 	<td colspan="2">
 		<div id="file">
 			<div>
-				<img src='/prodimage/${imagefile.fileName }' style="width: 200px; height: 200px;" /><br>
+				<img src='/prodFile/${prodFile.fileName }' style="width: 200px; height: 200px;" /><br>
 			</div>
 		</div>
 	</td>
 </tr>
 </table>
-
-<a href="admin/prod/download?imgId=${imagefile.imgId }">${imagefile.fileName }</a>
 
 <div class="text-center">
 	<button id="btnList" class="btn btn-default">목록</button>

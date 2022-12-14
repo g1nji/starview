@@ -5,6 +5,19 @@
 
 <c:import url="../layout/header.jsp" />
 
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	if( ${empty prodFile} ) {
+		$("#newFile").show()
+	} else {
+		$("#originFile").show()
+	}
+	
+})
+
+</script>
+
 <h1>상품 수정</h1>
 <hr>
 
@@ -30,7 +43,12 @@
 <div class="form-group">
 
 	<div id="fileBox">
-		파일 삭제 및 추가
+		<div id="originFile">${prodFile.fileName }</div>
+
+		<div id="newFile">
+			<label for="file">새로운 첨부파일</label>
+			<input type="file" id="file" name="file">
+		</div>
 	</div>
 
 </div>

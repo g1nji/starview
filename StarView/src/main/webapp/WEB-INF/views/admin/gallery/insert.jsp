@@ -23,8 +23,8 @@ $(document).ready(function() {
 <form action="./insert" method="post" enctype="multipart/form-data">
 
 <!-- <div class="form-group">
-	<label for="gId">상품번호</label>
-	<input type="text" id="gId" name="gId" class="form-control">
+	<label for="galleryNo">번호</label>
+	<input type="text" id="galleryNo" name="galleryNo" class="form-control">
 </div> -->
 
 <div class="form-group">

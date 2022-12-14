@@ -2,6 +2,7 @@ package seulgi.controller;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import seulgi.dto.AdminBoard;
 import seulgi.dto.AdminBoardFile;
-import seulgi.dto.AdminProduct;
 import seulgi.service.face.AdminBoardService;
 import seulgi.util.Paging;
 
@@ -43,8 +43,8 @@ public class AdminBoardController {
 		//게시글 리스트
 		List<AdminBoard> boardList = adminBoardService.list(paging);
 		
-		for (AdminBoard b : boardList)
-			logger.info("{}", b);
+		//for (AdminBoard b : boardList)
+			//logger.info("{}", b);
 		
 		model.addAttribute("boardList", boardList);
 	}
@@ -91,22 +91,21 @@ public class AdminBoardController {
 		return "redirect:/admin/gallery/list";
 	}
 	
+	//후에 추가
 	//첨부파일 다운로드
-	@RequestMapping("/gallery/download")
-	public String downloadGalleyFile(AdminBoardFile boardFile, Model model) {
-		logger.info("download 주소 연결");
-		
-		//첨부파일 정보 객체
-		boardFile = adminBoardService.getFile(boardFile);
-		logger.info("{}", boardFile);
-		
-		//모델값 전달
-		model.addAttribute("boardFile", boardFile);
-		
-		return "down";
-	}
+//	@RequestMapping("/gallery/download")
+//	public void downloadGalleyFile(AdminBoardFile boardFile, Model model) {
+//		logger.info("download 주소 연결");
+//		
+//		//첨부파일 정보 객체
+//		boardFile = adminBoardService.getFile(boardFile);
+//		logger.info("{}", boardFile);
+//		
+//		//모델값 전달
+//		model.addAttribute("boardFile", boardFile);
+//	}
 
-	//게시글 수정
+	//게시글 수정 페이지
 	@RequestMapping(value="/gallery/update", method = RequestMethod.GET)
 	public String updateGalley(AdminBoard board, Model model) {
 		logger.info("/update 주소 연결 - [GET]");
@@ -140,6 +139,16 @@ public class AdminBoardController {
 		adminBoardService.update(board, file);
 		
 		return "redirect:/admin/gallery/view?galleryNo=" + board.getGalleryNo();
+	}
+	
+	//게시글 삭제
+	@RequestMapping("/gallery/delete")
+	public String deleteGallery(AdminBoard board) {
+		logger.info("/delete 주소 연결");
+		
+		adminBoardService.delete(board);
+		
+		return "redirect:/admin/gallery/list";
 	}
 	
 }

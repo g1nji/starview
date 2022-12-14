@@ -173,6 +173,7 @@ html .container {
 		<li>
 			게시글 관리
 			<ul>
+				<li><a href="../gallery/insert"> - 공지사항 등록</a></li>
 				<li><a href="../gallery/list"> - 회원 글 조회</a></li>
 				<li><a href=""> - 회원 댓글 조회</a></li>
 				<li><a href=""> - 신고사항 조회</a></li>

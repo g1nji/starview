@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import javax.servlet.ServletContext;
 
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,9 +70,8 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 		//게시글 업로드
 		if("".equals(board.getGalleryTitle())) {
 			board.setGalleryTitle("(제목없음)");
-		} else {
-			adminBoardDao.insertBoard(board);
 		}
+		adminBoardDao.insertBoard(board);
 		
 		//첨부파일 업로드
 		//빈 파일일 경우
@@ -81,6 +81,7 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 		
 		//파일이 저장될 경로
 		String storedPath = context.getRealPath("boardFile");
+		logger.info("파일 주소: {}", storedPath);
 		
 		//파일 저장할 폴더 만들기(boardFile 폴더)
 		File storedFolder = new File(storedPath);
@@ -89,8 +90,9 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 		}
 		
 		//파일이 저장될 이름
-		String originName = file.getOriginalFilename();
-		String storedName = originName + UUID.randomUUID().toString().split("-")[4];
+		String originName = FilenameUtils.getBaseName(file.getOriginalFilename());
+		String storedName = originName + UUID.randomUUID().toString().split("-")[4]
+				+ "." + FilenameUtils.getExtension(file.getOriginalFilename());
 		
 		//저장할 파일의 정보 객체
 		File dest = new File(storedFolder, storedName);
@@ -109,7 +111,6 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 		boardFile.setOriginName(originName);
 		boardFile.setStoredName(storedName);
 	
-		//새로운 첨부파일을 삽입한다
 		adminBoardDao.insertFile(boardFile);
 		
 	}
@@ -159,10 +160,10 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 		
 		//파일이 저장될 이름
 		String originName = file.getOriginalFilename();
-		String storedName = originName + UUID.randomUUID().toString().split("-")[4];
+		//String storedName = originName + UUID.randomUUID().toString().split("-")[4];
 		
 		//저장할 파일의 정보 객체
-		File dest = new File( storedFolder, storedName );
+		File dest = new File( storedFolder, originName );
 		
 		try {
 			file.transferTo(dest);
@@ -176,7 +177,7 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 		AdminBoardFile boardFile = new AdminBoardFile();
 		boardFile.setGalleryNo(board.getGalleryNo());
 		boardFile.setOriginName(originName);
-		boardFile.setStoredName(storedName);
+		//boardFile.setStoredName(storedName);
 	
 		//기존에 게시글에 연결된 첨부파일을 삭제한다
 		adminBoardDao.deleteFile(board);
@@ -196,5 +197,17 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 		}
 		
 		adminBoardDao.updateBoard(board);
+	}
+	
+	//게시글 삭제
+	@Override
+	public void delete(AdminBoard board) {
+		logger.info("delete() 사용");
+		
+		//첨부파일 삭제
+		adminBoardDao.deleteFile(board);
+		
+		//게시글 삭제
+		adminBoardDao.delete(board);
 	}
 }

@@ -25,9 +25,10 @@ td:nth-child(2) {
 <table class="table table-striped table-hover table-condensed">
 <thead>
 	<tr>
+		<th style="width: 10%;"><input type="checkbox"> 전체선택</th>
 		<th style="width: 10%;">상품 번호</th>
-		<th style="width: 20%;">상품명</th>
-		<th style="width: 20%;">상품 가격</th>
+		<th style="width: 10%;">상품명</th>
+		<th style="width: 10%;">상품 가격</th>
 		<th style="width: 20%;">상품 설명</th>
 		<th style="width: 10%;">배송비</th>
 		<th style="width: 20%;">등록일</th>
@@ -36,6 +37,7 @@ td:nth-child(2) {
 <tbody>
 <c:forEach items="${prodList }" var="p">
 	<tr>
+		<td><input type="checkbox"></td>
 		<td>${p.gId }</td>
 		<td><a href="./view?gId=${p.gId }">${p.gName }</a></td>
 		<td>${p.gPrice }</td>

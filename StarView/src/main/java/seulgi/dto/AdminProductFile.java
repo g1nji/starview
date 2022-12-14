@@ -1,15 +1,15 @@
 package seulgi.dto;
 
-public class AdminProductImage {
+public class AdminProductFile {
 
 	private int imgId;
 	private int gId;
 	private String fileName;
 	private String fileType;
 	
-	public AdminProductImage() {}
+	public AdminProductFile() {}
 
-	public AdminProductImage(int imgId, int gId, String fileName, String fileType) {
+	public AdminProductFile(int imgId, int gId, String fileName, String fileType) {
 		super();
 		this.imgId = imgId;
 		this.gId = gId;

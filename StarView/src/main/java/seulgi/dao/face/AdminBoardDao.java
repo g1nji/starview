@@ -16,7 +16,7 @@ public interface AdminBoardDao {
 	public List<AdminBoard> selectAll(Paging paging);
 
 	/**
-	 * 전체 게시글 수를 조회한다
+	 * 전체 게시글 수를 조회하기
 	 * 
 	 * @return 총 게시글 수
 	 */
@@ -38,7 +38,7 @@ public interface AdminBoardDao {
 	public void insertBoard(AdminBoard board);
 	
 	/**
-	 * 첨부파일 정보 삽입하기
+	 * 첨부파일 정보 업로드하기
 	 * 
 	 * @param boardFile - 업로드할 첨부파일 정보
 	 */
@@ -53,15 +53,15 @@ public interface AdminBoardDao {
 	public AdminBoardFile selectFileByBoard(AdminBoard viewBoard);
 
 	/**
-	 * 파일 번호를 이용하여 첨부파일 정보를 조회한다
+	 * 파일 번호를 이용하여 첨부파일 정보를 조회하기
 	 * 
-	 * @param boardFile - 조회할 첨부파일 객체
+	 * @param boardFile - 조회할 첨부파일 번호
 	 * @return 조회된 첨부파일 정보
 	 */
 	public AdminBoardFile selectFileByFile(AdminBoardFile boardFile);
 	
 	/**
-	 * 게시글 정보를 수정하기
+	 * 게시글 정보 수정하기
 	 * 
 	 * @param board - 수정할 게시글 정보
 	 */
@@ -74,4 +74,11 @@ public interface AdminBoardDao {
 	 */
 	public void deleteFile(AdminBoard board);
 
+	/**
+	 * 게시글 삭제
+	 * 
+	 * @param board - 삭제할 게시글 번호
+	 */
+	public void delete(AdminBoard board);
+	
 }

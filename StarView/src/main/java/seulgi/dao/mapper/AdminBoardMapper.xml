@@ -26,12 +26,12 @@
 	</select>
 	
 	<insert id="insertBoard" parameterType="seulgi.dto.AdminBoard">
-		<!-- <selectKey order="BEFORE" resultType="int" keyProperty="galleryNo ">
+		<selectKey order="BEFORE" resultType="int" keyProperty="galleryNo" keyColumn="galleryNo">
 			SELECT gallery_seq.nextval FROM dual
-		</selectKey> -->
+		</selectKey>
 	
 		INSERT INTO gallery (gallery_no, gallery_title, gallery_content, gallery_loc, gallery_tag)
-		VALUES (gallery_seq.nextval, #{galleryTitle }, #{galleryContent }, #{galleryLoc }, #{galleryTag })
+		VALUES (#{galleryNo}, #{galleryTitle }, #{galleryContent }, #{galleryLoc }, #{galleryTag })
 	</insert>
 	
 	<insert id="insertFile" parameterType="seulgi.dto.AdminBoardFile">
@@ -61,5 +61,9 @@
 		WHERE gallery_no = #{galleryNo }	
 	</delete>
 	
+	<delete id="delete" parameterType="seulgi.dto.AdminBoard">
+		DELETE gallery
+		WHERE gallery_no = #{galleryNo }
+	</delete>
 	
 </mapper>
