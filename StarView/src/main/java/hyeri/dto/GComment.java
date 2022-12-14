@@ -8,23 +8,25 @@ public class GComment {
 	private String cmContent;
 	private Date cmDate;
 	private String uId;
+	private String uNick;
 	private int galleryNo;
 	
 	public GComment() {}
 
-	public GComment(int cmNo, String cmContent, Date cmDate, String userId, int galleryNo) {
+	public GComment(int cmNo, String cmContent, Date cmDate, String uId, String uNick, int galleryNo) {
 		super();
 		this.cmNo = cmNo;
 		this.cmContent = cmContent;
 		this.cmDate = cmDate;
-		this.uId = userId;
+		this.uId = uId;
+		this.uNick = uNick;
 		this.galleryNo = galleryNo;
 	}
 
 	@Override
 	public String toString() {
-		return "GComment [cmNo=" + cmNo + ", cmContent=" + cmContent + ", cmDate=" + cmDate + ", userId=" + uId
-				+ ", galleryNo=" + galleryNo + "]";
+		return "GComment [cmNo=" + cmNo + ", cmContent=" + cmContent + ", cmDate=" + cmDate + ", uId=" + uId
+				+ ", uNick=" + uNick + ", galleryNo=" + galleryNo + "]";
 	}
 
 	public int getCmNo() {
@@ -51,12 +53,20 @@ public class GComment {
 		this.cmDate = cmDate;
 	}
 
-	public String getUserId() {
+	public String getuId() {
 		return uId;
 	}
 
-	public void setUserId(String userId) {
-		this.uId = userId;
+	public void setuId(String uId) {
+		this.uId = uId;
+	}
+
+	public String getuNick() {
+		return uNick;
+	}
+
+	public void setuNick(String uNick) {
+		this.uNick = uNick;
 	}
 
 	public int getGalleryNo() {
@@ -66,5 +76,5 @@ public class GComment {
 	public void setGalleryNo(int galleryNo) {
 		this.galleryNo = galleryNo;
 	}
-	
+
 }

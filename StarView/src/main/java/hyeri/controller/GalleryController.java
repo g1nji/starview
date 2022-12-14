@@ -19,9 +19,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 
+import hyeri.dto.GComment;
 import hyeri.dto.GTag;
 import hyeri.dto.Gallery;
 import hyeri.dto.GalleryFile;
+import hyeri.service.face.CommentService;
 import hyeri.service.face.GalleryService;
 import hyeri.util.Paging;
 
@@ -32,6 +34,7 @@ public class GalleryController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired GalleryService galleryService;
+	@Autowired CommentService commentService;
 	
 	@RequestMapping("/list")
 	public void list(@RequestParam(defaultValue = "0") int curPage, Model model,
@@ -48,7 +51,7 @@ public class GalleryController {
 	}
 	
 	@RequestMapping("/view")
-	public void view(Gallery viewGallery, Model model) {
+	public void view(Gallery viewGallery, int galleryNo, Model model) {
 		logger.info("/view");
 		
 		//게시글 조회
@@ -63,6 +66,13 @@ public class GalleryController {
 		logger.info("{}", galleryFile);
 		model.addAttribute("galleryFile", galleryFile);
 		
+		//덧글 조회
+		List<GComment> list = null;
+		list = commentService.view(galleryNo);
+		
+		//모델값 전달
+		model.addAttribute("comment", list);
+//		
 	}
 	
 	@GetMapping("/write")

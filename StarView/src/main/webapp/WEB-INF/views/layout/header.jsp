@@ -46,6 +46,10 @@ a:hover {
 	text-decoration: underline;
 }
 
+.container {
+	padding: 40px 0;
+}
+
 /* ----------------- */
 
 #logo {

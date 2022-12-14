@@ -46,9 +46,16 @@ public class UsersController {
 			logger.info("로그인 성공");
 			
 			//세션 저장
-			session.setAttribute("login", loginResult);
+			session.setAttribute("login", loginResult);	//true
+			
+			//유저 닉네임 조회
+			String uNick = usersService.finduNick(users);
+			
+			logger.info("{}", uNick);
+			
 			session.setAttribute("uId", users.getuId());
-			session.setAttribute("uNick", users.getuNick());
+//			session.setAttribute("uNick", users.getuNick());
+			session.setAttribute("uNick", uNick);
 			session.setAttribute("uName", users.getuName());
 			
 			//쿠키 저장

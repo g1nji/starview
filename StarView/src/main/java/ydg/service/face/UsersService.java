@@ -57,6 +57,14 @@ public interface UsersService {
 	 */
 	public List<Users> findId(String find, String phoneName, String mailName, Users users);
 
+	/**
+	 * 로그인 시 유저 닉네임 가져오기
+	 * 
+	 * @param users
+	 * @return
+	 */
+	public String finduNick(Users users);
+
 
 
 }
