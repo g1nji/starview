@@ -75,7 +75,6 @@ $(document).ready(function() {
 <style type="text/css">
 .wrap {
 	margin: 0 auto;
-	padding: 60px 0;
 }
 
 #galleryTitle {
@@ -94,6 +93,7 @@ $(document).ready(function() {
 <form action="/gallery/write" method="post" enctype="multipart/form-data">
 
 <input type="text" name="uId" value="<%= session.getAttribute("uId") %>" style="display:none;">
+<input type="text" name="uNick" value="<%= session.getAttribute("uNick") %>" style="display:none;">
 
 <!-- 제목 -->
 <input type="text" style="width: 100%;" id="galleryTitle" name="galleryTitle" class="gallerytitle" placeholder="제목을 입력하세요">
@@ -129,8 +129,10 @@ window.onload = function(){
 </script>
 
 <button type="button" id="searchBtn">검색</button>
+
 <div id="map"></div>
-<!-- kakao API -->
+
+	<!-- kakao API -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c7734a4a4f9eea96e74458a7dba40614&libraries=services"></script>
 	<script>
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -139,9 +141,8 @@ window.onload = function(){
         level: 3 // 지도의 확대 레벨
     };  
 
-
-$('#searchBtn').click(function(){
 	// 버튼을 click했을때
+	$('#searchBtn').click(function(){
 	
 	$('#map').css({"width":"500px","height":"300px"})
 	
@@ -150,6 +151,8 @@ $('#searchBtn').click(function(){
 	
 	// 주소-좌표 변환 객체를 생성합니다
 	var geocoder = new kakao.maps.services.Geocoder();
+	
+	console.log($('#address_kakao').val());
 	
 	// 주소로 좌표를 검색합니다
 	geocoder.addressSearch($('#address_kakao').val(), function(result, status) {
