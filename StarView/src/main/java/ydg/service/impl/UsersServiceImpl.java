@@ -186,7 +186,10 @@ public class UsersServiceImpl implements UsersService {
 			return null;
 		}
 	}
-	
-	
+
+	@Override
+	public String finduNick(Users users) {
+		return usersDao.finduNick(users);
+	}
 	
 }

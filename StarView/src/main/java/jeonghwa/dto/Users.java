@@ -1,7 +1,5 @@
 package jeonghwa.dto;
 
-import java.util.Date;
-
 public class Users {
 
 	private String uId;
@@ -9,7 +7,7 @@ public class Users {
 	private String uPw;
 	private String uName;
 	private String uGender;
-	private Date ubirth;
+	private String uBirth;
 	private String uEmail;
 	private String uPhone;
 	private String uAddress;
@@ -21,15 +19,15 @@ public class Users {
 	}
 
 
-	public Users(String uId, int uNo, String uPw, String uName, String uGender, Date ubirth, String uEmail, String uPhone,
-			String uAddress, String uNick) {
+	public Users(String uId, int uNo, String uPw, String uName, String uGender, String uBirth, String uEmail,
+			String uPhone, String uAddress, String uNick) {
 		super();
 		this.uId = uId;
 		this.uNo = uNo;
 		this.uPw = uPw;
 		this.uName = uName;
 		this.uGender = uGender;
-		this.ubirth = ubirth;
+		this.uBirth = uBirth;
 		this.uEmail = uEmail;
 		this.uPhone = uPhone;
 		this.uAddress = uAddress;
@@ -40,7 +38,7 @@ public class Users {
 	@Override
 	public String toString() {
 		return "Users [uId=" + uId + ", uNo=" + uNo + ", uPw=" + uPw + ", uName=" + uName + ", uGender=" + uGender
-				+ ", ubirth=" + ubirth + ", uEmail=" + uEmail + ", uPhone=" + uPhone + ", uAddress=" + uAddress
+				+ ", uBirth=" + uBirth + ", uEmail=" + uEmail + ", uPhone=" + uPhone + ", uAddress=" + uAddress
 				+ ", uNick=" + uNick + "]";
 	}
 
@@ -95,13 +93,13 @@ public class Users {
 	}
 
 
-	public Date getUbirth() {
-		return ubirth;
+	public String getuBirth() {
+		return uBirth;
 	}
 
 
-	public void setUbirth(Date ubirth) {
-		this.ubirth = ubirth;
+	public void setuBirth(String uBirth) {
+		this.uBirth = uBirth;
 	}
 
 
@@ -143,6 +141,7 @@ public class Users {
 	public void setuNick(String uNick) {
 		this.uNick = uNick;
 	}
+
 	
 	
 	

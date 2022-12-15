@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="hyeri.dao.face.CommentDao">
+
+	<insert id="insertComment" parameterType="hyeri.dto.GComment">
+		<selectKey order="BEFORE" resultType="int" keyProperty="cmNo">
+			SELECT g_comment_seq.nextval FROM dual	
+		</selectKey>
+		INSERT INTO g_comment (cm_no, cm_content, cm_date, gallery_no, u_id, u_nick)
+		VALUES ( #{cmNo }, #{cmContent }, sysdate, #{galleryNo }, #{uId }, #{uNick } )
+	</insert>
+	
+	<select id="selectGalleryNo" resultType="hyeri.dto.GComment" parameterType="int">
+		SELECT cm_no, cm_content, cm_date, gallery_no, u_id, u_nick
+		FROM g_comment
+		WHERE gallery_no = #{galleryNo }
+	</select>
+	
+
+</mapper>

@@ -78,11 +78,6 @@ public class GalleryServiceImpl implements GalleryService {
 		
 		//첨부파일 처리
 		
-		//빈 파일일 경우
-		if( file.getSize() <= 0 ) {
-			return;
-		}
-		
 		//파일이 저장될 경로
 		String storedPath = context.getRealPath("upload");
 		File storedFolder = new File( storedPath );

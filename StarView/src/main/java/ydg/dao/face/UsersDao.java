@@ -54,6 +54,13 @@ public interface UsersDao {
 	 */
 	public List<Users> selectByEmail(Users users);
 
+	/**
+	 * 
+	 * @param users
+	 * @return
+	 */
+	public String finduNick(Users users);
+
 
 
 

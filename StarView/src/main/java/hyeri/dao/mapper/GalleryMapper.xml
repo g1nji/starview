@@ -34,14 +34,11 @@
 	
 	<select id="selectGallery" resultType="hyeri.dto.Gallery" parameterType="hyeri.dto.Gallery">
 		SELECT
-            g.gallery_no, g.gallery_title, g.gallery_content,
-            g.gallery_date, g.gallery_like, g.gallery_loc,
-            g.gallery_hit, g.u_id AS guid, u.u_id AS uuid, u.u_nick
+           g.gallery_no, g.gallery_title, g.gallery_content, g.gallery_loc, g.u_id, u.u_nick
         FROM gallery g
         INNER JOIN users u
         ON g.u_id = u.u_id
 		WHERE gallery_no = #{galleryNo}
-        ORDER BY g.gallery_no DESC
 	</select>
 
 	<insert id="uploadPhoto" parameterType="hyeri.dto.Gallery">
@@ -49,8 +46,8 @@
 			SELECT gallery_seq.nextval FROM dual
 		</selectKey>
 		INSERT INTO gallery ( 
-			gallery_no, gallery_title, gallery_content, gallery_loc, u_id)
-		VALUES ( #{galleryNo}, #{galleryTitle }, #{galleryContent }, #{galleryLoc }, #{uId })
+			gallery_no, gallery_title, gallery_content, gallery_loc, u_id, u_nick)
+		VALUES ( #{galleryNo}, #{galleryTitle }, #{galleryContent }, #{galleryLoc }, #{uId }, #{uNick } )
 	</insert>
 	
 	<insert id="insertPhoto" parameterType="hyeri.dto.GalleryFile">
