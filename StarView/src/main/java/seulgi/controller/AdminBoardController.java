@@ -151,4 +151,89 @@ public class AdminBoardController {
 		return "redirect:/admin/gallery/list";
 	}
 	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	//2. 상품 리뷰
+	//게시글 리스트
+	@RequestMapping(value="/goods/list")
+	public void getGoodsReviewList(Model model, @RequestParam(defaultValue = "0") int curPage) {
+		logger.info("/list 주소 연결");
+		
+		//페이징 추가
+		Paging paging = adminBoardService.getPaging2(curPage);
+		logger.info("페이징 정보: {}", paging);
+		model.addAttribute("paging", paging);
+		
+		//게시글 리스트
+		List<AdminBoard> boardList = adminBoardService.list2(paging);
+		
+		//for (AdminBoard b : boardList)
+			//logger.info("{}", b);
+		
+		model.addAttribute("boardList", boardList);
+	}
+	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	//3. 명소 후기
+	//게시글 리스트
+	@RequestMapping(value="/place/list")
+	public void getPlaceReviewList(Model model, @RequestParam(defaultValue = "0") int curPage) {
+		logger.info("/list 주소 연결");
+		
+		//페이징 추가
+		Paging paging = adminBoardService.getPaging3(curPage);
+		logger.info("페이징 정보: {}", paging);
+		model.addAttribute("paging", paging);
+		
+		//게시글 리스트
+		List<AdminBoard> boardList = adminBoardService.list3(paging);
+		
+		//for (AdminBoard b : boardList)
+		//logger.info("{}", b);
+		
+		model.addAttribute("boardList", boardList);
+	}
+	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	//4. 공지사항
+	//전체 공지사항
+	//게시글 리스트
+	@RequestMapping(value="/board/list")
+	public void getBoardList(Model model, @RequestParam(defaultValue = "0") int curPage) {
+	//public void getBoardList(Model model) {
+		logger.info("/list 주소 연결");
+		
+		//페이징 추가
+		Paging paging = adminBoardService.getPagingAll(curPage);
+		logger.info("페이징 정보: {}", paging);
+		model.addAttribute("paging", paging);
+		
+		//게시글 리스트
+		List<AdminBoard> boardList = adminBoardService.listAll(paging);
+		
+		//for (AdminBoard b : boardList)
+		//logger.info("{}", b);
+		
+		model.addAttribute("boardList", boardList);
+	}
+	
+	//게시글 업로드 페이지(공지사항)
+	@RequestMapping(value="/board/insert", method = RequestMethod.GET)
+	public void insertBoard() {
+		logger.info("/insert 주소 연결 - [GET]");
+	}
+	
+	//게시글 업로드
+	@RequestMapping(value="/board/insert", method = RequestMethod.POST)
+	public String insertBoardProc(AdminBoard board, MultipartFile file) {
+		logger.info("/insert 주소 연결 - [POST]");
+		logger.info("게시글 정보: {}", board);
+		
+		//게시글 처리
+		adminBoardService.upload(board);
+		
+		return "redirect:/admin/board/list";
+	}
 }

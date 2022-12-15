@@ -19,7 +19,7 @@ td:nth-child(2) {
 }
 </style>
 
-<h1>갤러리 게시글 리스트</h1>
+<h1>상품 리뷰 게시글 리스트</h1>
 <hr>
 
 <select id="category" name="category" required onchange="window.open(value,'_self')">
@@ -34,32 +34,24 @@ td:nth-child(2) {
 <thead>
 	<tr>
 		<th style="width: 10%;"><input type="checkbox"> 전체선택</th>
-		<th style="width: 5%;">번호</th>
+		<th style="width: 10%;">번호</th>
 		<th style="width: 10%;">작성자</th>
 		<th style="width: 10%;">제목</th>
-		<th style="width: 10%;">내용</th>
-		<th style="width: 10%;">위치</th>
-		<th style="width: 10%;">태그</th>
-		<th style="width: 10%;">등록일</th>
-		<th style="width: 5%;">조회수</th>
-		<th style="width: 5%;">추천수</th>
-		<th style="width: 10%;">사진번호</th>
+		<th style="width: 20%;">내용</th>
+		<th style="width: 20%;">등록일</th>
+		<th style="width: 10%;">상품번호</th>
 	</tr>
 </thead>	
 <tbody>
 <c:forEach items="${boardList }" var="b">
 	<tr>
 		<td><input type="checkbox"></td>
-		<td>${b.galleryNo }</td>
+		<td>${b.rId}</td>
 		<td>${b.uId }</td>
-		<td><a href="./view?galleryNo=${b.galleryNo }">${b.galleryTitle }</a></td>
-		<td>${b.galleryContent }</td>
-		<td>${b.galleryLoc }</td>
-		<td>${b.galleryTag }</td>
-		<td><fmt:formatDate value="${b.galleryDate }" pattern="yy-MM-dd HH:mm:ss"/></td>
-		<td>${b.galleryHit }</td>
-		<td>${b.galleryLike }</td>
-		<td>${b.photoNo }</td>
+		<td><a href="./view?rId=${b.rId }">${b.rTitle }</a></td>
+		<td>${b.rContent }</td>
+		<td><fmt:formatDate value="${b.regDate }" pattern="yy-MM-dd HH:mm:ss"/></td>
+		<td>${b.gId }</td>
 	</tr>
 </c:forEach>
 </tbody>

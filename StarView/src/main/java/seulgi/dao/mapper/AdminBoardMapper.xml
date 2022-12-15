@@ -6,7 +6,23 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="seulgi.dao.face.AdminBoardDao">
-
+	
+	<select id="selectAllBoard" resultType="seulgi.dto.AdminBoard">
+		SELECT * FROM (
+		SELECT rownum rnum, A.* FROM (SELECT n.notice_code, n.notice_title, n.notice_content, g.gallery_title, g.gallery_content, r.r_title, r.r_content, p.sreview_content
+		FROM admin_notice n
+			LEFT JOIN gallery g
+				ON n.notice_content = g.gallery_content
+			LEFT JOIN review r
+				ON n.notice_content = r.r_content
+			LEFT JOIN place_review p
+				ON n.notice_content = p.sreview_content
+			ORDER BY n.notice_code DESC
+		) A
+		) admin_notice
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
+	
 	<select id="selectAll" resultType="seulgi.dto.AdminBoard">
 		SELECT * FROM (
 			SELECT rownum rnum, G.* FROM (
@@ -15,9 +31,39 @@
 		) gallery
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
 	</select>
+	
+	<select id="selectAll2" resultType="seulgi.dto.AdminBoard">
+		SELECT * FROM (
+			SELECT rownum rnum, R.* FROM (
+				SELECT * FROM review
+			) R
+		) review
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
+	
+	<select id="selectAll3" resultType="seulgi.dto.AdminBoard">
+		SELECT * FROM (
+			SELECT rownum rnum, P.* FROM (
+				SELECT * FROM place_review
+			) P
+		) place_review
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
+
+	<select id="selectCntAllBoard" resultType="int">
+		select count(*) from admin_notice
+	</select>
 
 	<select id="selectCntAll" resultType="int">
-		SELECT count(*) FROM gallery
+		select count(*) from gallery
+	</select>
+	
+	<select id="selectCntAll2" resultType="int">
+		SELECT count(*) FROM review
+	</select>
+	
+	<select id="selectCntAll3" resultType="int">
+		SELECT count(*) FROM place_review
 	</select>
 	
 	<select id="selectBoard" resultType="seulgi.dto.AdminBoard" parameterType="seulgi.dto.AdminBoard">
@@ -32,6 +78,26 @@
 	
 		INSERT INTO gallery (gallery_no, gallery_title, gallery_content, gallery_loc, gallery_tag)
 		VALUES (#{galleryNo}, #{galleryTitle }, #{galleryContent }, #{galleryLoc }, #{galleryTag })
+	</insert>
+	
+	<insert id="insertAllBoard" parameterType="seulgi.dto.AdminBoard">
+		<selectKey order="BEFORE" resultType="int" keyProperty="noticeCode">
+			SELECT admin_notice_seq.nextval FROM dual
+		</selectKey>
+	
+		<!-- INSERT INTO admin_notice (notice_code, notice_title, notice_content)
+		VALUES (#{noticeCode}, #{noticeTitle }, #{noticeContent }) -->
+		
+		INSERT ALL
+		INTO admin_notice (notice_code, notice_title, notice_content)
+			VALUES (#{noticeCode }, #{noticeTitle }, #{noticeContent })
+		INTO gallery (gallery_no, gallery_title, gallery_content)
+			VALUES (#{noticeCode }, #{noticeTitle }, #{noticeContent })
+		INTO review (r_id, r_title, r_content)
+			VALUES (#{noticeCode }, #{noticeTitle }, #{noticeContent })
+    	INTO place_review (sreview_no, sreview_content)
+    		VALUES (#{noticeCode }, #{noticeContent })
+		SELECT * FROM dual
 	</insert>
 	
 	<insert id="insertFile" parameterType="seulgi.dto.AdminBoardFile">

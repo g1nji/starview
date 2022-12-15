@@ -45,6 +45,13 @@ public interface AdminBoardService {
 	 * @param file - 첨부파일 정보 객체
 	 */
 	public void upload(AdminBoard board, MultipartFile file);
+
+	/**
+	 * 게시글 업로드하기
+	 * 
+	 * @param board - 업로드할 게시글 정보 객체
+	 */
+	public void upload(AdminBoard board);
 	
 	/**
 	 * 게시글 번호를 이용하여 업로드된 사진 정보 조회하기
@@ -83,5 +90,16 @@ public interface AdminBoardService {
 	 * @param board - 삭제할 게시글 정보 객체
 	 */
 	public void delete(AdminBoard board);
+
+	public Paging getPaging2(int curPage);
+	public List<AdminBoard> list2(Paging paging);
+
+	public Paging getPaging3(int curPage);
+	public List<AdminBoard> list3(Paging paging);
+
+	public List<AdminBoard> list();
 	
+	public List<AdminBoard> listAll(Paging paging);
+	public Paging getPagingAll(int curPage);
+
 }

@@ -16,20 +16,15 @@ $(document).ready(function() {
 
 </script>
 
-<h1>게시글 업로드</h1>
+<h1>공지사항 업로드</h1>
 <hr>
 
 <!-- <form action="./insert" method="post"> -->
 <form action="./insert" method="post" enctype="multipart/form-data">
 
 <!-- <div class="form-group">
-	<label for="galleryNo">번호</label>
-	<input type="text" id="galleryNo" name="galleryNo" class="form-control">
-</div> -->
-
-<!-- <div class="form-group">
-	<label for="cateCode">카테고리</label>
-	<input type="text" id="cateCode" name="cateCode" class="form-control">
+	<label for="noticeCode">번호</label>
+	<input type="text" id="noticeCode" name="noticeCode" class="form-control">
 </div> -->
 
 <!-- 아이디 불러오도록 수정 -->
@@ -39,27 +34,12 @@ $(document).ready(function() {
 </div> -->
 
 <div class="form-group">
-	<label for="galleryTitle">제목</label>
-	<input type="text" id="galleryTitle" name="galleryTitle" class="form-control">
+	<label for="noticeTitle">제목</label>
+	<input type="text" id="noticeTitle" name="noticeTitle" class="form-control">
 </div>
 <div class="form-group">
-	<label for="galleryContent">내용</label>
-	<textarea rows="10" style="width: 100%;" id="galleryContent" name="galleryContent"></textarea>
-</div>
-
-<div class="form-group">
-	<label for="galleryLoc">위치</label>
-	<input type="text" id="galleryLoc" name="galleryLoc" class="form-control">
-</div>
-
-<div class="form-group">
-	<label for="galleryTag">태그</label>
-	<input type="text" id="galleryTag" name="galleryTag" class="form-control">
-</div>
-
-<div class="form-group">
-	<label for="file">게시글 사진 첨부</label>
-	 <input type="file" id="file" name="file">
+	<label for="noticeContent">내용</label>
+	<textarea rows="10" style="width: 100%;" id="noticeContent" name="noticeContent"></textarea>
 </div>
 
 <div class="text-center">
@@ -67,6 +47,5 @@ $(document).ready(function() {
 	<input type="reset" id="cancel" class="btn btn-danger" value="작성 취소">
 </div>
 </form>
-
 
 <c:import url="../layout/footer.jsp" />

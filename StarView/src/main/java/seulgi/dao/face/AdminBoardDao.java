@@ -36,7 +36,7 @@ public interface AdminBoardDao {
 	 * @param board - 업로드할 게시글 정보
 	 */
 	public void insertBoard(AdminBoard board);
-	
+
 	/**
 	 * 첨부파일 정보 업로드하기
 	 * 
@@ -80,5 +80,17 @@ public interface AdminBoardDao {
 	 * @param board - 삭제할 게시글 번호
 	 */
 	public void delete(AdminBoard board);
+
+	public int selectCntAll2();
+	public List<AdminBoard> selectAll2(Paging paging);
+
+	public int selectCntAll3();
+	public List<AdminBoard> selectAll3(Paging paging);
+
+	public void insertAllBoard(AdminBoard board);
+	public List<AdminBoard> selectAllBoard();
+	
+	public int selectCntAllBoard();
+	public List<AdminBoard> selectAllBoard(Paging paging);
 	
 }
