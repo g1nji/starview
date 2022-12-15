@@ -238,14 +238,14 @@ ul.mainnav > li:hover > ul {
 		<!-- 비로그인 상태 -->
 		<c:if test="${empty login }">
 			<li style="padding-top: 53px;"><a href="/users/login">로그인/회원가입</a></li>
-			<li><a href=""><img src="/resources/image/shopping-cart.png" style="height:25px;"></a></li>
+			<li><a href="/goods/cart"><img src="/resources/image/shopping-cart.png" style="height:25px;"></a></li>
 		</c:if>
 		
 		<!-- 로그인 상태 -->
 		<c:if test="${not empty login }">
 			<li style="padding-top: 53px;"><a href="/users/logout">로그아웃</a></li>
 			<li><a href="/mypage/mypage"><img src="/resources/image/user.png" style="height:25px;"></a></li>
-			<li><a href=""><img src="/resources/image/shopping-cart.png" style="height:25px;"></a></li>
+			<li><a href="/goods/cart"><img src="/resources/image/shopping-cart.png" style="height:25px;"></a></li>
 		</c:if>
 
 	</ul>
