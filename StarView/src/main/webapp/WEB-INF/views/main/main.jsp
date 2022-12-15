@@ -77,7 +77,6 @@ var hour = function() {
 </script>
 
 <style type="text/css">
-
 /* 웹폰트(NotoSans) */
 @font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 100;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.otf) format('opentype');}
 @font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 300;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.otf) format('opentype');}
@@ -88,95 +87,87 @@ var hour = function() {
 body, h1, h2, h3, h4, h5, h6, input, textarea, select {
 	font-family: 'Noto Sans KR', sans-serif;
 }
-
 /* ----------------- */
-
 body {
 	margin: 0;
 }
-
 a {
 	color: black;
 }
-
 a:hover {
 	text-decoration: underline;
 }
-
 /* ----------------- */
-
 #logo {
 	height: 100px;
 	padding: 0;
+	margin-top: 0;
 	margin-right: 20px;
 }
-
 ul.subnav {
 	padding: 0 100px 0 0;
 }
-
 ul.subnav > li {
 	float: right;
 	list-style-type: none;
 }
-
 #menu {
 	height: 100px;
 }
-
 ul.mainnav > li {
 	float: left;
 	position: relative;
 	width: 150px;
 	height: 30px;
 	text-align: center;
-	padding: 50px 10px 5px 10px;
+	margin-top: 50px;
+	padding: 0 10px 40px 10px;
 	list-style-type: none;
 }
-
 ul.subnav > li {
 	padding: 50px 5px 5px 5px;
 }
-
 ul.mainnav > li > a {
 	text-decoration: none;
-    font-size: 17px;
-    font-weight: 400;
+    font-size: 19px;
+    font-weight: 500;
 }
-
 ul.mainnav > li > ul {
-	position: absolute;
 	display: none;
-	padding: 10px 0px;
-	width: 150px;
-	border-radius: 10px;
+	width: 480px;
+	height: 45px;
+	margin-top: 6px;
+	margin-left: -10px;
+	padding: 10px 12px;
+	border-radius: 30px;
 }
-
 ul.mainnav > li > ul > li {
 	list-style-type: none;
 	text-align: left;
+	float: left;
 	padding: 0 0 10px 20px;
 }
-
 ul.mainnav > li > ul > li > a {
 	text-decoration: none;
+	font-size: 16px;
+	font-weight: 400;
 }
 
+ul.mainnav > li > ul > li > a:hover {
+	font-weight: 500;
+}
 ul.mainnav > li:hover > ul {
 	display: block;
 }
-
 #footer {
 	padding: 30px 0;
 	background-color: lightgray;
 	font-size: 12px;
 	text-align: center;
 }
-
 .wrap {
 	margin: 0 auto;
 }
-
 .monthly {
 	width: 55%;
 	height: 200px;
@@ -184,7 +175,6 @@ ul.mainnav > li:hover > ul {
 	border: 1px solid black;
 	display: inline-block;
 }
-
 .weather {
 	width: 20%;
 	height: 200px;
@@ -193,7 +183,7 @@ ul.mainnav > li:hover > ul {
 	display: inline-block;
 }
 
-.moon {
+.etc {
 	width: 20%;
 	height: 200px;
 	border: 1px solid black;
@@ -202,11 +192,21 @@ ul.mainnav > li:hover > ul {
 
 #day {
 	width:80%;
-	height: 450px;
+	height: 500px;
 	margin: 0 auto;
 	background-size: 100%;
 	border-radius: 100px;
 	background-size : cover;
+}
+
+.moon {
+	width: 120px;
+	height: 120px;
+	margin: 70px 230px;
+	float: right;
+	border-radius: 120px;
+	background-color: yellow;
+	text-align: center;
 }
 
 </style>
@@ -223,10 +223,10 @@ ul.mainnav > li:hover > ul {
 			<a href="">별 정보 확인</a>
 			<ul>
 				<li><a href="/sunset/time">일몰시간</a></li>
-				<li><a href="">날씨</a></li>
-				<li><a href="">달 모양</a></li>
+				<li><a href="/data/weather3">날씨</a></li>
+				<li><a href="/data/moonToday">달 모양</a></li>
 				<li><a href="">별 사진 명소</a></li>
-				<li><a href="">이달의 천문현상</a></li>
+				<li><a href="/data/astroMonth">이달의 천문현상</a></li>
 			</ul>
 		</li>
 		<li><a href="/gallery/list">갤러리</a></li>
@@ -247,38 +247,42 @@ ul.mainnav > li:hover > ul {
 			<li><a href="/mypage/mypage"><img src="/resources/image/user.png" style="height:25px;"></a></li>
 			<li><a href=""><img src="/resources/image/shopping-cart.png" style="height:25px;"></a></li>
 		</c:if>
-		
+
 	</ul>
 </div>
 
 </header>
 
-<div id="day"></div>
+<div id="day">
+	<div class="moon">
+		<br><br>오늘의<br>달 추가
+	</div>
+</div>
 
 <div class="container">
 
 <div class="wrap">
 
-<div class="monthly">
-이달의 천문현상
-	<div>
-	천문현상 글
+	<div class="monthly">
+	이달의 천문현상
+		<div>
+		천문현상 글
+		</div>
 	</div>
-</div>
-
-<div class="weather">
-현재 날씨
-	<div>
-	현재 날씨 상태
+	
+	<div class="weather">
+	현재 날씨
+		<div>
+		현재 날씨 상태
+		</div>
 	</div>
-</div>
-
-<div class="moon">
-오늘의 달 모양
-	<div>
+	
+	<div class="etc">
 	오늘의 달 모양
+		<div>
+		오늘의 달 모양
+		</div>
 	</div>
-</div>
 
 </div>
 <c:import url="../layout/footer.jsp" />

@@ -6,7 +6,7 @@
 <c:import url="../layout/header.jsp" />
 
 <h2>${viewGallery.galleryTitle }</h2>
-작성자
+${viewGallery.uNick }
 
 <!-- 게시글 작성자가 아닐 때 -->
 좋아요
@@ -59,7 +59,7 @@ ${viewGallery.galleryContent }
 			<input type="hidden" name="uId" value="${uId }">
 			<input type="hidden" name="uNick" value="${uNick }">
 			<textarea rows="5" cols="50" name="cmContent"></textarea>
-		</p>	
+		</p>
 		
 		<p>
 			<button type="submit">댓글 작성</button>
