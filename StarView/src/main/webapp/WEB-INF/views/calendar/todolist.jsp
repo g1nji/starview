@@ -165,13 +165,22 @@ $(document).ready(function() {
 	        //테이블에 td 태그 클릭 시 기존 selectday 클래스를 지우고 클릭한 곳에 selectDay클래스 적용
 	        $(".calendarTable").on("click", "td", function () {
 	            $(".calendarTable .selectDay").removeClass("selectDay");
-	            $(this).removeClass("selectDay").addClass("selectDay");
+	            $(this).removeClass("selectDay").addClass("selectDay").attr("name","sDate");
 	        });
+	        
+	        //토글 클래스
+// 	        $(".claendarTable").on("click", "td", function() {
+// 	        	$(this).toggleClass("selectDay");
+// 	        });
 	        
 	        //투두리스트 폼 만들기
 	    	$(".calendarTable").on("click", "td", function() {
-	    		$("#todoform").css("display", "block");
-// 	    		$("#todolist").attr();
+	    		
+	    		var day = $('td').attr('class');
+	    		
+	    		$("#todolist").css("display", "block");
+	    		$("#selectDay").css("display", "block");
+	    		$("#selectDay").text(day);
 	    	})
 	    	
 	    }
@@ -193,13 +202,15 @@ $(document).ready(function() {
 	<div id="calendarForm"></div>
 	
 <!-- todolist 폼 -->
-	<div id="todolist">
+	<div id="todolist" style="display:none;">
 	
-	<form id="todoform" action="POST" style="display:none;">
-	<label>
+	<div id="selectDay" style="display:none;">
+		
+	</div>
+	<form id="todoform" method="POST">
+	
 	Todo List
-		<input type="text">
-	</label>
+	<label><input type="text" name="todoList" id="inputbox"></label>
 	<button>작성</button>
 	</form>	
 	

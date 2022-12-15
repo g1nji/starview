@@ -2,37 +2,37 @@ package jiwon.dto;
 
 import java.util.Date;
 
-public class Scheduler {
+public class Calendar {
 
-	private int sDate;
+	private int sNo;
 	private Date recomDate;
 	private String uId;
-	private int sMonth;
+	private int sDate;
 	private String todoList;
 	
-	public Scheduler() {	}
+	public Calendar() {	}
 
-	public Scheduler(int sDate, Date recomDate, String uId, int sMonth, String todoList) {
+	public Calendar(int sNo, Date recomDate, String uId, int sDate, String todoList) {
 		super();
-		this.sDate = sDate;
+		this.sNo = sNo;
 		this.recomDate = recomDate;
 		this.uId = uId;
-		this.sMonth = sMonth;
+		this.sDate = sDate;
 		this.todoList = todoList;
 	}
 
 	@Override
 	public String toString() {
-		return "Scheduler [sDate=" + sDate + ", recomDate=" + recomDate + ", uId=" + uId + ", sMonth=" + sMonth
-				+ ", todoList=" + todoList + "]";
+		return "Calendar [sNo=" + sNo + ", recomDate=" + recomDate + ", uId=" + uId + ", sDate=" + sDate + ", todoList="
+				+ todoList + "]";
 	}
 
-	public int getsDate() {
-		return sDate;
+	public int getsNo() {
+		return sNo;
 	}
 
-	public void setsDate(int sDate) {
-		this.sDate = sDate;
+	public void setsNo(int sNo) {
+		this.sNo = sNo;
 	}
 
 	public Date getRecomDate() {
@@ -51,12 +51,12 @@ public class Scheduler {
 		this.uId = uId;
 	}
 
-	public int getsMonth() {
-		return sMonth;
+	public int getsDate() {
+		return sDate;
 	}
 
-	public void setsMonth(int sMonth) {
-		this.sMonth = sMonth;
+	public void setsDate(int sDate) {
+		this.sDate = sDate;
 	}
 
 	public String getTodoList() {
@@ -66,6 +66,8 @@ public class Scheduler {
 	public void setTodoList(String todoList) {
 		this.todoList = todoList;
 	}
+
+
 	
 	
 }

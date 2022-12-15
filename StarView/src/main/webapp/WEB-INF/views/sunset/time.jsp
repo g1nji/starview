@@ -23,8 +23,8 @@
 
 $(function() {
 	$( "#Date" ).datepicker({
-	    	format:'yyyy-mm-dd',
-	    	autoclose: true,
+// 	    	format:'yyyy-mm-dd',
+	    	autoclose: true
 	    })
 })
 
@@ -79,15 +79,35 @@ $(document).ready(() => {
 					+ "<th>일몰 시간</th>"
 				$table.html( tHead )
 				
+					
 				$rows.each(( i, row )=> {
 					console.log( i, row)
 					
+					var locdate = function() {
+						
+						var year = $(row).find("locdate").text().substr(0,4)
+						var mm = $(row).find("locdate").text().substr(4,2)
+						var dd = $(row).find("locdate").text().substr(6,2)
+						
+						return year + "년&nbsp;" + mm + "월&nbsp;" + dd + "일&nbsp;"
+					};
+					
+					var sunset = function() {
+						
+						var h = $(row).find("sunset").text().substr(0,2)
+						var m = $(row).find("sunset").text().substr(2,2)
+						
+						return "&nbsp;" +h + "시&nbsp;" + m + "분&nbsp;"
+					};
+					
 					$("<tr>")
-					.append( $("<td>").html($(row).find("locdate").text() ) )
+					.append(locdate)
+// 					.append( $("<td>").html($(row).find("locdate").text() ) )
 					.append( $("<td>").html($(row).find("location").text() ) )
 // 					.append( $("<td>").html($(row).find("longitude").text() ) )
 // 					.append( $("<td>").html($(row).find("latitude").text() ) )
-					.append( $("<td>").html($(row).find("sunset").text() ) )
+// 					.append( $("<td>").html($(row).find("sunset").text() ) )
+					.append(sunset)
 				.appendTo( $table )
 					
 				})
