@@ -101,7 +101,7 @@ $(document).ready(function() {
 
 
 <!-- 파일첨부 -->
-<input type="file" id="file" name="file"><br>
+<input multiple type="file" id="file" name="file"><br>
 
 <!-- 내용 -->
 <div id="editor" style="height:400px;"></div>
