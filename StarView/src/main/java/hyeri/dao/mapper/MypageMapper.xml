@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="hyeri.dao.face.MypageDao">
+
+	<select id="selectCntAll" resultType="int">
+		SELECT count(*) FROM gallery
+	</select>
+	
+	<select id="selectList" resultType="hyeri.dto.Gallery" parameterType="String">
+		SELECT gallery_no, gallery_title, gallery_date, gallery_like, gallery_hit
+		FROM gallery
+		WHERE u_id = #{uId }
+	</select>
+
+</mapper>

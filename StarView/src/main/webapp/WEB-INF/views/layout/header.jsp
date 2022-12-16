@@ -18,6 +18,31 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$(".mo").mouseover(function() {
+		$(".mo > a").addClass("yellow")
+	})
+	
+	$(".mo > a").mouseover(function() {
+		$(this).addClass("yellow")
+	})
+	
+	$(".mo > a").mouseleave(function() {
+		$(this).removeClass("yellow")
+	})
+	
+	$("ul.mainnav > li > ul").mouseover(function() {
+		$(".mo > a").addClass("yellow")
+	})
+	
+	$("ul.mainnav > li > ul").mouseleave(function() {
+		$(".mo > a").removeClass("yellow")
+	})
+})
+</script>
+
 <style type="text/css">
 
 /* 웹폰트(NotoSans) */
@@ -33,6 +58,10 @@ body, h1, h2, h3, h4, h5, h6, input, textarea, select {
 
 /* ----------------- */
 
+.yellow {
+	color: #FFB703;
+}
+
 body {
 	margin: 0;
 }
@@ -46,17 +75,23 @@ a:hover {
 	text-decoration: underline;
 }
 
-.container {
-	padding: 40px 0;
+header {
+	background-color: white;
+	margin-bottom: 40px;
+	margin-left: -20px;
+	padding: 1px 0 0 0;
 }
 
 /* ----------------- */
 
 #logo {
-	height: 100px;
-	padding: 0;
-	margin-top: 0;
-	margin-right: 20px;
+	background-color: white;
+    width: 190px;
+    height: 150px;
+    border-radius: 200px;
+    padding: 0;
+    padding-bottom: 63px;
+    margin-top: 0;
 }
 
 ul.subnav {
@@ -178,7 +213,7 @@ ul.mainnav > li:hover > ul {
 <div id="menu">
 	<ul class="mainnav">
 		<li id="logo"><a href="/"><img src="/resources/image/logo.png" style="width:150px; margin-top: 5px;"></a></li>
-		<li>
+		<li class="mo">
 			<a href="">별 정보 확인</a>
 			<ul>
 				<li><a href="/sunset/time">일몰시간</a></li>
@@ -197,7 +232,7 @@ ul.mainnav > li:hover > ul {
 		<!-- 비로그인 상태 -->
 		<c:if test="${empty login }">
 			<li style="padding-top: 53px;"><a href="/users/login">로그인/회원가입</a></li>
-			<li><a href="/goods/cart"><img src="/resources/image/shopping-cart.png" style="height:25px;"></a></li>
+			<li><a href="/goods/cart"><img src="/resources/image/user.png" style="height:25px;"></a></li>
 		</c:if>
 		
 		<!-- 로그인 상태 -->
