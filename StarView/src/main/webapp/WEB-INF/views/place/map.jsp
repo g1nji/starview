@@ -30,7 +30,7 @@
 	
 	//마커 생성하기
 	// 마커 아이콘 대신할 이미지 넣기
-	var imageSrc = '/resources/image/star_marker.png', //마커이미지 경로  
+	var imageSrc = '/resources/starImage/star_marker.png', //마커이미지 경로  
     imageSize = new kakao.maps.Size(50, 50), // 마커이미지 크기
     imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션 마커의 좌표와 일치시킬 이미지 안에서의 좌표
 	
