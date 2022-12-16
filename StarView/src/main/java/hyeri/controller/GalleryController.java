@@ -41,11 +41,11 @@ public class GalleryController {
 			Gallery viewGallery) {
 		
 		Paging paging = galleryService.getPaging(curPage);
-		logger.info("{}", paging);
+//		logger.info("{}", paging);
 		model.addAttribute("paging", paging);
 		
 		List<Gallery> list = galleryService.list(paging);
-		for( Gallery g : list ) logger.info("{}", g);
+//		for( Gallery g : list ) logger.info("{}", g);
 		model.addAttribute("list", list);
 		
 	}
@@ -56,14 +56,14 @@ public class GalleryController {
 		
 		//게시글 조회
 		viewGallery = galleryService.view(viewGallery);
-		logger.info("{}", viewGallery);
+//		logger.info("{}", viewGallery);
 		
 		//모델값 전달
 		model.addAttribute("viewGallery", viewGallery);
 		
 		//첨부파일 모델값 전달
 		GalleryFile galleryFile = galleryService.getAttachFile(viewGallery);
-		logger.info("{}", galleryFile);
+//		logger.info("{}", galleryFile);
 		model.addAttribute("galleryFile", galleryFile);
 		
 		//덧글 조회
@@ -107,7 +107,7 @@ public class GalleryController {
 				String t = jsonArray.get(i).getAsJsonObject().get("value").getAsString();
 				logger.info("t {}", t);
 				
-				tagList.add( new GTag(0, t) );
+				tagList.add( new GTag(0, t, 0) );
 			}
 			
 			logger.info("tagList {}", tagList);
@@ -184,6 +184,11 @@ public class GalleryController {
 		
 			return "redirect:./search_not-found";
 		}
+		
+	}
+	
+	@RequestMapping("/search_list")
+	public void searchList() {
 		
 	}
 

@@ -78,6 +78,11 @@ public class GalleryServiceImpl implements GalleryService {
 		
 		//첨부파일 처리
 		
+		//빈 파일일 경우
+		if( file.getSize() <= 0 ) {
+			return;
+		}
+		
 		//파일이 저장될 경로
 		String storedPath = context.getRealPath("upload");
 		File storedFolder = new File( storedPath );
@@ -119,6 +124,7 @@ public class GalleryServiceImpl implements GalleryService {
 		for( int i=0; i<tagList.size(); i++ ) {
 			String t= tagList.get(i).getTagName();
 			gTag.setTagName(t);
+			gTag.setGalleryNo( gallery.getGalleryNo() );
 		}
 		
 		galleryDao.insertTag(gTag);

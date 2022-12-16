@@ -47,7 +47,7 @@
 		</selectKey>
 		INSERT INTO gallery ( 
 			gallery_no, gallery_title, gallery_content, gallery_loc, u_id, u_nick)
-		VALUES ( #{galleryNo}, #{galleryTitle }, #{galleryContent }, #{galleryLoc }, #{uId }, #{uNick } )
+		VALUES ( #{galleryNo }, #{galleryTitle }, #{galleryContent }, #{galleryLoc }, #{uId }, #{uNick } )
 	</insert>
 	
 	<insert id="insertPhoto" parameterType="hyeri.dto.GalleryFile">
@@ -83,8 +83,8 @@
 	</delete>
 	
 	<insert id="insertTag" parameterType="hyeri.dto.GTag">
-		INSERT INTO g_tag ( tag_no, tag_name )
-		VALUES ( g_tag_seq.nextval, #{tagName } )
+		INSERT INTO g_tag ( tag_no, tag_name, gallery_no )
+		VALUES ( g_tag_seq.nextval, #{tagName }, #{galleryNo } )
 	</insert>
 
 	<select id="selectByKeyword" resultType="hyeri.dto.Gallery" parameterType="String">
