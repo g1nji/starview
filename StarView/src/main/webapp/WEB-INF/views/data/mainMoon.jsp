@@ -8,24 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-body {
-  margin: 0;
-/*   background: linear-gradient(45deg, #49a09d, #5f2c82); */
-  font-weight: 100;
-}
 
-
-.moonContent{
-margin:0 auto;
-text-align:center;
-font-size: 20px;
-/* background-color: rgba(255,255,255,0.3); */
-height: 470px;
-padding:20px;
-margin-bottom:20px;
-width:600px;
-border-radius: 10px;
-}
 #moonimg{
 display: block;
 margin:0 auto;
@@ -179,15 +162,9 @@ $(document).ready(() => {
 
 </div> 
 
-<div class="moonContent">
-<div>
-</div>
 <img id="moonimg" src=""/>
-<div class="moonbox">
 <div id="resultLayout"></div>
 <div id="result"></div>
-</div>
-</div>
 </body>
 </html>
 <c:import url="../layout/footer.jsp" />
