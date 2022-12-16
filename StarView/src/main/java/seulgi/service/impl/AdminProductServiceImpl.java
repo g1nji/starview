@@ -3,9 +3,11 @@ package seulgi.service.impl;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.ServletContext;
 
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import seulgi.dao.face.AdminProductDao;
 import seulgi.dto.AdminProduct;
-import seulgi.dto.AdminProductImage;
+import seulgi.dto.AdminProductFile;
 import seulgi.service.face.AdminProductService;
 import seulgi.util.Paging;
 
@@ -79,18 +81,21 @@ public class AdminProductServiceImpl implements AdminProductService {
 		}
 		
 		//파일 저장될 경로
-		String storedPath = context.getRealPath("prodimage");
+		String storedPath = context.getRealPath("prodFile");
+		logger.info("파일주소: {}", storedPath);
 		
-		logger.info("주소>>>" + storedPath);
-		
-		//파일 저장할 폴더 만들기(prodimage 폴더)
+		//파일 저장할 폴더 만들기(prodFile 폴더)
 		File storedFolder = new File(storedPath);
 		if( !storedFolder.exists() ) {
 			storedFolder.mkdir();
 		}
 		
 		//파일 이름
-		String fileName = file.getOriginalFilename();
+						//이름만
+		String fileName = FilenameUtils.getBaseName(file.getOriginalFilename())
+				+ UUID.randomUUID().toString().split("-")[4]
+						//확장자만
+				+ "." + FilenameUtils.getExtension(file.getOriginalFilename());
 		
 		//저장될 이름 추가(dto, DB)
 		
@@ -107,7 +112,7 @@ public class AdminProductServiceImpl implements AdminProductService {
 		}
 		
 		//첨부파일 정보 DB 기록
-		AdminProductImage prodFile = new AdminProductImage();
+		AdminProductFile prodFile = new AdminProductFile();
 		prodFile.setgId(prod.getgId());
 		prodFile.setFileName(fileName);
 		
@@ -116,12 +121,13 @@ public class AdminProductServiceImpl implements AdminProductService {
 	
 	//첨부파일 정보 얻어오기
 	@Override
-	public AdminProductImage getAttachFile(AdminProduct viewProd) {
+	public AdminProductFile getAttachFile(AdminProduct viewProd) {
 		logger.info("getAttachFile() 사용");
 		
 		return adminProductDao.selectImageFile(viewProd);
 	}
 	
+	//상품 수정
 	@Override
 	public void update(AdminProduct prod, MultipartFile file) {
 		logger.info("upload() 사용");
@@ -140,7 +146,9 @@ public class AdminProductServiceImpl implements AdminProductService {
 		}
 		
 		//파일 저장될 경로
-		String storedPath = context.getRealPath("prodimage");
+		//String storedPath = context.getRealPath("prodimage");
+		String storedPath = context.getRealPath("prodFile");
+		logger.info("파일 주소: {}", storedPath);
 		
 		//파일 저장할 폴더 만들기(prodimage 폴더)
 		File storedFolder = new File(storedPath);
@@ -166,7 +174,7 @@ public class AdminProductServiceImpl implements AdminProductService {
 		}
 		
 		//첨부파일 정보 DB 기록
-		AdminProductImage prodFile = new AdminProductImage();
+		AdminProductFile prodFile = new AdminProductFile();
 		prodFile.setgId(prod.getgId());
 		prodFile.setFileName(fileName);
 
@@ -177,6 +185,7 @@ public class AdminProductServiceImpl implements AdminProductService {
 		adminProductDao.insertFile(prodFile);
 	}
 	
+	//파일 없이
 	@Override
 	public void update(AdminProduct prod) {
 		logger.info("upload() 사용");
@@ -187,6 +196,17 @@ public class AdminProductServiceImpl implements AdminProductService {
 		} else {
 			adminProductDao.updateProd(prod);
 		}
-		
 	}
+	
+	@Override
+	public void delete(AdminProduct prod) {
+		logger.info("delete() 사용");
+		
+		//첨부파일 삭제
+		adminProductDao.deleteFile(prod);
+		
+		//게시글 삭제
+		adminProductDao.delete(prod);
+	}
+	
 }

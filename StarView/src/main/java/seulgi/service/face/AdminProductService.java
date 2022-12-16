@@ -5,15 +5,16 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import seulgi.dto.AdminProduct;
-import seulgi.dto.AdminProductImage;
+import seulgi.dto.AdminProductFile;
 import seulgi.util.Paging;
 
 public interface AdminProductService {
 
 	/**
-	 * 상품 전체 조회하기
+	 * 페이징이 적용된 상품 전체 조회하기
 	 * 
-	 * @return 상품 리스트
+	 * @param paging - 페이징 정보 객체
+	 * @return 페이징이 적용된 상품 리스트
 	 */
 	public List<AdminProduct> list(Paging paging);
 
@@ -33,8 +34,8 @@ public interface AdminProductService {
 	/**
 	 * 상품 번호 이용하여 상품 상세 조회하기
 	 * 
-	 * @param viewProd - 상세 조회하려는 상품 번호
-	 * @return 조회된 상품 정보
+	 * @param viewProd - 상세 조회하려는 상품 정보 객체
+	 * @return 조회된 상품 정보 객체
 	 */
 	public AdminProduct view(AdminProduct viewProd);
 
@@ -49,24 +50,30 @@ public interface AdminProductService {
 	/**
 	 * 상품 번호를 이용하여 업로드된 파일 정보 조회하기
 	 * 
-	 * @param viewProd - 조회할 상품 객체
+	 * @param viewProd - 조회할 상품 정보 객체
 	 * @return 첨부파일 정보 객체
 	 */
-	public AdminProductImage getAttachFile(AdminProduct viewProd);
+	public AdminProductFile getAttachFile(AdminProduct viewProd);
 
 	/**
-	 * 상품 정보, 첨부파일을 함께 처리한다
+	 * 상품 정보, 첨부파일을 함께 처리하기
 	 * 
-	 * @param prod - 상품 정보 객체
+	 * @param prod - 수정할 상품 정보 객체
 	 * @param file - 첨부파일 정보 객체
 	 */
 	public void update(AdminProduct prod, MultipartFile file);
 	
-	//수정하기
 	/**
-	 * 상품 정보, 첨부파일을 함께 처리한다
+	 * 상품 정보만 처리하기
 	 * 
-	 * @param prod - 상품 정보 객체
+	 * @param prod - 수정할 상품 정보 객체
 	 */
 	public void update(AdminProduct prod);
+
+	/**
+	 * 상품 삭제 + 첨부파일 삭제하기
+	 * 
+	 * @param prod - 삭제할 상품 정보 객체
+	 */
+	public void delete(AdminProduct prod);
 }

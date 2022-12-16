@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import seulgi.dto.AdminBoard;
 import seulgi.dto.AdminProduct;
-import seulgi.dto.AdminProductImage;
+import seulgi.dto.AdminProductFile;
 import seulgi.service.face.AdminProductService;
 import seulgi.util.Paging;
 
@@ -55,7 +55,7 @@ public class AdminProductController {
 
 		//잘못된 상품 번호 처리
 		if( viewProd.getgId() < 0 ) {
-			return "redirect:admin/prod/list";
+			return "redirect:/admin/prod/list";
 		}
 		
 		//상품 상세 조회
@@ -66,8 +66,8 @@ public class AdminProductController {
 		model.addAttribute("viewProd", viewProd);
 		
 		//첨부파일 모델값 전달
-		AdminProductImage imagefile = adminProductService.getAttachFile(viewProd);
-		model.addAttribute("imagefile", imagefile);
+		AdminProductFile prodFile = adminProductService.getAttachFile(viewProd);
+		model.addAttribute("prodFile", prodFile);
 		
 		return "admin/prod/view";
 	}
@@ -80,22 +80,24 @@ public class AdminProductController {
 	
 	//상품 업로드
 	@RequestMapping(value="/insert", method = RequestMethod.POST)
-	public void insertProdProc(AdminProduct prod, MultipartFile file) {
+	public String insertProdProc(AdminProduct prod, MultipartFile file) {
 		logger.info("/insert 주소 연결 - [POST]");
 		logger.info("상품 정보: {}", prod);
 		
 		//게시글, 첨부파일 처리
 		adminProductService.upload(prod, file);
+		
+		return "redirect:/admin/prod/list";
 	}
 	
-	//상품 수정
+	//상품 수정 페이지
 	@RequestMapping(value="/update", method = RequestMethod.GET)
 	public String updateProd(AdminProduct prod, Model model) {
 		logger.info("/update 주소 연결 - [GET]");
 		
 		//잘못된 상품 번호 처리
 		if( prod.getgId() < 0 ) {
-			return "redirect:admin/prod/list";
+			return "redirect:/admin/prod/list";
 		}
 		
 		//상품 상세 조회
@@ -103,8 +105,8 @@ public class AdminProductController {
 		logger.info("조회된 상품: {}", prod);
 		
 		//첨부파일 모델값 전달
-		AdminProductImage imagefile = adminProductService.getAttachFile(prod);
-		model.addAttribute("imagefile", imagefile);
+		AdminProductFile prodFile = adminProductService.getAttachFile(prod);
+		model.addAttribute("prodFile", prodFile);
 		
 		//모델값 전달
 		model.addAttribute("updateProd", prod);
@@ -112,16 +114,25 @@ public class AdminProductController {
 		return "admin/prod/update";
 	}
 
+	//상품 수정
 	@RequestMapping(value="/update", method = RequestMethod.POST)
 	public String updateProdProc(AdminProduct prod, MultipartFile file) {
 		logger.info("/update 주소 연결 - [POST]");
 		
-		adminProductService.update(prod);
-		//adminProductService.update(prod, file);
+		//adminProductService.update(prod);
+		adminProductService.update(prod, file);
 		
 		return "redirect:/admin/prod/view?gId=" + prod.getgId();
 	}
 	
-	
+	//상품 삭제
+	@RequestMapping("/delete")
+	public String deleteProd(AdminProduct prod) {
+		logger.info("/delete 주소 연결");
+		
+		adminProductService.delete(prod);
+		
+		return "redirect:/admin/prod/list";
+	}
 	
 }

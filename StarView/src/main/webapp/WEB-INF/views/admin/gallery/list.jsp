@@ -19,37 +19,43 @@ td:nth-child(2) {
 }
 </style>
 
-<h1>게시글 리스트</h1>
+<h1>갤러리 게시글 리스트</h1>
 <hr>
 
-<select id="category" name="category" required>
+<select id="category" name="category" required onchange="window.open(value,'_self')">
     <option value="" disabled selected>카테고리</option>
-    <option value="gallery">갤러리</option>
-    <option value="goods">상품리뷰</option>
-    <option value="place">명소후기</option>
+    <option value="/admin/gallery/list">갤러리</option>
+    <option value="/admin/goods/list">상품리뷰</option>
+    <option value="/admin/place/list">명소후기</option>
 </select>
 <br><br>
 
 <table class="table table-striped table-hover table-condensed">
 <thead>
 	<tr>
-		<th style="width: 10%;">번호</th>
+		<th style="width: 10%;"><input type="checkbox"> 전체선택</th>
+		<th style="width: 5%;">번호</th>
 		<th style="width: 10%;">작성자</th>
 		<th style="width: 10%;">제목</th>
-		<th style="width: 30%;">내용</th>
+		<th style="width: 10%;">내용</th>
+		<th style="width: 10%;">위치</th>
+		<th style="width: 10%;">태그</th>
 		<th style="width: 10%;">등록일</th>
-		<th style="width: 10%;">조회수</th>
-		<th style="width: 10%;">추천수</th>
+		<th style="width: 5%;">조회수</th>
+		<th style="width: 5%;">추천수</th>
 		<th style="width: 10%;">사진번호</th>
 	</tr>
 </thead>	
 <tbody>
 <c:forEach items="${boardList }" var="b">
 	<tr>
+		<td><input type="checkbox"></td>
 		<td>${b.galleryNo }</td>
 		<td>${b.uId }</td>
 		<td><a href="./view?galleryNo=${b.galleryNo }">${b.galleryTitle }</a></td>
 		<td>${b.galleryContent }</td>
+		<td>${b.galleryLoc }</td>
+		<td>${b.galleryTag }</td>
 		<td><fmt:formatDate value="${b.galleryDate }" pattern="yy-MM-dd HH:mm:ss"/></td>
 		<td>${b.galleryHit }</td>
 		<td>${b.galleryLike }</td>

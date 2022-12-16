@@ -3,7 +3,7 @@ package seulgi.dao.face;
 import java.util.List;
 
 import seulgi.dto.AdminProduct;
-import seulgi.dto.AdminProductImage;
+import seulgi.dto.AdminProductFile;
 import seulgi.util.Paging;
 
 public interface AdminProductDao {
@@ -43,7 +43,7 @@ public interface AdminProductDao {
 	 * 
 	 * @param prodFile - 업로드할 첨부파일 정보
 	 */
-	public void insertFile(AdminProductImage prodFile);
+	public void insertFile(AdminProductFile prodFile);
 
 	/**
 	 * 상품 번호를 이용하여 첨부파일 정보 조회하기
@@ -51,7 +51,7 @@ public interface AdminProductDao {
 	 * @param viewProd - 조회할 상품 번호
 	 * @return 조회된 첨부파일 정보
 	 */
-	public AdminProductImage selectImageFile(AdminProduct viewProd);
+	public AdminProductFile selectImageFile(AdminProduct viewProd);
 
 	/**
 	 * 상품 수정하기
@@ -66,4 +66,11 @@ public interface AdminProductDao {
 	 * @param prod - 첨부파일을 삭제할 상품 번호
 	 */
 	public void deleteFile(AdminProduct prod);
+
+	/**
+	 * 상품 삭제
+	 * 
+	 * @param prod - 삭제할 상품 번호
+	 */
+	public void delete(AdminProduct prod);
 }

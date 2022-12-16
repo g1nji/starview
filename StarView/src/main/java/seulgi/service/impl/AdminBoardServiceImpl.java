@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import javax.servlet.ServletContext;
 
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,17 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 	
 	//페이징 처리
 	@Override
+	public Paging getPagingAll(int curPage) {
+		//총 게시글 수 조회
+		int totalCount = adminBoardDao.selectCntAllBoard();
+		
+		//페이징 계산
+		Paging paging = new Paging(totalCount, curPage);
+		
+		return paging;
+	}
+	
+	@Override
 	public Paging getPaging(int curPage) {
 		//총 게시글 수 조회
 		int totalCount = adminBoardDao.selectCntAll();
@@ -45,12 +57,62 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 		return paging;
 	}
 	
+	@Override
+	public Paging getPaging2(int curPage) {
+		//총 게시글 수 조회
+		int totalCount = adminBoardDao.selectCntAll2();
+		
+		//페이징 계산
+		Paging paging = new Paging(totalCount, curPage);
+		
+		return paging;
+	}
+	
+	@Override
+	public Paging getPaging3(int curPage) {
+		//총 게시글 수 조회
+		int totalCount = adminBoardDao.selectCntAll3();
+		
+		//페이징 계산
+		Paging paging = new Paging(totalCount, curPage);
+		
+		return paging;
+	}
+	
 	//게시글 리스트
+	@Override
+	public List<AdminBoard> list() {
+		logger.info("list() 사용");
+		
+		return adminBoardDao.selectAllBoard();
+	}
+	
+	@Override
+	public List<AdminBoard> listAll(Paging paging) {
+		logger.info("list() 사용");
+		
+		return adminBoardDao.selectAllBoard(paging);
+	}
+	
 	@Override
 	public List<AdminBoard> list(Paging paging) {
 		logger.info("list() 사용");
 		
 		return adminBoardDao.selectAll(paging);
+	}
+	
+	@Override
+	public List<AdminBoard> list2(Paging paging) {
+		logger.info("list() 사용");
+		
+		return adminBoardDao.selectAll2(paging);
+	}
+	
+	@Override
+	public List<AdminBoard> list3(Paging paging) {
+		logger.info("list() 사용");
+		
+		return adminBoardDao.selectAll3(paging);
 	}
 	
 	//게시글 상세 조회
@@ -59,6 +121,19 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 		logger.info("view() 사용");
 		
 		return adminBoardDao.selectBoard(viewBoard);
+	}
+	
+	//게시글만 업로드
+	@Override
+	public void upload(AdminBoard board) {
+		logger.info("upload() 사용");
+		
+		//게시글 업로드
+		if("".equals(board.getNoticeTitle())) {
+			board.setGalleryTitle("(공지사항입니다)");
+		} else {
+			adminBoardDao.insertAllBoard(board);
+		}
 	}
 	
 	//게시글, 첨부파일 업로드
@@ -81,6 +156,7 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 		
 		//파일이 저장될 경로
 		String storedPath = context.getRealPath("boardFile");
+		logger.info("파일 주소: {}", storedPath);
 		
 		//파일 저장할 폴더 만들기(boardFile 폴더)
 		File storedFolder = new File(storedPath);
@@ -89,8 +165,9 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 		}
 		
 		//파일이 저장될 이름
-		String originName = file.getOriginalFilename();
-		String storedName = originName + UUID.randomUUID().toString().split("-")[4];
+		String originName = FilenameUtils.getBaseName(file.getOriginalFilename());
+		String storedName = originName + UUID.randomUUID().toString().split("-")[4]
+				+ "." + FilenameUtils.getExtension(file.getOriginalFilename());
 		
 		//저장할 파일의 정보 객체
 		File dest = new File(storedFolder, storedName);
@@ -109,9 +186,7 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 		boardFile.setOriginName(originName);
 		boardFile.setStoredName(storedName);
 	
-		//새로운 첨부파일을 삽입한다
 		adminBoardDao.insertFile(boardFile);
-		
 	}
 	
 	//첨부파일 정보 얻어오기
@@ -130,7 +205,20 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 		return adminBoardDao.selectFileByFile(boardFile);
 	}
 	
-	//게시글 수정
+	//게시글만 수정
+	@Override
+	public void update(AdminBoard board) {
+		logger.info("update() 사용");
+		
+		//게시글 처리
+		if("".equals(board.getGalleryTitle())) {
+			board.setGalleryTitle("(제목없음)");
+		}
+		
+		adminBoardDao.updateBoard(board);
+	}
+	
+	//게시글, 첨부파일 수정
 	@Override
 	public void update(AdminBoard board, MultipartFile file) {
 		logger.info("update() 사용");
@@ -159,10 +247,10 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 		
 		//파일이 저장될 이름
 		String originName = file.getOriginalFilename();
-		String storedName = originName + UUID.randomUUID().toString().split("-")[4];
+		//String storedName = originName + UUID.randomUUID().toString().split("-")[4];
 		
 		//저장할 파일의 정보 객체
-		File dest = new File( storedFolder, storedName );
+		File dest = new File( storedFolder, originName );
 		
 		try {
 			file.transferTo(dest);
@@ -176,7 +264,7 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 		AdminBoardFile boardFile = new AdminBoardFile();
 		boardFile.setGalleryNo(board.getGalleryNo());
 		boardFile.setOriginName(originName);
-		boardFile.setStoredName(storedName);
+		//boardFile.setStoredName(storedName);
 	
 		//기존에 게시글에 연결된 첨부파일을 삭제한다
 		adminBoardDao.deleteFile(board);
@@ -185,16 +273,15 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 		adminBoardDao.insertFile(boardFile);
 	}
 	
-	//파일 없이
+	//게시글 삭제
 	@Override
-	public void update(AdminBoard board) {
-		logger.info("update() 사용");
+	public void delete(AdminBoard board) {
+		logger.info("delete() 사용");
 		
-		//게시글 처리
-		if("".equals(board.getGalleryTitle())) {
-			board.setGalleryTitle("(제목없음)");
-		}
+		//첨부파일 삭제
+		adminBoardDao.deleteFile(board);
 		
-		adminBoardDao.updateBoard(board);
+		//게시글 삭제
+		adminBoardDao.delete(board);
 	}
 }

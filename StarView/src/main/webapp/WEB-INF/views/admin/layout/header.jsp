@@ -173,17 +173,25 @@ html .container {
 		<li>
 			게시글 관리
 			<ul>
+				<li><a href="../board/insert"> - 공지사항 등록</a></li>
+				<li><a href="../board/list"> - 공지사항 목록</a></li>
 				<li><a href="../gallery/list"> - 회원 글 조회</a></li>
 				<li><a href=""> - 회원 댓글 조회</a></li>
 				<li><a href=""> - 신고사항 조회</a></li>
 			</ul>
 		</li>
-		<li><a href="">캘린더 관리</a></li>
+		<li>
+			캘린더 관리
+			<ul>
+				<li><a href="../calendar/date"> - 추천일 조회</a></li>
+				<li><a href="../calendar/time"> - 추천시간 조회</a></li>
+			</ul>
+		</li>
 		<li>
 			상품 관리
 			<ul>
 				<li><a href="../prod/insert"> - 상품 업로드</a></li>
-				<li><a href="../prod/list"> - 상품 전체 목록</a></li>
+				<li><a href="../prod/list"> - 상품 목록</a></li>
 			</ul>
 		</li>
 	</ul>

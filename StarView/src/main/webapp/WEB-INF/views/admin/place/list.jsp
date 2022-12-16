@@ -19,31 +19,37 @@ td:nth-child(2) {
 }
 </style>
 
-<h1>상품 리스트</h1>
+<h1>명소 후기 게시글 리스트</h1>
 <hr>
+
+<select id="category" name="category" required onchange="window.open(value,'_self')">
+    <option value="" disabled selected>카테고리</option>
+    <option value="/admin/gallery/list">갤러리</option>
+    <option value="/admin/goods/list">상품리뷰</option>
+    <option value="/admin/place/list">명소후기</option>
+</select>
+<br><br>
 
 <table class="table table-striped table-hover table-condensed">
 <thead>
 	<tr>
 		<th style="width: 10%;"><input type="checkbox"> 전체선택</th>
-		<th style="width: 10%;">상품 번호</th>
-		<th style="width: 10%;">상품명</th>
-		<th style="width: 10%;">상품 가격</th>
-		<th style="width: 20%;">상품 설명</th>
-		<th style="width: 10%;">배송비</th>
+		<th style="width: 10%;">번호</th>
+		<th style="width: 10%;">작성자</th>
+		<th style="width: 20%;">내용</th>
 		<th style="width: 20%;">등록일</th>
+		<th style="width: 10%;">장소번호</th>
 	</tr>
 </thead>	
 <tbody>
-<c:forEach items="${prodList }" var="p">
+<c:forEach items="${boardList }" var="b">
 	<tr>
 		<td><input type="checkbox"></td>
-		<td>${p.gId }</td>
-		<td><a href="./view?gId=${p.gId }">${p.gName }</a></td>
-		<td>${p.gPrice }</td>
-		<td>${p.gDetail }</td>
-		<td>${p.delPrice }</td>
-		<td><fmt:formatDate value="${p.regDate }" pattern="yy-MM-dd HH:mm:ss"/></td>
+		<td>${b.sreviewNo }</td>
+		<td>${b.uId }</td>
+		<td>${b.sreviewContent }</td>
+		<td><fmt:formatDate value="${b.sreviewDate }" pattern="yy-MM-dd HH:mm:ss"/></td>
+		<td>${b.arrivalNum }</td>
 	</tr>
 </c:forEach>
 </tbody>

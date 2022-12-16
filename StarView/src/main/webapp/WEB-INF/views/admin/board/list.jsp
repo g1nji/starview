@@ -19,47 +19,31 @@ td:nth-child(2) {
 }
 </style>
 
-<h1>게시글 리스트</h1>
+<h1>공지사항 리스트</h1>
 <hr>
-
-<select id="category" name="category" required>
-    <option value="" disabled selected>카테고리</option>
-    <option value="gallery">갤러리</option>
-    <option value="goods">상품리뷰</option>
-    <option value="place">명소후기</option>
-</select>
-<br><br>
 
 <table class="table table-striped table-hover table-condensed">
 <thead>
 	<tr>
-		<th style="width: 10%;">번호</th>
-		<th style="width: 10%;">작성자</th>
-		<th style="width: 10%;">제목</th>
-		<th style="width: 30%;">내용</th>
-		<th style="width: 10%;">등록일</th>
-		<th style="width: 10%;">조회수</th>
-		<th style="width: 10%;">추천수</th>
-		<th style="width: 10%;">사진번호</th>
+		<th style="width: 10%;"><input type="checkbox"> 전체선택</th>
+		<th style="width: 20%;">작성자</th>
+		<th style="width: 2%;">번호</th>
+		<th style="width: 20%;">제목</th>
+		<th style="width: 20%;">내용</th>
 	</tr>
 </thead>	
 <tbody>
 <c:forEach items="${boardList }" var="b">
 	<tr>
-		<td>${b.galleryNo }</td>
+		<td><input type="checkbox"></td>
 		<td>${b.uId }</td>
-		<td><a href="./view?galleryNo=${b.galleryNo }">${b.galleryTitle }</a></td>
-		<td>${b.galleryContent }</td>
-		<td><fmt:formatDate value="${b.galleryDate }" pattern="yy-MM-dd HH:mm:ss"/></td>
-		<td>${b.galleryHit }</td>
-		<td>${b.galleryLike }</td>
-		<td>${b.photoNo }</td>
+		<td>${b.noticeCode }</td>
+		<td>${b.noticeTitle }</td>
+		<td>${b.noticeContent }</td>
 	</tr>
 </c:forEach>
 </tbody>
 </table>
-
-<span class="pull-right">total : ${paging.totalCount }</span>
 
 <c:import url="../layout/paging.jsp" />
 

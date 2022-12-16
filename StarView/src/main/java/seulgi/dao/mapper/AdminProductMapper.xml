@@ -22,7 +22,7 @@
 	
 	<select id="selectProd" resultType="seulgi.dto.AdminProduct" parameterType="seulgi.dto.AdminProduct">
 		SELECT * FROM goods
-		WHERE g_id = #{gId}
+		WHERE g_id = #{gId }
 	</select>
 
 	<insert id="insertProd" parameterType="seulgi.dto.AdminProduct">
@@ -34,14 +34,14 @@
 		VALUES (#{gId }, #{gName }, #{gPrice }, #{gDetail })
 	</insert>
 	
-	<insert id="insertFile" parameterType="seulgi.dto.AdminProductImage">
+	<insert id="insertFile" parameterType="seulgi.dto.AdminProductFile">
 		INSERT INTO goods_img ( img_id, g_id, file_name)
 		VALUES ( goods_img_seq.nextval, #{gId }, #{fileName })
 	</insert>
 
-	<select id="selectImageFile" resultType="seulgi.dto.AdminProductImage" parameterType="seulgi.dto.AdminProduct">
+	<select id="selectImageFile" resultType="seulgi.dto.AdminProductFile" parameterType="seulgi.dto.AdminProduct">
 		SELECT * FROM goods_img
-		WHERE g_id = #{gId}
+		WHERE g_id = #{gId }
 	</select>
 	
 	<update id="updateProd" parameterType="seulgi.dto.AdminProduct">
@@ -54,7 +54,12 @@
 
 	<delete id="deleteFile" parameterType="seulgi.dto.AdminProduct">
 		DELETE goods_img
-		WHERE g_id = #{gId}	
+		WHERE g_id = #{gId }	
+	</delete>
+	
+	<delete id="delete" parameterType="seulgi.dto.AdminProduct">
+		DELETE goods
+		WHERE g_id = #{gId }
 	</delete>
 	
 </mapper>
