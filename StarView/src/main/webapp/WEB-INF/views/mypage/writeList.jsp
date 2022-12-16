@@ -5,25 +5,35 @@
 
 <c:import url="../layout/header.jsp" />
 
+<style type="text/css">
+
+th, td {
+	text-align: center;
+}
+
+</style>
+
 <div class="wrap">
 <h1>내가 작성한 글 리스트</h1>
 
 <table class="table">
 <tr>
-	<th>글 번호</th>
-	<th>글 제목</th>
-	<th>작성일</th>
-	<th>좋아요 수</th>
-	<th>조회수</th>
+	<th style="width:5%;">No</th>
+	<th style="width:65%; text-align:left;">글 제목</th>
+	<th style="width:10%;">추천수</th>
+	<th style="width:10%;">조회수</th>
+	<th style="width:10%; text-align:right;">작성일</th>
 </tr>
 
+<c:forEach items="${list }" var="gallery">
 <tr>
-	<td>숫자</td>
-	<td>제목</td>
-	<td>작성일</td>
-	<td>좋아요 수</td>
-	<td>조회수</td>
+	<td>${gallery.galleryNo }</td>
+	<td style="text-align:left;"><a href="/gallery/view?galleryNo=${gallery.galleryNo }">${gallery.galleryTitle }</a></td>
+	<td>${gallery.galleryLike }</td>
+	<td>${gallery.galleryHit }</td>
+	<td style="text-align:right;"><fmt:formatDate value="${gallery.galleryDate }" pattern="yyyy-MM-dd" /></td>
 </tr>
+</c:forEach>
 </table>
 
 </div>

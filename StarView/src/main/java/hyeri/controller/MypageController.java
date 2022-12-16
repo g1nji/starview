@@ -30,15 +30,16 @@ public class MypageController {
 			, Model model
 			, HttpSession session) {
 		
-		Paging2 paging = mypageService.getPaging(curPage);
-		model.addAttribute("paging", paging);
-		
 		String uId = (String)session.getAttribute("uId");
 		logger.info("uId : {}", uId);
 		
+		Paging2 paging = mypageService.getPaging(curPage, uId);
+		model.addAttribute("paging", paging);
+		
 		//작성한 글 조회
-		List<Gallery> list = mypageService.list(uId);
+		List<Gallery> list = mypageService.list(paging, uId);
 		for( Gallery g : list ) logger.info("{}", g);
+		model.addAttribute("list", list);
 	}
 
 }

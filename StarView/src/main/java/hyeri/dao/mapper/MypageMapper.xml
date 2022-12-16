@@ -6,14 +6,24 @@
 	
 <mapper namespace="hyeri.dao.face.MypageDao">
 
-	<select id="selectCntAll" resultType="int">
+	<select id="selectCntAll" resultType="int" parameterType="String">
 		SELECT count(*) FROM gallery
+		WHERE u_id = #{uId }
 	</select>
 	
-	<select id="selectList" resultType="hyeri.dto.Gallery" parameterType="String">
-		SELECT gallery_no, gallery_title, gallery_date, gallery_like, gallery_hit
-		FROM gallery
-		WHERE u_id = #{uId }
+	<select id="selectList" resultType="hyeri.dto.Gallery">
+		SELECT * FROM (
+			SELECT rownum rnum, g.* FROM (
+		        SELECT
+		            gallery_no, gallery_title, gallery_content,
+		            gallery_date, gallery_like,
+		            gallery_hit, u_id, u_nick
+		        FROM gallery
+		        WHERE u_id = #{uId }
+		        ORDER BY gallery_no DESC
+			)g
+		)gallery
+		WHERE rnum BETWEEN #{paging.startNo } AND #{paging.endNo }
 	</select>
 
 </mapper>
