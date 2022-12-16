@@ -7,19 +7,15 @@
 
     <mapper namespace="yewon.dao.face.GoodsDao">
     
-    <resultMap type="yewon.dto.Goods" id="Goods">
-    <id column="g_id" property="gId" />
-    <result column="g_name" property="gName" />
-    <result column="g_price" property="gPrice" />
-    <result column="file_name" property="fileName" />
-<!--     <result column="like_cnt" property="likeCnt" /> -->
-<!--     <association property="goodsImg" javaType="GoodsImg" > -->
-<!--     	<result column="file_type" property="fileType" /> -->
-<!--     </association>	 -->
-    </resultMap>
+<!--     <resultMap type="yewon.dto.Goods" id="Goods"> -->
+<!--     <id column="g_id" property="gId" /> -->
+<!--     <result column="g_name" property="gName" /> -->
+<!--     <result column="g_price" property="gPrice" /> -->
+<!--     <result column="file_name" property="fileName" /> -->
+<!--     </resultMap> -->
     
     
-    <select id="selectAllGoods" resultMap="Goods">
+    <select id="selectAllGoods" resultType="Goods">
     <![CDATA[
 	SELECT * FROM (
 	    SELECT ROWNUM rnum, t.* FROM (
@@ -39,7 +35,7 @@
 	</select>
 
 <!--     총 상품개수(totalCount). 한번에 보여질 상품개수(step). 시작번호(startIdx). 끝번호(endIdx)-->
-    <select id="selectMoreGoods" resultMap="Goods" parameterType="map">
+    <select id="selectMoreGoods" resultType="Goods" parameterType="map">
     <![CDATA[
 	SELECT * FROM (
 	    SELECT ROWNUM rnum, t.* FROM (
@@ -54,7 +50,7 @@
     ]]>
     </select>
 
-	<select id="selectByLowPrice" resultMap="Goods">
+	<select id="selectByLowPrice" resultType="Goods">
     <![CDATA[
 	SELECT * FROM (
 	    SELECT ROWNUM rnum, t.* FROM (
@@ -69,7 +65,7 @@
     ]]>
 	</select>
 
-    <select id="lowPriceMore" resultMap="Goods" parameterType="map">
+    <select id="lowPriceMore" resultType="Goods" parameterType="map">
     <![CDATA[
 	SELECT * FROM (
 	    SELECT ROWNUM rnum, t.* FROM (
@@ -84,7 +80,7 @@
     ]]>
     </select>
 	
-	<select id="selectByHighPrice" resultMap="Goods">
+	<select id="selectByHighPrice" resultType="Goods">
     <![CDATA[
 	SELECT * FROM (
 	    SELECT ROWNUM rnum, t.* FROM (
@@ -99,7 +95,7 @@
     ]]>
 	</select>
 
-    <select id="highPriceMore" resultMap="Goods" parameterType="map">
+    <select id="highPriceMore" resultType="Goods" parameterType="map">
     <![CDATA[
 	SELECT * FROM (
 	    SELECT ROWNUM rnum, t.* FROM (
@@ -114,7 +110,7 @@
     ]]>
     </select>
     
-	<select id="selectByDate" resultMap="Goods">
+	<select id="selectByDate" resultType="Goods">
     <![CDATA[
 	SELECT * FROM (
 	    SELECT ROWNUM rnum, t.* FROM (
@@ -129,7 +125,7 @@
     ]]>
 	</select>
 
-    <select id="latestMore" resultMap="Goods" parameterType="map">
+    <select id="latestMore" resultType="Goods" parameterType="map">
     <![CDATA[
 	SELECT * FROM (
 	    SELECT ROWNUM rnum, t.* FROM (
@@ -144,7 +140,7 @@
     ]]>
     </select>
     
-    <select id="selectGoods" resultMap="Goods" parameterType="map">
+    <select id="selectGoods" resultType="Goods" parameterType="map">
     SELECT g.*, i.file_name 
     	FROM goods g, goods_img i
 	    	WHERE g.g_id = i.g_id

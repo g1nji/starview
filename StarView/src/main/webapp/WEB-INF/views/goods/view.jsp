@@ -33,7 +33,9 @@ table {
 	clear: both;
 }
 
-td { width: 70px; }
+td { 
+	width: 70px; 
+}
 
 .detail-img {
 	border-top: 2px solid black;
@@ -129,6 +131,7 @@ td { width: 70px; }
 	background-color: gray;
 	color: white;
 }  
+
 #goto-cart {
 	background-color: black;
 	color: white;
@@ -143,6 +146,7 @@ $(document).ready(function() {
 	console.log(uId);
 	console.log(gId);
 	
+	//찜하기 클릭시 로그인 검증
 	$('#nologin').click(function() {
 		alert('로그인이 필요합니다');
 	})
@@ -153,50 +157,73 @@ $(document).ready(function() {
 	
 function like_func(){
 	console.log('like_func 실행')
-		var sendData = {"gId":gId, "uId":uId}
-	
-		$.ajax({
-			type: 'post',
-			url: '/wish/clickLike',
-			data: JSON.stringify(sendData),
-			contentType: 'application/json; charset=UTF-8',
-			dataType: 'json',
-			success: function(data){
-				console.log(data);
+	var sendData = {"gId":gId, "uId":uId}
+
+	$.ajax({
+		type: 'post',
+		url: '/wish/clickLike',
+		data: JSON.stringify(sendData),
+		contentType: 'application/json; charset=UTF-8',
+		dataType: 'json',
+		success: function(data){
+			console.log(data);
+			
+			if(data.findLike==1){
+				$('#login').css('background', 'url(/resources/img/empty_heart.png) no-repeat center 1px/38px');
+				$('#like-cnt').html(data.totalLike);
+				alert('찜을 취소했습니다')
 				
-				if(data.findLike==1){
-					$('#login').css('background', 'url(/resources/img/empty_heart.png) no-repeat center 1px/38px');
-					$('#like-cnt').html(data.totalLike);
-					alert('찜을 취소했습니다')
-					
-				} else {
-					$('#login').css('background', 'url(/resources/img/heart.png) no-repeat center 1px/38px');
-					$('#like-cnt').html(data.totalLike);
-					alert('위시리스트에 담겼습니다')
-					
-				}
+			} else {
+				$('#login').css('background', 'url(/resources/img/heart.png) no-repeat center 1px/38px');
+				$('#like-cnt').html(data.totalLike);
+				alert('위시리스트에 담겼습니다')
+				
 			}
-		})
-	}
+		}
+	})
+}
 	
 	$('#cart').click(function() {
-	   $('.black-bg').addClass('show-modal')
-
-	   $('#keep-on').on('click', function() {
-	   		$('.black-bg').toggleClass('show-modal')
-	   })
-		
-		$('#goto-cart').on('click', function() {
-	    	location.href="./cart"
-		})
-	
+		addCart();
 	})
 	
+	//까만배경 누르면 모달창 닫기
 	$('.black-bg').on('click', function(e) {
    		if ( e.target == document.querySelector('.black-bg') ){
    		document.querySelector('.black-bg').classList.remove('show-modal');
    		}
 	})
+	
+function addCart(){
+	console.log('addCart() 실행')
+
+	var cQty = $('#selectQty').val();
+	var sendData = {"gId":gId, "uId":uId, "cQty":cQty};
+	console.log(sendData)
+
+	$.ajax({
+		type: 'post',
+		url: '/goods/addCart',
+		data: JSON.stringify(sendData),
+		contentType: 'application/json; charset=UTF-8',
+		success: function(res){
+			if(res=='add_success'){
+				console.log('카트 담기 성공');				
+				$('.black-bg').addClass('show-modal')
+				
+				$('#keep-on').on('click', function() {
+					$('.black-bg').toggleClass('show-modal')
+				})
+					
+				$('#goto-cart').on('click', function() {
+				   	location.href="./cart"
+				})					
+			} else if(res=='already_exist') {
+				alert('이미 등록된 상품입니다.')
+			}
+		}
+	})
+}
 	
 })
 </script>
@@ -227,7 +254,7 @@ function like_func(){
 	<tr>
 		<td>수량</td>
 		<td>
-		<input type="number" name="selectQty" min="1" max="5" value="1">
+		<input type="number" id="selectQty" min="1" max="5" value="1">
 		</td>
 	</tr>
 	</table>

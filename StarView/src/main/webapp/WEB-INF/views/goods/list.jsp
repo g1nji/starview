@@ -45,6 +45,17 @@ a {
 	text-align: center;
 }
 
+#moreBtn {
+	padding: 10px 40px;
+	border-radius: 20px;
+	border: none;
+	font-weight: 500;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-style: italic;
+    color: black;
+    background-color: #FFEBBA;
+}
+
 .clear {
 	clear: both;
 }
@@ -56,15 +67,6 @@ span {
 .sort {
 	color: #999; 
 }
-
-/* .check { */
-/* 	width:20px;  */
-/* 	height: 20px;  */
-/* } */
-	
-/* #hide { */
-/*  	display: none;  */
-/* } */
 	
 </style>
 </head>
@@ -196,7 +198,7 @@ $(document).ready(function() {
 		</ul>
 	</c:forEach>
 		<div class="more"></div>
-	<div id="btn"><button id="moreBtn">상품 더보기</button></div>
+	<div id="btn"><button id="moreBtn">More...</button></div>
 </div>
 
 

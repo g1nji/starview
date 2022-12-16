@@ -146,7 +146,7 @@ public class GoodsController {
 		model.addAttribute("latestMore", latestMore);
 	}
 	
-	
+	//상품 상세보기
 	@RequestMapping("/view")
 	public void viewGoods(@RequestParam Map<String, Object> map, Model model) {
 		
@@ -158,13 +158,6 @@ public class GoodsController {
 		int findLike = wishService.findLike(map);
 		int likeCntAll = wishService.getLikeCntAll(map);
 		logger.info("likeCntAll: {}", likeCntAll);
-		
-		//좋아요를 한번도 누른적이 없으면 wishlist tb에 데이터가 없으므로 null반환
-//		if(findLike == null) {
-//			model.addAttribute("likeCheck", 0);
-//		} else {
-//			model.addAttribute("likeCheck", findLike.get("likeCheck"));
-//		}
 		
 		model.addAttribute("goodsInfo", goodsInfo);
 		model.addAttribute("findLike", findLike);
