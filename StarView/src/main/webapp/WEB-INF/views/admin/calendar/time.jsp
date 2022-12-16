@@ -18,6 +18,7 @@ $(document).ready(() => {
 		
 		$.ajax({
 			type: "get",
+			//주소가 왜 404가...뜨지...
 			url: "﻿https://apis.data.go.kr/B090041/openapi/service/RiseSetInfoService/getAreaRiseSetInfo",
 			data: {
 				//Decoding 키로 인증키 사용할 것
