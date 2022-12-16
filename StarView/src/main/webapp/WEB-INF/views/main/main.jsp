@@ -492,7 +492,7 @@ transform:scale(1.05,1.05);
 		</li>
 		<li><a href="/gallery/list">갤러리</a></li>
 		<li><a href="/goods/list">굿즈샵</a></li>
-		<li><a href="">스케줄러</a></li>
+		<li><a href="/calendar/todolist">스케줄러</a></li>
 	</ul>
 	<ul class="subnav">
 	

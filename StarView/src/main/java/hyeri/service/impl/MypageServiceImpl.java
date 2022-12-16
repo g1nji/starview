@@ -16,10 +16,10 @@ public class MypageServiceImpl implements MypageService {
 	@Autowired MypageDao mypageDao;
 	
 	@Override
-	public Paging2 getPaging(int curPage) {
+	public Paging2 getPaging(int curPage, String uId) {
 		
 		//총 게시글 수 조회
-		int totalCount = mypageDao.selectCntAll();
+		int totalCount = mypageDao.selectCntAll(uId);
 		
 		//페이징 계산
 		Paging2 paging = new Paging2(totalCount, curPage);
@@ -28,7 +28,7 @@ public class MypageServiceImpl implements MypageService {
 	}
 	
 	@Override
-	public List<Gallery> list(String uId) {
-		return mypageDao.selectList(uId);
+	public List<Gallery> list(Paging2 paging, String uId) {
+		return mypageDao.selectList(paging, uId);
 	}
 }

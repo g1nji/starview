@@ -38,7 +38,7 @@ public class GalleryController {
 	
 	@RequestMapping("/list")
 	public void list(@RequestParam(defaultValue = "0") int curPage, Model model,
-			Gallery viewGallery) {
+			Gallery viewGallery, GComment gComment) {
 		
 		Paging paging = galleryService.getPaging(curPage);
 //		logger.info("{}", paging);
@@ -47,6 +47,9 @@ public class GalleryController {
 		List<Gallery> list = galleryService.list(paging);
 //		for( Gallery g : list ) logger.info("{}", g);
 		model.addAttribute("list", list);
+		
+		//댓글수 조회
+		
 		
 	}
 	
@@ -72,7 +75,7 @@ public class GalleryController {
 		
 		//모델값 전달
 		model.addAttribute("comment", list);
-//		
+		
 	}
 	
 	@GetMapping("/write")

@@ -5,6 +5,21 @@
 
 <c:import url="../layout/header.jsp" />
 
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$("#btnReport").click(function() {
+		
+		if(confirm("덧글을 신고하시겠습니까?") == true ) {
+			alert("신고가 완료되었습니다");
+		} else {
+			return;
+		}
+	})
+	
+})
+</script>
+
 <h2>${viewGallery.galleryTitle }</h2>
 ${viewGallery.uNick }
 
@@ -32,16 +47,42 @@ ${viewGallery.galleryContent }
 
 <div class="comment-list">
 
-<ul>
-
+	<h4>댓글</h4>
+	
 	<c:forEach items="${comment }" var="comment">
-		<li>
-			<p>작성자 ${comment.uNick }</p>
-			<p>작성일 ${comment.cmDate }</p>
-			<p>덧글내용 ${comment.cmContent }</p>
-		</li>
+		<table style="margin-bottom:20px;">
+			<tr>
+				<th>${comment.uNick }</th>
+			</tr>
+			<tr>
+				<td>${comment.cmContent }</td>
+			</tr>
+			<tr>
+				<td style="color:gray;"><fmt:formatDate value="${comment.cmDate }" pattern="yyyy.MM.dd hh:mm" /></td>
+				<c:if test="${uId ne comment.uId}">
+					<td style="padding-left:10px;">
+						<form action="/comment/report" method="post" style="display:none;" id="reportform">
+							<input type="text" name="uId" value="${comment.uId }">
+							<input type="text" name="cmContent" value="${comment.cmContent }">
+							<input type="text" name="cmDate" value="${comment.cmDate }">
+							<input type="text" name="reporter" value="${uId }">
+						</form>
+						<a href="" id="btnReport" style="color:gray;">신고</a>
+					</td>
+				</c:if>
+				<c:if test="${uId eq comment.uId }">
+					<td style="padding-left:10px;">
+					<a href="" style="color:#5BC0CF;">수정</a>
+					</td>
+				</c:if>
+				<c:if test="${uId eq comment.uId }">
+					<td style="padding-left:10px;">
+					<a href="" style="color:#E64556;">삭제</a>
+					</td>
+				</c:if>
+			</tr>
+		</table>
 	</c:forEach>
-</ul>
 
 </div>
 
@@ -50,20 +91,24 @@ ${viewGallery.galleryContent }
 	
 	<form action="/comment/write" method="post">
 	
-		<p>
-			작성자 : ${uNick }
-		</p>
+		<table>
+			<tr>
+				<th>${uNick }</th>
+			</tr>
 
-		<p>
-			<input type="hidden" name="galleryNo" value="${viewGallery.galleryNo }">
-			<input type="hidden" name="uId" value="${uId }">
-			<input type="hidden" name="uNick" value="${uNick }">
-			<textarea rows="5" cols="50" name="cmContent"></textarea>
-		</p>
-		
-		<p>
-			<button type="submit">댓글 작성</button>
-		</p>
+			<tr>
+				<td>
+					<input type="hidden" name="galleryNo" value="${viewGallery.galleryNo }">
+					<input type="hidden" name="uId" value="${uId }">
+					<input type="hidden" name="uNick" value="${uNick }">
+					<textarea rows="5" cols="50" name="cmContent"></textarea>
+				</td>
+			</tr>
+			
+			<tr>
+				<td><button type="submit">댓글 작성</button></td>
+			</tr>
+		</table>
 	</form>
 
 </div>

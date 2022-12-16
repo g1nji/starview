@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import hyeri.dao.face.GalleryDao;
+import hyeri.dto.GComment;
 import hyeri.dto.GTag;
 import hyeri.dto.Gallery;
 import hyeri.dto.GalleryFile;
