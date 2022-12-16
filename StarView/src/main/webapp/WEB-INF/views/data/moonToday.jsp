@@ -10,7 +10,7 @@
 <style type="text/css">
 body {
   margin: 0;
-  background: linear-gradient(45deg, #49a09d, #5f2c82);
+/*   background: linear-gradient(45deg, #49a09d, #5f2c82); */
   font-weight: 100;
 }
 #Year, #Mon, #Day{
@@ -30,19 +30,18 @@ body {
 }
 .moonTitle{
 text-align:center;
-padding:0 auto;
-color: #fff;
+/* color: #fff; */
+margin-top: 70px;
+margin-bottom: 25px;
 }
 
 .moonContent{
 margin:0 auto;
-margin-top:20px;
 text-align:center;
 font-size: 20px;
-background-color: rgba(255,255,255,0.3);
+/* background-color: rgba(255,255,255,0.3); */
 height: 470px;
-padding:50px;
-margin:0 auto;
+padding:20px;
 margin-bottom:20px;
 width:600px;
 border-radius: 10px;
@@ -94,8 +93,9 @@ background-color: #F2D7D9;
 .moonbox{
 width:350px;
 margin:0 auto;
-color: #fff;
+/* color: #fff; */
 padding:0 auto;
+margin-top: 40px;
 }
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>

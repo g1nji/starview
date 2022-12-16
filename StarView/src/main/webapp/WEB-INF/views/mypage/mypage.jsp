@@ -2,17 +2,88 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="../layout/header.jsp" />
-
+<c:import url="../layout/mymenu.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-html {
-	text-align: center;
-	margin: 0 auto;
-	padding: 0 auto;
+
+.myp{
+	margin-left: 200px;
+	margin-top: 80px;
+}
+
+
+.person_field_legend {
+    margin-bottom: 12px;
+    height: 24px;
+    color: #373f57;
+    font-size: 16px;
+    letter-spacing: -1.14px;
+    line-height: 1.5;
+}
+
+.person_field_table {
+    width: 400px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    margin: 0 auto;
+}
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    font-family: "Malgun Gothic",dotum,gulim,sans-serif;
+    font-size: inherit;
+    line-height: 100%;
+}
+
+.person_field_table th {
+    width: 135px;
+    color: #8491a7;
+    font-size: 14px;
+    letter-spacing: -1px;
+    line-height: 40px;
+    vertical-align: top;
+}
+.person_field_table th, .person_field_table td {
+    padding: 8px 0;
+    border-bottom: 1px solid #eaedf4;
+    text-align: left;
+}
+caption, th {
+    text-align: left;
+}
+
+.person_field_table th, .person_field_table td {
+    padding: 8px 0;
+    border-bottom: 1px solid #eaedf4;
+    text-align: left;
+}
+.person_field_body {
+    display: inline-block;
+    padding: 4px 0;
+    min-height: 32px;
+    box-sizing: border-box;
+    color: #373f57;
+    font-size: 15px;
+    letter-spacing: -1px;
+    line-height: 32px;
+    vertical-align: top;
+}
+input{
+ border: 1px solid transparent;
+}
+
+.person_field_wrap{
+	float:left;
+	margin-left: 200px;
+	margin-bottom: 50px;
+}
+
+.person_field_wrap2{
+float:right;
 }
 </style>
 
@@ -34,11 +105,108 @@ function up(){
 
 </head>
 <body>
-
-<h1>마이페이지</h1>
+<div class="myp">
+<h1 class="titlewrap">마이페이지</h1>
 <hr>
+</div>
 
-<h3>아이디:${info.uId }</h3>
+<!-- <h1 class="titlewrap">개인정보 수정</h1>
+<hr> -->
+<form action="/mypage/update" method="post" id="form" onsubmit="return validate();">
+<div class="person_field_wrap">
+                <h2 class="person_field_legend">기본정보</h2>
+                <table class="person_field_table">
+                    <tbody>
+                    <tr class="person_field">
+                        <th scope="row">아이디</th>
+                        <td>
+                            <div class="person_field_body">
+                                  <input type="text" id="uId" name="uId" value="${info.uId}" readonly>
+                                  </div>
+                        </td>
+                    </tr>
+                    <tr class="person_field">
+                        <th scope="row">비밀번호</th>
+                        <td>
+                            <div class="person_field_body">
+                            	<input type="password" value="${info.uPw}" id="uPw" name="uPw"readonly>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="person_field">
+                        <th scope="row">이름</th>
+                        <td>
+                            <div class="person_field_body">
+                            	<input type="text" value="${info.uName}" name="uName"readonly>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="person_field">
+                        <th scope="row">닉네임</th>
+                        <td>
+                            <div class="person_field_body">
+                            	<input type="text" value="${info.uNick}" name="uNick"readonly>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="person_field">
+                        <th scope="row">생년월일</th>
+                        <td>
+                            <div class="person_field_body">
+                            	<input type="text" value="${info.uBirth}" name="uBirth"readonly>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="person_field">
+                        <th scope="row">성별</th>
+                        <td>
+                            <div class="person_field_body">
+                            	<input type="text" value="${info.uGender}" name="uGender"readonly>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    </tbody>
+                </table>
+            </div>
+                    
+	<div class="person_field_wrap2">
+                <h2 class="person_field_legend">연락처 정보</h2>
+                <table class="person_field_table">
+                    <tbody>
+                    <tr class="person_field">
+                        <th scope="row">전화번호</th>
+                        <td>
+                            <div class="person_field_body">
+                            	<input type="text" value="${info.uPhone }" name="uPhone" oninput="autoHyphen2(this)" maxlength="13"readonly>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="person_field">
+                        <th scope="row">이메일</th>
+                        <td>
+                            <div class="person_field_body">
+                            	<input type="text" value="${info.uEmail }" name="uEmail" id="uEmail"readonly>
+                            </div>
+                        </td>
+                    </tr>
+					<tr class="person_field">
+                        <th scope="row">주소</th>
+                        <td>
+                            <div class="person_field_body">
+                            	<input type="text" id="uAddress" value="${info.uAddress}" name="uAddress">
+                            </div>
+                        </td>
+                    </tr>
+
+                    
+                                        </tbody>
+                </table>
+            </div>
+           
+</form>            
+
+<%-- <h3>아이디:${info.uId }</h3>
 <h3>패스워드:${info.uPw }</h3>
 <h3>이름:${info.uName }</h3>
 <h3>닉네임:${info.uNick }</h3>
@@ -46,11 +214,11 @@ function up(){
 <h3>생년월일:${info.uBirth }</h3>
 <h3>성별:${info.uGender }</h3>
 <h3>이메일:${info.uEmail }</h3>
-<h3>전화번호:${info.uPhone }</h3>
+<h3>전화번호:${info.uPhone }</h3> --%>
 
-<a href="./main"><button>메인</button></a>
+<!-- <a href="./main"><button>메인</button></a>
 <input type="button" id="btn" value="탈퇴" onclick='del()'>
-<input type="button" id="savebtn" value="수정" onclick='up()'>
+<input type="button" id="savebtn" value="수정" onclick='up()'> -->
 
 
 </body>
