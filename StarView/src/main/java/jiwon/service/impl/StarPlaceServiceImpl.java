@@ -34,4 +34,16 @@ public class StarPlaceServiceImpl implements StarPlaceService {
 	}
 
 	
+	
+	//명소 상세 조회
+	@Override
+	public StarPlace view(StarPlace viewStarplace) {
+		
+		//상세보기 조회 결과 리턴하기
+		return starplaceDao.selectStarplace(viewStarplace);
+	}
+
+
+
+	
 }

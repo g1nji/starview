@@ -12,5 +12,11 @@
 		FROM starplace
 		ORDER BY arrival_num
 	</select>
+	
+	<select id="selectStarplace" resultType="jiwon.dto.StarPlace" parameterType="jiwon.dto.StarPlace" >
+		SELECT arrival, p_adr, p_expln
+		FROM starplace
+		WHERE arrival_num = #{arrivalNum}
+	</select>
 
 </mapper>

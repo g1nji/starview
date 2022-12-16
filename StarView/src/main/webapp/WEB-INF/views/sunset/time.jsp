@@ -70,6 +70,7 @@ $(document).ready(() => {
 		console.log($("#Date").val())
 		console.log($('input[name="location"]:checked').val())
 		
+		
 		$.ajax({
 			type: "get",
 			url: "http://apis.data.go.kr/B090041/openapi/service/RiseSetInfoService/getAreaRiseSetInfo",
@@ -94,11 +95,14 @@ $(document).ready(() => {
 				
 				var $table = $("<table>")
 				var tHead = "<tr>"
-					+ "<th>날짜</th>"
-					+ "<th>지역</th>"
+// 					+ "<th>날짜</th>"
+// 					+ "<th>지역</th>"
+					+ "<th></th>"
+// 					+ "<th></th>"
+// 					+ "<th></th>"
 // 					+ "<th>경도</th>"
 // 					+ "<th>위도</th>"
-					+ "<th>일몰 시간</th>"
+// 					+ "<th>일몰 시간</th>"
 				$table.html( tHead )
 				
 					
@@ -119,13 +123,13 @@ $(document).ready(() => {
 						var h = $(row).find("sunset").text().substr(0,2)
 						var m = $(row).find("sunset").text().substr(2,2)
 						
-						return "&nbsp;" +h + "시&nbsp;" + m + "분&nbsp;"
+						return "&nbsp;" +h + "시&nbsp;" + m + "분&nbsp; 입니다"
 					};
 					
 					$("<tr>")
 					.append(locdate)
 // 					.append( $("<td>").html($(row).find("locdate").text() ) )
-					.append( $("<td>").html($(row).find("location").text() ) )
+					.append( $("<td>").html($(row).find("location").text() +"의 일몰 시간은" ) )
 // 					.append( $("<td>").html($(row).find("longitude").text() ) )-
 // 					.append( $("<td>").html($(row).find("latitude").text() ) )
 // 					.append( $("<td>").html($(row).find("sunset").text() ) )
@@ -151,7 +155,7 @@ $(document).ready(() => {
 <h1>일몰 시간 나타내기</h1>
 
 <h4>날짜 선택</h4>
-<input type="text" id="Date" style="width:30px;">
+<input type="text" id="Date" style="width:80px;">
 
 
 <div class="locBg" id="locDiv">
