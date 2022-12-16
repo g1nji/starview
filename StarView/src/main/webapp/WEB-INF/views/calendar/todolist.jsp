@@ -20,6 +20,7 @@
 /* 캘린더 */
 .calendarTable {
 	float: right;
+
 }
 
 
@@ -29,8 +30,16 @@
 
 /* yyyy년 MM월 */
 .calendarTable thead.calDate th {
-    font-size: 1.5rem;
+    font-size: 18px;
     text-align: center;
+    position: relative;
+    left:115px;
+    bottom: 10px;
+}
+
+.calendarTable thead.calDate th p {
+	position: relative;
+	top:7px;
 }
 
 /* < > 버튼 */
@@ -42,14 +51,19 @@
 
 /* sun - sat 부분 */
 .calendarTable thead.calWeek th {
-    background-color: #FFD700;
+    background-color: #191970;
     color: #fff;
     text-align : center;
+    height: 25px;
 }
 
 /* 날짜 전체 설정 */
 .calendarTable tbody td {
+	background-color: #FFF8DC;
     cursor: pointer;
+    width: 75px;
+    height: 65px;
+    font-size: 17px;
 }
 
 /* 일요일 색상 빨갛게 */
@@ -63,8 +77,9 @@
 /* } */
 
 .calendarTable tbody td.selectDay {
-    background-color: #FFD700;
+    background-color: #191970;
     color: #fff;
+    border-radius: 10px;
 }
 </style>
 
