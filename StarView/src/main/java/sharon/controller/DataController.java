@@ -21,9 +21,9 @@ public class DataController {
 		logger.info("/data/astroMonth");
 	}
 	
-	@RequestMapping("/data/moon")
-	public void moonData() {
-		logger.info("/data/moon");
+	@RequestMapping("/data/mainMoon")
+	public void mainMoon() {
+		logger.info("/data/mainMoon");
 	}
 	
 	@RequestMapping("/data/moonToday")
