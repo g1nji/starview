@@ -154,6 +154,7 @@ public class AdminBoardController {
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
 	//2. 상품 리뷰
+	//하나의 매퍼로 시도하다 포기함...
 	//게시글 리스트
 	@RequestMapping(value="/goods/list")
 	public void getGoodsReviewList(Model model, @RequestParam(defaultValue = "0") int curPage) {
