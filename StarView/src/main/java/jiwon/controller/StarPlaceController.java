@@ -7,7 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jiwon.dto.StarPlace;
 import jiwon.service.face.StarPlaceService;
@@ -21,17 +23,38 @@ public class StarPlaceController {
 	//서비스 객체
 	@Autowired private StarPlaceService starplaceService;
 	
-	@RequestMapping("star/place")
+	//메인 화면
+	@RequestMapping("place/main")
 	public void starplace(Model model) {
-		logger.info("star/place [get]");
+		logger.info("place/main");
 		
 		List<StarPlace> starPlaceList = starplaceService.list();
 		for(StarPlace s : starPlaceList ) logger.info("{}", s);
 		
 		//모델값 전달하기
 		model.addAttribute("starPlaceList", starPlaceList);
-		
 	}
+	
+	//명소 상세 조회
+	@GetMapping("place/view")
+	public String placedetail(StarPlace viewStarplace, Model model) {
+		logger.info("/star/view");
+		
+		//잘못된게시글 번호 처리
+		if( viewStarplace.getArrivalNum() < 0 ) {
+			return "redirect:/star/place";
+		}
+		
+		//게시글 조회
+		viewStarplace = starplaceService.view(viewStarplace);
+		logger.info("조회된 게시글 {}", viewStarplace);
+		
+		//모델값 전달
+		model.addAttribute("viewStarplace", viewStarplace);
+		
+		return "place/view";
+	}
+	
 
 
 }

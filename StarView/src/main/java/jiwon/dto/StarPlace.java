@@ -9,11 +9,13 @@ public class StarPlace {
 	private double sLngtd;	//출발지 경도
 	private String departure;	//출발지 이름
 	private String arrival;	//도착지 이름
+	private String pAdr;	//명소 상세조회 시 출력할 주소
+	private String pExpln;	//명소 상세조회 시 출력할 설명
 	
 	public StarPlace() {	}
 
 	public StarPlace(int arrivalNum, double eLttd, double eLngtd, double sLttd, double sLngtd, String departure,
-			String arrival) {
+			String arrival, String pAdr, String pExpln) {
 		super();
 		this.arrivalNum = arrivalNum;
 		this.eLttd = eLttd;
@@ -22,13 +24,15 @@ public class StarPlace {
 		this.sLngtd = sLngtd;
 		this.departure = departure;
 		this.arrival = arrival;
+		this.pAdr = pAdr;
+		this.pExpln = pExpln;
 	}
 
 	@Override
 	public String toString() {
 		return "StarPlace [arrivalNum=" + arrivalNum + ", eLttd=" + eLttd + ", eLngtd=" + eLngtd + ", sLttd=" + sLttd
-				+ ", sLngtd=" + sLngtd + ", departure=" + departure + ", arrival=" + arrival + ", getClass()="
-				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+				+ ", sLngtd=" + sLngtd + ", departure=" + departure + ", arrival=" + arrival + ", pAdr=" + pAdr
+				+ ", pExpln=" + pExpln + "]";
 	}
 
 	public int getArrivalNum() {
@@ -85,6 +89,22 @@ public class StarPlace {
 
 	public void setArrival(String arrival) {
 		this.arrival = arrival;
+	}
+
+	public String getpAdr() {
+		return pAdr;
+	}
+
+	public void setpAdr(String pAdr) {
+		this.pAdr = pAdr;
+	}
+
+	public String getpExpln() {
+		return pExpln;
+	}
+
+	public void setpExpln(String pExpln) {
+		this.pExpln = pExpln;
 	}
 
 

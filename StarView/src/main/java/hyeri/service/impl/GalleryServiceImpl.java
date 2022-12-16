@@ -124,6 +124,7 @@ public class GalleryServiceImpl implements GalleryService {
 		for( int i=0; i<tagList.size(); i++ ) {
 			String t= tagList.get(i).getTagName();
 			gTag.setTagName(t);
+			gTag.setGalleryNo( gallery.getGalleryNo() );
 		}
 		
 		galleryDao.insertTag(gTag);

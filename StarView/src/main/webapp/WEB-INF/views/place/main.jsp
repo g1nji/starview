@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="../layout/header.jsp" />
-<c:import url="../star/map.jsp"/>
+<c:import url="../place/map.jsp"/>
 
 <!DOCTYPE html>
 
@@ -26,7 +26,7 @@
 <table>
 <thead>
 <tr>
-	<th>번호</th>
+<!-- 	<th>번호</th> -->
 	<th>명소</th>
 </tr>	
 </thead>
@@ -35,8 +35,8 @@
 <c:forEach items="${starPlaceList }" var="StarPlace">
 
 <tr>
-	<td>${StarPlace.arrivalNum }</td>
-	<td>${StarPlace.arrival }</td>
+<%-- 	<td>${StarPlace.arrivalNum }</td> --%>
+	<td><a href="/place/view?arrivalNum=${StarPlace.arrivalNum }">${StarPlace.arrival }</a></td>
 </tr>
 
 </c:forEach>
