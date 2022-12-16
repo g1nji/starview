@@ -2,16 +2,123 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="../layout/header.jsp" />
+<c:import url="../layout/mymenu.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
 <style type="text/css">
-html {
-	text-align: center;
-	margin: 0 auto;
-	padding: 0 auto;
+
+/* .titlewrap{
+    color: #373f57;
+    font-size: 36px;
+    font-weight: bold;
+    letter-spacing: -3px;
+    line-height: 56px;
+
+} */
+.myp{
+	margin-left: 200px;
+	margin-top: 80px;
+}
+
+.person_field_legend {
+    margin-bottom: 12px;
+    height: 24px;
+    color: #373f57;
+    font-size: 16px;
+    letter-spacing: -1.14px;
+    line-height: 1.5;
+}
+
+.person_field_table {
+    width: 400px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    margin: 0 auto;
+}
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    font-family: "Malgun Gothic",dotum,gulim,sans-serif;
+    font-size: inherit;
+    line-height: 100%;
+}
+
+.person_field_table th {
+    width: 135px;
+    color: #8491a7;
+    font-size: 14px;
+    letter-spacing: -1px;
+    line-height: 40px;
+    vertical-align: top;
+}
+.person_field_table th, .person_field_table td {
+    padding: 8px 0;
+    border-bottom: 1px solid #eaedf4;
+    text-align: left;
+}
+caption, th {
+    text-align: left;
+}
+
+.person_field_table th, .person_field_table td {
+    padding: 8px 0;
+    border-bottom: 1px solid #eaedf4;
+    text-align: left;
+}
+.person_field_body {
+   	display: flex;
+    padding: 4px 0;
+    min-height: 32px;
+    box-sizing: border-box;
+    color: #373f57;
+    font-size: 15px;
+    letter-spacing: -1px;
+    line-height: 32px;
+    vertical-align: top;
+}
+
+.person_field_wrap{
+	float:left;
+	margin-left: 200px;
+	margin-bottom: 50px;
+}
+
+.person_field_wrap2{
+float:right;
+}
+input{
+ 	border: 1px solid #ccc;
+}
+#uGender, #uId, #uBirth{
+	border: 1px solid transparent;
+}
+
+#addbtn{
+	border-radius: 5px;
+    position: relative;
+    padding: 5px 5px;
+    margin-left: 10px;
+    text-align: center;
+	outline: 0;
+	border:0;
+	font-weight: 600;
+}
+
+#savebtn{
+	border-radius: 5px;
+    position: relative;
+    padding: 15px 5px;
+    margin-top:30px;
+    margin-left:130px;
+    text-align: center;
+	outline: 0;
+	border:0;
+	font-weight: 600;
+	width:160px;
 }
 </style>
 <!-- jQuery 2.2.4 -->
@@ -69,44 +176,199 @@ html {
         }).open();
     }
 </script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script>
+    $("#uPwck").on("click", function(){
+      toastr.options.escapeHtml = true;
+      toastr.options.closeButton = true;
+      toastr.options.newestOnTop = false;
+      toastr.options.progressBar = true;
+      toastr.info('예제', '명월일지', {timeOut: 5000});
+    });
+  </script>
 <!-- 휴대전화 입력 유효성 검사 -->
 <script type="text/javascript">
-$(document).ready(function () {
-	$("form").submit(function() {
-		$("#addressSubmit").val( $("#sample6_address").val() + " " + $("#sample6_detailAddress").val() )
-	})
-	
-})
-
 
 const autoHyphen2 = (target) => {
 	 target.value = target.value
 	   .replace(/[^0-9]/g, '')
 	  .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
 	}
+//유효성 검사
+function validate() {
+	
+	if( !validatePW( $("#uPw").val() ) ) { //PW유효성 검증 실패
+		return false; //submit 중단
+	}
+	
+	if( !validateEmail( $("#uEmail").val() ) ) { 
+		return false; //submit 중단
+	}
+	
+	//모든 유효성 검증 성공	
+	return true; //submit 허용하기
+}
+
+function validatePW( uPw ) {
+	//패스워드 입력값 검증
+	if( !/^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/.test( uPw ) ) {
+		toastr.options.escapeHtml = true;
+	    toastr.options.closeButton = true;
+	    toastr.options.newestOnTop = false;
+		toastr.warning('영어대소문자, 숫자 8~16자만 입력하세요!','비밀번호', {timeOut: 10000}); 
+		return false;
+	   }
+	
+	//PW 유효성 검증 완료
+	return true;
+}	
+		function validateEmail(uEmail) {
+			 var regexEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; 
+
+			 if(!regexEmail.test( uEmail ) ) {
+				 console.log("이멜실패")
+				toastr.options.escapeHtml = true;
+			    toastr.options.closeButton = true;
+			    toastr.options.newestOnTop = false;
+				toastr.info('이메일 형식을 맞춰주세요!  ex)abc@naver.com','이메일', {timeOut: 10000}); 
+				return false;
+			   }
+				return true;
+		}
+
+
+
+$(document).ready(function () {
+	$("form").submit(function() {
+		
+		$("#addressSubmit").val( $("#sample6_address").val() + " " + $("#sample6_detailAddress").val() )
+		
+	
+	})
+	
+})
 </script>
 
 </head>
 <body>
-
-<h1>마이페이지 수정</h1>
+<div class="myp">
+<h1 class="titlewrap">회원정보 수정</h1>
 <hr>
-<form action="/mypage/update" method="post" id="form">
-<h3>아이디:<input type="text" name="uId" value="${users.uId}" readonly></h3>
-<h3>비밀번호:<input type="password" value="${users.uPw}" name="uPw"></h3>
+</div>
+<form action="/mypage/update" method="post" id="form" onsubmit="return validate();">
+<div class="person_field_wrap">
+                <h2 class="person_field_legend">기본정보</h2>
+                <table class="person_field_table">
+                    <tbody>
+                    <tr class="person_field">
+                        <th scope="row">아이디</th>
+                        <td>
+                            <div class="person_field_body">
+                                  <input type="text" id="uId" name="uId" value="${users.uId}" readonly>
+                                  </div>
+                        </td>
+                    </tr>
+                    <tr class="person_field">
+                        <th scope="row">비밀번호</th>
+                        <td>
+                            <div class="person_field_body">
+                            	<input type="password" value="${users.uPw}" id="uPw" name="uPw">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="person_field">
+                        <th scope="row">이름</th>
+                        <td>
+                            <div class="person_field_body">
+                            	<input type="text" value="${users.uName}" name="uName">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="person_field">
+                        <th scope="row">닉네임</th>
+                        <td>
+                            <div class="person_field_body">
+                            	<input type="text" value="${users.uNick}" name="uNick">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="person_field">
+                        <th scope="row">생년월일</th>
+                        <td>
+                            <div class="person_field_body">
+                            	<input type="text" id="uBirth" value="${users.uBirth}" name="uBirth"readonly>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="person_field">
+                        <th scope="row">성별</th>
+                        <td>
+                            <div class="person_field_body">
+                            	<input type="text" id="uGender" value="${users.uGender}" name="uGender"readonly>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    </tbody>
+                </table>
+            </div>
+                    
+	<div class="person_field_wrap2">
+                <h2 class="person_field_legend">연락처 정보</h2>
+                <table class="person_field_table">
+                    <tbody>
+                    <tr class="person_field">
+                        <th scope="row">전화번호</th>
+                        <td>
+                            <div class="person_field_body">
+                            	<input type="text" value="${users.uPhone }" name="uPhone" oninput="autoHyphen2(this)" maxlength="13">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="person_field">
+                        <th scope="row">이메일</th>
+                        <td>
+                            <div class="person_field_body">
+                            	<input type="text" value="${users.uEmail }" name="uEmail" id="uEmail">
+                            </div>
+                        </td>
+                    </tr>
+					<tr class="person_field">
+                        <th scope="row">주소</th>
+                        <td>
+                            <div class="person_field_body">
+                            	<input type="text" id="uAddress" value="${users.uAddress}" name="uAddress">
+                            	<input type="button" id="addbtn"onclick="sample6_execDaumPostcode()" value="주소 찾기">
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+				<input type="submit" id="savebtn" value="저 장" >
+            </div>
+<input type="text" id="sample6_postcode" placeholder="우편번호" hidden="hidden">
+<input type="text" id="sample6_address" name="uAdd1" hidden="hidden"><br>
+<input type="text" id="sample6_detailAddress" name="uAdd2" hidden="hidden"><br>
+<input type="text" id="sample6_extraAddress" hidden="hidden">            
+</form>                    
+                    
+                    
+                     
+<%-- <div class="mypagediv">
+<form action="/mypage/update" method="post" id="form" onsubmit="return validate();">
+<h3>아이디:<input type="text" id="uId" name="uId" value="${users.uId}" readonly></h3>
+<h3>비밀번호:<input type="password" value="${users.uPw}" id="uPw" name="uPw"></h3>
 <h3>이름:<input type="text" value="${users.uName}" name="uName"></h3>
 <h3>닉네임:<input type="text" value="${users.uNick}" name="uNick"></h3>
 <h3>주소:<input type="text" id="uAddress" value="${users.uAddress}" name="uAddress">
-<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+<input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기"><br>
 </h3>
-
-
 <h3>생년월일:<input type="text" value="${users.uBirth}" name="uBirth"readonly></h3>
 <h3>성별:<input type="text" value="${users.uGender}" name="uGender"readonly></h3>
-<h3>이메일:<input type="text" value="${users.uEmail }" name="uEmail"></h3>
+<h3>이메일:<input type="text" value="${users.uEmail }" name="uEmail" id="uEmail"></h3>
 <h3>전화번호:<input type="text" value="${users.uPhone }" name="uPhone" oninput="autoHyphen2(this)" maxlength="13"></h3>
 
-<a href="./main"><button>메인</button></a>
 <input type="submit" id="savebtn" value="저장" ><!-- onclick='save()' -->
 <input type="text" id="sample6_postcode" placeholder="우편번호" hidden="hidden">
 <input type="text" id="sample6_address" name="uAdd1" hidden="hidden"><br>
@@ -116,6 +378,7 @@ const autoHyphen2 = (target) => {
 
 
 </form>
+</div> --%>
 </body>
 </html>
 <c:import url="../layout/footer.jsp" />

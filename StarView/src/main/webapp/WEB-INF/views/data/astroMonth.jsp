@@ -11,7 +11,7 @@
 <style type="text/css">
 
 .out{
-/* background-color:#FFFFE8; */
+margin-top: 40px;
 }
 #Year, #Mon{
     position: relative;
@@ -24,12 +24,12 @@
 }
 #resultLayout{
 margin-bottom:5%;
-height:600px;
+height: auto;
 
 }
 
 #astroEvent{
-width:800px;
+width:700px;
 margin-left: 25px;
 font-size: 16px;
 }
@@ -42,7 +42,7 @@ font-size: 16px;
     padding: 10px 20px;
     margin-bottom:10px;
     border: 1px solid #fff;
-    background-color:#ffd66d;
+/*     background-color:#ffd66d; */
     text-align: center;
     text-decoration: none;
 }
@@ -55,6 +55,8 @@ background-color: #F2D7D9;
 
 #title{
 text-align: center;
+float: left;
+
 }
 table{
 	border-collapse: collapse;
@@ -63,7 +65,8 @@ table{
     border-radius: 10px;
  	width:1200px;
   	box-shadow: 0 0 20px rgba(0,0,0,0.1);
-  	height:600px;
+  	height:auto;
+    margin-top: 30px;
  }
  
 
@@ -74,33 +77,34 @@ text-align: right;
 
 #space{
 width:600px;
-margin-left: 250px;
 }
 
 
-body {
+/* body {
   margin: 0;
   background: linear-gradient(45deg, #49a09d, #5f2c82);
   font-family: sans-serif;
   font-weight: 100;
 }
-
+ */
 
 th,td {
   padding: 15px;
   background-color: rgba(255,255,255,0.2);
-  color: #fff;
+ /*  color: #fff; */
 }
 
 th {
-background-color: #55608f;
+/* background-color: #FFE5F1; */
+background-color: #C0DEFF;
 font-size: 17px;
 text-align:center;
 font-size: 600;
 }
 
 tr:hover {
-      background-color: rgba(255,255,255,0.3);
+      background-color: #FFFBE7;
+/*       background-color: rgba(255,255,255,0.3); */
     }
 </style>
 
@@ -201,6 +205,7 @@ $(document).ready(() => {
       })
       
    })
+   $("#btn").trigger("click");
    
 })
 
@@ -213,7 +218,8 @@ $(document).ready(() => {
 <div class="out">
 
 <div id="title">
-<h2 style="color:white">이달의 천문현상🌟</h2>
+<h2>이달의 천문현상🌟</h2>
+</div>
 <div class="box">
 <input type="text" name="Year" id="Year">년
 	<select id="Mon">
@@ -231,7 +237,6 @@ $(document).ready(() => {
 		<option value="12">12월</option>
 	</select>
 	<button id="btn">검색</button>
-</div>
 </div>
 </div>
 <div id="resultLayout" class="resultLayout">
