@@ -21,9 +21,9 @@ public class DataController {
 		logger.info("/data/astroMonth");
 	}
 	
-	@RequestMapping("/data/moon")
-	public void moonData() {
-		logger.info("/data/moon");
+	@RequestMapping("/data/mainMoon")
+	public void mainMoon() {
+		logger.info("/data/mainMoon");
 	}
 	
 	@RequestMapping("/data/moonToday")
@@ -31,16 +31,20 @@ public class DataController {
 		logger.info("/data/moonToday");
 	}
 	
-	@RequestMapping("/data/weather")
-	public void weatherData() {
+	@RequestMapping("/data/weather2")
+	public void weather() {
 		logger.info("/data/weather");
 	}
 	
-	@RequestMapping("/data/data3")
-	public void weather() {
-		logger.info("/data/data3");
+	@RequestMapping("/data/weatherdata")
+	public void weatherData() {
+		logger.info("/data/weatherdata");
 	}
 	
+	@RequestMapping("/data/weather3")
+	public void weather3() {
+		logger.info("/data/weather3");
+	}
 	
 
 }

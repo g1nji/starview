@@ -20,10 +20,32 @@
 }
 #out{
     width: 300px;
-    margin: 0 auto;
-    margin-bottom: 40px;
+   /*  margin: 0 auto;
+    margin-bottom: 90px; */
+    margin-top: 40px;
+     float:left;
 }
 
+#titleup{
+	margin-top: 40px;
+}
+.weather {
+    margin: 0 20px 0 0;
+    border: 1px solid black;
+    display: inline-block;
+    height:auto;
+}
+
+.vis-weather{
+    float:left;
+
+}
+
+#resultLayout{
+box-sizing: border-box;
+font-size: 15px;
+width:800px;
+}
 </style>
 
 <!-- jQeury 2.2.4 -->
@@ -31,6 +53,26 @@
 <script src="https://kit.fontawesome.com/8609a8f4cd.js" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
+//오늘 날짜
+function init(){
+	var newDate=new Date();
+	
+	//년
+	$("#Year").val(newDate.getFullYear());
+
+	//월
+	var mon= newDate.getMonth()+1;
+	if(mon<10) mon = "0"+mon;
+	
+	$("#Mon").val(mon);
+	
+	//일
+	var day= newDate.getDate();
+	if(day<10) day = "0"+day;
+	
+	$("#Day").val(day);
+}
+
 $(document).ready(() => {
 	var arr=[];
 	var today=new Date();
@@ -84,7 +126,7 @@ $(document).ready(() => {
 			URL+="&base_date="+ today;
 			URL+="&base_time="+now+"00";
 			URL+="&nx="+_nx+"&ny="+_ny;
-			console.log(URL)
+		//	console.log(URL)
 			arr.push({'url':URL,'region':region});
 			
 
@@ -98,7 +140,7 @@ $(document).ready(() => {
 						var temp='';
 						var sky='';
 						var rain='';
-						console.log($data)
+				//		console.log($data)
 						$.each($data,function(i,o){
 							cate=$(o).find("category").text(); //카테고리 목록
 							
@@ -115,7 +157,7 @@ $(document).ready(() => {
 							}
 							/* console.log(temp)
 							console.log(sky) */
-							console.log(rain)
+							//console.log(rain)
 						});
 						
 						$('.weather').append('<li class="list-group-item weather_li'+j+'"></li>');
@@ -161,7 +203,41 @@ $(document).ready(() => {
 					}
 			});
 	});
-})
+	init();
+
+			$.ajax({
+				type:"get",
+				url:"http://apis.data.go.kr/1360000/MidFcstInfoService/getMidFcst",
+				data:{
+					//Decoding 인증키 사용할것
+					serviceKey:"LSmq6lV4xNT9EXS3YbCJmT99kVha0kxUYP6MJGMpIEdPrRnKIi49fDlPA5dh59Ik+5L2c9H3hxNJeHLffcpGsg=="
+					,numOfRows:"10"
+					,pageNo:"1"
+					,stnId:"108"
+					,tmFc:today+"0600"
+				},
+				dataType:"xml"
+				,success: res=>{ 
+					console.log("AJAX 중기예보 성공")
+					
+					var $rows = $(res).find("item");
+				//결과화면 지우기
+				resultLayout.innerHTML=''
+				
+				var wfSv=$rows.find("wfSv").text();
+				
+				$("#resultLayout").append("전국중기예보: "+wfSv); 
+				console.log(wfSv)
+				
+				},
+				error:()=>{
+					console.log("AJAX 실패")
+					
+				}
+				
+			})
+		
+		})
 </script>
 
 </head>
@@ -172,6 +248,11 @@ $(document).ready(() => {
 <div class="vis-weather">
 <ul class="list-group list-group-flush weather" style="font-weight:600;"></ul>
 </div>
+</div>
+<div id="titleup">
+<h1 id="title2">중기예보(전국)</h1>
+<hr>
+<div id="resultLayout"></div>
 </div>
 
 </body>
