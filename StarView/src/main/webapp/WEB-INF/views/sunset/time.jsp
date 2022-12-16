@@ -10,6 +10,24 @@
 <meta charset="UTF-8">
 <title>일몰 시간</title>
 
+<style type="text/css">
+
+#locDiv {
+	width: 500px;
+	height: 520px;
+	float:right;
+}
+.locBg {
+	background-image:url("/resources/starImg/sunMoonMap_bg.png");
+}
+
+label {
+	position: relative;
+}
+
+
+</style>
+
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -19,17 +37,16 @@
 
 
 <script type="text/javascript">
-//날짜 선택
 
+//날짜 선택
 $(function() {
 	$( "#Date" ).datepicker({
-// 	    	format:'yyyy-mm-dd',
 	    	autoclose: true
 	    })
 })
 
-$("#location option:selected").val()
 
+//datepicker로 선택한 날짜를 api 응답 데이터 형식에 맞게 변환
 var getFormattedDate = ( d )=>{
 	d = new Date( d )
 	
@@ -40,13 +57,18 @@ var getFormattedDate = ( d )=>{
 	return y + m + dat
 }
 
+	//지역 선택
+// 	var selectlocation = $("#location option:selected").val();
+	var selectlocation = $('input[name="location"]:checked').val();
+
 $(document).ready(() => {
-		
+	
+	
 	$("#btn").click(() => {
 		console.log("#btn click")
 	
 		console.log($("#Date").val())
-		console.log($("#location option:selected").val())
+		console.log($('input[name="location"]:checked').val())
 		
 		$.ajax({
 			type: "get",
@@ -54,7 +76,7 @@ $(document).ready(() => {
 			data: {
 				type: "xml"
 				,locdate: getFormattedDate( $("#Date").val() )
-				,location: $("#location option:selected").val()
+				,location: $('input[name="location"]:checked').val()
 			,ServiceKey: "uej3x/SsIAytAndt4BMIKuPLeCRuvBJL1aMC+iIe3gzxsas6kdk0hv7SLipcQPprTnEOdxDKToBjNSPqXw2nrQ=="
 			},
 			dataType:"xml",
@@ -104,7 +126,7 @@ $(document).ready(() => {
 					.append(locdate)
 // 					.append( $("<td>").html($(row).find("locdate").text() ) )
 					.append( $("<td>").html($(row).find("location").text() ) )
-// 					.append( $("<td>").html($(row).find("longitude").text() ) )
+// 					.append( $("<td>").html($(row).find("longitude").text() ) )-
 // 					.append( $("<td>").html($(row).find("latitude").text() ) )
 // 					.append( $("<td>").html($(row).find("sunset").text() ) )
 					.append(sunset)
@@ -128,22 +150,70 @@ $(document).ready(() => {
 
 <h1>일몰 시간 나타내기</h1>
 
-날짜 선택 : <input type="text" id="Date">
-<select id="location">
-	<option>강릉</option>
-	<option>강화도</option>
-	<option>대관령</option>
-	<option>대구</option>
-	<option>부산</option>
-	<option>서울</option>
-	<option>양양</option>
-	<option>양평</option>
-	<option>울릉도</option>
-	<option>제주</option>
-	<option>주문진</option>
-</select>
-<!-- 지역 선택 : <input type="text" id="location"> -->
+<h4>날짜 선택</h4>
+<input type="text" id="Date" style="width:30px;">
+
+
+<div class="locBg" id="locDiv">
+<h4>지역 선택</h4>
+
+<label for="loc1" style="top:36px; left:292px;">
+<input type="radio" name="location" id="loc1" value="강릉">
+<span>강릉</span>
+</label>
+
+<label for="loc2" style="top:64px; left:79px;">
+<input type="radio" name="location" id="loc2" value="강화도">
+<span>강화도</span>
+</label>
+
+<label for="loc3" style="top:57px; left:155px;">
+<input type="radio" name="location" id="loc3" value="대관령">
+<span>대관령</span>
+</label>
+
+<label for="loc4" style="top:215px; left:110px;">
+<input type="radio" name="location" id="loc4" value="대구">
+<span>대구</span>
+</label>
+
+<label for="loc5" style="top:274px; left:105px;">
+<input type="radio" name="location" id="loc5" value="부산">
+<span>부산</span>
+</label>
+
+<label for="loc6" style="top:49px; left:-102px;">
+<input type="radio" name="location" id="loc6" value="서울">
+<span>서울</span>
+</label>
+
+<label for="loc7" style="top:5px; right:32px;">
+<input type="radio" name="location" id="loc7" value="양양">
+<span>양양</span>
+</label>
+
+<label for="loc8" style="top:62px; right:145px;">
+<input type="radio" name="location" id="loc8" value="양평">
+<span>양평</span>
+</label>
+
+</div>
+
 <button id="btn">조회</button>
+
+<!-- <select id="location"> -->
+<!-- 	<option>강릉</option> -->
+<!-- 	<option>강화도</option> -->
+<!-- 	<option>대관령</option> -->
+<!-- 	<option>대구</option> -->
+<!-- 	<option>부산</option> -->
+<!-- 	<option>서울</option> -->
+<!-- 	<option>양양</option> -->
+<!-- 	<option>양평</option> -->
+<!-- 	<option>울릉도</option> -->
+<!-- 	<option>제주</option> -->
+<!-- 	<option>주문진</option> -->
+<!-- </select> -->
 
 <div id="resultLayout"></div>
 
