@@ -211,20 +211,6 @@ $(document).ready(() => {
 
 <button id="btn">조회</button>
 
-<!-- <select id="location"> -->
-<!-- 	<option>강릉</option> -->
-<!-- 	<option>강화도</option> -->
-<!-- 	<option>대관령</option> -->
-<!-- 	<option>대구</option> -->
-<!-- 	<option>부산</option> -->
-<!-- 	<option>서울</option> -->
-<!-- 	<option>양양</option> -->
-<!-- 	<option>양평</option> -->
-<!-- 	<option>울릉도</option> -->
-<!-- 	<option>제주</option> -->
-<!-- 	<option>주문진</option> -->
-<!-- </select> -->
-
 <div id="resultLayout"></div>
 
 </body>
