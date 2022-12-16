@@ -10,15 +10,14 @@ public class Gallery {
 	private Date galleryDate;
 	private int galleryHit;
 	private int galleryLike;
+	private String galleryLoc;
 	private String uId;
 	private String uNick;
-	private String galleryLoc;
-	private String tag;
 	
 	public Gallery() {}
 
 	public Gallery(int galleryNo, String galleryTitle, String galleryContent, Date galleryDate, int galleryHit,
-			int galleryLike, String uId, String uNick, String galleryLoc, String tag) {
+			int galleryLike, String galleryLoc, String uId, String uNick) {
 		super();
 		this.galleryNo = galleryNo;
 		this.galleryTitle = galleryTitle;
@@ -26,18 +25,16 @@ public class Gallery {
 		this.galleryDate = galleryDate;
 		this.galleryHit = galleryHit;
 		this.galleryLike = galleryLike;
+		this.galleryLoc = galleryLoc;
 		this.uId = uId;
 		this.uNick = uNick;
-		this.galleryLoc = galleryLoc;
-		this.tag = tag;
 	}
 
 	@Override
 	public String toString() {
 		return "Gallery [galleryNo=" + galleryNo + ", galleryTitle=" + galleryTitle + ", galleryContent="
 				+ galleryContent + ", galleryDate=" + galleryDate + ", galleryHit=" + galleryHit + ", galleryLike="
-				+ galleryLike + ", uId=" + uId + ", uNick=" + uNick + ", galleryLoc=" + galleryLoc + ", tag=" + tag
-				+ "]";
+				+ galleryLike + ", galleryLoc=" + galleryLoc + ", uId=" + uId + ", uNick=" + uNick + "]";
 	}
 
 	public int getGalleryNo() {
@@ -88,6 +85,14 @@ public class Gallery {
 		this.galleryLike = galleryLike;
 	}
 
+	public String getGalleryLoc() {
+		return galleryLoc;
+	}
+
+	public void setGalleryLoc(String galleryLoc) {
+		this.galleryLoc = galleryLoc;
+	}
+
 	public String getuId() {
 		return uId;
 	}
@@ -102,22 +107,6 @@ public class Gallery {
 
 	public void setuNick(String uNick) {
 		this.uNick = uNick;
-	}
-
-	public String getGalleryLoc() {
-		return galleryLoc;
-	}
-
-	public void setGalleryLoc(String galleryLoc) {
-		this.galleryLoc = galleryLoc;
-	}
-
-	public String getTag() {
-		return tag;
-	}
-
-	public void setTag(String tag) {
-		this.tag = tag;
 	}
 
 }

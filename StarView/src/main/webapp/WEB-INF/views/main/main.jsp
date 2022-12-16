@@ -73,7 +73,9 @@ var hour = function() {
 			$(this).css("background-color", "#FFEBBA");
 		})
 	}
+	
 }
+
 </script>
 
 <style type="text/css">
@@ -209,6 +211,12 @@ ul.mainnav > li:hover > ul {
 	text-align: center;
 }
 
+#moonimg{
+	display: block;
+	margin:0 auto;
+	height:120px;
+}
+
 </style>
 </head>
 
@@ -255,7 +263,8 @@ ul.mainnav > li:hover > ul {
 
 <div id="day">
 	<div class="moon">
-		<br><br>오늘의<br>달 추가
+		<br><br>달 이미지<br>추가
+		<img id="moonimg" src=""/>
 	</div>
 </div>
 
