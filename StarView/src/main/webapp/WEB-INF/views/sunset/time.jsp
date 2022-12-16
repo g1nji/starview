@@ -13,16 +13,22 @@
 <style type="text/css">
 
 #locDiv {
-	width: 500px;
-	height: 520px;
+	width: 371px;
+	height: 500px;
 	float:right;
+    right: 115px;
+    position: relative;
 }
 .locBg {
-	background-image:url("/resources/starImg/sunMoonMap_bg.png");
+	background-image:url("/resources/starImg/sunset_map.png");
 }
 
 label {
 	position: relative;
+}
+
+span {
+	color: white;
 }
 
 
@@ -161,42 +167,42 @@ $(document).ready(() => {
 <div class="locBg" id="locDiv">
 <h4>지역 선택</h4>
 
-<label for="loc1" style="top:36px; left:292px;">
-<input type="radio" name="location" id="loc1" value="강릉">
+<label for="loc1" style="top:45px; left:220px;">
 <span>강릉</span>
+<input type="radio" name="location" id="loc1" value="강릉">
 </label>
 
-<label for="loc2" style="top:64px; left:79px;">
+<label for="loc2" style="top:83px; left:40px;">
 <input type="radio" name="location" id="loc2" value="강화도">
 <span>강화도</span>
 </label>
 
-<label for="loc3" style="top:57px; left:155px;">
+<label for="loc3" style="top:68px; left:89px;">
 <input type="radio" name="location" id="loc3" value="대관령">
 <span>대관령</span>
 </label>
 
-<label for="loc4" style="top:215px; left:110px;">
+<label for="loc4" style="top:230px; left:50px;">
 <input type="radio" name="location" id="loc4" value="대구">
 <span>대구</span>
 </label>
 
-<label for="loc5" style="top:274px; left:105px;">
+<label for="loc5" style="top:298px; left:18px;">
 <input type="radio" name="location" id="loc5" value="부산">
 <span>부산</span>
 </label>
 
-<label for="loc6" style="top:49px; left:-102px;">
+<label for="loc6" style="top:60px; right: 140px;">
 <input type="radio" name="location" id="loc6" value="서울">
 <span>서울</span>
 </label>
 
-<label for="loc7" style="top:5px; right:32px;">
-<input type="radio" name="location" id="loc7" value="양양">
+<label for="loc7" style="top:13px; right:96px;">
 <span>양양</span>
+<input type="radio" name="location" id="loc7" value="양양">
 </label>
 
-<label for="loc8" style="top:62px; right:145px;">
+<label for="loc8" style="top:61px; left:154px;">
 <input type="radio" name="location" id="loc8" value="양평">
 <span>양평</span>
 </label>

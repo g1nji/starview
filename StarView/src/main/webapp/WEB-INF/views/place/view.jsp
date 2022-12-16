@@ -20,6 +20,14 @@ $(document).ready(function() {
 })
 </script>
 
+<style type="text/css">
+
+#expln{
+	width:600px;
+	float:right;
+}
+
+</style>
 
 </head>
 <body>
@@ -30,7 +38,11 @@ $(document).ready(function() {
 <div>
 	<h3>${viewStarplace.arrival}</h3>
 	<p>${viewStarplace.pAdr }</p>
+	
+	<div id="expln">
 	<p>${viewStarplace.pExpln }</p>
+	</div>
+	
 </div>
 
 <button id="btnList">⬅</button>
