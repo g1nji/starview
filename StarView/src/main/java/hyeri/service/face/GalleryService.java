@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import hyeri.dto.GComment;
 import hyeri.dto.GTag;
 import hyeri.dto.Gallery;
 import hyeri.dto.GalleryFile;
@@ -80,6 +81,5 @@ public interface GalleryService {
 	 * @return
 	 */
 	public List<Gallery> search(String keywordInput);
-
 
 }

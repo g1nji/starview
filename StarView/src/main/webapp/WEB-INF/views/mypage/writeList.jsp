@@ -4,11 +4,17 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:import url="../layout/header.jsp" />
+<c:import url="../layout/mymenu.jsp" />
 
 <style type="text/css">
 
 th, td {
 	text-align: center;
+}
+
+.wrap{
+	margin-left: 200px;
+	margin-top: 80px;
 }
 
 </style>

@@ -2,6 +2,9 @@ package hyeri.dao.face;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
+import hyeri.dto.GComment;
 import hyeri.dto.GTag;
 import hyeri.dto.Gallery;
 import hyeri.dto.GalleryFile;
@@ -94,11 +97,5 @@ public interface GalleryDao {
 	 * @return
 	 */
 	public List<Gallery> selectByKeyword(String keywordInput);
-
-
-
-
-
-
 	
 }

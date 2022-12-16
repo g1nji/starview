@@ -64,6 +64,7 @@ body, h1, h2, h3, h4, h5, h6, input, textarea, select {
 
 body {
 	margin: 0;
+	height: 100%;
 }
 
 a {
@@ -225,7 +226,7 @@ ul.mainnav > li:hover > ul {
 		</li>
 		<li><a href="/gallery/list">갤러리</a></li>
 		<li><a href="/goods/list">굿즈샵</a></li>
-		<li><a href="">스케줄러</a></li>
+		<li><a href="/calendar/todolist">스케줄러</a></li>
 	</ul>
 	<ul class="subnav">
 	

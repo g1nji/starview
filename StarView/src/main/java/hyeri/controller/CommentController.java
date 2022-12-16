@@ -36,4 +36,10 @@ public class CommentController {
 		return "redirect:/gallery/view?galleryNo=" + gallery.getGalleryNo();
 	}
 	
+	@PostMapping("/report")
+	public String cmReport() {
+		
+		return "";
+	}
+	
 }
