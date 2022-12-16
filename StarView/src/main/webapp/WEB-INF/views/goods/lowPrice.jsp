@@ -5,14 +5,14 @@
 
    	<c:forEach items="${lowPriceList }" var="goods">
 	<ul class="items">
-		<li><a href="/goods/detail.jsp?gId=${goods.gId }"><img class="thumb" src="${goods.fileName }"></li>
+		<li><a href="/goods/view?gId=${goods.gId }"><img class="thumb" src="${goods.fileName }"></li>
 		<li class="title">${goods.gName}</a></li>
 		<li class="price"><fmt:formatNumber value="${goods.gPrice}" type="number" groupingUsed="true" />원</li>
 	</ul>
 </c:forEach>
 	<div class="more"></div>
 
-	<div id="btn"><button id="moreBtn">상품 더보기</button></div>
+	<div id="btn"><button id="moreBtn">More...</button></div>
 </div>
 
 	

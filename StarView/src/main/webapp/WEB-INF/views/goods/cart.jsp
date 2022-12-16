@@ -11,177 +11,212 @@
 <style type="text/css">
 
 section {
-	width: 1000px; 
+	width: 1500px; 
 	margin: 100px auto;
 }
 
 table {
-	width: 480px;
-}
-
-.goods-img {
-	width: 420px;
-	height: 420px;
-	float: left;
-}
-
-.goods-info {
-	float: right;
-}
-
-.clear {
-	clear: both;
-}
-
-td { width: 70px; }
-
-.detail-img {
+	width: 60%;
 	border-top: 2px solid black;
-	margin-top: 100px;
+	border-bottom: 1px solid black;
+}
+
+th {
+	border-bottom: 1px solid #E0E3DA;
+	height: 68px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+td {
+	text-align: center;
+	vertical-align: middle;
+	padding-top: 10px;
+	color: #333;
+}
+
+.prod {
+	display: flex;
+	align-items: center;
+}
+
+.thumbnail {
+	width: 100px;
+	height: 100px;
+	margin: 20px;
+}
+
+#qty {
+	width: 40px;
+	border: 1px solid #E0E3DA;
+}
+
+#deleteBtn {
+	border: 1px solid #E0E3DA;
+	background: white;
+	padding: 0 15px;
+}
+
+#qty-update {
+	border: 1px solid #E0E3DA;
+	background: white;
+	font-size: 13px;
+	color: #333;
+ 	padding: 2px 10px; 
 }
 
 .btn {
-	padding: 15px 30px;
-	border-radius: 15px;
-	border: none;
-	font-weight: 600;
-    font-family: 'Noto Sans KR', sans-serif;
+	width: 180px;
+	height: 50px;
+	font-weight: 400;
+	padding: 0 20px;
+	border: 1px solid #333;
+	border-radius: 0px;
 }
 
-#buynow {
-	background-color: black;
+#selectDeleteBtn {
+	background: white;
+	color: #7d7d7d;
+}
+
+#goto-cart {
+	background: #7d7d7d;
 	color: white;
-}
-
-#cart {
-    background-color: #f8e6e0;
-    color: #6e6e6e;
-}
-
-.likebox {
-    position: relative;
-}
-
-.heart-icon {
-    background: url(/resources/img/empty_heart.png) no-repeat center 1px/38px;
-    width: 54px;
-    height: 57px;
-	border: none;
-	cursor: pointer;
-}
-
-#like-cnt {
-	position: absolute;
-	line-height: 29px;
-	left: 23px;
+	margin-left: 10px;
 }
 </style>
 
 <script type="text/javascript">
 $(document).ready(function() {
-	const uId = '${sessionScope.uId }'
-	const gId = '${goodsInfo.gId }'
-	console.log(uId);
-	console.log(gId);
-	
-	$('#nologin').click(function() {
-		alert('로그인이 필요합니다');
-	})
 
-	$('#login').click(function() {
-		like_func();
-	})
-	
-function like_func(){
-	console.log('like_func 실행')
-		var sendData = {"gId":gId, "uId":uId}
-	
-		$.ajax({
-			type: 'post',
-			url: '/wish/clickLike',
-			data: JSON.stringify(sendData),
-			contentType: 'application/json; charset=UTF-8',
-			dataType: 'json',
-			success: function(data){
-				console.log(data);
-				
-				if(data.findLike==1){
-					$('#login').css('background', 'url(/resources/img/empty_heart.png) no-repeat center 1px/38px');
-					$('#like-cnt').html(data.totalLike);
-					alert('찜을 취소했습니다')
-					
-				} else {
-					$('#login').css('background', 'url(/resources/img/heart.png) no-repeat center 1px/38px');
-					$('#like-cnt').html(data.totalLike);
-					alert('위시리스트에 담겼습니다')
-					
-				}
-			}
-		})
-	}
 })
+
 </script>
 
 </head>
 <body>
 
 <section>
-<img class="goods-img" src="${goodsInfo.fileName }">
+<h3>쇼핑백 상품(${totalCart})</h3>
 
-<div class="goods-info">
-	<table>
-	<tr>
-		<div class="title"><h3>${goodsInfo.gName}</h3></div>
-	</tr>	
-	<tr>
-		<td>가격</td>
-		<td><div class="price"><fmt:formatNumber value="${goodsInfo.gPrice}" type="number" groupingUsed="true" />원</div></td>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>배송비</td>
-		<td><div class="delPrice"><fmt:formatNumber value="${goodsInfo.delPrice}" type="number" groupingUsed="true" />원</div></td>
-		<td></td>
-		<td></td>
-	</tr>	
-	<tr>
-		<td>수량</td>
-		<td>
-		<input type="number" name="selectQty" min="1" max="5" value="1">
-		</td>
-	</tr>
-	</table>
-	<br>
+<table>
+<thead>
+<tr>
+	<th>
+	<input type="checkbox" name="allCheck" id="allCheck" onclick="selectAll(this)">
+		<script>
+		//모두선택 체크박스 체크시 개별 체크박스 모두 체크
+		function selectAll(selectAll) {
+		  const checkboxes = document.querySelectorAll('.chBox');
+	  
+		  checkboxes.forEach((checkbox) => {
+		    checkbox.checked = selectAll.checked
+	  	  })
+		}
+		</script>
+	</th>
+	<th style="width: 35%">상품정보</th>
+	<th style="width: 15%">수량</th>
+	<th style="width: 20%">가격</th>
+	<th style="width: 15%">배송비</th>
+	<th style="width: 15%">선택</th>
+</tr>
+</thead>
 
-	<button class="btn" id="buynow">바로구매</button>
-	<button class="btn" id="cart">장바구니</button>
-	<span class="likebox">
-		<c:choose>
-			<c:when test="${uId eq null }">
-				<button class="heart-icon" id="nologin">
-			</c:when>
-			<c:otherwise>
-				<c:choose>
-					<c:when test="${likeCheck eq '0' or empty likeCheck }">
-						<button class="heart-icon" id="login" style="background: url(/resources/img/empty_heart.png) no-repeat center 1px/38px;">
-					</c:when>
-					<c:otherwise>
-						<button class="heart-icon" id="login" style="background: url(/resources/img/heart.png) no-repeat center 1px/38px;">
-					</c:otherwise>
-				</c:choose>
-			</c:otherwise>
-		</c:choose>
-		<span id="like-cnt">${likeCntAll }</span>
-		</button>
-	</span>
-	
-	
-</div> 
-<div class="clear"></div>
+<tbody>
+	<c:forEach items="${cartList }" var="cart">
+		<tr>
+			<td>
+			<input type="checkbox" name="chBox" class="chBox" data-cId="${cart.cId }">
+				<script>
+				//개별 체크박스 선택 or 해제시 모두 선택 해제
+				$("#chBox").click(function(){
+				 $("#allCheck").prop("checked", false);
+				});
+				</script>
+			</td>
+			<td class="prod">
+				<img class="thumbnail" src="${cart.fileName }">
+				<span style="">${cart.gName }</span>
+			</td>
+			
+			<td class="qty" style="text-align: center;">
+				<input type="number" id="qty" value="${cart.cQty}">
+				<button id="qty-update">변경</button></td>
+				
+			<td><fmt:formatNumber value="${cart.gPrice }" type="number" groupingUsed="true" />원</td>
+			<td><fmt:formatNumber value="${cart.delPrice }" type="number" groupingUsed="true" />원</td>
+			
+<!-- 단일상품 삭제(버튼) -->
+			<td><button id="deleteBtn" data-cId="${cart.cId }">
+				<script>
+			   $("#deleteBtn").click(function(){
+				var confirm_val = confirm("정말 삭제하시겠습니까?");
+				
+				if(confirm_val) {
+				var checkArr = new Array();
+					checkArr.push($(this).attr("data-cId"));
+				 console.log(checkArr)
+					  
+					$.ajax({
+						url : "/goods/deleteCart",
+						type : "post",
+						traditional: true,
+						data : JSON.stringify({"chbox":checkArr}),
+						contentType: 'application/json; charset=UTF-8',
+						success : function(res){
+							if(res=="delete_success"){
+							location.href = "/goods/cart";
+							} else {
+								alert('삭제 실패');
+							}
+						}
+					});
+				}   
+				});
+				</script>
+				<span style="font-size: 12px; margin-right: 3px;">삭제</span><span style="size: 15px;">x</span></button></td>
+		</tr>
+	</c:forEach>
+</tbody>
+</table>
 
-<div class="detail-img">
-</div>
+<br><br>
+<!-- 선택상품 삭제(체크박스) -->
+<button class="btn" id="selectDeleteBtn">선택상품삭제</button>
+			<script>
+			   $("#selectDeleteBtn").click(function(){
+				var confirm_val = confirm("정말 삭제하시겠습니까?");
+				
+				if(confirm_val) {
+					var checkArr = new Array();
+					var list = $('.chBox');
+					for(var i=0; i<list.length; i++){
+						if( list[i].checked ){
+// 						checkArr.push(list[i].attr("data-cId"));
+						checkArr.push(list.eq(i).attr("data-cId"));
+						}
+					}
+				 console.log(checkArr)
+					  
+					$.ajax({
+						url : "/goods/deleteCart",
+						type : "post",
+						traditional: true,
+						data : JSON.stringify({chbox:checkArr}),
+						contentType: 'application/json; charset=UTF-8',
+						success : function(res){
+							if(res=="delete_success"){
+							location.href = "/goods/cart";
+							} else {
+								alert('삭제 실패');
+							}
+						}
+					});
+				}   
+				});
+				</script>
+<button class="btn" id="goto-cart">쇼핑계속하기</button>
 </section>
 
 <br><br><br><br>
