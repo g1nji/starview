@@ -31,4 +31,9 @@
     <select id="addCheck" resultType="int">
     select count(*) from cart where g_id = #{gId } and u_id = #{uId }
     </select>
+    
+    <update id="updateQty">
+    UPDATE cart SET c_qty = #{cQty }
+    WHERE c_id = #{cId }
+    </update>
 </mapper>

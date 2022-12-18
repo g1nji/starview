@@ -261,6 +261,11 @@ function addCart(){
 	<br>
 
 	<button class="btn" id="buynow">바로구매</button>
+		<script>
+		$('#buynow').click(()=>{
+			location.href="/order/orderSheet"
+		})
+		</script>
 	<button class="btn" id="cart">장바구니</button>
 	<span class="likebox">
 		<c:choose>

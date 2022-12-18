@@ -38,4 +38,9 @@ public class CartServiceImpl implements yewon.service.face.CartService {
 		return cartDao.addCheck(cart);
 	}
 
+	@Override
+	public void updateQty(Cart cart) {
+		cartDao.updateQty(cart);
+	}
+
 }

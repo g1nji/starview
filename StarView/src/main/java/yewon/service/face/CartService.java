@@ -17,4 +17,6 @@ public interface CartService {
 
 	public int addCheck(Cart cart);
 
+	public void updateQty(Cart cart);
+
 }

@@ -16,4 +16,6 @@ public interface CartDao {
 
 	public int addCheck(Cart cart);
 
+	public void updateQty(Cart cart);
+
 }
