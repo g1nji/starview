@@ -132,7 +132,7 @@ $(document).ready(function() {
 	        }
 	    }
 	    $(calendar).find("#setDate").append(trTag);
-	    calMoveEvtFn();
+	    calMove();
 
 	    function assembly(year, month) {
 	        var calendarHtml =
@@ -165,7 +165,7 @@ $(document).ready(function() {
 	    }
 
 	    
-	    function calMoveEvtFn() {
+	    function calMove() {
 	        //전달 클릭
 	        $(".calendarTable").on("click", ".prev", function () {
 	            nowDate = new Date(nowDate.getFullYear(), nowDate.getMonth() - 1, nowDate.getDate());
@@ -181,6 +181,15 @@ $(document).ready(function() {
 	        $(".calendarTable").on("click", "td", function () {
 	            $(".calendarTable .selectDay").removeClass("selectDay");
 	            $(this).removeClass("selectDay").addClass("selectDay").attr("name","sDate");
+
+	            var ht = $( ".calendarTable .selectDay" ).html();
+	            console.log( ht );
+	            
+	            //투두리스트 폼 만들기
+	    		$("#todolist").css("display", "block");
+	            $("#selectDay").text( ht );
+	            
+	    		
 	        });
 	        
 	        //토글 클래스
@@ -188,15 +197,17 @@ $(document).ready(function() {
 // 	        	$(this).toggleClass("selectDay");
 // 	        });
 	        
+	        
 	        //투두리스트 폼 만들기
-	    	$(".calendarTable").on("click", "td", function() {
+// 	    	$(".calendarTable").on("click", "td", function() {
+// 	    		$("#todolist").css("display", "block");
 	    		
-	    		var day = $('td').attr('class');
+// 	    		var valDay = $('.selectDay').val();
 	    		
-	    		$("#todolist").css("display", "block");
-	    		$("#selectDay").css("display", "block");
-	    		$("#selectDay").text(day);
-	    	})
+// 	    		$("#selectDay").text( valDay );
+// 	    	})
+	    	
+	    	//todolist에 선택 날짜 띄우기
 	    	
 	    }
 	    
@@ -219,8 +230,7 @@ $(document).ready(function() {
 <!-- todolist 폼 -->
 	<div id="todolist" style="display:none;">
 	
-	<div id="selectDay" style="display:none;">
-		
+	<div id="selectDay" style="font-weight:bold;">
 	</div>
 	<form id="todoform" method="POST">
 	
