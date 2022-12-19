@@ -84,8 +84,8 @@ public class UsersServiceImpl implements UsersService {
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
             
-			sb.append("&client_id=40bfbca47f825701e600575bf0bc7082"); //본인이 발급받은 key
-			sb.append("&redirect_uri=http://localhost:8888/users/oauth"); // 본인이 설정한 주소
+			sb.append("&client_id=97cf4084041ad45dbcd326d4447775e1"); //본인이 발급받은 key
+			sb.append("&redirect_uri=http://localhost:8088/users/kakao"); // 본인이 설정한 주소
             
 			sb.append("&code=" + code);
 			bw.write(sb.toString());

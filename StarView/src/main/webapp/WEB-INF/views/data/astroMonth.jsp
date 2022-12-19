@@ -42,7 +42,7 @@ font-size: 16px;
     padding: 10px 20px;
     margin-bottom:10px;
     border: 1px solid #fff;
-/*     background-color:#ffd66d; */
+	background-color:#ffd66d;
     text-align: center;
     text-decoration: none;
 }
@@ -54,9 +54,9 @@ background-color: #F2D7D9;
 }
 
 #title{
-text-align: center;
-float: left;
-
+	text-align: center;
+	float: left;
+    margin-bottom: 10px;
 }
 table{
 	border-collapse: collapse;
@@ -71,8 +71,8 @@ table{
  
 
 .box{
-text-align: right;
-/* margin-right: 20px; */
+	float: right;
+    margin-top: 20px;
 }
 
 #space{
@@ -221,7 +221,7 @@ $(document).ready(() => {
 <h2>이달의 천문현상🌟</h2>
 </div>
 <div class="box">
-<input type="text" name="Year" id="Year">년
+<input type="text" name="Year" id="Year" placeholder="년">
 	<select id="Mon">
 		<option value="01">1월</option>
 		<option value="02">2월</option>
