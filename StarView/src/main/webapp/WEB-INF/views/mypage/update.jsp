@@ -178,15 +178,7 @@ input{
 </script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-  <script>
-    $("#uPwck").on("click", function(){
-      toastr.options.escapeHtml = true;
-      toastr.options.closeButton = true;
-      toastr.options.newestOnTop = false;
-      toastr.options.progressBar = true;
-      toastr.info('예제', '명월일지', {timeOut: 5000});
-    });
-  </script>
+ 
 <!-- 휴대전화 입력 유효성 검사 -->
 <script type="text/javascript">
 
@@ -297,7 +289,7 @@ $(document).ready(function () {
                         <th scope="row">생년월일</th>
                         <td>
                             <div class="person_field_body">
-                            	<input type="text" id="uBirth" value="${users.uBirth}" name="uBirth"readonly>
+                            	<input type="date" id="uBirth" value="${users.uBirth}" name="uBirth">
                             </div>
                         </td>
                     </tr>
