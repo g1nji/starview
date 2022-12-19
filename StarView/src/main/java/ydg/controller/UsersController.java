@@ -134,9 +134,9 @@ public class UsersController {
 		
 	}
 	
-	@RequestMapping("/oauth")
+	@RequestMapping("/kakao")
 	public String kakaoLogin(@RequestParam(value="code", required = false) String code, Users users, HttpSession session) {
-		logger.info("/users/oauth");
+		logger.info("/users/kakao");
 		
 		logger.info("########" + code);
 		
@@ -163,6 +163,10 @@ public class UsersController {
 		
 		if(joinResult) {
 			logger.info("가입완료");
+			session.setAttribute("login", true);
+			session.setAttribute("uId", users.getuId());
+			//마이페이지 수정화면으로 넘어감
+			return "mypage/update";
 		} else {
 			logger.info("이미 존재하는 아이디");
 		}
@@ -171,6 +175,8 @@ public class UsersController {
 		session.setAttribute("uId", users.getuId());
 		
 		return "redirect:/";
+		
+		
 	}
 	
 	@GetMapping("/findid")

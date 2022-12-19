@@ -99,7 +99,7 @@ function logout() {
 </form>
 
 <!-- 카카오 로그인 -->
-	<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=40bfbca47f825701e600575bf0bc7082&redirect_uri=http://localhost:8888/users/oauth&response_type=code">
+	<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=97cf4084041ad45dbcd326d4447775e1&redirect_uri=http://localhost:8088/users/kakao&response_type=code">
 	<!-- REST_API키 및 REDIRECT_URi는 본인걸로 수정하세요 -->
 	<!-- 저는 redirect_uri을 http://localhost:8080/member/kakaoLogin로 했습니다. -->
 	<!-- 본인걸로 수정 시 띄어쓰기 절대 하지 마세요. 오류납니다. -->
