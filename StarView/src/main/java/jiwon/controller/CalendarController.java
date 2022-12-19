@@ -1,5 +1,8 @@
 package jiwon.controller;
 
+import java.io.IOException;
+import java.io.Writer;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import jiwon.dto.Calendar;
 import jiwon.service.face.CalendarService;
@@ -41,5 +45,23 @@ public class CalendarController {
 		calendarservice.write(scheduler);
 		
 		return "redirect:/calendar/todolist";
+	}
+	
+	//글쓰기 완료
+	@ResponseBody
+	@PostMapping("/todolist_ok")
+	public String writeok(Writer out, Calendar calendar ) {
+		logger.info("Calendar {} ", calendar);
+//		logger.info("sDate {} ", sDate);
+		
+		
+//		try {
+//			out.write("{\"res\":true}");
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+		
+		return "";
+		
 	}
 }
