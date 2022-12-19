@@ -34,7 +34,6 @@ section {
 
 table {
 	border-top: 2px solid black;
-	border-bottom: 1px solid black;
 }
 
 th {
@@ -46,6 +45,10 @@ th {
 
 tr {
 	border-bottom: 1px solid #eae7e7;
+}
+
+tr:last-child{
+	border-bottom: 1px solid black;
 }
 
 td {

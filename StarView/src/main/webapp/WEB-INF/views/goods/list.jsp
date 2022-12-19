@@ -19,13 +19,25 @@ section {
 	padding-top: 100px; 
 }
 
+.header p {
+	font-size: 17px;
+}
+
+.header p #ttlCnt {
+	font-size: 25px;
+}
+/* .chkicon { */
+/* 	width: 10px; */
+/* 	height: 10px; */
+/* } */
+
 .items {  
  	list-style: none;  
 	display: block;
 	padding: 0;
  	float: left;
  	margin-right: 42px; 
- 	margin-top: 50px;
+ 	margin-top: 40px;
  } 
 
 
@@ -47,13 +59,18 @@ a {
 
 #moreBtn {
 	padding: 10px 40px;
-	border-radius: 20px;
+	border-radius: 16px;
 	border: none;
 	font-weight: 500;
     font-family: 'Noto Sans KR', sans-serif;
-    font-style: italic;
+/*     font-style: italic; */
     color: black;
     background-color: #FFEBBA;
+    width: 530px;
+}
+
+#moreBtn:hover {
+    background-color: #f8ca00;
 }
 
 .clear {
@@ -65,8 +82,9 @@ span {
 }
 
 .sort {
-	color: #999; 
+	color: #C5C6B6; 
 }
+
 	
 </style>
 </head>
@@ -115,20 +133,20 @@ $(document).ready(function() {
 	}) //-- .click() 
 	
 	$('#latest').click(function() {
-		$('.sort').css('color', '#999');
+		$('.sort').css('color', '#C5C6B6');
 		$('#latest').css('color', 'black');
 		sortByDate();
 	})
 	
 	$('#lowPrice').click(function() {
-		$('.sort').css('color', '#999');
+		$('.sort').css('color', '#C5C6B6');
 		$('#lowPrice').css('color', 'black');
 		
 		sortByLowPrice();
 	})
 	
 	$('#highPrice').click(function() {
-		$('.sort').css('color', '#999');
+		$('.sort').css('color', '#C5C6B6');
 		$('#highPrice').css('color', 'black');
 		sortByHighPrice();
 	})
@@ -180,8 +198,8 @@ $(document).ready(function() {
 
 <section id="goods-box">
 	<div class="header">
-		<h2>굿즈샵</h2>
-		<p style="float: left;"> 총 ${totalCount }개의 상품</p>
+		<h2>굿즈샵</h2><br>
+		<p style="float: left;"> 총 <span id="ttlCnt">${totalCount } </span>개의 상품</p>
 		<p style="float: right;">
 			<span class="sort" id="latest" style="color: black;">최신등록순</span> | 
 			<span class="sort" id="lowPrice">낮은가격순</span> | 
@@ -198,7 +216,7 @@ $(document).ready(function() {
 		</ul>
 	</c:forEach>
 		<div class="more"></div>
-	<div id="btn"><button id="moreBtn">More...</button></div>
+	<div id="btn"><button id="moreBtn">MORE <img style="width: 17px; height: 17px;" src="/resources/img/rightarr.png"></button></div>
 </div>
 
 
