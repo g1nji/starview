@@ -1,0 +1,160 @@
+@charset "UTF-8";
+
+/* 웹폰트(NotoSans) */
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 100;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 300;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 400;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 500;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 700;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 900;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.otf) format('opentype');}
+body, h1, h2, h3, h4, h5, h6, input, textarea, select {
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* ----------------- */
+
+.yellow {
+	color: #FFB703;
+}
+
+body {
+	margin: 0;
+	height: 100%;
+}
+
+a {
+	color: black;
+}
+
+a:hover {
+	color: #FFB703;
+	text-decoration: underline;
+}
+
+header {
+	background-color: white;
+	margin-bottom: 40px;
+	margin-left: -20px;
+	padding: 1px 0 0 0;
+}
+
+/* ----------------- */
+
+#logo {
+	background-color: white;
+    width: 190px;
+    height: 150px;
+    border-radius: 200px;
+    padding: 0;
+    padding-bottom: 63px;
+    margin-top: 0;
+}
+
+ul.subnav {
+	padding: 0 100px 0 0;
+}
+
+ul.subnav > li {
+	float: right;
+	list-style-type: none;
+}
+
+#menu {
+	height: 100px;
+}
+
+ul.mainnav > li {
+	float: left;
+	position: relative;
+	width: 150px;
+	height: 30px;
+	text-align: center;
+	margin-top: 50px;
+	padding: 0 10px 40px 10px;
+	list-style-type: none;
+}
+
+ul.subnav > li {
+	padding: 50px 5px 5px 5px;
+}
+
+ul.mainnav > li > a {
+	text-decoration: none;
+    font-size: 19px;
+    font-weight: 500;
+}
+
+ul.mainnav > li > ul {
+	display: none;
+	width: 480px;
+	height: 45px;
+	margin-top: 6px;
+	margin-left: -10px;
+	padding: 10px 12px;
+	background-color: #FFEBBA;
+	border-radius: 30px;
+}
+
+ul.mainnav > li > ul > li {
+	list-style-type: none;
+	text-align: left;
+	float: left;
+	padding: 0 0 10px 20px;
+}
+
+ul.mainnav > li > ul > li > a {
+	text-decoration: none;
+	font-size: 16px;
+	font-weight: 400;
+}
+
+ul.mainnav > li > ul > li > a:hover {
+	font-weight: 500;
+}
+
+ul.mainnav > li:hover > ul {
+	display: block;
+}
+
+#footer {
+	padding: 30px 0;
+	background-color: lightgray;
+	font-size: 12px;
+	text-align: center;
+}
+
+.wrap {
+	margin: 0 auto;
+}
+
+.monthly {
+	width: 55%;
+	height: 200px;
+	margin: 15px 30px 15px 0;
+	border: 1px solid black;
+	display: inline-block;
+}
+
+.weather {
+	width: 20%;
+	height: 200px;
+	margin: 0 20px 0 0;
+	border: 1px solid black;
+	display: inline-block;
+}
+
+.moon {
+	width: 80%;
+	height: 200px;
+	border: 1px solid black;
+	display: inline-block;
+}
+
+#day {
+	width:70%;
+	height: 500px;
+	margin: 0 auto;
+	background-size: 100%;
+	border-radius: 100px;
+	background-size : cover;
+}
