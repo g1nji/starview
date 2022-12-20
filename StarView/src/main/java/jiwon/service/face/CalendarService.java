@@ -9,6 +9,6 @@ public interface CalendarService {
 	 * 
 	 * @param scheduler - 작성한 게시글 정보 객체
 	 */
-	public void write(Calendar scheduler);
+	public void write(Calendar calendar);
 
 }

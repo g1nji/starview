@@ -189,12 +189,11 @@ $(document).ready(function() {
 	            $(this).removeClass("selectDay").addClass("selectDay");
 
 	            var todoDay = $(".calendarTable .selectDay").html();
-	            console.log( todoDay );
+// 	            console.log( todoDay );
 	            
 	            //투두리스트 폼 만들기
 	    		$("#todolist").css("display", "block");
-// 	            $("#selectDay").text( todoDay );
-	            $("#selectDay").html( todoDay );
+	            $("#selectDay").text( todoDay );
 	    		
 	        });
 
@@ -203,22 +202,19 @@ $(document).ready(function() {
 		     $("#todoBtn").on("click", function () {
 		    	 var inputTodo = $("#inputbox").val();
 		    	 var todoDay = $("#selectDay").text();
-		    	 console.log( todoDay );
+// 		    	 console.log( todoDay );
+// 		    	 console.log(inputTodo);
 		    	 
 		    	 $.ajax({
 		    		type:"POST"
 		    		, url: "/calendar/todolist"
-					, data: { todoList : inputTodo , sDate : todoDay } 
+					, data: { "todoList" : inputTodo , "sDate" : todoDay } 
 					, dataType:"json"
 					, success: function(res) {
 						console.log("AJAX 성공");
 						
-						var out = "";
 						
-						var content = res.inputTodo;
 						
-						out += "<br>------------------";
-						out += "<br>" + content;
 					}
 		    	 	, error: function() {
 		    	 		console.log("AJAX 실패")
@@ -271,6 +267,9 @@ $(document).ready(function() {
 	<label><input type="text" name="todoList" id="inputbox"></label>
 	<button type="button" id="todoBtn">작성</button>
 	</form>	
+	
+	<div id="listbox">
+	</div>
 	
 	</div>
 	

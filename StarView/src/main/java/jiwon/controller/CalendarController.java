@@ -1,7 +1,7 @@
 package jiwon.controller;
 
-import java.io.IOException;
-import java.io.Writer;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,34 +35,36 @@ public class CalendarController {
 	}
 	
 	//todoList 글쓰기 처리
+	@ResponseBody
 	@PostMapping("/todolist")
-	public String calendarwrite( Calendar scheduler, HttpSession session) {
+	public String calendarwrite( Calendar calendar, HttpSession session, Model model) {
 		logger.info("/calendar/todolist [POST]");
-		logger.info("{}", scheduler);
+		logger.info("{}", calendar);
 		
 		//작성자 정보 추가하기
-		scheduler.setuId( (String) session.getAttribute("uId"));
-		
-		calendarservice.write(scheduler);
+		calendar.setuId( (String) session.getAttribute("uId"));
+		calendarservice.write(calendar);
 		
 		return "redirect:/calendar/todolist";
 	}
 	
 	//글쓰기 완료
-	@ResponseBody
-	@PostMapping("/todolist_ok")
-	public String writeok(Writer out, Calendar calendar ) {
-		logger.info("Calendar {} ", calendar);
-//		logger.info("sDate {} ", sDate);
-		
-		
-//		try {
-//			out.write("{\"res\":true}");
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-		
-		return "";
-		
-	}
+//	@ResponseBody
+//	@PostMapping("/todolist_ok")
+//	public String writeok(Writer out, Calendar calendar ) {
+//		logger.info("Calendar {} ", calendar);
+////		logger.info("sDate {} ", sDate);
+//		
+//		
+////		try {
+////			out.write("{\"res\":true}");
+////		} catch (IOException e) {
+////			e.printStackTrace();
+////		}
+//		
+//		return "";
+//		
+//	}
+	
+	
 }
