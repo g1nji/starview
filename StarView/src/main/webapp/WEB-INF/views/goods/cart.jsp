@@ -8,217 +8,32 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
-<style type="text/css">
+<link rel="stylesheet" href="/resources/css/cartCss.css" />
 
-.container {
-	width: 1300px;
-}
-
-.bag-title {
-	margin-top: 50px;
-    margin-bottom: 30px;
-}
-
-section {
-	margin: 0 auto;
-}
-
-.bag-wrap {
-	float: left;
-	width: 74%; 
-}
-
-.clear {
-	clear: both;
-}
-
-table {
-	border-top: 2px solid black;
-	border-bottom: 1px solid black;
-}
-
-th {
-	border-bottom: 1px solid #E0E3DA;
-	height: 68px;
-	text-align: center;
-	vertical-align: middle;
-}
-
-tr {
-	border-bottom: 1px solid #eae7e7;
-}
-
-td {
-	text-align: center;
-	vertical-align: middle;
-	color: #333;
-}
-
-.prod {
-	display: flex;
-	align-items: center;
-}
-
-.thumbnail {
-	width: 100px;
-	height: 100px;
-	margin: 20px;
-}
-
-.deleteBtn {
-	border: 1px solid #E0E3DA;
-	background: white;
-	padding: 0 15px;
-}
-
-/* 좌측 하단 버튼 */
-.bottom-btn {
-	width: 180px;
-	height: 50px;
-	font-weight: 400;
-	padding: 0 20px;
-	border: 1px solid #333;
-	border-radius: 0px;
-}
-
-#selectDeleteBtn {
-	background: white;
-	color: #7d7d7d;
-}
-
-#goto-cart {
-	background: #7d7d7d;
-	color: white;
-	margin-left: 10px;
-}
-
-/* 우측 총 결제금액 섹션 */
-.payment {
-	float: right;
-	width: 24%;
-	height: 330px;
-	background: #f2f2f2;
-}
-
-.payment h3 {
-	height: 70px;
-    padding-top: 27px;
-    border-bottom: 1px solid #ababab;
-    font-size: 18px;
-    text-align: center;
-}
-
-.payment ul {
-	padding: 0 20px;
-}
-
-.payment ul li {
-	padding: 8px 0;
-    font-size: 14px;
-    list-style-type: none;
-    color: #333;
-}
-
-.payment ul li p {
-	float: right;
-	width: 114px;
-    text-align: right;
-}
-
-.payment ul li p .cntTtl {
-	margin-right: 5px;
-    font-size: 18px;
-}
-
-.payment ul li.total {
-	margin-top: 20px;
-    padding-top: 18px;
-    border-top: 1px solid #d9d9d9;
-}
-
-.payment ul li p #ttlAmt {
-	margin-right: 5px;
-    font-size: 20px;
-    color: #fa5500;
-}
-
-.payment .btn-order {
-    width: 100%;
-    height: 70px;
-    background-color: #000;
-    font-size: 18px;
-    line-height: 70px;
-    color: #fff;
-    margin-top: 10px;
-}
-
-/* 수량 div */
-.each {
-	width: 45px;
-    height: 25px;
-    margin: 0 auto;
-    border: 1px solid #dfdfdf;
-    position: relative;
-    padding-right: 18px;
-}
-
-.each button {
-    width: 19px;
-    height: 11px;
-    background: url(/resources/img/arrow.png) 0 0 no-repeat;
-    text-indent: -999em;
-/*     overflow: hidden; */
-    position: absolute;
-    top: 0;
-    right: 0;
-    border: none;
-}
-
-.each .btn-up {
-    border-bottom: 1px solid #dfdfdf;
-    background-position: 7px -46px;
-}
-
-.each input {
-	width: 23px;
-    height: 23px;
-    border-right: 1px solid #dfdfdf;
-    border-left: none;
-    border-top: none;
-    border-bottom: none;
-    font-size: 12px;
-    text-align: center;
-}
-
-.each .btn-down {
-    background-position: -43px -46px;
-    top: auto;
-    bottom: 0;
-}
-
-.qty-update {
-	border: 1px solid #E0E3DA;
-	background: white;
-	font-size: 13px;
-	color: #333;
- 	padding: 0 10px; 
- 	margin-top: 5px;
-}
-
-.each:after {
-    display: block;
-    clear: both;
-    content: '';
-}    
-</style>
 
 <script type="text/javascript">
 $(document).ready(function() {
 
+	//DOM객체 로딩시 총금액 보이도록 이벤트 발생시키기
+	$('#allCheck').trigger("click");
+	calOrderPrice();
+	calTotalPrice();
+
+	// 	var res = sessionStorage.getItem('qtyArr')
+// 	if(res!=null){
+// 		console.log(res);
+// 		res = JSON.parse(res);
+// 		var qtyarr = res.flatMap(Object.values)
+// 		console.log(qtyarr);
+// 		})
+// 	}
+	
+	
 	//개별 체크박스 선택시 전체 선택 해제
 	$(".chBox").click(function(){
 	 $("#allCheck").prop("checked", false);
 	});
+	
 	
 	//단일상품 삭제
    $(".deleteBtn").click(function(){
@@ -242,9 +57,10 @@ $(document).ready(function() {
 						alert('삭제 실패');
 					}
 				}
-			});
-		}   
-		});
+			}); //ajax
+		}   //if
+	}); //click
+	
 	
 	//선택상품 삭제
    $("#selectDeleteBtn").click(function(){
@@ -259,7 +75,7 @@ $(document).ready(function() {
 				checkArr.push(list.eq(i).attr("data-cId"));
 				}
 			}
-		 console.log(checkArr)
+			console.log(checkArr)
 			  
 			$.ajax({
 				url : "/goods/deleteCart",
@@ -274,66 +90,135 @@ $(document).ready(function() {
 						alert('삭제 실패');
 					}
 				}
-			});
-		}   
-	});
+			}); //ajax
+		}   //if
+	}); //click
+	
 	
 	//주문페이지 이동
 	$('.btn-order').click(()=>{
 		location.href="/order/orderSheet"
 	})
 	
-	//체크박스 onchange event 발생시 총금액 보여주기
-	$("input[name='chBox']").change(function(){
-		checkEvent()
+// 	체크이벤트 발생시 총금액 보여주기
+	$("input[type='checkbox']").change(function(){
+		calOrderPrice()
+		calTotalPrice()
 	})
-	
-	function checkEvent(){
+
+	function calTotalPrice(){
 		var gSum = 0; //총상품금액
 		var dSum = 0; //총배송비
 		var total = 0; //총결제금액
 
 		//총상품금액 계산
 		$("input[class='chBox']:checked").each((idx, chbx)=>{
+			//각 체크박스의 수량 가져오기
+			 var qty = $(chbx).parents("tr").find($(".input-qty")).val()
+			//각 체크박스의 가격 가져오기
 			 var gPrice = $(chbx).attr("data-gPrice");
-			 gSum += Number(gPrice) //attr()는 값이 String으로 넘어오기 때문에 형변환 해줌
-			 var dPrice = $(chbx).attr("data-delPrice");
-			 dSum += Number(dPrice)
+			//구매가격(가격*수량) 계산하기
+			 var orderPrice = gPrice * qty
+			//attr()는 값이 String으로 넘어오기 때문에 형변환 해줌
+			 gSum += Number(orderPrice) 			
+			//배송비 계산하기
+			var dPrice = $(chbx).attr("data-delPrice");
+			dSum += Number(dPrice)
 		})
-		console.log(gSum);
-		if(dSum >= 3000){
-			dSum = 3000;
-		}
-		console.log(dSum);
-
+		//배송비 보정
+		if(dSum >= 3000)	dSum = 3000;
+		//주문금액 계산하기
+		console.log(gSum + "+" + dSum);
 		total = gSum + dSum
-
+		//상품금액, 배송비, 결제금액 표시하기
 		$('#ttlGprice').html(gSum.toLocaleString());
 		$('#ttlDprice').html(dSum.toLocaleString());
 		$('#ttlAmt').html(total.toLocaleString());
 	}
 	
-	//수량 변경 버튼
-	$('.qty-update').click(function(e){
+	
+	//수량 변경
+	$('.qty-update').click(function(){
 		if(confirm('수량을 변경하시겠습니까?')){
-			let cId = $(this).attr("data-cId"); //현 jQuery버전에서는 .data()적용안됨
+			let cId = $(this).attr("data-cId"); 	//현 jQuery버전에서는 .data()적용안됨
+			let gPrice = $(this).attr("data-gPrice");
 			let cQty = $(this).parent("td").find("input").val();
-			console.log(cId + ", " + cQty);
+			var data = { cId:cId, cQty:cQty }
 			
-			sessionStorage.setItem('cId', cId)
-			sessionStorage.setItem('cQty', cQty)
+			console.log(data);
 			
-			$(".update-cId").val(cId);
-			$(".update-cQty").val(cQty);
-			$(".qty-update-form").submit();
-			
-			cQty = Number(sessionStorage.getItem('cQty'))
-			$('.input-qty').val(cQty)
+			$.ajax({
+				url : "/goods/updateQty",
+				type : "post",
+				data : JSON.stringify(data),
+				contentType: 'application/json; charset=UTF-8',
+				context: this,
+				success : function(res){
+					if(res=="update_done"){
+						calOrderPrice();
+						calTotalPrice();
+						console.log('수량변경 완료')
+					} 
+				}
+			}); //ajax
+		} //if
+	})	//click
+	
+		
+	//상품금액 계산		
+	function calOrderPrice() {
+		var tbody = document.getElementById("cart");
+		var rows = tbody.querySelectorAll("tr");
+		
+		for(var i=0; i<rows.length; i++){
+			//tr을 순서대로 하나씩 가져오기
+			var tr = rows[i];
+			//tr에서 가격이 표시된 td 가져오기
+			var priceTd = tr.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling;
+			//구매수량이 표시된 td 가져오기
+			var qtyTd = tr.firstElementChild.nextElementSibling.nextElementSibling;
+			//구매가격(가격*구매수량)을 표시할 td 가져오기
+			var orderPriceTd = tr.lastElementChild.previousElementSibling;
+			//td에서 가격 가져오기
+			var price = stringNumberToInt(priceTd.innerText); 
+			console.log(price)
+			//td에서 구매수량 가져오기
+			var qty = qtyTd.querySelector("input").value;
+			console.log(qty)
+			//구매가격 계산하기
+			var orderPrice = price * qty;
+			console.log(orderPrice)
+			//구매가격 표시 td에 구매가격 넣기
+			orderPriceTd.innerText = orderPrice.toLocaleString() + "원";
 		}
-	})
+	}		
+	
+	function stringNumberToInt(stringNumber){
+	    return parseInt(stringNumber.replace(/,/g , ''));
+	}
 	
 
+// 			var qtyArr = sessionStorage.getItem("qtyArr");
 			
+// 			if(qtyArr==null){
+// 				qtyArr = [];
+// 				var entry = {"cQty": cQty}
+// 				qtyArr.push(entry);
+// 				sessionStorage.setItem('qtyArr', JSON.stringify(qtyArr));
+// 			} else {
+// 				var entry = {"cQty": cQty}
+// 				qtyArr = JSON.parse(qtyArr)
+// 				console.log(qtyArr)
+// 				qtyArr.push(entry);
+// 				sessionStorage.setItem('qtyArr', JSON.stringify(qtyArr));
+// 			}
+// 			console.log(qtyArr)
+			
+			//form태그로 값 전달
+// 			$(".update-cId").val(cId);
+// 			$(".update-cQty").val(cQty);
+// 			$(".qty-update-form").submit();
+
 })
 
 </script>
@@ -370,7 +255,7 @@ $(document).ready(function() {
 </tr>
 </thead>
 
-<tbody>
+<tbody id="cart">
 	<c:forEach items="${cartList }" var="cart">
 		<tr>
 			<td>
@@ -384,43 +269,44 @@ $(document).ready(function() {
 			<td class="prodQty" style="text-align: center;">
 			<!-- 수량조정 form -->
 				<div class="each">
-					<form action="/goods/updateQty" method="post" class="qty-update-form">
-						<button type="button" name="button" class="btn-up" onclick="changeQty('p')">수량올림</button>
-						<input type="text" class="input-qty"  value="1" readonly="readonly">
-						<button type="button" name="button" class="btn-down" onclick="changeQty('m')">수량내림</button>
-	<!-- 					<input type="number" class="input-qty" min="1" max="9" value="1"> -->
-						<input type="hidden" name="cId" class="update-cId">
-						<input type="hidden" name="cQty" class="update-cQty">
-						
-						<script>
-							function changeQty(type){
-								var input = $("input[class='input-qty']")
-								var min = 1;
-								var max = 9;
-								var count = Number(input.val());
-								if(type=='p'){
-									if(count < max){
-									input.val(count+1)
-									} else if(count == max) {
-										input.val(max);
-									}
-								} else if(type=='m'){
-									if(count > min){
-									input.val(count-1)
-									} else if(count == min) {
-										input.val(min);
-									}
+				<form action="/goods/updateQty" method="post" class="qty-update-form">
+					<button type="button" name="button" class="btn-up" onclick="changeQty('p', this)">수량올림</button>
+					<input type="text" class="input-qty"  value="1" readonly="readonly">
+					<button type="button" name="button" class="btn-down" onclick="changeQty('m', this)">수량내림</button>
+<!-- 					<input type="number" class="input-qty" min="1" max="9" value="1"> -->
+<!-- 						<input type="hidden" name="cId" class="update-cId"> -->
+<!-- 						<input type="hidden" name="cQty" class="update-cQty"> -->
+					
+					<script>
+						function changeQty(type, ths){
+							var input = $(ths).parents("td").find("input[class='input-qty']");
+							var min = 1;
+							var max = 9;
+							
+							var count = Number(input.val());
+							if(type=='p'){
+								if(count < max){
+								input.val(count+1)
+								} else if(count == max) {
+									input.val(max);
+								}
+							} else if(type=='m'){
+								if(count > min){
+								input.val(count-1)
+								} else if(count == min) {
+									input.val(min);
 								}
 							}
-						</script>
-					</form>
+						}
+					</script>
+				</form>
 				</div>
-					<button class="qty-update" data-cId="${cart.cId }">변경</button>
+				<button class="qty-update" data-cId="${cart.cId }" data-gPrice="${cart.gPrice }">변경</button>
 			</td>	
 			
 			<td><fmt:formatNumber value="${cart.gPrice }" type="number" groupingUsed="true" />원</td>
 			<td><fmt:formatNumber value="${cart.delPrice }" type="number" groupingUsed="true" />원</td>
-			<td id="prodSum"><fmt:formatNumber value="${cart.gPrice * cart.cQty }" pattern="#,### 원" /></td>
+			<td id="prodSum"><span id="ttl"><fmt:formatNumber value="${cart.gPrice * cart.cQty }" type="number" groupingUsed="true" /></span>원</td>
 			
 			<!-- 단일상품 삭제 버튼 -->
 			<td>

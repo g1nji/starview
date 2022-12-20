@@ -42,12 +42,13 @@ public class CartController {
 	
 	@RequestMapping("/addCart")
 	@ResponseBody
-	public String addCart(@RequestBody Cart cart, Model model) {
+	public String addCart(@RequestBody Cart cart) {
 		
 		int addCheck = cartService.addCheck(cart);
 		logger.info("addCheck: {}", addCheck);
 		logger.info("addCart: {}", cart);
 
+		//장바구니 상품 중복체크
 		if(addCheck > 0) {
 			return "already_exist";
 		} else {
@@ -78,8 +79,9 @@ public class CartController {
 	}
 	
 	@RequestMapping("/updateQty")
-	public String updateQty(Cart cart) {
+	@ResponseBody
+	public String updateQty(@RequestBody Cart cart) {
 		cartService.updateQty(cart);
-		return "redirect:/goods/cart";
+		return "update_done";
 	}
 }
