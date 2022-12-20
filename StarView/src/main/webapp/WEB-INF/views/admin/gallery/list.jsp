@@ -33,17 +33,17 @@ td:nth-child(2) {
 <table class="table table-striped table-hover table-condensed">
 <thead>
 	<tr>
-		<th style="width: 10%;"><input type="checkbox"> 전체선택</th>
-		<th style="width: 5%;">번호</th>
-		<th style="width: 10%;">작성자</th>
-		<th style="width: 10%;">제목</th>
-		<th style="width: 10%;">내용</th>
-		<th style="width: 10%;">위치</th>
-		<th style="width: 10%;">태그</th>
-		<th style="width: 10%;">등록일</th>
-		<th style="width: 5%;">조회수</th>
-		<th style="width: 5%;">추천수</th>
-		<th style="width: 10%;">사진번호</th>
+		<th><input type="checkbox"> 전체선택</th>
+		<th>번호</th>
+		<th>작성자</th>
+		<th>제목</th>
+		<th>내용</th>
+		<th>위치</th>
+		<th>태그</th>
+		<th>등록일</th>
+		<th>조회수</th>
+		<th>추천수</th>
+		<th>사진번호</th>
 	</tr>
 </thead>	
 <tbody>
