@@ -331,6 +331,8 @@ $(document).ready(function() {
 			$('.input-qty').val(cQty)
 		}
 	})
+	
+
 			
 })
 
@@ -383,12 +385,34 @@ $(document).ready(function() {
 			<!-- 수량조정 form -->
 				<div class="each">
 					<form action="/goods/updateQty" method="post" class="qty-update-form">
-						<button type="button" name="button" class="btn-up">수량올림</button>
-						<input type="text" class="input-qty" min="1" max="9" value="1">
-						<button type="button" name="button" class="btn-down">수량내림</button>
+						<button type="button" name="button" class="btn-up" onclick="changeQty('p')">수량올림</button>
+						<input type="text" class="input-qty"  value="1" readonly="readonly">
+						<button type="button" name="button" class="btn-down" onclick="changeQty('m')">수량내림</button>
 	<!-- 					<input type="number" class="input-qty" min="1" max="9" value="1"> -->
 						<input type="hidden" name="cId" class="update-cId">
 						<input type="hidden" name="cQty" class="update-cQty">
+						
+						<script>
+							function changeQty(type){
+								var input = $("input[class='input-qty']")
+								var min = 1;
+								var max = 9;
+								var count = Number(input.val());
+								if(type=='p'){
+									if(count < max){
+									input.val(count+1)
+									} else if(count == max) {
+										input.val(max);
+									}
+								} else if(type=='m'){
+									if(count > min){
+									input.val(count-1)
+									} else if(count == min) {
+										input.val(min);
+									}
+								}
+							}
+						</script>
 					</form>
 				</div>
 					<button class="qty-update" data-cId="${cart.cId }">변경</button>
