@@ -29,7 +29,7 @@
     </select>
     
     <select id="addCheck" resultType="int">
-    select count(*) from cart where g_id = #{gId } and u_id = #{uId }
+    select count(*) from cart where g_id = #{gId } 
     </select>
     
     <update id="updateQty">
