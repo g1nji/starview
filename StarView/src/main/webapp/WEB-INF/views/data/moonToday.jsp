@@ -31,7 +31,7 @@ body {
 .moonTitle{
 text-align:center;
 /* color: #fff; */
-margin-top: 70px;
+margin-top: 35px;
 margin-bottom: 25px;
 }
 
@@ -57,7 +57,7 @@ box-shadow:20px 20px 10px rgba(0,0,0,0.2);
 #moonimg:hover{
 transition:0.5s;
 box-shadow:20px 20px 10px rgba(0,0,0,0.4);
-transform:scale(1.05,1.05);
+transform:scale(1.15,1.15);
 }
 
 #resultmoon{

@@ -120,6 +120,11 @@ input{
 	font-weight: 600;
 	width:160px;
 }
+
+.toast-bottom-center {
+	top:25%;
+}	
+
 </style>
 <!-- jQuery 2.2.4 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -208,6 +213,7 @@ function validatePW( uPw ) {
 		toastr.options.escapeHtml = true;
 	    toastr.options.closeButton = true;
 	    toastr.options.newestOnTop = false;
+	    toastr.options.positionClass = "toast-bottom-center";
 		toastr.warning('영어대소문자, 숫자 8~16자만 입력하세요!','비밀번호', {timeOut: 10000}); 
 		return false;
 	   }
@@ -223,12 +229,44 @@ function validatePW( uPw ) {
 				toastr.options.escapeHtml = true;
 			    toastr.options.closeButton = true;
 			    toastr.options.newestOnTop = false;
-				toastr.info('이메일 형식을 맞춰주세요!  ex)abc@naver.com','이메일', {timeOut: 10000}); 
+			    toastr.options.positionClass = "toast-bottom-center";
+			    toastr.info('이메일 형식을 맞춰주세요!  ex)abc@naver.com','이메일', {timeOut: 10000}); 
 				return false;
 			   }
 				return true;
 		}
 
+		function nick_check(){
+			console.log("닉쳌")
+			var uNick=$("#uNick").val();
+			
+			$.ajax({
+				url:"/mypage/nickCheck",
+				data:{"uNick":uNick},
+				type:"post",
+				dataType:"json",
+				/* cache:false,
+				async:ture, */
+				success:function(result){
+					console.log(result)
+					if(result>0){
+						/* $("#nickmsg").text("중복된 닉네임") */
+						toastr.options.escapeHtml = true;
+					    toastr.options.newestOnTop = true;
+					    toastr.options.positionClass = "toast-bottom-center";
+						toastr.warning('중복된 닉네임입니다!','닉네임 중복', {timeOut: 5000}); 
+					}else{
+					/* 	$("#nickmsg").text("사용 가능") */
+						toastr.options.escapeHtml = true;
+					    toastr.options.newestOnTop = true;
+					    toastr.options.positionClass = "toast-bottom-center";
+						toastr.success('사용 가능한 닉네임입니다!','닉네임 중복확인 완료', {timeOut: 5000}); 
+					}
+					
+				}
+			
+			})
+		}		
 
 
 $(document).ready(function () {
@@ -281,7 +319,8 @@ $(document).ready(function () {
                         <th scope="row">닉네임</th>
                         <td>
                             <div class="person_field_body">
-                            	<input type="text" value="${users.uNick}" name="uNick">
+                            	<input type="text" value="${users.uNick}" id="uNick" name="uNick"><input type="button" id="nickChk" value="확인" onclick="nick_check();">
+                            	<span id="nickmsg" style="color:red;">${msg }</span>
                             </div>
                         </td>
                     </tr>
@@ -344,8 +383,7 @@ $(document).ready(function () {
 <input type="text" id="sample6_detailAddress" name="uAdd2" hidden="hidden"><br>
 <input type="text" id="sample6_extraAddress" hidden="hidden">            
 </form>                    
-                    
-                    
+                   
                      
 <%-- <div class="mypagediv">
 <form action="/mypage/update" method="post" id="form" onsubmit="return validate();">
