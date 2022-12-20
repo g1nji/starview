@@ -107,10 +107,6 @@ ul.nav > li:hover > ul {
 	z-index: 999;
 }
 
-html #header {
-	position: absolute;
-}
-
 #footer {
 	position: fixed;
 	z-index: 999;
@@ -120,11 +116,7 @@ html #header {
 	height: 60px;
 	width: 100%;
 	color: white;
-}
-
-html #footer {
-	position: absolute;
-	bottom: -1px;
+	bottom: 0
 }
 
 .container {
