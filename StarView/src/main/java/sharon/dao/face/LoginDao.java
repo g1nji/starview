@@ -26,4 +26,7 @@ public interface LoginDao {
 	//회원정보 수정 시 비번 확인
 	public int selectCntByIdPW(String loginid, String pw);
 
+	//닉네임 중복 확인
+	public int selectByuNick(String uNick);
+
 }

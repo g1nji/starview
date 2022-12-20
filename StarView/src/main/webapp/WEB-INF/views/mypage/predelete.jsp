@@ -31,7 +31,9 @@ margin-bottom: 20px;
 }
 </style>
 <script type="text/javascript">
-	
+function del(){
+	alert('정말로 탈퇴하시겠습니까?')
+}	
 	
 </script>
 </head>
@@ -45,7 +47,7 @@ margin-bottom: 20px;
 <h3>비밀번호 <input type="password" name="uPw"></h3> <%--  value="${users.uPw}" --%>
 <div style="color:red;">${msg }</div>
 
-<input type="submit" id="btn" value="탈퇴" onclick='del()'>
+<input type="submit" id="btn" value="탈퇴" onsubmit='del()'>
 
 
 

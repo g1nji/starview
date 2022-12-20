@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import sharon.dao.face.LoginDao;
 import sharon.service.face.LoginService;
@@ -88,6 +89,41 @@ public class LoginController {
 			  return "redirect:/mypage/mypage";
 		  }
 		  
+		  @ResponseBody
+		  @PostMapping("/nickCheck")
+		    public int nickCheck(String uNick, Model model) {
+		        
+		        logger.info("usernick : {}",uNick);
+		 
+		        int result= loginService.nickCheck(uNick);
+		        logger.info("result, {}", result);
+		        
+		        if(result>0) {
+		        	logger.info("닉네임 중복");
+		        	model.addAttribute("msg","중복된 닉네임입니다.");
+		        }else {
+		        	logger.info("닉네임 사용 가능");
+		        	model.addAttribute("msg","사용 가능한 닉네임입니다.");
+		        }
+		        model.addAttribute("result",result);
+		        return result;
+		    }
+		  
+//		  @RequestMapping("/nickCheck")
+//		  public void nickChk(String uNick,Users users) {
+//			  
+//			  users.setUserid(req.getParameter("userid"));
+//			  
+//			  int result = dao.checkId(user);
+//			  
+//			  String json = "{\"result\":" +result+"}";
+//			  System.out.println(json);
+//			  
+//			  resp.setContentType("application/x-json; charset=utf-8");
+//			  
+//			  resp.getWriter().write(json);
+//			  
+//		  }
 		  
 		//회원정보 탈퇴 전 비밀번호 확인
 		  @GetMapping("/predelete")

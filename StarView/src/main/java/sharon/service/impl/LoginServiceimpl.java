@@ -46,6 +46,12 @@ public class LoginServiceimpl implements LoginService{
 		
 	}
 
+	@Override
+	public int nickCheck(String uNick) {
+			
+		return loginDao.selectByuNick(uNick);
+	}
+
 	
 
 }
