@@ -24,14 +24,10 @@ $(document).ready(function() {
 ${viewGallery.uNick }
 
 <!-- 게시글 작성자가 아닐 때 -->
-좋아요
-
-<!-- 게시글 작성자일 때 -->
-<c:if test="${uId eq viewGallery.uId }">
-	<a href="./update?galleryNo=${viewGallery.galleryNo }">수정</a>
-	<a href="./delete?galleryNo=${viewGallery.galleryNo }">삭제</a>
-</c:if>
-
+<!-- 좋아요 버튼 -->
+<%-- <c:choose> --%>
+<%-- 	<c:when test="${ }" --%>
+<%-- </c:choose> --%>
 <br>
 
 <fmt:formatDate value="${viewGallery.galleryDate }" pattern="yyyy-MM-dd" />

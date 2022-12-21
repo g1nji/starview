@@ -27,6 +27,7 @@
 		SELECT * FROM (
 			SELECT rownum rnum, G.* FROM (
 				SELECT * FROM gallery
+				ORDER BY gallery_no desc
 			) G
 		) gallery
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
@@ -36,6 +37,7 @@
 		SELECT * FROM (
 			SELECT rownum rnum, R.* FROM (
 				SELECT * FROM review
+				ORDER BY r_id desc
 			) R
 		) review
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
@@ -45,6 +47,7 @@
 		SELECT * FROM (
 			SELECT rownum rnum, P.* FROM (
 				SELECT * FROM place_review
+				ORDER BY sreview_no desc
 			) P
 		) place_review
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }

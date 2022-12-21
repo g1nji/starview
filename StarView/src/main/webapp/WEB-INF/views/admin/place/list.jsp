@@ -19,6 +19,38 @@ td:nth-child(2) {
 }
 </style>
 
+<script type="text/javascript">
+
+//전체 선택
+function selectAll(selectAll)  {
+	var checkboxes 
+	   = document.querySelectorAll('input[type="checkbox"]');
+	
+	checkboxes.forEach((checkbox) => {
+	  checkbox.checked = selectAll.checked
+	})
+}
+
+$(document).ready(function() {
+	
+	//선택
+	$('#select').click(function() {
+		var sel = $('input[name="select"]:checked').val()
+		//console.log(sel)
+		
+		//하지만 해당 게시글의 delete기능을 아직 구현하지 않았다
+		//삭제
+		$('#delOk').click(function() {
+			if (confirm('삭제하시면 복구할 수 없습니다. \n정말로 삭제하시겠습니까?')) {
+				location.href = "./delete?sreviewNo=" + sel
+			}
+		})
+	})
+
+})
+
+</script>
+
 <h1>명소 후기 게시글 리스트</h1>
 <hr>
 
@@ -33,29 +65,27 @@ td:nth-child(2) {
 <table class="table table-striped table-hover table-condensed">
 <thead>
 	<tr>
-		<th><input type="checkbox"> 전체선택</th>
-		<th>번호</th>
+		<th><input type='checkbox' name='all' value='selectall' onclick='selectAll(this)'/> 전체선택</th>
 		<th>작성자</th>
 		<th>내용</th>
 		<th>등록일</th>
-		<th>장소번호</th>
 	</tr>
 </thead>	
 <tbody>
 <c:forEach items="${boardList }" var="b">
 	<tr>
-		<td><input type="checkbox"></td>
-		<td>${b.sreviewNo }</td>
+		<td><input id="select" type="checkbox" name="select" value="${b.sreviewNo }"></td>
 		<td>${b.uId }</td>
 		<td>${b.sreviewContent }</td>
 		<td><fmt:formatDate value="${b.sreviewDate }" pattern="yy-MM-dd HH:mm:ss"/></td>
-		<td>${b.arrivalNum }</td>
 	</tr>
 </c:forEach>
 </tbody>
 </table>
 
-<span class="pull-right">total : ${paging.totalCount }</span>
+<span class="pull-right">total : ${paging.totalCount }</span><br><br>
+
+<button id="delOk" class="btn btn-primary" style="float: right">삭제</button><br>
 
 <c:import url="../layout/paging.jsp" />
 
