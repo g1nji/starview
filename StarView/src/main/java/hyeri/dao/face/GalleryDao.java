@@ -48,6 +48,8 @@ public interface GalleryDao {
 	 * @param gallery - 삽입할 게시글 정보
 	 */
 	public void uploadPhoto(Gallery gallery);
+	
+	public void updateCm(Gallery gallery);
 
 	/**
 	 * 첨부파일 정보를 삽입한다
@@ -97,5 +99,10 @@ public interface GalleryDao {
 	 * @return
 	 */
 	public List<Gallery> selectByKeyword(String keywordInput);
-	
+
+	public List<GComment> selectCList(Paging paging);
+
+	public void updateFilepath(Gallery gallery);
+
+
 }

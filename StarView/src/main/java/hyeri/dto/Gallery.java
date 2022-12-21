@@ -13,11 +13,13 @@ public class Gallery {
 	private String galleryLoc;
 	private String uId;
 	private String uNick;
+	private int commentCnt;
+	private String storedName;
 	
 	public Gallery() {}
 
 	public Gallery(int galleryNo, String galleryTitle, String galleryContent, Date galleryDate, int galleryHit,
-			int galleryLike, String galleryLoc, String uId, String uNick) {
+			int galleryLike, String galleryLoc, String uId, String uNick, int commentCnt, String storedName) {
 		super();
 		this.galleryNo = galleryNo;
 		this.galleryTitle = galleryTitle;
@@ -28,13 +30,16 @@ public class Gallery {
 		this.galleryLoc = galleryLoc;
 		this.uId = uId;
 		this.uNick = uNick;
+		this.commentCnt = commentCnt;
+		this.storedName = storedName;
 	}
 
 	@Override
 	public String toString() {
 		return "Gallery [galleryNo=" + galleryNo + ", galleryTitle=" + galleryTitle + ", galleryContent="
 				+ galleryContent + ", galleryDate=" + galleryDate + ", galleryHit=" + galleryHit + ", galleryLike="
-				+ galleryLike + ", galleryLoc=" + galleryLoc + ", uId=" + uId + ", uNick=" + uNick + "]";
+				+ galleryLike + ", galleryLoc=" + galleryLoc + ", uId=" + uId + ", uNick=" + uNick + ", commentCnt="
+				+ commentCnt + ", storedName=" + storedName + "]";
 	}
 
 	public int getGalleryNo() {
@@ -107,6 +112,22 @@ public class Gallery {
 
 	public void setuNick(String uNick) {
 		this.uNick = uNick;
+	}
+
+	public int getCommentCnt() {
+		return commentCnt;
+	}
+
+	public void setCommentCnt(int commentCnt) {
+		this.commentCnt = commentCnt;
+	}
+
+	public String getStoredName() {
+		return storedName;
+	}
+
+	public void setStoredName(String storedName) {
+		this.storedName = storedName;
 	}
 
 }

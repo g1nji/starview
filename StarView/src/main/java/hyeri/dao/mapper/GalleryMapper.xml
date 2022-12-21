@@ -16,7 +16,7 @@
 		        SELECT
 		            g.gallery_no, g.gallery_title, g.gallery_content,
 		            g.gallery_date, g.gallery_like, g.gallery_loc,
-		            g.gallery_hit, g.u_id AS guid, u.u_id AS uuid, u.u_nick
+		            g.gallery_hit, g.comment_cnt, g.stored_name, g.u_id AS guid, u.u_id AS uuid, u.u_nick
 		        FROM gallery g
 		        INNER JOIN users u
 		        ON g.u_id = u.u_id
@@ -32,9 +32,16 @@
 		WHERE gallery_no = #{galleryNo}
 	</update>
 	
+	<update id="updateCm" parameterType="hyeri.dto.Gallery">
+		UPDATE gallery
+		SET comment_cnt = (SELECT count(cm_no) FROM g_comment
+		WHERE gallery.gallery_no = g_comment.gallery_no)
+	</update>	
+	
 	<select id="selectGallery" resultType="hyeri.dto.Gallery" parameterType="hyeri.dto.Gallery">
 		SELECT
-           g.gallery_no, g.gallery_title, g.gallery_content, g.gallery_loc, g.u_id, u.u_nick
+           g.gallery_no, g.gallery_title, g.gallery_content
+           , g.gallery_loc, g.comment_cnt, g.u_id, g.stored_name, u.u_nick
         FROM gallery g
         INNER JOIN users u
         ON g.u_id = u.u_id
@@ -57,6 +64,12 @@
 		INSERT INTO gallery_file ( photo_no, gallery_no, stored_name, origin_name, filepath )
 		VALUES ( #{photoNo }, #{galleryNo }, #{storedName }, #{originName }, #{filepath })
 	</insert>
+	
+	<update id="updateFilepath" parameterType="hyeri.dto.Gallery">
+		UPDATE gallery
+		SET stored_name = (SELECT stored_name FROM gallery_file
+		WHERE gallery.gallery_no = gallery_file.gallery_no)
+	</update>
 
 	<select id="selectGalleryFileByGalleryNo" resultType="hyeri.dto.GalleryFile" parameterType="hyeri.dto.Gallery">
 		SELECT 
@@ -93,5 +106,32 @@
 			or gallery_content LIKE #{keywordInput }
 		ORDER BY gallery_no DESC
 	</select>
+	
+	<select id="selectCList" resultType="hyeri.dto.GComment" parameterType="hyeri.util.Paging">
+		SELECT * FROM (
+			SELECT rownum rnum, gu.* FROM (
+		        SELECT
+		            g.cm_no, g.cm_content, g.cm_date,
+		            g.gallery_no, g.u_id AS guid, u.u_id AS uuid, u.u_nick
+		        FROM g_comment g
+		        INNER JOIN users u
+		        ON g.u_id = u.u_id
+		        ORDER BY g.gallery_no DESC
+			)gu
+		)
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
+	
+	<update id="likeCheck" parameterType="HashMap">
+		UPDATE gallery_like
+		SET like_check = like_check + 1
+		WHERE u_id = #{uId } AND gallery_no = #{galleryNo }
+	</update>
+	
+	<update id="likeCheckCancel" parameterType="HashMap">
+		UPDATE gallery_like
+		SET like_check = 0
+		WHERE u_id = #{uId } AND gallery_no = #{galleryNo }
+	</update>
 
 </mapper>

@@ -23,6 +23,7 @@ import hyeri.dto.GComment;
 import hyeri.dto.GTag;
 import hyeri.dto.Gallery;
 import hyeri.dto.GalleryFile;
+import hyeri.dto.GalleryLike;
 import hyeri.service.face.CommentService;
 import hyeri.service.face.GalleryService;
 import hyeri.util.Paging;
@@ -45,11 +46,8 @@ public class GalleryController {
 		model.addAttribute("paging", paging);
 		
 		List<Gallery> list = galleryService.list(paging);
-//		for( Gallery g : list ) logger.info("{}", g);
+		for( Gallery g : list ) logger.info("{}", g);
 		model.addAttribute("list", list);
-		
-		//댓글수 조회
-		
 		
 	}
 	
@@ -75,6 +73,8 @@ public class GalleryController {
 		
 		//모델값 전달
 		model.addAttribute("comment", list);
+		
+		//좋아요 기능
 		
 	}
 	
@@ -117,7 +117,6 @@ public class GalleryController {
 			
 			//게시글, 첨부파일, 태그
 			galleryService.write(gallery, file, tagList);
-			
 			
 			
 		} else {
