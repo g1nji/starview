@@ -6,13 +6,34 @@
 <c:import url="../layout/header.jsp" />
 <c:import url="../layout/mymenu.jsp" />
 
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	$("td").mouseover(function() {
+		$(this).parent().find("td").addClass("backg")
+		$(this).parent().find("td > a").addClass("backg")
+	})
+	
+	$("td").mouseleave(function() {
+		$(this).parent().find("td").removeClass("backg")
+		$(this).parent().find("td > a").removeClass("backg")
+	})
+	
+})
+</script>
+
 <style type="text/css">
+
+.backg {
+ 	color: #FFB703;
+}
 
 th, td {
 	text-align: center;
 }
 
 .wrap{
+	height: 100%;
 	margin-left: 200px;
 	margin-top: 80px;
 }
@@ -21,6 +42,7 @@ th, td {
 
 <div class="wrap">
 <h1>내가 작성한 글 리스트</h1>
+<hr>
 
 <table class="table">
 <tr>
@@ -31,10 +53,10 @@ th, td {
 	<th style="width:10%; text-align:right;">작성일</th>
 </tr>
 
-<c:forEach items="${list }" var="gallery">
+<c:forEach items="${list }" var="gallery" varStatus="status">
 <tr>
-	<td>${gallery.galleryNo }</td>
-	<td style="text-align:left;"><a href="/gallery/view?galleryNo=${gallery.galleryNo }">${gallery.galleryTitle }</a></td>
+	<td>${list.size() - status.index }</td>
+	<td style="text-align:left;" onclick="location.href='/gallery/view?galleryNo=${gallery.galleryNo }'"><a href="/gallery/view?galleryNo=${gallery.galleryNo }">${gallery.galleryTitle }</a></td>
 	<td>${gallery.galleryLike }</td>
 	<td>${gallery.galleryHit }</td>
 	<td style="text-align:right;"><fmt:formatDate value="${gallery.galleryDate }" pattern="yyyy-MM-dd" /></td>
@@ -42,6 +64,9 @@ th, td {
 </c:forEach>
 </table>
 
+<c:import url="../layout/paging.jsp" />
+
 </div>
+
 
 <c:import url="../layout/footer.jsp" />
