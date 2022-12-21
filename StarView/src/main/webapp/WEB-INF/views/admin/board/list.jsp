@@ -19,13 +19,38 @@ td:nth-child(2) {
 }
 </style>
 
+<script type="text/javascript">
+
+//전체 선택
+function selectAll(selectAll)  {
+	var checkboxes 
+	   = document.querySelectorAll('input[type="checkbox"]');
+	
+	checkboxes.forEach((checkbox) => {
+	  checkbox.checked = selectAll.checked
+	})
+}
+
+//알림창
+$(document).ready(function() {
+	$('#delOk').click(function() {
+		if(!confirm('삭제하시면 복구할 수 없습니다. \n정말로 삭제하시겠습니까?')) {
+			return false;
+		}
+			
+	})
+	
+})
+
+</script>
+
 <h1>공지사항 리스트</h1>
 <hr>
 
 <table class="table table-striped table-hover table-condensed">
 <thead>
 	<tr>
-		<th><input type="checkbox"> 전체선택</th>
+		<th><input type='checkbox' name='all' value='selectall' onclick='selectAll(this)'/> 전체선택</th>
 		<th>작성자</th>
 		<th>번호</th>
 		<th>제목</th>
@@ -44,6 +69,8 @@ td:nth-child(2) {
 </c:forEach>
 </tbody>
 </table>
+
+<button id="delOk" class="btn btn-primary" style="float: right">삭제</button><br>
 
 <c:import url="../layout/paging.jsp" />
 

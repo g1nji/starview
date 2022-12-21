@@ -16,7 +16,9 @@ $(document).ready(function() {
 	})
 	
 	$("#btnDelete").click(function() {
-		location.href = "./delete?galleryNo=${viewBoard.galleryNo }"
+		if(confirm('삭제하시면 복구할 수 없습니다. \n정말로 삭제하시겠습니까?')) {
+			document.location.href = "./delete?galleryNo=${viewBoard.galleryNo }"
+		}
 	})
 })
 </script>

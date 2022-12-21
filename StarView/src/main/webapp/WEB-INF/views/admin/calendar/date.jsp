@@ -35,7 +35,6 @@ $(document).ready(() => {
 			dataType: "xml",
 			success: res=>{
 				console.log("AJAX 성공")	
-				
 				//테스트
 				//xml 응답 데이터
 				console.log(res)
@@ -53,28 +52,26 @@ $(document).ready(() => {
 				
 				var $table = $("<br><table class='table table-striped table table-bordered'>")
 				var tHead = "<tr>"
-					+ "<th>3일 후 오전 강수 확률</th>"
-					+ "<th>3일 후 오후 강수 확률</th>"
-					+ "<th>4일 후 오전 강수 확률</th>"
-					+ "<th>4일 후 오후 강수 확률</th>"
-					+ "<th>5일 후 오전 강수 확률</th>"
-					+ "<th>5일 후 오후 강수 확률</th>"
-					+ "<th>6일 후 오전 강수 확률</th>"
-					+ "<th>6일 후 오후 강수 확률</th>"
-					+ "<th>7일 후 오전 강수 확률</th>"
-					+ "<th>7일 후 오후 강수 확률</th>"
-					+ "<th>8일 후 강수 확률</th>"
-					+ "<th>3일 후 오전 날씨예보</th>"
-					+ "<th>3일 후 오후 날씨예보</th>"
-					+ "<th>4일 후 오전 날씨예보</th>"
-					+ "<th>4일 후 오후 날씨예보</th>"
-					+ "<th>5일 후 오전 날씨예보</th>"
-					+ "<th>5일 후 오후 날씨예보</th>"
-					+ "<th>6일 후 오전 날씨예보</th>"
-					+ "<th>6일 후 오후 날씨예보</th>"
-					+ "<th>7일 후 오전 날씨예보</th>"
-					+ "<th>7일 후 오후 날씨예보</th>"
-					+ "<th>8일 후 날씨예보</th>"
+					+ "<td>" + caseDay(day+3) +" 오전 강수 확률</td>"
+					+ "<td>" + caseDay(day+3) +" 오후 강수 확률</td>"
+					+ "<td>" + caseDay(day+4) +" 오전 강수 확률</td>"
+					+ "<td>" + caseDay(day+4) +" 오후 강수 확률</td>"
+					+ "<td>" + caseDay(day+5) +" 오전 강수 확률</td>"
+					+ "<td>" + caseDay(day+5) +" 오후 강수 확률</td>"
+					+ "<td>" + caseDay(day+6) +" 오전 강수 확률</td>"
+					+ "<td>" + caseDay(day+6) +" 오후 강수 확률</td>"
+					+ "<td>" + caseDay(day+7) +" 오전 강수 확률</td>"
+					+ "<td>" + caseDay(day+7) +" 오후 강수 확률</td>"
+					+ "<td>" + caseDay(day+3) +" 오전 날씨예보</td>"
+					+ "<td>" + caseDay(day+3) +" 오후 날씨예보</td>"
+					+ "<td>" + caseDay(day+4) +" 오전 날씨예보</td>"
+					+ "<td>" + caseDay(day+4) +" 오후 날씨예보</td>"
+					+ "<td>" + caseDay(day+5) +" 오전 날씨예보</td>"
+					+ "<td>" + caseDay(day+5) +" 오후 날씨예보</td>"
+					+ "<td>" + caseDay(day+6) +" 오전 날씨예보</td>"
+					+ "<td>" + caseDay(day+6) +" 오후 날씨예보</td>"
+					+ "<td>" + caseDay(day+7) +" 오전 날씨예보</td>"
+					+ "<td>" + caseDay(day+7) +" 오후 날씨예보</td>"
 					+ "</tr>";
 					
 				$table.html(tHead)
@@ -82,34 +79,32 @@ $(document).ready(() => {
 				//$rows.each(function(idx, ele) {
 				//})
 				
-					console.log($rows.find("regId").text())
+					//console.log($rows.find("regId").text())
 					
-					$("<tr>")
-					.	append($("<td>").html($rows.find("rnSt3Am").text()))
-					.	append($("<td>").html($rows.find("rnSt3Pm").text()))
-					.	append($("<td>").html($rows.find("rnSt4Am").text()))
-					.	append($("<td>").html($rows.find("rnSt4Pm").text()))
-					.	append($("<td>").html($rows.find("rnSt5Am").text()))
-					.	append($("<td>").html($rows.find("rnSt5Pm").text()))
-					.	append($("<td>").html($rows.find("rnSt6Am").text()))
-					.	append($("<td>").html($rows.find("rnSt6Pm").text()))
-					.	append($("<td>").html($rows.find("rnSt7Am").text()))
-					.	append($("<td>").html($rows.find("rnSt7Pm").text()))
-					.	append($("<td>").html($rows.find("rnSt8").text()))
-					.	append($("<td>").html($rows.find("wf3Am").text()))
-					.	append($("<td>").html($rows.find("wf3Pm").text()))
-					.	append($("<td>").html($rows.find("wf4Am").text()))
-					.	append($("<td>").html($rows.find("wf4Pm").text()))
-					.	append($("<td>").html($rows.find("wf5Am").text()))
-					.	append($("<td>").html($rows.find("wf5Pm").text()))
-					.	append($("<td>").html($rows.find("wf6Am").text()))
-					.	append($("<td>").html($rows.find("wf6Pm").text()))
-					.	append($("<td>").html($rows.find("wf7Am").text()))
-					.	append($("<td>").html($rows.find("wf7Pm").text()))
-					.	append($("<td>").html($rows.find("wf8").text()))
-					.appendTo($table)
+				$("<tr>")
+					.	append($("<td>").append($rows.find("rnSt3Am").text()))
+					.	append($("<td>").append($rows.find("rnSt3Pm").text()))
+					.	append($("<td>").append($rows.find("rnSt4Am").text()))
+					.	append($("<td>").append($rows.find("rnSt4Pm").text()))
+					.	append($("<td>").append($rows.find("rnSt5Am").text()))
+					.	append($("<td>").append($rows.find("rnSt5Pm").text()))
+					.	append($("<td>").append($rows.find("rnSt6Am").text()))
+					.	append($("<td>").append($rows.find("rnSt6Pm").text()))
+					.	append($("<td>").append($rows.find("rnSt7Am").text()))
+					.	append($("<td>").append($rows.find("rnSt7Pm").text()))
+					.	append($("<td>").append($rows.find("wf3Am").text()))
+					.	append($("<td>").append($rows.find("wf3Pm").text()))
+					.	append($("<td>").append($rows.find("wf4Am").text()))
+					.	append($("<td>").append($rows.find("wf4Pm").text()))
+					.	append($("<td>").append($rows.find("wf5Am").text()))
+					.	append($("<td>").append($rows.find("wf5Pm").text()))
+					.	append($("<td>").append($rows.find("wf6Am").text()))
+					.	append($("<td>").append($rows.find("wf6Pm").text()))
+					.	append($("<td>").append($rows.find("wf7Am").text()))
+					.	append($("<td>").append($rows.find("wf7Pm").text()))
+				.appendTo($table)
 				
-				$table.appendTo($('#resultLayout'))
+					$table.appendTo($('#resultLayout'))
 			},
 			error: ()=> {
 				console.log("AJAX 실패")
@@ -126,7 +121,78 @@ function func1(a,b) {
 //함수 정의 방법2
 var func2 = (a, b) => {
 	return a + b;
-} 
+}
+
+//오늘 날짜
+var today = new Date();
+console.log(today);
+
+//현재 시
+var hour = today.getHours();
+console.log(hour);
+
+//오늘 일자
+var date = today.getDate();
+console.log(date);
+
+//오늘 요일
+var day = today.getDay();
+console.log(day);
+
+
+function caseDay(day) {
+	var day2 = "";
+	
+	switch(day){
+	case 0:
+		day2 = "일요일";
+		break;
+	case 1:
+		day2 = "월요일";
+		break;
+	case 2:
+		day2 = "화요일";
+		break;
+	case 3:
+		day2 = "수요일";
+		break;
+	case 4:
+		day2 = "목요일";
+		break;
+	case 5:
+		day2 = "금요일";
+		break;
+	case 6:
+		day2 = "토요일";
+		break;
+	case 7:
+		day2 = "일요일";
+		break;
+	case 8:
+		day2 = "월요일";
+		break;
+	case 9:
+		day2 = "화요일";
+		break;
+	case 10:
+		day2 = "수요일";
+		break;
+	case 11:
+		day2 = "목요일";
+		break;
+	case 12:
+		day2 = "금요일";
+		break;
+	case 13:
+		day2 = "토요일";
+		break;
+	}
+	return day2;
+}
+
+console.log("---");
+console.log(caseDay(day));
+console.log(caseDay(day+1));
 
 </script>
 
