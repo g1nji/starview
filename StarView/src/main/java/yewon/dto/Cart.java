@@ -10,12 +10,10 @@ public class Cart {
 	private int delPrice;
 	private String fileName;
 	private String gName;
-	private String ckId;
 	
 	public Cart() {}
 
-	public Cart(int cId, int gId, String uId, int cQty, int gPrice, int delPrice, String fileName, String gName,
-			String ckId) {
+	public Cart(int cId, int gId, String uId, int cQty, int gPrice, int delPrice, String fileName, String gName) {
 		super();
 		this.cId = cId;
 		this.gId = gId;
@@ -25,21 +23,12 @@ public class Cart {
 		this.delPrice = delPrice;
 		this.fileName = fileName;
 		this.gName = gName;
-		this.ckId = ckId;
 	}
 
 	@Override
 	public String toString() {
 		return "Cart [cId=" + cId + ", gId=" + gId + ", uId=" + uId + ", cQty=" + cQty + ", gPrice=" + gPrice
-				+ ", delPrice=" + delPrice + ", fileName=" + fileName + ", gName=" + gName + ", ckId=" + ckId + "]";
-	}
-
-	public String getCkId() {
-		return ckId;
-	}
-
-	public void setCkId(String ckId) {
-		this.ckId = ckId;
+				+ ", delPrice=" + delPrice + ", fileName=" + fileName + ", gName=" + gName + "]";
 	}
 
 	public String getgName() {
