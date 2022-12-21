@@ -40,15 +40,14 @@ $(document).ready(function() {
 		var confirm_val = confirm("정말 삭제하시겠습니까?");
 		
 		if(confirm_val) {
-		var checkArr = new Array();
-			checkArr.push($(this).attr("data-cId"));
-		 console.log(checkArr)
+		var item = $(this).attr("data-cId");
+		 console.log(item)
 			  
 			$.ajax({
 				url : "/goods/deleteCart",
 				type : "post",
 				traditional: true,
-				data : JSON.stringify({"chbox":checkArr}),
+				data : JSON.stringify({"item":item}),
 				contentType: 'application/json; charset=UTF-8',
 				success : function(res){
 					if(res=="delete_success"){
@@ -78,7 +77,7 @@ $(document).ready(function() {
 			console.log(checkArr)
 			  
 			$.ajax({
-				url : "/goods/deleteCart",
+				url : "/goods/selectDelete",
 				type : "post",
 				traditional: true,
 				data : JSON.stringify({chbox:checkArr}),
