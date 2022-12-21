@@ -24,13 +24,13 @@ public class CartServiceImpl implements yewon.service.face.CartService {
 	}
 
 	@Override
-	public int getCartTotal(Cart cart) {
-		return cartDao.selectCartTotal(cart);
+	public int getCartTotal(String uId) {
+		return cartDao.selectCartTotal(uId);
 	}
 
 	@Override
-	public List<Cart> viewCart(Cart cart) {
-		return cartDao.selectCartList(cart);
+	public List<Cart> viewCart(String uId) {
+		return cartDao.selectCartList(uId);
 	}
 
 	@Override
@@ -41,11 +41,6 @@ public class CartServiceImpl implements yewon.service.face.CartService {
 	@Override
 	public void updateQty(Cart cart) {
 		cartDao.updateQty(cart);
-	}
-
-	@Override
-	public void cartUpdate(String uId, String ckid) {
-		cartDao.cartUpdate(uId, ckid);
 	}
 
 }

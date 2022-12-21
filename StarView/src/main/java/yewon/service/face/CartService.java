@@ -11,14 +11,12 @@ public interface CartService {
 
 	public void deleteCart(Cart cart);
 
-	public int getCartTotal(Cart cart);
+	public int getCartTotal(String uId);
 
-	public List<Cart> viewCart(Cart cart);
+	public List<Cart> viewCart(String uId);
 
 	public int addCheck(Cart cart);
 
 	public void updateQty(Cart cart);
-
-	public void cartUpdate(String uId, String ckid);
 
 }
