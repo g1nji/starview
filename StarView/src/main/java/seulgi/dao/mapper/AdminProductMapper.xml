@@ -11,6 +11,7 @@
 		SELECT * FROM (
 			SELECT rownum rnum, G.* FROM (
 				SELECT * FROM goods
+				ORDER BY g_id desc
 			) G
 		) goods
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }

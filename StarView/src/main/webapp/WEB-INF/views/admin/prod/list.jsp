@@ -19,26 +19,56 @@ td:nth-child(2) {
 }
 </style>
 
+<script type="text/javascript">
+
+//전체 선택
+function selectAll(selectAll)  {
+	var checkboxes 
+	   = document.querySelectorAll('input[type="checkbox"]');
+	
+	checkboxes.forEach((checkbox) => {
+	  checkbox.checked = selectAll.checked
+	})
+}
+
+$(document).ready(function() {
+	
+	//선택
+	$('#select').click(function() {
+		var sel = $('input[name="select"]:checked').val()
+		//console.log(sel)
+		
+		//삭제
+		$('#delOk').click(function() {
+			if (confirm('삭제하시면 복구할 수 없습니다. \n정말로 삭제하시겠습니까?')) {
+				location.href = "./delete?gId=" + sel
+			}
+		})
+	})
+
+})
+
+
+</script>
+
 <h1>상품 리스트</h1>
 <hr>
 
 <table class="table table-striped table-hover table-condensed">
 <thead>
 	<tr>
-		<th style="width: 10%;"><input type="checkbox"> 전체선택</th>
-		<th style="width: 10%;">상품 번호</th>
-		<th style="width: 10%;">상품명</th>
-		<th style="width: 10%;">상품 가격</th>
-		<th style="width: 20%;">상품 설명</th>
-		<th style="width: 10%;">배송비</th>
-		<th style="width: 20%;">등록일</th>
+		<th><input type='checkbox' name='all' value='selectall' onclick='selectAll(this)'/> 전체선택</th>
+		<th>상품명</th>
+		<th>상품 가격</th>
+		<th>상품 설명</th>
+		<th>배송비</th>
+		<th>등록일</th>
 	</tr>
 </thead>	
 <tbody>
 <c:forEach items="${prodList }" var="p">
 	<tr>
-		<td><input type="checkbox"></td>
-		<td>${p.gId }</td>
+		<td><input id="select" type="checkbox" name="select" value="${p.gId }"></td>
 		<td><a href="./view?gId=${p.gId }">${p.gName }</a></td>
 		<td>${p.gPrice }</td>
 		<td>${p.gDetail }</td>
@@ -49,7 +79,9 @@ td:nth-child(2) {
 </tbody>
 </table>
 
-<span class="pull-right">total : ${paging.totalCount }</span>
+<span class="pull-right">total : ${paging.totalCount }</span><br><br>
+
+<button id="delOk" class="btn btn-primary" style="float: right">삭제</button><br>
 
 <c:import url="../layout/paging.jsp" />
 
