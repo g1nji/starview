@@ -61,7 +61,7 @@ $(document).ready(function() {
 				<li><a href="/sunset/time">일몰시간</a></li>
 				<li><a href="/data/weather3">날씨</a></li>
 				<li><a href="/data/moonToday">달 모양</a></li>
-				<li><a href="">별 사진 명소</a></li>
+				<li><a href="/place/main">별 사진 명소</a></li>
 				<li><a href="/data/astroMonth">이달의 천문현상</a></li>
 			</ul>
 		</li>

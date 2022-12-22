@@ -95,22 +95,25 @@ ul.mainnav > li:hover > ul {
 	width: 55%;
 	height: 200px;
 	margin: 15px 30px 15px 0;
-	border: 1px solid black;
 	display: inline-block;
+	float: left;
 }
+
 .weather {
 	width: 20%;
 	height: auto;
-/* 	margin: 0 20px 0 0; */
-	border: 1px solid black;
+	margin: 15px 20px 0 0;
 	display: inline-block;
+	float: left;
+	cursor: pointer;
 }
 
 .etc {
 	width: 20%;
 	height: 200px;
-	border: 1px solid black;
 	display: inline-block;
+	margin-top: 15px;
+	float: left;
 }
 
 #day {
