@@ -382,6 +382,7 @@ $(document).ready(function () {
 <input type="text" id="sample6_address" name="uAdd1" hidden="hidden"><br>
 <input type="text" id="sample6_detailAddress" name="uAdd2" hidden="hidden"><br>
 <input type="text" id="sample6_extraAddress" hidden="hidden">            
+<input type="text" id="uNo" value="${users.uNo}"hidden="hidden">            
 </form>                    
                    
                      

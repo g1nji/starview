@@ -196,9 +196,9 @@ function up(){
                             <div class="person_field_body">
                             	<input type="text" id="uAddress" value="${info.uAddress}" name="uAddress">
                             </div>
+<input type="text" id="uNo" value="${users.uNo}"hidden="hidden">   
                         </td>
                     </tr>
-
                     
                                         </tbody>
                 </table>
