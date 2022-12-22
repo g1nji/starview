@@ -81,16 +81,24 @@ public interface AdminBoardDao {
 	 */
 	public void delete(AdminBoard board);
 
+	public int selectCntAllBoard();
+	public List<AdminBoard> searchBoard(String keyword);
+	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	public int selectCntAll2();
 	public List<AdminBoard> selectAll2(Paging paging);
+
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	public int selectCntAll3();
 	public List<AdminBoard> selectAll3(Paging paging);
 
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	public void insertAllBoard(AdminBoard board);
 	public List<AdminBoard> selectAllBoard();
-	
-	public int selectCntAllBoard();
 	public List<AdminBoard> selectAllBoard(Paging paging);
-	
+
+
 }

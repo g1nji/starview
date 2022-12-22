@@ -18,6 +18,11 @@ $(document).ready(() => {
 	$("#btn").click( () => {
 		console.log("#btn click")
 		
+		$("#form").css("display","block") 
+		$("#form1").css("display","block") 
+		$("#form2").css("display","block") 
+		
+		//관측 일자 API
 		$.ajax({
 			type: "get",
 			url: "https://apis.data.go.kr/1360000/MidFcstInfoService/getMidLandFcst",
@@ -29,8 +34,8 @@ $(document).ready(() => {
 				//, pageNo: page.value
 				, numOfRows: "10"
 				, regId: $('input[name="regId"]:checked').val()
-				//선택한 시간 값이 전달되도록 바꾸기
-				, tmFc: document.getElementById('Date').value
+				//, tmFc: document.getElementById('Date').value
+				, tmFc: caseHour(hour)
 			},
 			dataType: "xml",
 			success: res=>{
@@ -50,66 +55,94 @@ $(document).ready(() => {
 				//결과 화면 지우기
 				resultLayout.innerHTML = '';
 				
-				var $table = $("<br><table class='table table-striped table table-bordered'>")
-				var tHead = "<tr>"
-					+ "<td>" + caseDay(day+3) +" 오전 강수 확률</td>"
-					+ "<td>" + caseDay(day+3) +" 오후 강수 확률</td>"
-					+ "<td>" + caseDay(day+4) +" 오전 강수 확률</td>"
-					+ "<td>" + caseDay(day+4) +" 오후 강수 확률</td>"
-					+ "<td>" + caseDay(day+5) +" 오전 강수 확률</td>"
-					+ "<td>" + caseDay(day+5) +" 오후 강수 확률</td>"
-					+ "<td>" + caseDay(day+6) +" 오전 강수 확률</td>"
-					+ "<td>" + caseDay(day+6) +" 오후 강수 확률</td>"
-					+ "<td>" + caseDay(day+7) +" 오전 강수 확률</td>"
-					+ "<td>" + caseDay(day+7) +" 오후 강수 확률</td>"
-					+ "<td>" + caseDay(day+3) +" 오전 날씨예보</td>"
-					+ "<td>" + caseDay(day+3) +" 오후 날씨예보</td>"
-					+ "<td>" + caseDay(day+4) +" 오전 날씨예보</td>"
-					+ "<td>" + caseDay(day+4) +" 오후 날씨예보</td>"
-					+ "<td>" + caseDay(day+5) +" 오전 날씨예보</td>"
-					+ "<td>" + caseDay(day+5) +" 오후 날씨예보</td>"
-					+ "<td>" + caseDay(day+6) +" 오전 날씨예보</td>"
-					+ "<td>" + caseDay(day+6) +" 오후 날씨예보</td>"
-					+ "<td>" + caseDay(day+7) +" 오전 날씨예보</td>"
-					+ "<td>" + caseDay(day+7) +" 오후 날씨예보</td>"
-					+ "</tr>";
+				//강수확률
+				var d = "<h3> 오늘은 " +ymd3 + " " + caseD(day) + " 입니다</h3>"
+				
+				var $table = $("<br><table class='table table-striped table table-bordered' style='width: 300px; float:left; margin-right: 20px;'>")
+				var tt = "<tr><th> 강수확률 </th>"
+					+ "<th> 오전 </th>"
+					+ "<th> 오후 </th></tr>"
 					
-				$table.html(tHead)
+					+ "<tr><th>" + caseDay(day+3) + "</th>"
+					+ "<td>" + $rows.find("rnSt3Am").text() +"</td>"
+					+ "<td>" + $rows.find("rnSt3Pm").text() +"</td></tr>"
+					
+					+ "<tr><th>" + caseDay(day+4) + "</th>"
+					+ "<td>" + $rows.find("rnSt4Am").text() +"</td>"
+					+ "<td>" + $rows.find("rnSt4Pm").text() +"</td></tr>"
+					
+					+ "<tr><th>" + caseDay(day+5) + "</th>"
+					+ "<td>" + $rows.find("rnSt5Am").text() +"</td>"
+					+ "<td>" + $rows.find("rnSt5Pm").text() +"</td></tr>"
+					
+					+ "<tr><th>" + caseDay(day+6) + "</th>"
+					+ "<td>" + $rows.find("rnSt6Am").text() +"</td>"
+					+ "<td>" + $rows.find("rnSt6Pm").text() +"</td></tr>"
+					
+					+ "<tr><th>" + caseDay(day+7) + "</th>"
+					+ "<td>" + $rows.find("rnSt7Am").text() +"</td>"
+					+ "<td>" + $rows.find("rnSt7Pm").text() +"</td></tr>"
+					
+					+ "<tr><th>" + caseDay(day+8) + "</th>"
+					+ "<td colspan='2'>" + $rows.find("rnSt8").text() +"</td></tr>"
+
+					+ "<tr><th>" + caseDay(day+9) + "</th>"
+					+ "<td colspan='2'>" + $rows.find("rnSt10").text() +"</td></tr>"
+					
+					+ "<tr><th>" + caseDay(day+10) + "</th>"
+					+ "<td colspan='2'>" + $rows.find("rnSt10").text() +"</td></tr>"
+					
+				$table.html(tt)
+				$table.appendTo($('#resultLayout'))
+				
+				//날씨예보
+				var $table2 = $("<table class='table table-striped table table-bordered' style='width: 300px; float:left; margin-right: 20px;'>")
+				var tt2 = "<tr><th> 날씨예보 </th>"
+					+ "<th> 오전 </th>"
+					+ "<th> 오후 </th></tr>"
+					
+					+ "<tr><th>" + caseDay(day+3) + "</th>"
+					+ "<td>" + $rows.find("wf3Am").text() +"</td>"
+					+ "<td>" + $rows.find("wf3Pm").text() +"</td></tr>"
+					
+					+ "<tr><th>" + caseDay(day+4) + "</th>"
+					+ "<td>" + $rows.find("wf4Am").text() +"</td>"
+					+ "<td>" + $rows.find("wf4Pm").text() +"</td></tr>"
+					
+					+ "<tr><th>" + caseDay(day+5) + "</th>"
+					+ "<td>" + $rows.find("wf5Am").text() +"</td>"
+					+ "<td>" + $rows.find("wf5Pm").text() +"</td></tr>"
+					
+					+ "<tr><th>" + caseDay(day+6) + "</th>"
+					+ "<td>" + $rows.find("wf6Am").text() +"</td>"
+					+ "<td>" + $rows.find("wf6Pm").text() +"</td></tr>"
+					
+					+ "<tr><th>" + caseDay(day+7) + "</th>"
+					+ "<td>" + $rows.find("wf7Am").text() +"</td>"
+					+ "<td>" + $rows.find("wf7Pm").text() +"</td></tr>"
+					
+					+ "<tr><th>" + caseDay(day+8) + "</th>"
+					+ "<td colspan='2'>" + $rows.find("wf8").text() +"</td></tr>"
+
+					+ "<tr><th>" + caseDay(day+9) + "</th>"
+					+ "<td colspan='2'>" + $rows.find("wf10").text() +"</td></tr>"
+					
+					+ "<tr><th>" + caseDay(day+10) + "</th>"
+					+ "<td colspan='2'>" + $rows.find("wf10").text() +"</td></tr>"
+					
+				$table2.html(tt2)
+				$table2.appendTo($('#resultLayout'))
 				
 				//$rows.each(function(idx, ele) {
 				//})
 				
-					//console.log($rows.find("regId").text())
-					
-				$("<tr>")
-					.	append($("<td>").append($rows.find("rnSt3Am").text()))
-					.	append($("<td>").append($rows.find("rnSt3Pm").text()))
-					.	append($("<td>").append($rows.find("rnSt4Am").text()))
-					.	append($("<td>").append($rows.find("rnSt4Pm").text()))
-					.	append($("<td>").append($rows.find("rnSt5Am").text()))
-					.	append($("<td>").append($rows.find("rnSt5Pm").text()))
-					.	append($("<td>").append($rows.find("rnSt6Am").text()))
-					.	append($("<td>").append($rows.find("rnSt6Pm").text()))
-					.	append($("<td>").append($rows.find("rnSt7Am").text()))
-					.	append($("<td>").append($rows.find("rnSt7Pm").text()))
-					.	append($("<td>").append($rows.find("wf3Am").text()))
-					.	append($("<td>").append($rows.find("wf3Pm").text()))
-					.	append($("<td>").append($rows.find("wf4Am").text()))
-					.	append($("<td>").append($rows.find("wf4Pm").text()))
-					.	append($("<td>").append($rows.find("wf5Am").text()))
-					.	append($("<td>").append($rows.find("wf5Pm").text()))
-					.	append($("<td>").append($rows.find("wf6Am").text()))
-					.	append($("<td>").append($rows.find("wf6Pm").text()))
-					.	append($("<td>").append($rows.find("wf7Am").text()))
-					.	append($("<td>").append($rows.find("wf7Pm").text()))
-				.appendTo($table)
-				
-					$table.appendTo($('#resultLayout'))
+				//console.log($rows.find("regId").text())
 			},
 			error: ()=> {
 				console.log("AJAX 실패")
 			}
 		})
+		
 	})
 })
 
@@ -123,76 +156,196 @@ var func2 = (a, b) => {
 	return a + b;
 }
 
-//오늘 날짜
+//날짜
 var today = new Date();
-console.log(today);
+
+//연도
+var year = today.getFullYear();
+
+//월
+var month = today.getMonth() + 1;
+
+//일
+var date = today.getDate();
+
+//오늘 날짜
+var ymd = year + "" + month + "" +date;
+var ymd3 = year + "/" + month + "/" + date;
+
+//어제 날짜
+var ymd2 = year + "" + month + "" + (date-1);
+
+//console.log(ymd +" ::: " + ymd3 + " ::: " + ymd2);
 
 //현재 시
 var hour = today.getHours();
-console.log(hour);
-
-//오늘 일자
-var date = today.getDate();
-console.log(date);
 
 //오늘 요일
 var day = today.getDay();
-console.log(day);
 
+//시간에 따른 날짜값
+function caseHour(hour) {
+	var tm = "";
+	
+	if(hour >= 0 && hour < 18) {
+		tm = ymd2 + "" + "1800";
+	} else if(hour >= 18 && hour <= 23) {
+		tm = ymd + "" + "0600";
+	}
+	return tm;
+}
 
+console.log(caseHour(hour));
+console.log(caseDay(day+10));
+
+//요일값
+function caseD(day) {
+	var day3 = "";
+	
+	switch(day) {
+	case 0:
+		day3 = "일요일";
+		break;
+	case 1:
+		day3 = "월요일";
+		break;
+	case 2:
+		day3 = "화요일";
+		break;
+	case 3:
+		day3 = "수요일";
+		break;
+	case 4:
+		day3 = "목요일";
+		break;
+	case 5:
+		day3 = "금요일";
+		break;
+	case 6:
+		day3 = "토요일";
+		break;
+	}
+	return day3;
+}
+
+//시간에 따른 요일값
 function caseDay(day) {
 	var day2 = "";
 	
-	switch(day){
-	case 0:
-		day2 = "일요일";
-		break;
-	case 1:
-		day2 = "월요일";
-		break;
-	case 2:
-		day2 = "화요일";
-		break;
-	case 3:
-		day2 = "수요일";
-		break;
-	case 4:
-		day2 = "목요일";
-		break;
-	case 5:
-		day2 = "금요일";
-		break;
-	case 6:
-		day2 = "토요일";
-		break;
-	case 7:
-		day2 = "일요일";
-		break;
-	case 8:
-		day2 = "월요일";
-		break;
-	case 9:
-		day2 = "화요일";
-		break;
-	case 10:
-		day2 = "수요일";
-		break;
-	case 11:
-		day2 = "목요일";
-		break;
-	case 12:
-		day2 = "금요일";
-		break;
-	case 13:
-		day2 = "토요일";
-		break;
+	if(hour >= 0 && hour < 18) {
+		switch(day-1) {
+		case 0:
+			day2 = "일요일";
+			break;
+		case 1:
+			day2 = "월요일";
+			break;
+		case 2:
+			day2 = "화요일";
+			break;
+		case 3:
+			day2 = "수요일";
+			break;
+		case 4:
+			day2 = "목요일";
+			break;
+		case 5:
+			day2 = "금요일";
+			break;
+		case 6:
+			day2 = "토요일";
+			break;
+		case 7:
+			day2 = "일요일";
+			break;
+		case 8:
+			day2 = "월요일";
+			break;
+		case 9:
+			day2 = "화요일";
+			break;
+		case 10:
+			day2 = "수요일";
+			break;
+		case 11:
+			day2 = "목요일";
+			break;
+		case 12:
+			day2 = "금요일";
+			break;
+		case 13:
+			day2 = "토요일";
+			break;
+		case 14:
+			day2 = "일요일";
+			break;
+		case 15:
+			day2 = "월요일";
+			break;
+		case 16:
+			day2 = "화요일";
+			break;
+		}
+	} else if(hour >= 18 && hour <= 23) {
+		switch(day) {
+		case 0:
+			day2 = "일요일";
+			break;
+		case 1:
+			day2 = "월요일";
+			break;
+		case 2:
+			day2 = "화요일";
+			break;
+		case 3:
+			day2 = "수요일";
+			break;
+		case 4:
+			day2 = "목요일";
+			break;
+		case 5:
+			day2 = "금요일";
+			break;
+		case 6:
+			day2 = "토요일";
+			break;
+		case 7:
+			day2 = "일요일";
+			break;
+		case 8:
+			day2 = "월요일";
+			break;
+		case 9:
+			day2 = "화요일";
+			break;
+		case 10:
+			day2 = "수요일";
+			break;
+		case 11:
+			day2 = "목요일";
+			break;
+		case 12:
+			day2 = "금요일";
+			break;
+		case 13:
+			day2 = "토요일";
+			break;
+		case 14:
+			day2 = "일요일";
+			break;
+		case 15:
+			day2 = "월요일";
+			break;
+		case 16:
+			day2 = "화요일";
+			break;
+		}
 	}
 	return day2;
 }
 
-console.log("---");
-console.log(caseDay(day));
-console.log(caseDay(day+1));
+//console.log(caseDay(day));
+//console.log(caseDay(day+1));
 
 </script>
 
@@ -202,9 +355,9 @@ console.log(caseDay(day+1));
 <h1>관측일자</h1>
 <hr>
 
-<h3><날짜 입력></h3>
+<!-- <h3><날짜 입력></h3>
 <h5> ex) YYYYMMDD0600(1800) *최근 24시간 이내만 조회가능합니다* </h5>
-<input type="text" id="Date"><br><br>
+<input type="text" id="Date"><br><br> -->
 
 <h3><지역 선택></h3>
 <input type="radio" name="regId" value="11B00000"> 서울, 인천, 경기도
@@ -221,5 +374,8 @@ console.log(caseDay(day+1));
 <button id="btn">조회</button>
 <div id="resultLayout"></div>
 
-
+<div id="form" style="display: none;">
+지역 <input id="form1" type="text" style="width: 300px; height: 140px; display: none;"><br>
+추천일 <input id="form2" type="text" style="width: 300px; height: 140px; display: none;">입력한 내용이 DB에 저장되도록
+</div>
 <c:import url="../layout/footer.jsp" />
