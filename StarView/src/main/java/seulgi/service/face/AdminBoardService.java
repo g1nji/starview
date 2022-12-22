@@ -91,15 +91,23 @@ public interface AdminBoardService {
 	 */
 	public void delete(AdminBoard board);
 
+	public List<AdminBoard> list();
+	public List<AdminBoard> search(String keyword);
+
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	public Paging getPaging2(int curPage);
 	public List<AdminBoard> list2(Paging paging);
+	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	public Paging getPaging3(int curPage);
 	public List<AdminBoard> list3(Paging paging);
 
-	public List<AdminBoard> list();
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
 	public List<AdminBoard> listAll(Paging paging);
 	public Paging getPagingAll(int curPage);
+
 
 }

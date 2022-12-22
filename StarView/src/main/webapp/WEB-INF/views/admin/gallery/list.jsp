@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -47,6 +48,10 @@ $(document).ready(function() {
 		})
 	})
 
+	$("#btnSearch").click(function() {
+		location.href = "./search?keyword" + $('input[name="keyword"]:checked').val();
+	})
+	
 })
 
 </script>
@@ -60,6 +65,12 @@ $(document).ready(function() {
     <option value="/admin/goods/list">상품리뷰</option>
     <option value="/admin/place/list">명소후기</option>
 </select>
+
+<form action="./search" method="get" style="float: right;">
+	<input id="search" type="text" placeholder="검색어를 입력하세요" name="keyword">
+	<button class="btnSearch">검색</button>
+</form>
+
 <br><br>
 
 <table class="table table-striped table-hover table-condensed">

@@ -18,6 +18,11 @@ $(document).ready(() => {
 	$("#btn").click( () => {
 		console.log("#btn click")
 		
+		$("#form").css("display","block") 
+		$("#form1").css("display","block") 
+		$("#form2").css("display","block") 
+		
+		//관측 일자 API
 		$.ajax({
 			type: "get",
 			url: "https://apis.data.go.kr/1360000/MidFcstInfoService/getMidLandFcst",
@@ -29,8 +34,8 @@ $(document).ready(() => {
 				//, pageNo: page.value
 				, numOfRows: "10"
 				, regId: $('input[name="regId"]:checked').val()
-				//선택한 시간 값이 전달되도록 바꾸기
-				, tmFc: document.getElementById('Date').value
+				//, tmFc: document.getElementById('Date').value
+				, tmFc: caseHour(hour)
 			},
 			dataType: "xml",
 			success: res=>{
@@ -51,10 +56,10 @@ $(document).ready(() => {
 				resultLayout.innerHTML = '';
 				
 				//강수확률
-				var $table = $("<br><table class='table table-striped table table-bordered'>")
-				var tt = "<h3> 오늘은 " +ymd3 + " " + caseD(day) + " 입니다</h3>"
+				var d = "<h3> 오늘은 " +ymd3 + " " + caseD(day) + " 입니다</h3>"
 				
-					+ "<tr><th> 강수확률 </th>"
+				var $table = $("<br><table class='table table-striped table table-bordered' style='width: 300px; float:left; margin-right: 20px;'>")
+				var tt = "<tr><th> 강수확률 </th>"
 					+ "<th> 오전 </th>"
 					+ "<th> 오후 </th></tr>"
 					
@@ -91,10 +96,8 @@ $(document).ready(() => {
 				$table.appendTo($('#resultLayout'))
 				
 				//날씨예보
-				var $table2 = $("<br><table class='table table-striped table table-bordered'>")
-				var tt2 = "<h3> 오늘은 " +ymd3 + " " + caseD(day) + " 입니다</h3>"
-				
-					+ "<tr><th> 날씨예보 </th>"
+				var $table2 = $("<table class='table table-striped table table-bordered' style='width: 300px; float:left; margin-right: 20px;'>")
+				var tt2 = "<tr><th> 날씨예보 </th>"
 					+ "<th> 오전 </th>"
 					+ "<th> 오후 </th></tr>"
 					
@@ -139,6 +142,7 @@ $(document).ready(() => {
 				console.log("AJAX 실패")
 			}
 		})
+		
 	})
 })
 
@@ -152,44 +156,47 @@ var func2 = (a, b) => {
 	return a + b;
 }
 
-//오늘 날짜
+//날짜
 var today = new Date();
 
 //연도
 var year = today.getFullYear();
 
 //월
-var month = today.getMonth() + 1;  // 월
+var month = today.getMonth() + 1;
 
 //일
 var date = today.getDate();
 
+//오늘 날짜
 var ymd = year + "" + month + "" +date;
-var ymd2 = year + "" + month + "" + (date-1);
 var ymd3 = year + "/" + month + "/" + date;
 
-console.log("+++++");
-console.log(ymd +" # " + ymd2 + " # " + ymd3);
+//어제 날짜
+var ymd2 = year + "" + month + "" + (date-1);
+
+//console.log(ymd +" ::: " + ymd3 + " ::: " + ymd2);
 
 //현재 시
 var hour = today.getHours();
-console.log(hour);
 
 //오늘 요일
 var day = today.getDay();
-console.log(day);
 
 //시간에 따른 날짜값
 function caseHour(hour) {
 	var tm = "";
 	
 	if(hour >= 0 && hour < 18) {
-		tm = ymd2 + 1800;
+		tm = ymd2 + "" + "1800";
 	} else if(hour >= 18 && hour <= 23) {
-		tm = ymd + 1800;
+		tm = ymd + "" + "0600";
 	}
 	return tm;
 }
+
+console.log(caseHour(hour));
+console.log(caseDay(day+10));
 
 //요일값
 function caseD(day) {
@@ -222,7 +229,6 @@ function caseD(day) {
 }
 
 //시간에 따른 요일값
-//뭔가 이상한데...
 function caseDay(day) {
 	var day2 = "";
 	
@@ -270,6 +276,15 @@ function caseDay(day) {
 		case 13:
 			day2 = "토요일";
 			break;
+		case 14:
+			day2 = "일요일";
+			break;
+		case 15:
+			day2 = "월요일";
+			break;
+		case 16:
+			day2 = "화요일";
+			break;
 		}
 	} else if(hour >= 18 && hour <= 23) {
 		switch(day) {
@@ -315,14 +330,22 @@ function caseDay(day) {
 		case 13:
 			day2 = "토요일";
 			break;
+		case 14:
+			day2 = "일요일";
+			break;
+		case 15:
+			day2 = "월요일";
+			break;
+		case 16:
+			day2 = "화요일";
+			break;
 		}
 	}
 	return day2;
 }
 
-console.log("---");
-console.log(caseDay(day));
-console.log(caseDay(day+1));
+//console.log(caseDay(day));
+//console.log(caseDay(day+1));
 
 </script>
 
@@ -332,9 +355,9 @@ console.log(caseDay(day+1));
 <h1>관측일자</h1>
 <hr>
 
-<h3><날짜 입력></h3>
+<!-- <h3><날짜 입력></h3>
 <h5> ex) YYYYMMDD0600(1800) *최근 24시간 이내만 조회가능합니다* </h5>
-<input type="text" id="Date"><br><br>
+<input type="text" id="Date"><br><br> -->
 
 <h3><지역 선택></h3>
 <input type="radio" name="regId" value="11B00000"> 서울, 인천, 경기도
@@ -351,5 +374,8 @@ console.log(caseDay(day+1));
 <button id="btn">조회</button>
 <div id="resultLayout"></div>
 
-
+<div id="form" style="display: none;">
+지역 <input id="form1" type="text" style="width: 300px; height: 140px; display: none;"><br>
+추천일 <input id="form2" type="text" style="width: 300px; height: 140px; display: none;">입력한 내용이 DB에 저장되도록
+</div>
 <c:import url="../layout/footer.jsp" />

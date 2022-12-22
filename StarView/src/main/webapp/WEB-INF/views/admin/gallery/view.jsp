@@ -11,9 +11,9 @@ $(document).ready(function() {
 		location.href = "./list"
 	})
 	
-	$("#btnUpdate").click(function() {
+	/* $("#btnUpdate").click(function() {
 		location.href = "./update?galleryNo=${viewBoard.galleryNo }"
-	})
+	}) */
 	
 	$("#btnDelete").click(function() {
 		if(confirm('삭제하시면 복구할 수 없습니다. \n정말로 삭제하시겠습니까?')) {
@@ -80,7 +80,7 @@ table {
 	<button id="btnList" class="btn btn-default">목록</button>
 	
 	<!-- 아이디 추가 -->
-	<button id="btnUpdate" class="btn btn-primary">수정</button>
+	<!-- <button id="btnUpdate" class="btn btn-primary">수정</button> -->
 	<button id="btnDelete" class="btn btn-danger">삭제</button>
 </div>
 

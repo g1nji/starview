@@ -73,6 +73,7 @@ $(document).ready(function() {
 		<td>${p.gPrice }</td>
 		<td>${p.gDetail }</td>
 		<td>${p.delPrice }</td>
+		<td>${p.fileName }</td>
 		<td><fmt:formatDate value="${p.regDate }" pattern="yy-MM-dd HH:mm:ss"/></td>
 	</tr>
 </c:forEach>

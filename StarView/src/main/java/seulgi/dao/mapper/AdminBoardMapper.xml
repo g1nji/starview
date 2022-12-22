@@ -27,7 +27,7 @@
 		SELECT * FROM (
 			SELECT rownum rnum, G.* FROM (
 				SELECT * FROM gallery
-				ORDER BY gallery_no desc
+				ORDER BY gallery_no DESC
 			) G
 		) gallery
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
@@ -37,7 +37,7 @@
 		SELECT * FROM (
 			SELECT rownum rnum, R.* FROM (
 				SELECT * FROM review
-				ORDER BY r_id desc
+				ORDER BY r_id DESC
 			) R
 		) review
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
@@ -47,7 +47,7 @@
 		SELECT * FROM (
 			SELECT rownum rnum, P.* FROM (
 				SELECT * FROM place_review
-				ORDER BY sreview_no desc
+				ORDER BY sreview_no DESC
 			) P
 		) place_review
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
@@ -134,5 +134,13 @@
 		DELETE gallery
 		WHERE gallery_no = #{galleryNo }
 	</delete>
+	
+	<select id="searchBoard" resultType="seulgi.dto.AdminBoard" parameterType="String">
+		<![CDATA[
+		SELECT * FROM gallery
+		WHERE gallery_content LIKE '%'||#{galleryContent }||'%'
+		ORDER BY gallery_no DESC
+		]]>
+	</select>
 	
 </mapper>
