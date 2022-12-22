@@ -29,7 +29,7 @@
 	
 	</delete>
 	
-	<update id="update">
+	<update id="update" parameterType="string">
 		UPDATE Users
 		SET u_pw = #{uPw}, u_name=#{uName}, u_email = #{uEmail}, u_phone=#{uPhone},u_address=#{uAddress},u_nick=#{uNick},u_birth=#{uBirth}
 		WHERE u_id=#{uId}
