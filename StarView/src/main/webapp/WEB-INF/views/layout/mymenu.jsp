@@ -45,7 +45,8 @@ margin-top: 50px;
         <li class="myli"><a href="/mypage/mypage">MY홈</a></li>
         <li class="myli"><a href="./preupdate">회원정보 수정</a></li>  
         <li class="myli"><a href="./predelete">회원 탈퇴</a></li>  
-        <li class="myli"><a href="/mypage/writeList">게시글 확인</a></li>  
+        <li class="myli"><a href="/mypage/writeList">작성한 게시글 확인</a></li>  
+        <li class="myli"><a href="/mypage/writeCList">작성한 댓글 확인</a></li>  
         <li class="myli"><a href="">찜목록 확인</a></li>  
         <li class="myli"><a href="">리뷰확인</a></li>  
     </ul>
