@@ -2,9 +2,7 @@ package hyeri.service.impl;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -20,6 +18,7 @@ import hyeri.dto.GComment;
 import hyeri.dto.GTag;
 import hyeri.dto.Gallery;
 import hyeri.dto.GalleryFile;
+import hyeri.dto.GalleryLike;
 import hyeri.service.face.GalleryService;
 import hyeri.util.Paging;
 
@@ -46,11 +45,15 @@ public class GalleryServiceImpl implements GalleryService {
 	
 	@Override
 	public List<Gallery> list(Paging paging) {
+		
 		return galleryDao.selectList(paging);
 	}
 	
 	@Override
 	public Gallery view(Gallery viewGallery) {
+		
+		//덧글수 확인
+		galleryDao.updateCm(viewGallery);
 		
 		//조회수 증가
 		galleryDao.updateHit(viewGallery);
@@ -106,6 +109,7 @@ public class GalleryServiceImpl implements GalleryService {
 			e.printStackTrace();
 		}
 		
+		
 		//---------------------------------------------------
 		
 		//첨부파일 정보 DB 기록
@@ -118,6 +122,10 @@ public class GalleryServiceImpl implements GalleryService {
 		galleryFile.setFilepath(storedPath);
 		
 		galleryDao.insertPhoto(galleryFile);
+		
+		//---------------------------------------------------
+		
+		galleryDao.updateFilepath(gallery);
 		
 		//---------------------------------------------------
 		
@@ -185,6 +193,12 @@ public class GalleryServiceImpl implements GalleryService {
 		galleryFile.setFilepath(storedPath);
 		
 		galleryDao.insertPhoto(galleryFile);
+		
+		//---------------------------------------------------
+		
+		galleryDao.updateFilepath(gallery);
+		
+		//---------------------------------------------------
 		
 	}
 	
@@ -260,6 +274,11 @@ public class GalleryServiceImpl implements GalleryService {
 	public List<Gallery> search(String keywordInput) {
 		
 		return galleryDao.selectByKeyword(keywordInput);
+	}
+	
+	@Override
+	public List<GComment> clist(Paging paging) {
+		return galleryDao.selectCList(paging);
 	}
 	
 }

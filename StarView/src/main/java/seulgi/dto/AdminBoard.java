@@ -26,6 +26,7 @@ public class AdminBoard {
 	private String galleryLoc;
 	private String galleryTag;
 	private int photoNo;
+	private int tagNo;
 	
 	private String uId;
 
@@ -48,8 +49,9 @@ public class AdminBoard {
 
 	public AdminBoard(int noticeCode, String noticeTitle, String noticeContent, Date noticeDate, int galleryNo,
 			String galleryTitle, String galleryContent, Date galleryDate, int galleryHit, int galleryLike,
-			String galleryLoc, String galleryTag, int photoNo, String uId, int rId, String rTitle, String rContent,
-			Date regDate, int gId, int sreviewNo, String sreviewContent, Date sreviewDate, int arrivalNum) {
+			String galleryLoc, String galleryTag, int photoNo, int tagNo, String uId, int rId, String rTitle,
+			String rContent, Date regDate, int gId, int sreviewNo, String sreviewContent, Date sreviewDate,
+			int arrivalNum) {
 		super();
 		this.noticeCode = noticeCode;
 		this.noticeTitle = noticeTitle;
@@ -64,6 +66,7 @@ public class AdminBoard {
 		this.galleryLoc = galleryLoc;
 		this.galleryTag = galleryTag;
 		this.photoNo = photoNo;
+		this.tagNo = tagNo;
 		this.uId = uId;
 		this.rId = rId;
 		this.rTitle = rTitle;
@@ -82,10 +85,10 @@ public class AdminBoard {
 				+ noticeContent + ", noticeDate=" + noticeDate + ", galleryNo=" + galleryNo + ", galleryTitle="
 				+ galleryTitle + ", galleryContent=" + galleryContent + ", galleryDate=" + galleryDate + ", galleryHit="
 				+ galleryHit + ", galleryLike=" + galleryLike + ", galleryLoc=" + galleryLoc + ", galleryTag="
-				+ galleryTag + ", photoNo=" + photoNo + ", uId=" + uId + ", rId=" + rId + ", rTitle=" + rTitle
-				+ ", rContent=" + rContent + ", regDate=" + regDate + ", gId=" + gId + ", sreviewNo=" + sreviewNo
-				+ ", sreviewContent=" + sreviewContent + ", sreviewDate=" + sreviewDate + ", arrivalNum=" + arrivalNum
-				+ "]";
+				+ galleryTag + ", photoNo=" + photoNo + ", tagNo=" + tagNo + ", uId=" + uId + ", rId=" + rId
+				+ ", rTitle=" + rTitle + ", rContent=" + rContent + ", regDate=" + regDate + ", gId=" + gId
+				+ ", sreviewNo=" + sreviewNo + ", sreviewContent=" + sreviewContent + ", sreviewDate=" + sreviewDate
+				+ ", arrivalNum=" + arrivalNum + "]";
 	}
 
 	public int getNoticeCode() {
@@ -190,6 +193,14 @@ public class AdminBoard {
 
 	public void setPhotoNo(int photoNo) {
 		this.photoNo = photoNo;
+	}
+
+	public int getTagNo() {
+		return tagNo;
+	}
+
+	public void setTagNo(int tagNo) {
+		this.tagNo = tagNo;
 	}
 
 	public String getuId() {

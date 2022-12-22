@@ -7,14 +7,27 @@
 
 <mapper namespace="seulgi.dao.face.AdminProductDao">
 
-	<select id="selectAll" resultType="seulgi.dto.AdminProduct">
+	<!-- <select id="selectAll" resultType="seulgi.dto.AdminProduct">
 		SELECT * FROM (
 			SELECT rownum rnum, G.* FROM (
 				SELECT * FROM goods
+				ORDER BY g_id desc
 			) G
 		) goods
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
-	</select>
+	</select> -->
+	
+	<select id="selectAll" resultType="seulgi.dto.AdminProduct">
+	SELECT * FROM (
+	    SELECT ROWNUM rnum, t.* FROM (
+	      SELECT g.*, i.file_name 
+	    	FROM goods g, goods_img i
+		    	WHERE g.g_id = i.g_id
+		    	<!-- AND i.file_type = 'main_img' -->
+		   		ORDER BY g.g_id DESC
+	        ) t
+	    ) GOODS
+    </select>
 	
 	<select id="selectCntAll" resultType="int">
 		SELECT count(*) FROM goods

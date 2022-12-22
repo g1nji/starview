@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -149,6 +150,24 @@ public class AdminBoardController {
 		adminBoardService.delete(board);
 		
 		return "redirect:/admin/gallery/list";
+	}
+	
+	//나중에 페이징 처리도 할 것
+	//게시글 검색
+	@RequestMapping("/gallery/search")
+	public void searchGallery(Model model, @RequestParam(required = false) String keyword) {
+		logger.info("/search 주소 연결");
+		
+		//검색된 게시글 리스트
+		List<AdminBoard> searchList = adminBoardService.search(keyword);
+		
+		for (AdminBoard b : searchList)
+			logger.info("검색된 게시글: {}", searchList);
+		
+		logger.info("검색어: {}", keyword);
+	
+		model.addAttribute("searchList", searchList);
+		model.addAttribute("keyword", keyword);
 	}
 	
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

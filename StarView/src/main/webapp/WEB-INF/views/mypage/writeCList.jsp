@@ -41,7 +41,7 @@ th, td {
 </style>
 
 <div class="wrap">
-<h1>내가 작성한 글 리스트</h1>
+<h1>내가 작성한 댓글 리스트</h1>
 <hr>
 
 <table class="table">
@@ -53,16 +53,17 @@ th, td {
 	<th style="width:10%; text-align:right;">작성일</th>
 </tr>
 
-<c:forEach items="${list }" var="gallery" varStatus="status">
+<c:forEach items="${clist }" var="comment" varStatus="status">
 <tr>
-	<td>${list.size() - status.index }</td>
-	<td style="text-align:left;" onclick="location.href='/gallery/view?galleryNo=${gallery.galleryNo }'"><a href="/gallery/view?galleryNo=${gallery.galleryNo }">${gallery.galleryTitle }</a></td>
-	<td>${gallery.galleryLike }</td>
-	<td>${gallery.galleryHit }</td>
-	<td style="text-align:right;"><fmt:formatDate value="${gallery.galleryDate }" pattern="yyyy-MM-dd" /></td>
+	<td>${clist.size() - status.index }</td>
+	<td style="text-align:left;" onclick="location.href='/gallery/view?galleryNo=${comment.galleryNo }'"><a href="/gallery/view?galleryNo=${comment.galleryNo }">제목</a></td>
+	<td>좋아요 수</td>
+	<td>조회수</td>
+	<td style="text-align:right;">작성일</td>
 </tr>
 </c:forEach>
 </table>
+
 
 <c:import url="../layout/paging.jsp" />
 

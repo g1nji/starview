@@ -85,6 +85,45 @@ $(document).ready(function() {
 #galleryContent {
 	border: none;
 }
+
+.filebox {
+    border-radius: 10px;
+    display: flex;
+    font-size: 16px;
+    align-items: center;
+    width: 80px;
+    height: 35px;
+    background-color: #FFEBBA;
+    justify-content: center;
+    font-weight: 500;
+}
+
+.filebox:hover {
+	background-color: #FFB703;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#image {
+
+	display: none;
+}
+
+#image_container > img {
+	width: 50px;
+	margin-right: 8px;
+}
+
+.tag {
+	margin-left: -5px;
+    width: 100%;
+    border: none;
+}
+
+.btn-primary {
+	background-color: red !important;
+}
+
 </style>
 
 
@@ -101,7 +140,30 @@ $(document).ready(function() {
 
 
 <!-- 파일첨부 -->
-<input type="file" id="file" name="file"><br>
+<label for="image">
+	<div class="filebox">사진첨부</div>
+</label>
+<input type="file" id="image" name="file" accept="image/*" onchange="setThumbnail(event)" multiple="multiple">
+<div id="image_container"></div>
+
+<script>
+      function setThumbnail(event) {
+        for (var image of event.target.files) {
+          var reader = new FileReader();
+
+          reader.onload = function(event) {
+            var img = document.createElement("img");
+            img.setAttribute("src", event.target.result);
+            document.querySelector("div#image_container").appendChild(img);
+          };
+
+          console.log(image);
+          reader.readAsDataURL(image);
+        }
+      }
+    </script>
+
+<br>
 
 <!-- 내용 -->
 <div id="editor" style="height:400px;"></div>

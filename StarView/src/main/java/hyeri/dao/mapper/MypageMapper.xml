@@ -25,5 +25,31 @@
 		)gallery
 		WHERE rnum BETWEEN #{paging.startNo } AND #{paging.endNo }
 	</select>
+	
+	<select id="selectCntAllC" resultType="int" parameterType="String">
+		SELECT count(*) FROM (
+			SELECT DISTINCT gallery_no
+			FROM g_comment
+			WHERE u_id=#{uId}
+		)c
+	</select>
+	
+	<select id="selectCList" resultType="hyeri.dto.GComment">
+		SELECT * FROM (
+			SELECT rownum rnum, cg.* FROM (
+		        SELECT
+				    c.cm_no, c.cm_content, c.cm_date,
+				    c.gallery_no, c.u_id, c.u_nick,
+				    g.gallery_title, g.gallery_like, g.gallery_hit
+				FROM g_comment c
+				INNER JOIN gallery g
+				ON c.gallery_no = g.gallery_no
+				WHERE c.u_id = #{uId }
+				ORDER BY c.gallery_no DESC   
+			)cg
+		)g_comment
+		WHERE rnum BETWEEN #{paging.startNo } AND #{paging.endNo }
+	</select>
+	
 
 </mapper>
