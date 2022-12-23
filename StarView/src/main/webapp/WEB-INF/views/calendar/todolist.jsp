@@ -204,7 +204,6 @@ $(document).ready(function() {
 	        		, success: function(res) {
 	        			console.log("AJAX 성공");
 	        			
-	        			$("#listbox").val(sDate);
 	        		}
 		    	 	, error: function(request, error) {
 		    	 		console.log("AJAX 실패")
