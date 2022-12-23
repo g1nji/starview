@@ -24,4 +24,7 @@ public interface LoginService {
 	//닉네임 중복
 	public int nickCheck(String uNick);
 
+	//이메일 중복
+	public int emailCheck(String uEmail);
+
 }

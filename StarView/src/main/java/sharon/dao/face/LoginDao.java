@@ -29,4 +29,7 @@ public interface LoginDao {
 	//닉네임 중복 확인
 	public int selectByuNick(String uNick);
 
+	//이메일 중복 확인
+	public int selectByuEmail(String uEmail);
+
 }
