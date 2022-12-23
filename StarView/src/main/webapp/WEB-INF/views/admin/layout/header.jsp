@@ -173,14 +173,14 @@ html .container {
 		<li>
 			캘린더 관리
 			<ul>
-				<li><a href="../calendar/date"> - 추천일 조회</a></li>
+				<li><a href="../calendar/date"> - 추천일 등록</a></li>
 				<li><a href="../calendar/time"> - 추천시간 조회</a></li>
 			</ul>
 		</li>
 		<li>
 			상품 관리
 			<ul>
-				<li><a href="../prod/insert"> - 상품 업로드</a></li>
+				<li><a href="../prod/insert"> - 상품 등록</a></li>
 				<li><a href="../prod/list"> - 상품 목록</a></li>
 			</ul>
 		</li>

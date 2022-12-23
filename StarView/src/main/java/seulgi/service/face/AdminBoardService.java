@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import seulgi.dto.AdminBoard;
 import seulgi.dto.AdminBoardFile;
 import seulgi.util.Paging;
+import seulgi.util.Search;
 
 public interface AdminBoardService {
 
@@ -47,13 +48,6 @@ public interface AdminBoardService {
 	public void upload(AdminBoard board, MultipartFile file);
 
 	/**
-	 * 게시글 업로드하기
-	 * 
-	 * @param board - 업로드할 게시글 정보 객체
-	 */
-	public void upload(AdminBoard board);
-	
-	/**
 	 * 게시글 번호를 이용하여 업로드된 사진 정보 조회하기
 	 * 
 	 * @param viewBoard - 조회할 게시글 정보 객체
@@ -91,8 +85,9 @@ public interface AdminBoardService {
 	 */
 	public void delete(AdminBoard board);
 
-	public List<AdminBoard> list();
+	
 	public List<AdminBoard> search(String keyword);
+	//public List<AdminBoard> search(Search search);
 
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -104,10 +99,13 @@ public interface AdminBoardService {
 	public Paging getPaging3(int curPage);
 	public List<AdminBoard> list3(Paging paging);
 
+
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
-	public List<AdminBoard> listAll(Paging paging);
-	public Paging getPagingAll(int curPage);
+//	public List<AdminBoard> list();
+//	public List<AdminBoard> listAll(Paging paging);
+//	public Paging getPagingAll(int curPage);
+//	public void upload(AdminBoard board);
 
 
 }

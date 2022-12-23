@@ -7,7 +7,8 @@
 
 <mapper namespace="seulgi.dao.face.AdminBoardDao">
 	
-	<select id="selectAllBoard" resultType="seulgi.dto.AdminBoard">
+	<!-- 게시글 리스트 -->
+	<!-- <select id="selectAllBoard" resultType="seulgi.dto.AdminBoard">
 		SELECT * FROM (
 		SELECT rownum rnum, A.* FROM (SELECT n.notice_code, n.notice_title, n.notice_content, g.gallery_title, g.gallery_content, r.r_title, r.r_content, p.sreview_content
 		FROM admin_notice n
@@ -21,7 +22,7 @@
 		) A
 		) admin_notice
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
-	</select>
+	</select> -->
 	
 	<select id="selectAll" resultType="seulgi.dto.AdminBoard">
 		SELECT * FROM (
@@ -53,9 +54,10 @@
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
 	</select>
 
-	<select id="selectCntAllBoard" resultType="int">
+	<!-- 게시글 개수 조회 -->
+	<!-- <select id="selectCntAllBoard" resultType="int">
 		select count(*) from admin_notice
-	</select>
+	</select> -->
 
 	<select id="selectCntAll" resultType="int">
 		select count(*) from gallery
@@ -69,27 +71,20 @@
 		SELECT count(*) FROM place_review
 	</select>
 	
+	<!-- 게시글 상세 조회 -->
 	<select id="selectBoard" resultType="seulgi.dto.AdminBoard" parameterType="seulgi.dto.AdminBoard">
 		SELECT * FROM gallery
 		WHERE gallery_no = #{galleryNo }
 	</select>
 	
-	<insert id="insertBoard" parameterType="seulgi.dto.AdminBoard">
-		<selectKey order="BEFORE" resultType="int" keyProperty="galleryNo" keyColumn="galleryNo">
-			SELECT gallery_seq.nextval FROM dual
-		</selectKey>
-	
-		INSERT INTO gallery (gallery_no, gallery_title, gallery_content, gallery_loc, gallery_tag)
-		VALUES (#{galleryNo}, #{galleryTitle }, #{galleryContent }, #{galleryLoc }, #{galleryTag })
-	</insert>
-	
-	<insert id="insertAllBoard" parameterType="seulgi.dto.AdminBoard">
+	<!-- 게시글 업로드 -->
+	<!-- <insert id="insertAllBoard" parameterType="seulgi.dto.AdminBoard">
 		<selectKey order="BEFORE" resultType="int" keyProperty="noticeCode">
 			SELECT admin_notice_seq.nextval FROM dual
 		</selectKey>
 	
-		<!-- INSERT INTO admin_notice (notice_code, notice_title, notice_content)
-		VALUES (#{noticeCode}, #{noticeTitle }, #{noticeContent }) -->
+		INSERT INTO admin_notice (notice_code, notice_title, notice_content)
+		VALUES (#{noticeCode}, #{noticeTitle }, #{noticeContent })
 		
 		INSERT ALL
 		INTO admin_notice (notice_code, notice_title, notice_content)
@@ -101,23 +96,36 @@
     	INTO place_review (sreview_no, sreview_content)
     		VALUES (#{noticeCode }, #{noticeContent })
 		SELECT * FROM dual
+	</insert> -->
+	
+	<insert id="insertBoard" parameterType="seulgi.dto.AdminBoard">
+		<selectKey order="BEFORE" resultType="int" keyProperty="galleryNo" keyColumn="galleryNo">
+			SELECT gallery_seq.nextval FROM dual
+		</selectKey>
+	
+		INSERT INTO gallery (gallery_no, gallery_title, gallery_content, gallery_loc, gallery_tag, u_id)
+		VALUES (#{galleryNo}, #{galleryTitle }, #{galleryContent }, #{galleryLoc }, #{galleryTag }, #{uId })
 	</insert>
 	
+	<!-- 파일 업로드 -->
 	<insert id="insertFile" parameterType="seulgi.dto.AdminBoardFile">
 		INSERT INTO gallery_file ( photo_no, gallery_no, origin_name, stored_name)
 		VALUES ( gallery_file_seq.nextval, #{galleryNo }, #{originName }, #{storedName } )
 	</insert>
 	
+	<!-- 파일 조회 -->
 	<select id="selectFileByBoard" resultType="seulgi.dto.AdminBoardFile" parameterType="seulgi.dto.AdminBoard">
 		SELECT * FROM gallery_file
 		WHERE gallery_no = #{galleryNo }
 	</select>
 	
+	<!-- 파일 다운로드 -->
 	<select id="selectFileByFile" resultType="seulgi.dto.AdminBoardFile" parameterType="seulgi.dto.AdminBoardFile">
 		SELECT * FROM gallery_file
 		WHERE gallery_no = #{galleryNo }
 	</select>
 	
+	<!-- 게시글 수정 -->
 	<update id="updateBoard" parameterType="seulgi.dto.AdminBoard">
 		UPDATE gallery
 		SET gallery_title = #{galleryTitle }
@@ -125,22 +133,55 @@
 		WHERE gallery_no = #{galleryNo }
 	</update>
 
-	<delete id="deleteFile" parameterType="seulgi.dto.AdminBoard">
-		DELETE gallery_file
-		WHERE gallery_no = #{galleryNo }	
-	</delete>
-	
+	<!-- 게시글 삭제 -->
 	<delete id="delete" parameterType="seulgi.dto.AdminBoard">
 		DELETE gallery
 		WHERE gallery_no = #{galleryNo }
 	</delete>
 	
+	<!-- 파일 삭제 -->
+	<delete id="deleteFile" parameterType="seulgi.dto.AdminBoard">
+		DELETE gallery_file
+		WHERE gallery_no = #{galleryNo }	
+	</delete>
+	
+		<!-- WHERE gallery_title LIKE '%'||#{galleryTitle }||'%' -->
+		<!-- WHERE gallery_content LIKE '%'||#{galleryContent }||'%' -->
+		<!-- WHERE u_id LIKE '%'||#{uId }||'%' -->
+		<!-- <if test="galleryTitle != null">
+			WHERE gallery_title LIKE '%'||#{galleryTitle }||'%'
+		</if>							
+		<if test="galleryContent != null">
+			WHERE gallery_content LIKE '%'||#{galleryContent }||'%'
+		</if>
+		<if test="uId != null">
+			WHERE u_id LIKE '%'||#{uId}||'%'
+		</if>
+		
+		쿼리 고치기...
+	<choose>
+		<when test="galleryTitle != null">
+			WHERE gallery_title LIKE '%'||#{galleryTitle }||'%'
+		</when>							
+		<when test="galleryContent != null">
+			WHERE gallery_content LIKE '%'||#{galleryContent }||'%'
+		</when>
+		<when test="uId != null">
+			WHERE u_id LIKE '%'||#{uId }||'%'
+		</when>
+	</choose> -->
+	<!-- 게시글 검색 -->
 	<select id="searchBoard" resultType="seulgi.dto.AdminBoard" parameterType="String">
 		<![CDATA[
 		SELECT * FROM gallery
-		WHERE gallery_content LIKE '%'||#{galleryContent }||'%'
+		WHERE u_id LIKE '%'||#{uId }||'%'
 		ORDER BY gallery_no DESC
 		]]>
 	</select>
 	
+	<!-- <select id="searchBoard" resultType="seulgi.dto.AdminBoard" parameterType="seulgi.util.Search">
+		SELECT * FROM gallery
+		WHERE #{option } LIKE '%'||#{keyword }||'%'
+		ORDER BY gallery_no DESC
+	</select> -->
 </mapper>
