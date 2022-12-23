@@ -23,6 +23,11 @@
 		WHERE u_nick = #{uNick}
 	</select>
 	
+	<select id="selectByuEmail" resultType="int" parameterType="string">
+		SELECT count(*) FROM users
+		WHERE u_email = #{uEmail}
+	</select>
+	
 	<delete id="delete">
 		DELETE FROM Users
 		WHERE u_id=#{uId}

@@ -22,13 +22,14 @@
     width: 300px;
    /*  margin: 0 auto;*/
     margin-bottom: 70px; 
-    margin-top: 70px;
-     float:left;
+    margin-top: 80px;
+    float:left;
+    height: 600px;
 }
 
 #titleup{
 	margin-left: 444px;
-	margin-top: 70px;
+    margin-top: 80px;
 }
 .weather {
     margin: 0 20px 0 0;
@@ -277,7 +278,8 @@ $(document).ready(() => {
 				var shaplace3=shaplace2.replaceAll('비 또는', '비☔️ 또는');
 				var shaplace4=shaplace3.replaceAll('맑겠습니다.', '맑겠습니다.🔆');
 				var shaplace5=shaplace4.replaceAll('비가', '비☔️가');
-				$("#resultLayout").append(shaplace5.replaceAll('○', '🗸')); 
+				var shaplace6=shaplace5.replaceAll('구름', '구름☁️');
+				$("#resultLayout").append(shaplace6.replaceAll('○', '🗸')); 
 				
 				console.log(wfSv)
 				
@@ -322,7 +324,8 @@ $(document).ready(() => {
 				var shaplace3=shaplace2.replaceAll('비 또는', '비☔️ 또는');
 				var shaplace4=shaplace3.replaceAll('맑겠습니다.', '맑겠습니다.🔆');
 				var shaplace5=shaplace4.replaceAll('비가', '비☔️가');
-				$("#resultLayout").append(shaplace5.replaceAll('○', '🗸')); 
+				var shaplace6=shaplace5.replaceAll('구름', '구름☁️');
+				$("#resultLayout").append(shaplace6.replaceAll('○', '🗸')); 
 				
 				console.log(wfSv)
 				
@@ -366,7 +369,8 @@ $(document).ready(() => {
 				var shaplace3=shaplace2.replaceAll('비 또는', '비☔️ 또는');
 				var shaplace4=shaplace3.replaceAll('맑겠습니다.', '맑겠습니다.🔆');
 				var shaplace5=shaplace4.replaceAll('비가', '비☔️가');
-				$("#resultLayout").append(shaplace5.replaceAll('○', '🗸')); 
+				var shaplace6=shaplace5.replaceAll('구름', '구름☁️');
+				$("#resultLayout").append(shaplace6.replaceAll('○', '🗸')); 
 				
 				},
 				error:()=>{
@@ -408,7 +412,8 @@ $(document).ready(() => {
 				var shaplace3=shaplace2.replaceAll('비 또는', '비☔️ 또는');
 				var shaplace4=shaplace3.replaceAll('맑겠습니다.', '맑겠습니다.🔆');
 				var shaplace5=shaplace4.replaceAll('비가', '비☔️가');
-				$("#resultLayout").append(shaplace5.replaceAll('○', '🗸')); 
+				var shaplace6=shaplace5.replaceAll('구름', '구름☁️');
+				$("#resultLayout").append(shaplace6.replaceAll('○', '🗸')); 
 				
 				},
 				error:()=>{
@@ -450,7 +455,8 @@ $(document).ready(() => {
 				var shaplace3=shaplace2.replaceAll('비 또는', '비☔️ 또는');
 				var shaplace4=shaplace3.replaceAll('맑겠습니다.', '맑겠습니다.🔆');
 				var shaplace5=shaplace4.replaceAll('비가', '비☔️가');
-				$("#resultLayout").append(shaplace5.replaceAll('○', '🗸')); 
+				var shaplace6=shaplace5.replaceAll('구름', '구름☁️');
+				$("#resultLayout").append(shaplace6.replaceAll('○', '🗸')); 
 				
 				},
 				error:()=>{
@@ -492,7 +498,8 @@ $(document).ready(() => {
 				var shaplace3=shaplace2.replaceAll('비 또는', '비☔️ 또는');
 				var shaplace4=shaplace3.replaceAll('맑겠습니다.', '맑겠습니다.🔆');
 				var shaplace5=shaplace4.replaceAll('비가', '비☔️가');
-				$("#resultLayout").append(shaplace5.replaceAll('○', '🗸')); 
+				var shaplace6=shaplace5.replaceAll('구름', '구름☁️');
+				$("#resultLayout").append(shaplace6.replaceAll('○', '🗸')); 
 				
 				},
 				error:()=>{
@@ -534,7 +541,8 @@ $(document).ready(() => {
 				var shaplace3=shaplace2.replaceAll('비 또는', '비☔️ 또는');
 				var shaplace4=shaplace3.replaceAll('맑겠습니다.', '맑겠습니다.🔆');
 				var shaplace5=shaplace4.replaceAll('비가', '비☔️가');
-				$("#resultLayout").append(shaplace5.replaceAll('○', '🗸')); 
+				var shaplace6=shaplace5.replaceAll('구름', '구름☁️');
+				$("#resultLayout").append(shaplace6.replaceAll('○', '🗸'));  
 				
 				},
 				error:()=>{
@@ -576,7 +584,8 @@ $(document).ready(() => {
 				var shaplace3=shaplace2.replaceAll('비 또는', '비☔️ 또는');
 				var shaplace4=shaplace3.replaceAll('맑겠습니다.', '맑겠습니다.🔆');
 				var shaplace5=shaplace4.replaceAll('비가', '비☔️가');
-				$("#resultLayout").append(shaplace5.replaceAll('○', '🗸')); 
+				var shaplace6=shaplace5.replaceAll('구름', '구름☁️');
+				$("#resultLayout").append(shaplace6.replaceAll('○', '🗸')); 
 				
 				},
 				error:()=>{
@@ -618,7 +627,8 @@ $(document).ready(() => {
 				var shaplace3=shaplace2.replaceAll('비 또는', '비☔️ 또는');
 				var shaplace4=shaplace3.replaceAll('맑겠습니다.', '맑겠습니다.🔆');
 				var shaplace5=shaplace4.replaceAll('비가', '비☔️가');
-				$("#resultLayout").append(shaplace5.replaceAll('○', '🗸')); 
+				var shaplace6=shaplace5.replaceAll('구름', '구름☁️');
+				$("#resultLayout").append(shaplace6.replaceAll('○', '🗸')); 
 				
 				},
 				error:()=>{
@@ -660,7 +670,8 @@ $(document).ready(() => {
 				var shaplace3=shaplace2.replaceAll('비 또는', '비☔️ 또는');
 				var shaplace4=shaplace3.replaceAll('맑겠습니다.', '맑겠습니다.🔆');
 				var shaplace5=shaplace4.replaceAll('비가', '비☔️가');
-				$("#resultLayout").append(shaplace5.replaceAll('○', '🗸')); 
+				var shaplace6=shaplace5.replaceAll('구름', '구름☁️');
+				$("#resultLayout").append(shaplace6.replaceAll('○', '🗸')); 
 				
 				},
 				error:()=>{

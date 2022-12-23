@@ -15,7 +15,7 @@ html {
 	padding: 0 auto;
 }
 .pwcon{
-height:600px;
+height: 680px;
 padding-top: 8%;
 width:500px;
 margin:0 auto;

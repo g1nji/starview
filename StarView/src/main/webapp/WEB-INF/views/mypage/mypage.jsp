@@ -12,7 +12,7 @@
 
 .myp{
 	margin-left: 200px;
-	margin-top: 80px;
+	margin-top: 45px;
 }
 
 
@@ -79,7 +79,7 @@ input{
 .person_field_wrap{
 	float:left;
 	margin-left: 200px;
-	margin-bottom: 50px;
+	margin-bottom: 150px;
 }
 
 .person_field_wrap2{

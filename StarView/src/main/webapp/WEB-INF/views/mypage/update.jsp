@@ -21,7 +21,7 @@
 } */
 .myp{
 	margin-left: 200px;
-	margin-top: 80px;
+	margin-top: 45px;
 }
 
 .person_field_legend {
@@ -84,7 +84,7 @@ caption, th {
 .person_field_wrap{
 	float:left;
 	margin-left: 200px;
-	margin-bottom: 50px;
+	margin-bottom: 160px;
 }
 
 .person_field_wrap2{
@@ -97,28 +97,44 @@ input{
 	border: 1px solid transparent;
 }
 
-#addbtn{
-	border-radius: 5px;
-    position: relative;
-    padding: 5px 5px;
+#addbtn, #nickChk,#emailChk{
     margin-left: 10px;
+	border:2px solid  #6b80f1;
+    color:#6b80f1;
+    background-color: #fff;
+    
+    padding: 4px 8px;
+    height: 32px;
+    font-size: 13px;
+    letter-spacing: -0.5px;
+    line-height: 20px;
+    
+    display: inline-block;
+    box-sizing: border-box;
+    letter-spacing: -1px;
     text-align: center;
-	outline: 0;
-	border:0;
-	font-weight: 600;
+}
+
+#addbtn:hover, #nickChk:hover, #emailChk:hover{
+	background-color: #6b80f1;
+    color: #fff;
 }
 
 #savebtn{
-	border-radius: 5px;
-    position: relative;
-    padding: 15px 5px;
-    margin-top:30px;
-    margin-left:130px;
+    margin-top: 37px;
+    margin-left: 109px;
+	display: inline-block;
+    padding: 13px 8px 14px;
+    width: 200px;
+    height: 50px;
+    border: 1px solid #5f75eb;
+    box-sizing: border-box;
+    color: #fff;
+    font-size: 16px;
+    line-height: normal;
     text-align: center;
-	outline: 0;
-	border:0;
-	font-weight: 600;
-	width:160px;
+    vertical-align: top;
+    background-color: #6b80f1;
 }
 
 .toast-bottom-center {
@@ -267,6 +283,35 @@ function validatePW( uPw ) {
 			
 			})
 		}		
+		
+		
+		function email_check(){
+			console.log("멜쳌")
+			var uEmail=$("#uEmail").val();
+			
+			$.ajax({
+				url:"/mypage/emailCheck",
+				data:{"uEmail":uEmail},
+				type:"post",
+				dataType:"json",
+				success:function(result){
+					console.log(result)
+					if(result>0){
+						toastr.options.escapeHtml = true;
+					    toastr.options.newestOnTop = true;
+					    toastr.options.positionClass = "toast-bottom-center";
+						toastr.warning('중복된 email입니다!','email 중복', {timeOut: 5000}); 
+					}else{
+						toastr.options.escapeHtml = true;
+					    toastr.options.newestOnTop = true;
+					    toastr.options.positionClass = "toast-bottom-center";
+						toastr.success('사용 가능한 email입니다!','email 중복확인 완료', {timeOut: 5000}); 
+					}
+					
+				}
+			
+			})
+		}		
 
 
 $(document).ready(function () {
@@ -361,7 +406,7 @@ $(document).ready(function () {
                         <th scope="row">이메일</th>
                         <td>
                             <div class="person_field_body">
-                            	<input type="text" value="${users.uEmail }" name="uEmail" id="uEmail">
+                            	<input type="text" value="${users.uEmail }" name="uEmail" id="uEmail"><input type="button" id="emailChk" value="확인" onclick="email_check();">
                             </div>
                         </td>
                     </tr>
@@ -370,7 +415,7 @@ $(document).ready(function () {
                         <td>
                             <div class="person_field_body">
                             	<input type="text" id="uAddress" value="${users.uAddress}" name="uAddress">
-                            	<input type="button" id="addbtn"onclick="sample6_execDaumPostcode()" value="주소 찾기">
+                            	<input type="button" id="addbtn"onclick="sample6_execDaumPostcode()" value="검색">
                             </div>
                         </td>
                     </tr>
@@ -385,31 +430,7 @@ $(document).ready(function () {
 <input type="text" id="uNo" value="${users.uNo}"hidden="hidden">            
 </form>                    
                    
-                     
-<%-- <div class="mypagediv">
-<form action="/mypage/update" method="post" id="form" onsubmit="return validate();">
-<h3>아이디:<input type="text" id="uId" name="uId" value="${users.uId}" readonly></h3>
-<h3>비밀번호:<input type="password" value="${users.uPw}" id="uPw" name="uPw"></h3>
-<h3>이름:<input type="text" value="${users.uName}" name="uName"></h3>
-<h3>닉네임:<input type="text" value="${users.uNick}" name="uNick"></h3>
-<h3>주소:<input type="text" id="uAddress" value="${users.uAddress}" name="uAddress">
-<input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기"><br>
-</h3>
-<h3>생년월일:<input type="text" value="${users.uBirth}" name="uBirth"readonly></h3>
-<h3>성별:<input type="text" value="${users.uGender}" name="uGender"readonly></h3>
-<h3>이메일:<input type="text" value="${users.uEmail }" name="uEmail" id="uEmail"></h3>
-<h3>전화번호:<input type="text" value="${users.uPhone }" name="uPhone" oninput="autoHyphen2(this)" maxlength="13"></h3>
-
-<input type="submit" id="savebtn" value="저장" ><!-- onclick='save()' -->
-<input type="text" id="sample6_postcode" placeholder="우편번호" hidden="hidden">
-<input type="text" id="sample6_address" name="uAdd1" hidden="hidden"><br>
-<input type="text" id="sample6_detailAddress" name="uAdd2" hidden="hidden"><br>
-<input type="text" id="sample6_extraAddress" hidden="hidden">
-
-
-
-</form>
-</div> --%>
+                    
 </body>
 </html>
 <c:import url="../layout/footer.jsp" />
