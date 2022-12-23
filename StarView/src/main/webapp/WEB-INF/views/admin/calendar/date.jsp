@@ -63,33 +63,33 @@ $(document).ready(() => {
 					+ "<th> 오전 </th>"
 					+ "<th> 오후 </th></tr>"
 					
-					+ "<tr><th>" + caseDay(day+3) + "</th>"
+					+ "<tr><th>" + caseDay(day+3) + " (" + caseDate(date) + "일)</th>"
 					+ "<td>" + $rows.find("rnSt3Am").text() +"</td>"
 					+ "<td>" + $rows.find("rnSt3Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+4) + "</th>"
+					+ "<tr><th>" + caseDay(day+4) + " (" + caseDate(date+1) + "일)</th>"
 					+ "<td>" + $rows.find("rnSt4Am").text() +"</td>"
 					+ "<td>" + $rows.find("rnSt4Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+5) + "</th>"
+					+ "<tr><th>" + caseDay(day+5) + " (" + caseDate(date+2) +"일)</th>"
 					+ "<td>" + $rows.find("rnSt5Am").text() +"</td>"
 					+ "<td>" + $rows.find("rnSt5Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+6) + "</th>"
+					+ "<tr><th>" + caseDay(day+6) + " (" + caseDate(date+3) + "일)</th>"
 					+ "<td>" + $rows.find("rnSt6Am").text() +"</td>"
 					+ "<td>" + $rows.find("rnSt6Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+7) + "</th>"
+					+ "<tr><th>" + caseDay(day+7) + " (" + caseDate(date+4) + "일)</th>"
 					+ "<td>" + $rows.find("rnSt7Am").text() +"</td>"
 					+ "<td>" + $rows.find("rnSt7Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+8) + "</th>"
+					+ "<tr><th>" + caseDay(day+8) + " (" + caseDate(date+5) + "일)</th>"
 					+ "<td colspan='2'>" + $rows.find("rnSt8").text() +"</td></tr>"
 
-					+ "<tr><th>" + caseDay(day+9) + "</th>"
+					+ "<tr><th>" + caseDay(day+9) + " (" + caseDate(date+6) + "일)</th>"
 					+ "<td colspan='2'>" + $rows.find("rnSt10").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+10) + "</th>"
+					+ "<tr><th>" + caseDay(day+10) + " (" + caseDate(date+7) + "일)</th>"
 					+ "<td colspan='2'>" + $rows.find("rnSt10").text() +"</td></tr>"
 					
 				$table.html(tt)
@@ -101,33 +101,33 @@ $(document).ready(() => {
 					+ "<th> 오전 </th>"
 					+ "<th> 오후 </th></tr>"
 					
-					+ "<tr><th>" + caseDay(day+3) + "</th>"
+					+ "<tr><th>" + caseDay(day+3) + " (" + caseDate(date) + "일)</th>"
 					+ "<td>" + $rows.find("wf3Am").text() +"</td>"
 					+ "<td>" + $rows.find("wf3Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+4) + "</th>"
+					+ "<tr><th>" + caseDay(day+4) + " (" + caseDate(date+1) + "일)</th>"
 					+ "<td>" + $rows.find("wf4Am").text() +"</td>"
 					+ "<td>" + $rows.find("wf4Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+5) + "</th>"
+					+ "<tr><th>" + caseDay(day+5) + " (" + caseDate(date+2) + "일)</th>"
 					+ "<td>" + $rows.find("wf5Am").text() +"</td>"
 					+ "<td>" + $rows.find("wf5Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+6) + "</th>"
+					+ "<tr><th>" + caseDay(day+6) + " (" + caseDate(date+3) + "일)</th>"
 					+ "<td>" + $rows.find("wf6Am").text() +"</td>"
 					+ "<td>" + $rows.find("wf6Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+7) + "</th>"
+					+ "<tr><th>" + caseDay(day+7) + " (" + caseDate(date+4) + "일)</th>"
 					+ "<td>" + $rows.find("wf7Am").text() +"</td>"
 					+ "<td>" + $rows.find("wf7Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+8) + "</th>"
+					+ "<tr><th>" + caseDay(day+8) + " (" + caseDate(date+5) + "일)</th>"
 					+ "<td colspan='2'>" + $rows.find("wf8").text() +"</td></tr>"
 
-					+ "<tr><th>" + caseDay(day+9) + "</th>"
+					+ "<tr><th>" + caseDay(day+9) + " (" + caseDate(date+6) + "일)</th>"
 					+ "<td colspan='2'>" + $rows.find("wf10").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+10) + "</th>"
+					+ "<tr><th>" + caseDay(day+10) + " (" + caseDate(date+7) + "일)</th>"
 					+ "<td colspan='2'>" + $rows.find("wf10").text() +"</td></tr>"
 					
 				$table2.html(tt2)
@@ -158,6 +158,8 @@ var func2 = (a, b) => {
 
 //날짜
 var today = new Date();
+console.log(today);
+//console.log(new Date(today.setDate(today.getDate()-1)));
 
 //연도
 var year = today.getFullYear();
@@ -167,6 +169,8 @@ var month = today.getMonth() + 1;
 
 //일
 var date = today.getDate();
+console.log(date);
+console.log(date+3);
 
 //오늘 날짜
 var ymd = year + "" + month + "" +date;
@@ -183,7 +187,21 @@ var hour = today.getHours();
 //오늘 요일
 var day = today.getDay();
 
+//월을 넘어가면 1부터 시작되도록
+//28일, 30일, 31일로 끝나는 월 설정도 추가하기...
 //시간에 따른 날짜값
+function caseDate(date) {
+	var d = "";
+	
+	if(hour >= 0 && hour < 18) {
+		d = date+2;
+	} else if(hour >= 18 && hour <= 23) {
+		d = date+3;
+	}
+	return d;
+}
+
+//시간에 따른 시간값
 function caseHour(hour) {
 	var tm = "";
 	
@@ -195,8 +213,8 @@ function caseHour(hour) {
 	return tm;
 }
 
-console.log(caseHour(hour));
-console.log(caseDay(day+10));
+//console.log(caseHour(hour));
+//console.log(caseDay(day+10));
 
 //요일값
 function caseD(day) {
@@ -371,11 +389,14 @@ function caseDay(day) {
 <input type="radio" name="regId" value="11H20000"> 부산, 울산, 경상남도
 <input type="radio" name="regId" value="11G00000"> 제주도<br><br>
 
-<button id="btn">조회</button>
+<button id="btn" class="btn btn-primary btn-sm">조회</button>
 <div id="resultLayout"></div>
 
 <div id="form" style="display: none;">
-지역 <input id="form1" type="text" style="width: 300px; height: 140px; display: none;"><br>
-추천일 <input id="form2" type="text" style="width: 300px; height: 140px; display: none;">입력한 내용이 DB에 저장되도록
+<form action="./date" method="post">
+지역 <input id="form1" name="recomLoc" type="text" style="width: 300px; height: 130px; display: none;">
+추천일 <input id="form2" name="recomDate" type="text" style="width: 300px; height: 130px; display: none;"><br>
+<input type="submit" value="등록" class="btn btn-primary btn-xs" style="margin-left: 120px">
+</form>
 </div>
 <c:import url="../layout/footer.jsp" />

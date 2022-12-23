@@ -52,6 +52,27 @@ $(document).ready(function() {
 		location.href = "./search?keyword" + $('input[name="keyword"]:checked').val();
 	})
 	
+	var searchForm = $('#searchForm');
+	$('#searchForm button').on('click', function(e) {
+		/* if (!searchForm.find('option:selected').val()) {
+			alert('검색항목을 선택하세요');
+			return false;
+		} */
+		if (!searchForm.find('input[name="keyword"]').val()) {
+			alert('검색어를 입력하세요');
+			return false;
+		}
+		e.preventDefault();
+		
+		//var option = $('#option option:selected').val();
+		//var keyword = document.getElementById('keyword').value;
+		//var keyword = $('input[name="keyword"]:checked').val();
+		searchForm.submit();
+		//location.href = "./search?option=" + $('#option option:selected').val() + "&keyword=" document.getElementById('keyword').value;
+		//location.href = "./search?" + $('#option option:selected').val() + "=" + document.getElementById('keyword').value;
+		location.href = "./search?keyword=" + document.getElementById('keyword').value;
+	});
+	
 })
 
 </script>
@@ -66,11 +87,16 @@ $(document).ready(function() {
     <option value="/admin/place/list">명소후기</option>
 </select>
 
-<form action="./search" method="get" style="float: right;">
-	<input id="search" type="text" placeholder="검색어를 입력하세요" name="keyword">
+<form id="searchForm" action="./search" method="get" style="float: right;">
+    <!-- <select id="option" name="option">
+        <option value="">검색 항목</option>
+        <option value="galleryTitle">제목</option>
+        <option value="galleryContent">내용</option>
+        <option value="uId">작성자</option>
+    </select> -->
+    <input id="keyword" name="keyword" type="text" placeholder="검색할 아이디를 입력하세요" value="">
 	<button class="btnSearch">검색</button>
 </form>
-
 <br><br>
 
 <table class="table table-striped table-hover table-condensed">

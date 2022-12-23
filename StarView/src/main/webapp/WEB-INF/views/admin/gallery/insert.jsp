@@ -33,10 +33,10 @@ $(document).ready(function() {
 </div> -->
 
 <!-- 아이디 불러오도록 수정 -->
-<!-- <div class="form-group">
+<div class="form-group">
 	<label for="uId">작성자</label>
-	<input type="text" id="uId" name="uId" class="form-control">
-</div> -->
+	<input type="text" id="uId" name="uId" value="${uId }class="form-control">
+</div>
 
 <div class="form-group">
 	<label for="galleryTitle">제목</label>
