@@ -194,8 +194,28 @@ $(document).ready(function() {
 	            //투두리스트 폼 만들기
 	    		$("#todolist").css("display", "block");
 	            $("#selectDay").text( todoDay );
-	    		
+	            
+	        //날짜 선택 시(.selectDay 클래스 선택 시) ajax로 요청 보내서 새로운 url 띄우기 (여기에 list 출력)
+	        	$.ajax({
+	        		type:"GET"
+	        		, url: "/calendar/listview"
+	        		, data: {}
+	        		, dataType: "html"
+	        		, success: function(res) {
+	        			console.log("AJAX 성공");
+	        			
+	        			$("#listbox").val(sDate);
+	        		}
+		    	 	, error: function(request, error) {
+		    	 		console.log("AJAX 실패")
+		    	 		console.log("code:"+request.status+"\n"+"message"+request.responseText+"\n"+"error:"+error);
+		    	 		
+		    	 	} 
+	        	})
+	        
 	        });
+	        
+	        
 
 		     
 	        //todolist 버튼 클릭해서 제출하면 선택한 날짜 값 들어가게
@@ -207,20 +227,25 @@ $(document).ready(function() {
 		    	 
 		    	 $.ajax({
 		    		type:"POST"
-		    		, url: "/calendar/todolist"
+		    		, url: "/calendar/listview"
 					, data: { "todoList" : inputTodo , "sDate" : todoDay } 
-					, dataType:"json"
+					, dataType:"text"
 					, success: function(res) {
 						console.log("AJAX 성공");
 						
 						
+						$("#listbox").html(inputTodo);
 						
 					}
-		    	 	, error: function() {
+		    	 	, error: function(request, error) {
 		    	 		console.log("AJAX 실패")
+		    	 		console.log("code:"+request.status+"\n"+"message"+request.responseText+"\n"+"error:"+error);
+		    	 		
 		    	 	}
 		    	 })
 	    	 });
+	        
+	        
 	        
 	        //토글 클래스
 // 	        $(".claendarTable").on("click", "td", function() {
@@ -238,8 +263,6 @@ $(document).ready(function() {
 // 	    	})
 	    	
 	    }
-	    
-	    
 	    
 	}
 
@@ -268,7 +291,14 @@ $(document).ready(function() {
 	<button type="button" id="todoBtn">작성</button>
 	</form>	
 	
+	<!-- 입력한 내용이 뜨게 할 div -->
 	<div id="listbox">
+	
+	<p>----------------</p>
+	<c:forEach items="${todoList }" var="todoList">
+	<span>${todoList.todoList}</span>
+	</c:forEach>
+	
 	</div>
 	
 	</div>

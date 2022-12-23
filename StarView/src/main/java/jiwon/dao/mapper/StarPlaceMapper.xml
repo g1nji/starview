@@ -14,7 +14,7 @@
 	</select>
 	
 	<select id="selectStarplace" resultType="jiwon.dto.StarPlace" parameterType="jiwon.dto.StarPlace" >
-		SELECT arrival, p_adr, p_expln
+		SELECT arrival, p_adr, p_expln, arrival_num
 		FROM starplace
 		WHERE arrival_num = #{arrivalNum}
 	</select>

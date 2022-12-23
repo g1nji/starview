@@ -11,7 +11,7 @@
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = { 
 	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표 (나중에 현재 위치로 바꾸기)
-	        level: 2 // 지도의 확대 레벨
+	        level: 12 // 지도의 확대 레벨
 	    };
 	//지도 생성
 	var map = new kakao.maps.Map(mapContainer, mapOption);
@@ -29,7 +29,7 @@
 				lon = position.coords.longitude; // 경도
 
 				var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성
-				message = '<div style="padding:5px;">📍현재 위치가 맞나요?</div>'; // 인포윈도우에 표시될 내용
+				message = '<div style="padding:5px;">📍현재 위치</div>'; // 인포윈도우에 표시될 내용
 
 				// 마커와 인포윈도우를 표시합니다
 				displayMarker(locPosition, message);
@@ -87,17 +87,29 @@
 							128.48601903785342)
 				},
 				{
-					title : '안성 천문대',
-					latlng : new kakao.maps.LatLng(36.96508851862295,
-							127.22389960191012)
+					title : '안반데기',
+					latlng : new kakao.maps.LatLng(37.62646015343739,
+							128.74028894771928)
 				},
 				{
 					title : '중미산 천문대',
 					latlng : new kakao.maps.LatLng(37.58172695499676,
 							127.45931344199813)
-				}, {
-					title : '근린공원',
-					latlng : new kakao.maps.LatLng(33.451393, 126.570738)
+				}, 
+				{
+					title : '매봉산 바람의 언덕',
+					latlng : new kakao.maps.LatLng(37.2155764, 
+							128.963924)
+				} , 
+				{
+					title : '합천 황매산',
+					latlng : new kakao.maps.LatLng(35.4812128 , 
+							127.984827)
+				} , 
+				{
+					title : '화악터널 쌈지공원',
+					latlng : new kakao.maps.LatLng(37.9929169, 
+							127.522422)
 				} ];
 		
 		// 마커 아이콘 대신할 이미지 넣기

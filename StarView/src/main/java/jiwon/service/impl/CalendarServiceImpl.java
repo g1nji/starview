@@ -1,5 +1,7 @@
 package jiwon.service.impl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,26 @@ public class CalendarServiceImpl implements CalendarService {
 		
 		calendarDao.insertTodolist(calendar);
 		
-		
 	}
+
+	@Override
+	public List<Calendar> list() {
+		logger.info("list()");
+		
+		List<Calendar> todoList = calendarDao.selectAll();
+		
+		logger.info("전체조회하기");
+		for( Calendar c : todoList ) logger.info("{}", c);
+		
+		return todoList;
+	}
+
+	
+//	@Override
+//	public Calendar view() {
+//		return null;
+//	}
+
+
 
 }

@@ -12,5 +12,10 @@
   		VALUES ( scheduler_seq.nextval, #{uId}, #{todoList}, #{sDate} )
   	</insert>
   	
+  	<select id="selectAll" resultType="jiwon.dto.Calendar" parameterType="jiwon.dto.Calendar">
+  		SELECT * FROM calendar
+  		ORDER BY s_no DESC
+  	</select>
+  	
   	
 </mapper>

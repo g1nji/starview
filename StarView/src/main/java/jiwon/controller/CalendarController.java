@@ -20,7 +20,7 @@ import jiwon.service.face.CalendarService;
 
 @Controller
 @RequestMapping("/calendar")
-public class CalendarController {
+public class CalendarController<TodolistData> {
 
 	//로그
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -32,39 +32,38 @@ public class CalendarController {
 	public void calendarmain() {
 		logger.info("/calendar/todolist [GET]");
 		
+		
+	}
+	
+	//날짜 선택 시 호출될 메소드
+	@ResponseBody
+	@GetMapping("/listview")
+	public void writeok( Model model, Calendar viewcalendar) {
+		logger.info("List 요청 확인");
+		
+		List<Calendar> todoList = calendarservice.list();
+		for (Calendar c : todoList ) logger.info("{}", c);
+		
+//		viewcalendar = calendarservice.view();
+		
+		model.addAttribute("todoList", todoList);
+		model.addAttribute("viewcalendar", viewcalendar);
 	}
 	
 	//todoList 글쓰기 처리
 	@ResponseBody
-	@PostMapping("/todolist")
+	@PostMapping("/listview")
 	public String calendarwrite( Calendar calendar, HttpSession session, Model model) {
 		logger.info("/calendar/todolist [POST]");
 		logger.info("{}", calendar);
 		
 		//작성자 정보 추가하기
 		calendar.setuId( (String) session.getAttribute("uId"));
-		calendarservice.write(calendar);
+		
 		
 		return "redirect:/calendar/todolist";
 	}
-	
-	//글쓰기 완료
-//	@ResponseBody
-//	@PostMapping("/todolist_ok")
-//	public String writeok(Writer out, Calendar calendar ) {
-//		logger.info("Calendar {} ", calendar);
-////		logger.info("sDate {} ", sDate);
-//		
-//		
-////		try {
-////			out.write("{\"res\":true}");
-////		} catch (IOException e) {
-////			e.printStackTrace();
-////		}
-//		
-//		return "";
-//		
-//	}
+
 	
 	
 }
