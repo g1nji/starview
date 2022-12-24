@@ -18,7 +18,6 @@ import seulgi.dto.AdminBoard;
 import seulgi.dto.AdminBoardFile;
 import seulgi.service.face.AdminBoardService;
 import seulgi.util.Paging;
-import seulgi.util.Search;
 
 @Controller
 @RequestMapping(value="/admin")
