@@ -40,8 +40,9 @@ $(document).ready(function() {
 <tr>
 <%-- 	<td>${StarPlace.arrivalNum }</td> --%>
 	<td><a href="/place/view?arrivalNum=${StarPlace.arrivalNum }">${StarPlace.arrival }</a></td>
-	<td><button id="roadmap" type="button" onclick="">길찾기</button></td>
-	<td><button id="findplace" type="button" onclick="">편의시설 조회</button></td>
+	<td><p>${StarPlace.pAdr }</p></td>
+	<td><a href="https://map.kakao.com/link/to/${StarPlace.arrival },${StarPlace.eLttd },${StarPlace.eLngtd }">길찾기</a></td>
+<!-- 	<td><button id="findplace" type="button" onclick="">편의시설 조회</button></td> -->
 </tr>
 
 </c:forEach>

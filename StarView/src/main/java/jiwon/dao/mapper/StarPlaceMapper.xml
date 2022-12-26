@@ -8,7 +8,7 @@
 <mapper namespace="jiwon.dao.face.StarPlaceDao">
 
 	<select id="selectAll" resultType="jiwon.dto.StarPlace">
-		SELECT arrival_num, e_lttd, e_lngtd, arrival
+		SELECT arrival_num, e_lttd, e_lngtd, arrival, p_adr
 		FROM starplace
 		ORDER BY arrival_num
 	</select>

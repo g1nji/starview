@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <body>
 	<div id="map" style="width:500px;height:400px;"></div>
@@ -67,7 +68,8 @@
 			map.setCenter(locPosition);
 		}
 
-		// 지도타입 컨트롤 생성 (일반 지도와 스카이뷰로 지도 타입을 전환)
+// 		지도타입 컨트롤 생성 (일반 지도와 스카이뷰로 지도 타입을 전환)
+		
 		var mapTypeControl = new kakao.maps.MapTypeControl();
 
 		// 오른쪽 위에 지도 컨트롤 표시하기
@@ -80,37 +82,15 @@
 		
 		//마커 생성하기
 		// 마커를 표시할 위치와 title 객체 배열입니다 
-		var positions = [
-				{
-					title : '별마로 천문대',
-					latlng : new kakao.maps.LatLng(37.199428994067965,
-							128.48601903785342)
-				},
-				{
-					title : '안반데기',
-					latlng : new kakao.maps.LatLng(37.62646015343739,
-							128.74028894771928)
-				},
-				{
-					title : '중미산 천문대',
-					latlng : new kakao.maps.LatLng(37.58172695499676,
-							127.45931344199813)
-				}, 
-				{
-					title : '매봉산 바람의 언덕',
-					latlng : new kakao.maps.LatLng(37.2155764, 
-							128.963924)
-				} , 
-				{
-					title : '합천 황매산',
-					latlng : new kakao.maps.LatLng(35.4812128 , 
-							127.984827)
-				} , 
-				{
-					title : '화악터널 쌈지공원',
-					latlng : new kakao.maps.LatLng(37.9929169, 
-							127.522422)
-				} ];
+		var positions = [ 
+				{ title : '별마로 천문대', latlng : new kakao.maps.LatLng(37.199428994067965, 128.48601903785342) },
+				{ title : '안반데기', latlng : new kakao.maps.LatLng(37.62646015343739, 128.74028894771928) },
+				{ title : '중미산 천문대', latlng : new kakao.maps.LatLng(37.58172695499676, 127.45931344199813) }, 
+				{ title : '매봉산 바람의 언덕', latlng : new kakao.maps.LatLng(37.2155764, 128.963924) } , 
+				{ title : '합천 황매산', latlng : new kakao.maps.LatLng(35.4812128 , 127.984827) } , 
+				{ title : '화악터널 쌈지공원', latlng : new kakao.maps.LatLng(37.9929169, 127.522422) } 
+				];
+	
 		
 		// 마커 아이콘 대신할 이미지 넣기
 		// 마커 이미지의 이미지 주소
@@ -118,7 +98,7 @@
 
 		for (var i = 0; i < positions.length; i++) {
 
-			// 마커 이미지의 이미지 크기 입니다
+			// 마커 이미지의 이미지 크기
 			var imageSize = new kakao.maps.Size(24, 35);
 
 			// 마커 이미지를 생성
