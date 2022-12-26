@@ -185,8 +185,8 @@ $(document).ready(function() {
 	        //일자 선택 클릭
 	        //테이블에 td 태그 클릭 시 기존 selectday 클래스를 지우고 클릭한 곳에 selectDay클래스 적용
 	        $(".calendarTable").on("click", "td", function () {
-	            $(".calendarTable .selectDay").removeClass("selectDay");
-	            $(this).removeClass("selectDay").addClass("selectDay");
+	            $(".calendarTable .selectDay").removeClass("selectDay").removeAttr('name','sDate');
+	            $(this).removeClass("selectDay").addClass("selectDay").attr('name', 'sDate');
 
 	            var todoDay = $(".calendarTable .selectDay").html();
 // 	            console.log( todoDay );
@@ -199,11 +199,12 @@ $(document).ready(function() {
 	        	$.ajax({
 	        		type:"GET"
 	        		, url: "/calendar/listview"
-	        		, data: {}
+	        		, data: { "todoList" : todoList }
 	        		, dataType: "html"
 	        		, success: function(res) {
 	        			console.log("AJAX 성공");
 	        			
+	        			$("#selectDay").html( res );
 	        		}
 		    	 	, error: function(request, error) {
 		    	 		console.log("AJAX 실패")
@@ -234,6 +235,7 @@ $(document).ready(function() {
 						
 						
 						$("#listbox").html(inputTodo);
+// 						location.reload();
 						
 					}
 		    	 	, error: function(request, error) {
@@ -284,21 +286,25 @@ $(document).ready(function() {
 	</div>
 	
 	
+	
 	<form id="todoform" method="POST">
-	Todo List
+	List
 	<label><input type="text" name="todoList" id="inputbox"></label>
 	<button type="button" id="todoBtn">작성</button>
-	</form>	
+	</form>
 	
-	<!-- 입력한 내용이 뜨게 할 div -->
 	<div id="listbox">
-	
-	<p>----------------</p>
-	<c:forEach items="${todoList }" var="todoList">
-	<span>${todoList.todoList}</span>
-	</c:forEach>
-	
+		<table>
+		<tr>
+			<th>-------------------</th>
+		</tr>
+		
+		<tr>
+			<td>${todoList.todoList }</td>
+		</tr>
+	</table>
 	</div>
+	
 	
 	</div>
 	

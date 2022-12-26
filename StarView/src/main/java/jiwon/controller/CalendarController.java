@@ -1,6 +1,5 @@
 package jiwon.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -38,7 +37,7 @@ public class CalendarController<TodolistData> {
 	//날짜 선택 시 호출될 메소드
 	@ResponseBody
 	@GetMapping("/listview")
-	public void writeok( Model model, Calendar viewcalendar) {
+	public void writeok( Model model ) {
 		logger.info("List 요청 확인");
 		
 		List<Calendar> todoList = calendarservice.list();
@@ -47,7 +46,6 @@ public class CalendarController<TodolistData> {
 //		viewcalendar = calendarservice.view();
 		
 		model.addAttribute("todoList", todoList);
-		model.addAttribute("viewcalendar", viewcalendar);
 	}
 	
 	//todoList 글쓰기 처리
