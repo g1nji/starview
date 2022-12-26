@@ -7,27 +7,26 @@ public class AdminComment {
 	private int cmNo;
 	private String cmContent;
 	private Date cmDate;
-	private String uId;
 	private int galleryNo;
-
+	private String uId;
 	private String uNick;
 	
 	public AdminComment() {}
 
-	public AdminComment(int cmNo, String cmContent, Date cmDate, String uId, String uNick, int galleryNo) {
+	public AdminComment(int cmNo, String cmContent, Date cmDate, int galleryNo, String uId, String uNick) {
 		super();
 		this.cmNo = cmNo;
 		this.cmContent = cmContent;
 		this.cmDate = cmDate;
+		this.galleryNo = galleryNo;
 		this.uId = uId;
 		this.uNick = uNick;
-		this.galleryNo = galleryNo;
 	}
 
 	@Override
 	public String toString() {
-		return "AdminComment [cmNo=" + cmNo + ", cmContent=" + cmContent + ", cmDate=" + cmDate + ", uId=" + uId
-				+ ", uNick=" + uNick + ", galleryNo=" + galleryNo + "]";
+		return "AdminComment [cmNo=" + cmNo + ", cmContent=" + cmContent + ", cmDate=" + cmDate + ", galleryNo="
+				+ galleryNo + ", uId=" + uId + ", uNick=" + uNick + "]";
 	}
 
 	public int getCmNo() {
@@ -54,6 +53,14 @@ public class AdminComment {
 		this.cmDate = cmDate;
 	}
 
+	public int getGalleryNo() {
+		return galleryNo;
+	}
+
+	public void setGalleryNo(int galleryNo) {
+		this.galleryNo = galleryNo;
+	}
+
 	public String getuId() {
 		return uId;
 	}
@@ -68,14 +75,6 @@ public class AdminComment {
 
 	public void setuNick(String uNick) {
 		this.uNick = uNick;
-	}
-
-	public int getGalleryNo() {
-		return galleryNo;
-	}
-
-	public void setGalleryNo(int galleryNo) {
-		this.galleryNo = galleryNo;
 	}
 
 }
