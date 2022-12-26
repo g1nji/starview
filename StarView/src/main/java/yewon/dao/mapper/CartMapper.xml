@@ -7,78 +7,47 @@
 
 <mapper namespace="yewon.dao.face.CartDao">
     
-    <select id="selectCartTotal" parameterType="Cart" resultType="int">
-    select count(*) from cart where 
-		<if test='uId != 0'>
-		u_id = #{uId }
-		</if>
-		<if test='uId == 0'>
-		ck_id = #{ckId }
-		</if>
+    <select id="selectCartTotal" resultType="int">
+    select count(*) from cart where u_id = #{uId }
     </select>
     
-    <select id="selectCartList" parameterType="Cart" resultType="Cart">
+    <select id="selectCartList" resultType="Cart">
     SELECT c.*, i.file_name, g.g_name, g.g_price, g.del_price 
     FROM cart c, goods_img i, goods g 
     WHERE c.g_id = i.g_id 
 		AND i.file_type = 'main_img'
 		AND c.g_id = g.g_id
-		<if test='uId != 0'>
 		AND c.u_id = #{uId }
-		</if>
-		<if test='uId == 0'>
-		AND c.ck_id = #{ckId }
-		</if>
+<!-- 		<if test='uId != null and !"".equals(uId)'> -->
+<!-- 		</if> -->
+    </select>
+    
+    <select id="nonuserList" resultType="Cart">
+    SELECT g.g_id, i.file_name, g.g_name, g.g_price, g.del_price 
+    FROM goods_img i, goods g 
+    WHERE
+    	g.g_id = i.g_id
+		AND i.file_type = 'main_img'
+		AND g.g_id = #{gId } 
     </select>
     
     <insert id="insertCart" parameterType="Cart">
-    insert into cart (c_id, g_id, c_qty,
-    	<if test='uId != 0'>
-		u_id
-		</if>
-		<if test='uId == 0'>
-		ck_id
-		</if>
-    ) values ( cart_seq.nextval, #{gId }, #{cQty },
-    	<if test='uId != 0'>
-		#{uId }
-		</if>
-		<if test='uId == 0'>
-		#{ckId}
-		</if>
-	)
+    insert into cart (c_id, g_id, c_qty, u_id ) 
+    values ( cart_seq.nextval, #{gId }, #{cQty }, #{uId } )
     </insert>
     
     <select id="addCheck" resultType="int">
-    select count(*) from cart where g_id = #{gId } 
-    <choose>
-    	<when test='uId != 0'>
-		AND u_id = #{uId }
-		</when>
-		<when test='uId == 0'>
-		AND ck_id = #{ckId }
-		</when>    	
-    </choose>
+    select count(*) from cart where g_id = #{gId } AND u_id = #{uId }
     </select>
     
     <delete id="deleteCart" parameterType="Cart">
-    delete from cart where c_id = #{cId }
-		<if test='uId != 0'>
+    delete from cart where g_id = #{gId }
 		AND u_id = #{uId }
-		</if>
-		<if test='uId == 0'>
-		AND ck_id = #{ckId }
-		</if>
     </delete>
 
     <update id="updateQty">
     UPDATE cart SET c_qty = #{cQty }
-    WHERE c_id = #{cId }
-    </update>
-    
-    <update id="cartUpdate">
-    UPDATE cart SET u_id = #{uId }
-    WHERE ck_id = #{ckId }
+    	WHERE g_id = #{gId }
     </update>
     
 </mapper>

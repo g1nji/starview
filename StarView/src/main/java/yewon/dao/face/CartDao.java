@@ -22,7 +22,9 @@ public interface CartDao {
 
 	public void updateQty(Cart cart);
 
-	public void cartUpdate(String uId, String ckid);
+	public void cartUpdate(Cart cart);
+
+	public Cart nonuserList(Cart cart);
 
 
 }

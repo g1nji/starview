@@ -44,8 +44,13 @@ public class CartServiceImpl implements yewon.service.face.CartService {
 	}
 
 	@Override
-	public void cartUpdate(String uId, String ckid) {
-		cartDao.cartUpdate(uId, ckid);
+	public void cartUpdate(Cart cart) {
+		cartDao.cartUpdate(cart);
+	}
+
+	@Override
+	public Cart nonuserCart(Cart goods) {
+		return cartDao.nonuserList(goods);
 	}
 
 }

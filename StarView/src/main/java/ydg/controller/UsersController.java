@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import ydg.dto.Users;
 import ydg.service.face.UsersService;
+import yewon.dto.Cart;
 import yewon.service.face.CartService;
 
 @Controller
@@ -40,10 +41,10 @@ public class UsersController {
 	@PostMapping("/login")
 	public String loginResult(
 			Users users, 
+			Cart cart,
 			HttpSession session, 
 			HttpServletRequest req, 
-			HttpServletResponse resp,
-			@CookieValue(value="cartid", required=false) Cookie cartid
+			HttpServletResponse resp
 			) {
 		logger.info("/users/login [POST]");
 		
@@ -70,16 +71,6 @@ public class UsersController {
 			//쿠키 저장
 			Cookie cookie = new Cookie("userInputId", users.getuId());
 			resp.addCookie(cookie);
-
-			
-			//비회원 장바구니 회원장바구니로 이동
-			String uId = users.getuId();
-			String ckid = cartid.getValue();
-			cartService.cartUpdate(uId, ckid);
-			
-			//장바구니 쿠키삭제
-			cartid.setMaxAge(0);
-			resp.addCookie(cartid);
 			
 			return "redirect:/";
 			
@@ -90,8 +81,6 @@ public class UsersController {
 			
 			return "redirect:/users/login";
 		}
-		
-		
 	}
 	
 	@RequestMapping("/logout")
