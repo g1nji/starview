@@ -8,14 +8,23 @@ public interface CartDao {
 
 	public void insertCart(Cart cart);
 
+	public void userInsertCart(Cart cart);
+	
 	public void deleteCart(Cart cart);
 
-	public int selectCartTotal(String uId);
+	public void userDeleteCart(Cart cart);
 
-	public List<Cart> selectCartList(String uId);
+	public int selectCartTotal(Cart cart);
+
+	public List<Cart> selectCartList(Cart cart);
 
 	public int addCheck(Cart cart);
 
 	public void updateQty(Cart cart);
+
+	public void cartUpdate(Cart cart);
+
+	public Cart nonuserList(Cart cart);
+
 
 }

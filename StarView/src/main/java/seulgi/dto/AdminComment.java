@@ -9,22 +9,25 @@ public class AdminComment {
 	private Date cmDate;
 	private String uId;
 	private int galleryNo;
+
+	private String uNick;
 	
 	public AdminComment() {}
 
-	public AdminComment(int cmNo, String cmContent, Date cmDate, String uId, int galleryNo) {
+	public AdminComment(int cmNo, String cmContent, Date cmDate, String uId, String uNick, int galleryNo) {
 		super();
 		this.cmNo = cmNo;
 		this.cmContent = cmContent;
 		this.cmDate = cmDate;
 		this.uId = uId;
+		this.uNick = uNick;
 		this.galleryNo = galleryNo;
 	}
 
 	@Override
 	public String toString() {
 		return "AdminComment [cmNo=" + cmNo + ", cmContent=" + cmContent + ", cmDate=" + cmDate + ", uId=" + uId
-				+ ", galleryNo=" + galleryNo + "]";
+				+ ", uNick=" + uNick + ", galleryNo=" + galleryNo + "]";
 	}
 
 	public int getCmNo() {
@@ -59,6 +62,14 @@ public class AdminComment {
 		this.uId = uId;
 	}
 
+	public String getuNick() {
+		return uNick;
+	}
+
+	public void setuNick(String uNick) {
+		this.uNick = uNick;
+	}
+
 	public int getGalleryNo() {
 		return galleryNo;
 	}
@@ -66,5 +77,5 @@ public class AdminComment {
 	public void setGalleryNo(int galleryNo) {
 		this.galleryNo = galleryNo;
 	}
-	
+
 }

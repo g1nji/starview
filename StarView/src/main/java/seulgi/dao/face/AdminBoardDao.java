@@ -5,6 +5,7 @@ import java.util.List;
 import seulgi.dto.AdminBoard;
 import seulgi.dto.AdminBoardFile;
 import seulgi.util.Paging;
+import seulgi.util.Search;
 
 public interface AdminBoardDao {
 
@@ -81,16 +82,25 @@ public interface AdminBoardDao {
 	 */
 	public void delete(AdminBoard board);
 
+	public List<AdminBoard> searchBoard(String keyword);
+	//public List<AdminBoard> searchBoard(Search search);
+	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	public int selectCntAll2();
 	public List<AdminBoard> selectAll2(Paging paging);
+
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	public int selectCntAll3();
 	public List<AdminBoard> selectAll3(Paging paging);
 
-	public void insertAllBoard(AdminBoard board);
-	public List<AdminBoard> selectAllBoard();
-	
-	public int selectCntAllBoard();
-	public List<AdminBoard> selectAllBoard(Paging paging);
-	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//	public List<AdminBoard> selectAllBoard();
+//	public List<AdminBoard> selectAllBoard(Paging paging);
+//	public int selectCntAllBoard();
+//	public void insertAllBoard(AdminBoard board);
+
+
 }

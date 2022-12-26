@@ -8,6 +8,7 @@ import hyeri.dto.GComment;
 import hyeri.dto.GTag;
 import hyeri.dto.Gallery;
 import hyeri.dto.GalleryFile;
+import hyeri.dto.GalleryLike;
 import hyeri.util.Paging;
 
 public interface GalleryService {
@@ -81,5 +82,7 @@ public interface GalleryService {
 	 * @return
 	 */
 	public List<Gallery> search(String keywordInput);
+
+	public List<GComment> clist(Paging paging);
 
 }

@@ -11,8 +11,8 @@
 <style type="text/css">
 
 .myp{
-	margin-left: 200px;
-	margin-top: 80px;
+	margin-left: 158px;
+	margin-top: 45px;
 }
 
 
@@ -26,7 +26,7 @@
 }
 
 .person_field_table {
-    width: 400px;
+    width: 450px;
     border-collapse: collapse;
     table-layout: fixed;
     margin: 0 auto;
@@ -62,7 +62,7 @@ caption, th {
     text-align: left;
 }
 .person_field_body {
-    display: inline-block;
+    display: flex;
     padding: 4px 0;
     min-height: 32px;
     box-sizing: border-box;
@@ -78,13 +78,19 @@ input{
 
 .person_field_wrap{
 	float:left;
-	margin-left: 200px;
-	margin-bottom: 50px;
+	margin-left: 160px;
+	margin-bottom: 160px;
 }
 
 .person_field_wrap2{
 float:right;
+width:460px;
 }
+
+#uAddress,#uEmail, #uPhone{
+	width:263px;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -196,9 +202,9 @@ function up(){
                             <div class="person_field_body">
                             	<input type="text" id="uAddress" value="${info.uAddress}" name="uAddress">
                             </div>
+<input type="text" id="uNo" value="${users.uNo}"hidden="hidden">   
                         </td>
                     </tr>
-
                     
                                         </tbody>
                 </table>

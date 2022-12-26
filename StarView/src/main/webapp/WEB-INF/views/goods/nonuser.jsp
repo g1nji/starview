@@ -42,7 +42,7 @@ $(document).ready(function() {
 				contentType: 'application/json; charset=UTF-8',
 				success : function(res){
 					if(res=="delete_success"){
-					location.href = "/goods/cart";
+					location.href = "/goods/nonuser";
 					} else {
 						alert('삭제 실패');
 					}
@@ -75,7 +75,7 @@ $(document).ready(function() {
 				contentType: 'application/json; charset=UTF-8',
 				success : function(res){
 					if(res=="delete_success"){
-					location.href = "/goods/cart";
+					location.href = "/goods/nonuser";
 					} else {
 						alert('삭제 실패');
 					}

@@ -10,8 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import sharon.dao.face.LoginDao;
 import sharon.service.face.LoginService;
 import ydg.dto.Users;
 
@@ -23,7 +23,6 @@ public class LoginController {
 
 		//서비스 객체
 		@Autowired private LoginService loginService;
-		@Autowired private LoginDao loginDao;
 		
 		//마이페이지 회원정보
 	  @RequestMapping("/mypage")
@@ -88,6 +87,46 @@ public class LoginController {
 			  return "redirect:/mypage/mypage";
 		  }
 		  
+		  @ResponseBody
+		  @PostMapping("/nickCheck")
+		    public int nickCheck(String uNick, Model model) {
+		        
+		        logger.info("usernick : {}",uNick);
+		 
+		        int result= loginService.nickCheck(uNick);
+		        logger.info("result, {}", result);
+		        
+		        if(result>0) {
+		        	logger.info("닉네임 중복");
+		        	model.addAttribute("msg","중복된 닉네임입니다.");
+		        }else {
+		        	logger.info("닉네임 사용 가능");
+		        	model.addAttribute("msg","사용 가능한 닉네임입니다.");
+		        }
+		        model.addAttribute("result",result);
+		        return result;
+		    }
+		  
+
+		  @ResponseBody
+		  @PostMapping("/emailCheck")
+		    public int emailCheck(String uEmail, Model model) {
+		        
+		        logger.info("userEmail : {}",uEmail);
+		 
+		        int result= loginService.emailCheck(uEmail);
+		        logger.info("result, {}", result);
+		        
+		        if(result>0) {
+		        	logger.info("이메일 중복");
+		        	model.addAttribute("msg","중복된 이메일입니다.");
+		        }else {
+		        	logger.info("이메일 사용 가능");
+		        	model.addAttribute("msg","사용 가능한 이메일입니다.");
+		        }
+		        model.addAttribute("result",result);
+		        return result;
+		    }
 		  
 		//회원정보 탈퇴 전 비밀번호 확인
 		  @GetMapping("/predelete")

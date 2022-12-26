@@ -30,9 +30,8 @@ body {
 }
 .moonTitle{
 text-align:center;
-/* color: #fff; */
-margin-top: 70px;
 margin-bottom: 25px;
+margin-top: 33px;
 }
 
 .moonContent{
@@ -42,7 +41,7 @@ font-size: 20px;
 /* background-color: rgba(255,255,255,0.3); */
 height: 470px;
 padding:20px;
-margin-bottom:20px;
+margin-bottom:150px;
 width:600px;
 border-radius: 10px;
 }
@@ -50,14 +49,14 @@ border-radius: 10px;
 display: block;
 margin:0 auto;
 margin-top:20px;
-height:300px;
+height:370px;
 border-radius: 50%;
 box-shadow:20px 20px 10px rgba(0,0,0,0.2);
 }
 #moonimg:hover{
 transition:0.5s;
 box-shadow:20px 20px 10px rgba(0,0,0,0.4);
-transform:scale(1.05,1.05);
+transform:scale(1.15,1.15);
 }
 
 #resultmoon{
@@ -95,7 +94,7 @@ width:350px;
 margin:0 auto;
 /* color: #fff; */
 padding:0 auto;
-margin-top: 40px;
+margin-top: 59px;
 }
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>

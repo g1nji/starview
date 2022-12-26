@@ -18,13 +18,23 @@
 		WHERE u_id =#{uId }
 	</select>
 	
+	<select id="selectByuNick" resultType="int" parameterType="string">
+		SELECT count(*) FROM users
+		WHERE u_nick = #{uNick}
+	</select>
+	
+	<select id="selectByuEmail" resultType="int" parameterType="string">
+		SELECT count(*) FROM users
+		WHERE u_email = #{uEmail}
+	</select>
+	
 	<delete id="delete">
 		DELETE FROM Users
 		WHERE u_id=#{uId}
 	
 	</delete>
 	
-	<update id="update">
+	<update id="update" parameterType="string">
 		UPDATE Users
 		SET u_pw = #{uPw}, u_name=#{uName}, u_email = #{uEmail}, u_phone=#{uPhone},u_address=#{uAddress},u_nick=#{uNick},u_birth=#{uBirth}
 		WHERE u_id=#{uId}

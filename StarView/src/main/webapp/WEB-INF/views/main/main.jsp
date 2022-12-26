@@ -340,7 +340,7 @@ $(document).ready(() => {
 				<li><a href="/sunset/time">일몰시간</a></li>
 				<li><a href="/data/weather3">날씨</a></li>
 				<li><a href="/data/moonToday">달 모양</a></li>
-				<li><a href="">별 사진 명소</a></li>
+				<li><a href="/place/main">별 사진 명소</a></li>
 				<li><a href="/data/astroMonth">이달의 천문현상</a></li>
 			</ul>
 		</li>
@@ -434,9 +434,9 @@ $(document).ready(() => {
 		<div id="Layout2" class="Layout2"></div>
 	</div>
 	
-	<div class=""><!--weather  -->
+	<div class="weather" onclick="location.href='/data/weather3'"><!--weather  -->
 	<!-- 현재 날씨 -->
-		<ul class="list-group list-group-flush weather" style="font-weight:600;"></ul>
+<!-- 		<ul class="list-group list-group-flush weather" style="font-weight:600;"></ul> -->
 	</div>
 	
 	<div class="etc">

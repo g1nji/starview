@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import sharon.dao.face.LoginDao;
-import sharon.dto.Login;
 import sharon.service.face.LoginService;
 import ydg.dto.Users;
 @Service
@@ -44,6 +43,18 @@ public class LoginServiceimpl implements LoginService{
 		if(res>0) 	return true;
 		else		return false;
 		
+	}
+
+	@Override
+	public int nickCheck(String uNick) {
+			
+		return loginDao.selectByuNick(uNick);
+	}
+
+	@Override
+	public int emailCheck(String uEmail) {
+
+		return loginDao.selectByuEmail(uEmail);
 	}
 
 	

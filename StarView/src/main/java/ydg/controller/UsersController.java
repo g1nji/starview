@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import ydg.dto.Users;
 import ydg.service.face.UsersService;
+import yewon.dto.Cart;
+import yewon.service.face.CartService;
 
 @Controller
 @RequestMapping("/users")
@@ -27,6 +31,7 @@ public class UsersController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired UsersService usersService;
+	@Autowired CartService cartService;
 	
 	@GetMapping("/login")
 	public void login() {
@@ -34,7 +39,13 @@ public class UsersController {
 	}
 	
 	@PostMapping("/login")
-	public String loginResult(Users users, HttpSession session, HttpServletResponse reps) {
+	public String loginResult(
+			Users users, 
+			Cart cart,
+			HttpSession session, 
+			HttpServletRequest req, 
+			HttpServletResponse resp
+			) {
 		logger.info("/users/login [POST]");
 		
 		logger.info("users {}", users);
@@ -54,14 +65,12 @@ public class UsersController {
 			logger.info("{}", uNick);
 			
 			session.setAttribute("uId", users.getuId());
-//			session.setAttribute("uNick", users.getuNick());
 			session.setAttribute("uNick", uNick);
 			session.setAttribute("uName", users.getuName());
 			
 			//쿠키 저장
 			Cookie cookie = new Cookie("userInputId", users.getuId());
-			
-			reps.addCookie(cookie);
+			resp.addCookie(cookie);
 			
 			return "redirect:/";
 			
@@ -72,8 +81,6 @@ public class UsersController {
 			
 			return "redirect:/users/login";
 		}
-		
-		
 	}
 	
 	@RequestMapping("/logout")

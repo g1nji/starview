@@ -16,7 +16,9 @@ $(document).ready(function() {
 	})
 	
 	$("#btnDelete").click(function() {
-		location.href = "./delete?gId=${viewProd.gId }"
+		if(confirm('삭제하시면 복구할 수 없습니다. \n정말로 삭제하시겠습니까?')) {
+			document.location.href = "./delete?galleryNo=${viewBoard.galleryNo }"
+		}
 	})
 })
 </script>
@@ -32,25 +34,20 @@ table {
 
 <table class="table table-bordered">
 <tr>
-	<td class="info">글번호</td><td>${viewProd.gId }</td>
-</tr>
-<tr>
-	<td class="info">상품명</td><td>${viewProd.gName}</td>
-</tr>
-<tr>
-	<td class="info">상품 가격</td><td>${viewProd.gPrice }</td>
-</tr>
-<tr>
-	<td class="info">상품 설명</td><td>${viewProd.gDetail }</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<div id="file">
-			<div>
-				<img src='/prodFile/${prodFile.fileName }' style="width: 200px; height: 200px;" /><br>
-			</div>
-		</div>
+	<td rowspan="3" colspan="2">
+		<img src='/prodFile/${prodFile.fileName }' style="width: 300px; height: 300px;" /><br>
 	</td>
+	<th class="info">상품명</th><td>${viewProd.gName}</td>
+	<th class="info">상품 등록일</th><td><fmt:formatDate value="${viewProd.regDate }" pattern="yy-MM-dd HH:mm:ss"/></td>
+	<tr>
+	<th class="info">상품 가격</th><td>${viewProd.gPrice }</td>
+	<th class="info">배송비</th><td>${viewProd.delPrice }</td>
+	</tr>
+	<tr>
+	<th class="info">상품 설명</th><td colspan="3">${viewProd.gDetail }</td>
+	</tr>
+	<tr>
+	</tr>
 </tr>
 </table>
 
