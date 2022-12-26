@@ -46,6 +46,9 @@ $(document).ready(function() {
 </div>
 
 <button id="btnList">⬅</button>
+
+<c:import url="./review.jsp" />
+
 </body>
 </html>
 <c:import url="../layout/footer.jsp" />
