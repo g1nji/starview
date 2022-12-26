@@ -20,7 +20,7 @@
 
 } */
 .myp{
-	margin-left: 200px;
+	margin-left:158px;
 	margin-top: 45px;
 }
 
@@ -34,7 +34,7 @@
 }
 
 .person_field_table {
-    width: 400px;
+    width: 450px;
     border-collapse: collapse;
     table-layout: fixed;
     margin: 0 auto;
@@ -83,12 +83,13 @@ caption, th {
 
 .person_field_wrap{
 	float:left;
-	margin-left: 200px;
+	margin-left: 160px;
 	margin-bottom: 160px;
 }
 
 .person_field_wrap2{
 float:right;
+width:460px;
 }
 input{
  	border: 1px solid #ccc;
@@ -97,6 +98,9 @@ input{
 	border: 1px solid transparent;
 }
 
+#uAddress,#uEmail, #uPhone{
+	width:263px;
+}
 #addbtn, #nickChk,#emailChk{
     margin-left: 10px;
 	border:2px solid  #6b80f1;
@@ -398,7 +402,7 @@ $(document).ready(function () {
                         <th scope="row">전화번호</th>
                         <td>
                             <div class="person_field_body">
-                            	<input type="text" value="${users.uPhone }" name="uPhone" oninput="autoHyphen2(this)" maxlength="13">
+                            	<input type="text" value="${users.uPhone }" id="uPhone" name="uPhone" oninput="autoHyphen2(this)" maxlength="13">
                             </div>
                         </td>
                     </tr>
