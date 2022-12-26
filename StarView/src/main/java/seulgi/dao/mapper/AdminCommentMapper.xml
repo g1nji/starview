@@ -7,4 +7,9 @@
 
 <mapper namespace="seulgi.dao.face.AdminCommentDao">
 
+	<select id="selectAll" resultType="seulgi.dto.AdminComment" parameterType="int">
+		SELECT * FROM g_comment
+		WHERE gallery_no = #{galleryNo }
+	</select>
+
 </mapper>

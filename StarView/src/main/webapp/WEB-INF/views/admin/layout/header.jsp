@@ -28,7 +28,7 @@ body {
 }
 
 #logo > a {
-	color: white;
+	color: black;
 	text-decoration: none;
 	font-size: 25px;
 }
@@ -44,11 +44,13 @@ ul.subnav > li {
 
 #main-menu {
 	position: fixed;
+	border-right: solid 3px #506EA5;
+	width: 200px;
+	height: 100%;
 }
 
 ul.nav {
-	background-color: #506EA5;
-	color: white;
+	/* background-color: #506EA5; */
 }
 
 ul.nav > li {
@@ -64,12 +66,14 @@ ul.nav > li {
 ul.nav > li > a {
 	text-align: center;
 	text-decoration: none;
-	color: white;
+	color: black;
+	font-size: 19px;
+	/* background-color: #506EA5; */
 }
 
 ul.nav > li > a:hover {
-	background-color: #FFD732;
-	color: black;
+	background-color: #506EA5;
+	color: white;
 }
 
 ul.nav > li > ul {
@@ -84,12 +88,13 @@ ul.nav > li > ul > li {
 
 ul.nav > li > ul > li > a {
 	text-decoration: none;
-	color: white;
+	color: black;
+	font-size: 17px;
 }
 
 ul.nav > li > ul > li > a:hover {
-	background-color: #FFD732;
-	color: black;
+	background-color: #506EA5;
+	color: white;
 }
 
 ul.nav > li:hover > ul {
@@ -115,7 +120,6 @@ ul.nav > li:hover > ul {
 	text-align: center;
 	height: 60px;
 	width: 100%;
-	color: white;
 	bottom: 0
 }
 
@@ -138,7 +142,7 @@ html .container {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #2f3542;
+  background-color: #506EA5;
 }
 
 ::-webkit-scrollbar-track {
@@ -160,28 +164,33 @@ html .container {
 
 <div id="main-menu">
 	<ul class="nav">
+		<br><br><br>
 		<h3 style="text-align: center;">관리자 메뉴</h3>
+		<br>
 		<li><a href="">회원 관리</a></li>
 		<li>
-			게시글 관리
+			<a>게시글 관리</a>
+			<br>
 			<ul>
-				<li><a href="../gallery/list"> - 회원 글 조회</a></li>
-				<li><a href=""> - 회원 댓글 조회</a></li>
-				<li><a href=""> - 신고사항 조회</a></li>
+				<li><a href="../gallery/list"> 회원 글 조회</a></li>
+				<li><a href=""> 회원 댓글 조회</a></li>
+				<li><a href=""> 신고사항 조회</a></li>
 			</ul>
 		</li>
 		<li>
-			캘린더 관리
+			<a>캘린더 관리</a>
+			<br>
 			<ul>
-				<li><a href="../calendar/date"> - 추천일 등록</a></li>
-				<li><a href="../calendar/time"> - 추천시간 조회</a></li>
+				<li><a href="../calendar/date"> 추천일 등록</a></li>
+				<li><a href="../calendar/time"> 추천시간 조회</a></li>
 			</ul>
 		</li>
 		<li>
-			상품 관리
+			<a>상품 관리</a>
+			<br>
 			<ul>
-				<li><a href="../prod/insert"> - 상품 등록</a></li>
-				<li><a href="../prod/list"> - 상품 목록</a></li>
+				<li><a href="../prod/insert"> 상품 등록</a></li>
+				<li><a href="../prod/list"> 상품 목록</a></li>
 			</ul>
 		</li>
 	</ul>

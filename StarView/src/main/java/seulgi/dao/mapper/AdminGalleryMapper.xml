@@ -5,7 +5,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="seulgi.dao.face.AdminBoardDao">
+<mapper namespace="seulgi.dao.face.AdminGalleryDao">
 	
 	<!-- 게시글 리스트 -->
 	<!-- <select id="selectAllBoard" resultType="seulgi.dto.AdminBoard">
@@ -24,7 +24,7 @@
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
 	</select> -->
 	
-	<select id="selectAll" resultType="seulgi.dto.AdminBoard">
+	<select id="selectAll" resultType="seulgi.dto.AdminGallery">
 		SELECT * FROM (
 			SELECT rownum rnum, G.* FROM (
 				SELECT * FROM gallery
@@ -34,26 +34,6 @@
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
 	</select>
 	
-	<select id="selectAll2" resultType="seulgi.dto.AdminBoard">
-		SELECT * FROM (
-			SELECT rownum rnum, R.* FROM (
-				SELECT * FROM review
-				ORDER BY r_id DESC
-			) R
-		) review
-		WHERE rnum BETWEEN #{startNo } AND #{endNo }
-	</select>
-	
-	<select id="selectAll3" resultType="seulgi.dto.AdminBoard">
-		SELECT * FROM (
-			SELECT rownum rnum, P.* FROM (
-				SELECT * FROM place_review
-				ORDER BY sreview_no DESC
-			) P
-		) place_review
-		WHERE rnum BETWEEN #{startNo } AND #{endNo }
-	</select>
-
 	<!-- 게시글 개수 조회 -->
 	<!-- <select id="selectCntAllBoard" resultType="int">
 		select count(*) from admin_notice
@@ -63,16 +43,8 @@
 		select count(*) from gallery
 	</select>
 	
-	<select id="selectCntAll2" resultType="int">
-		SELECT count(*) FROM review
-	</select>
-	
-	<select id="selectCntAll3" resultType="int">
-		SELECT count(*) FROM place_review
-	</select>
-	
 	<!-- 게시글 상세 조회 -->
-	<select id="selectBoard" resultType="seulgi.dto.AdminBoard" parameterType="seulgi.dto.AdminBoard">
+	<select id="selectBoard" resultType="seulgi.dto.AdminGallery" parameterType="seulgi.dto.AdminGallery">
 		SELECT * FROM gallery
 		WHERE gallery_no = #{galleryNo }
 	</select>
@@ -98,7 +70,7 @@
 		SELECT * FROM dual
 	</insert> -->
 	
-	<insert id="insertBoard" parameterType="seulgi.dto.AdminBoard">
+	<insert id="insertBoard" parameterType="seulgi.dto.AdminGallery">
 		<selectKey order="BEFORE" resultType="int" keyProperty="galleryNo" keyColumn="galleryNo">
 			SELECT gallery_seq.nextval FROM dual
 		</selectKey>
@@ -114,7 +86,7 @@
 	</insert>
 	
 	<!-- 파일 조회 -->
-	<select id="selectFileByBoard" resultType="seulgi.dto.AdminBoardFile" parameterType="seulgi.dto.AdminBoard">
+	<select id="selectFileByBoard" resultType="seulgi.dto.AdminBoardFile" parameterType="seulgi.dto.AdminGallery">
 		SELECT * FROM gallery_file
 		WHERE gallery_no = #{galleryNo }
 	</select>
@@ -126,7 +98,7 @@
 	</select>
 	
 	<!-- 게시글 수정 -->
-	<update id="updateBoard" parameterType="seulgi.dto.AdminBoard">
+	<update id="updateBoard" parameterType="seulgi.dto.AdminGallery">
 		UPDATE gallery
 		SET gallery_title = #{galleryTitle }
 			, gallery_content = #{galleryContent }
@@ -134,13 +106,13 @@
 	</update>
 
 	<!-- 게시글 삭제 -->
-	<delete id="delete" parameterType="seulgi.dto.AdminBoard">
+	<delete id="delete" parameterType="seulgi.dto.AdminGallery">
 		DELETE gallery
 		WHERE gallery_no = #{galleryNo }
 	</delete>
 	
 	<!-- 파일 삭제 -->
-	<delete id="deleteFile" parameterType="seulgi.dto.AdminBoard">
+	<delete id="deleteFile" parameterType="seulgi.dto.AdminGallery">
 		DELETE gallery_file
 		WHERE gallery_no = #{galleryNo }	
 	</delete>
@@ -171,7 +143,7 @@
 		</when>
 	</choose> -->
 	<!-- 게시글 검색 -->
-	<select id="searchBoard" resultType="seulgi.dto.AdminBoard" parameterType="String">
+	<select id="searchBoard" resultType="seulgi.dto.AdminGallery" parameterType="String">
 		<![CDATA[
 		SELECT * FROM gallery
 		WHERE u_id LIKE '%'||#{uId }||'%'
