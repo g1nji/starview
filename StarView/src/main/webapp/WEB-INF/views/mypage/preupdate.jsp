@@ -29,6 +29,24 @@ margin-bottom: 20px;
 #uId{
 	border: 1px solid transparent;
 }
+
+#savebtn {
+    margin-top: 22px;
+    margin-left: 40px;
+    display: inline-block;
+    padding: 13px 8px 14px;
+    width: 200px;
+    height: 50px;
+    border: 1px solid #5f75eb;
+    box-sizing: border-box;
+    color: #fff;
+    font-size: 16px;
+    line-height: normal;
+    text-align: center;
+    vertical-align: top;
+    background-color: #6b80f1;
+}
+
 </style>
 <script type="text/javascript">
 	
