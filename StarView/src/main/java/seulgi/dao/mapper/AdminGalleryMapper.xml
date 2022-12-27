@@ -24,7 +24,7 @@
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
 	</select> -->
 	
-	 <select id="selectAll" resultType="seulgi.dto.AdminGallery">
+	<!-- <select id="selectAll" resultType="seulgi.dto.AdminGallery">
 		SELECT * FROM (
 			SELECT rownum rnum, G.* FROM (
 				SELECT * FROM gallery
@@ -32,9 +32,9 @@
 			) G
 		) gallery
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
-	</select> 
+	</select>  -->
 	
-	<!-- <select id="selectAll" resultType="seulgi.dto.AdminGallery">
+	 <select id="selectAll" resultType="seulgi.dto.AdminGallery">
 		SELECT * FROM (
 			SELECT rownum rnum, G.* FROM (
 				SELECT ga.*, u_id, u.u_nick
@@ -44,7 +44,7 @@
 			) G
 		) gallery
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
-	</select> -->
+	</select>
 	
 	<!-- 게시글 개수 조회 -->
 	<!-- <select id="selectCntAllBoard" resultType="int">

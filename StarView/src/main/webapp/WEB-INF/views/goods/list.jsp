@@ -231,6 +231,7 @@ $(document).ready(function() {
 		<h2>굿즈샵</h2><br>
 		<p style="float: left;"> 총 <span id="ttlCnt">${totalCount } </span>개의 상품</p>
 		<p style="float: right;">
+
 			<span class="sort" id="latest"><span class="chkicon" id="chk1"></span>최신등록순</span><span class="l">|</span>
 			<span class="sort" id="lowPrice"><span class="chkicon" id="chk2"></span>낮은가격순</span><span class="l">|</span> 
 			<span class="sort" id="highPrice"><span class="chkicon" id="chk3"></span>높은가격순</span></p>
