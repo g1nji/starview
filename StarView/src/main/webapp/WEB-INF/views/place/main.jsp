@@ -14,7 +14,10 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <script type="text/javascript">
-
+$(document).ready(function() {
+	
+})
+	
 </script>
 
 </head>
@@ -37,11 +40,15 @@
 <tr>
 <%-- 	<td>${StarPlace.arrivalNum }</td> --%>
 	<td><a href="/place/view?arrivalNum=${StarPlace.arrivalNum }">${StarPlace.arrival }</a></td>
+	<td><p>${StarPlace.pAdr }</p></td>
+	<td><a href="https://map.kakao.com/link/to/${StarPlace.arrival },${StarPlace.eLttd },${StarPlace.eLngtd }">길찾기</a></td>
+<!-- 	<td><button id="findplace" type="button" onclick="">편의시설 조회</button></td> -->
 </tr>
 
 </c:forEach>
 </tbody>
 </table>
+	
 	
 </body>
 </html>

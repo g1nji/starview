@@ -25,6 +25,23 @@ $(document).ready(function() {
 #expln{
 	width:600px;
 	float:right;
+	position: relative;
+	top: 234px;
+    left: 185px;
+}
+
+#placename {
+	float:right;
+	position: relative;	
+    top: 106px;
+    right: 416px;
+}
+
+#btnList {
+    float: right;
+    position: relative;
+    bottom: 365px;
+    right: 322px;
 }
 
 </style>
@@ -33,21 +50,28 @@ $(document).ready(function() {
 <body>
 
 <h1>명소 상세 페이지</h1>
-<hr>
 
 <div>
+	<div id="placebox">
+	<div id="placename">
 	<h3>${viewStarplace.arrival}</h3>
 	<p>${viewStarplace.pAdr }</p>
+	</div>
+	
+	<hr style=" position: relative; width: 605px; top: 216px; left: 360px;">
 	
 	<div id="expln">
-	<p>${viewStarplace.pExpln }</p>
+	<span>${viewStarplace.pExpln }</span>
+	</div>
+	</div>
+	
+	<div id="placeimg">
+	<img src="/resources/starImg/starplace_${viewStarplace.arrivalNum}.jpg" style="width: 500px; height: 400px;"/>
 	</div>
 	
 </div>
 
-<button id="btnList">⬅</button>
 
-<c:import url="./review.jsp" />
 
 </body>
 </html>
