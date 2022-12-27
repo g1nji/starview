@@ -238,7 +238,7 @@ $(document).ready(function() {
 							var list = res.todoList
 							
 							for(var i = 0; i < list.length; i++ ){
-								$("#listbox").append('<div>'+list[i].todoList+'</div>');
+								$("#listbox").append('<div>'+list[i].todoList+'<button>'+"✖"+'</button>'+'</div>');
 							
 							}
 							
