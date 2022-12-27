@@ -57,7 +57,7 @@ public class GalleryController {
 		
 		//게시글 조회
 		viewGallery = galleryService.view(viewGallery);
-//		logger.info("{}", viewGallery);
+		logger.info("{}", viewGallery);
 		
 		//모델값 전달
 		model.addAttribute("viewGallery", viewGallery);
@@ -73,6 +73,15 @@ public class GalleryController {
 		
 		//모델값 전달
 		model.addAttribute("comment", list);
+		
+		//태그 조회
+		List<GTag> list2 = null;
+		list2 = galleryService.viewTag(galleryNo);
+		
+		logger.info("태그 리스트 : {}", list2);
+		
+		//모델값 전달
+		model.addAttribute("tags", list2);
 		
 		//좋아요 기능
 		
@@ -161,9 +170,9 @@ public class GalleryController {
 	}
 	
 	@RequestMapping("/delete")
-	public String delete(Gallery gallery) {
+	public String delete(Gallery gallery, GalleryFile galleryFile) {
 		
-		galleryService.delete(gallery);
+		galleryService.delete(gallery, galleryFile);
 		
 		return "redirect:./list";
 	}

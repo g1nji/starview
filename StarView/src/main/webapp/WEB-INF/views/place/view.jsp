@@ -71,6 +71,10 @@ $(document).ready(function() {
 	
 </div>
 
+<button id="btnList">← 길찾기</button>
+<hr>
+
+<c:import url="./review.jsp" />
 
 
 </body>

@@ -57,6 +57,7 @@ $(document).ready(function(){
 .GImg {
 	width: 255px;
 	height: 255px;
+	border-radius: 40px;
 	overflow: hidden;
 	text-align: center;
 }
@@ -86,7 +87,7 @@ $(document).ready(function(){
 
 </style>
 
-<h2 class="title">갤러리</h2>
+<h1 class="title">갤러리</h1>
 <button id="btnWrite" class="btn btn-primary">글쓰기</button>
 <div class="clearfix"></div>
 <hr>
