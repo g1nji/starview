@@ -18,5 +18,13 @@
 		FROM starplace
 		WHERE arrival_num = #{arrivalNum}
 	</select>
-
+	
+	<select id="selectArrivalNum" resultType="hyeri.dto.PlaceReview" parameterType="int">
+		SELECT sreview_no, sreview_content, sreview_date, u_id, u_nick,
+			arrival_num, stored_name
+		FROM place_review
+		WHERE arrival_num = #{arrivalNum }
+		ORDER BY sreview_no DESC
+	</select>
+	
 </mapper>

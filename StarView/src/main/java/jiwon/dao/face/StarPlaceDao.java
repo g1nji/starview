@@ -2,6 +2,8 @@ package jiwon.dao.face;
 
 import java.util.List;
 
+import hyeri.dto.PlaceReview;
+import hyeri.dto.ReviewFile;
 import jiwon.dto.StarPlace;
 
 public interface StarPlaceDao {
@@ -22,5 +24,6 @@ public interface StarPlaceDao {
 	 */
 	public StarPlace selectStarplace(StarPlace viewStarplace);
 
+	public List<PlaceReview> selectArrivalNum(int arrivalNum);
 	
 }

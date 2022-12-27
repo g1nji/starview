@@ -2,6 +2,8 @@ package jiwon.service.face;
 
 import java.util.List;
 
+import hyeri.dto.PlaceReview;
+import hyeri.dto.ReviewFile;
 import jiwon.dto.StarPlace;
 
 public interface StarPlaceService {
@@ -24,5 +26,12 @@ public interface StarPlaceService {
 	public StarPlace view(StarPlace viewStarplace);
 
 
-	
+	/**
+	 * 리뷰 목록 조회하기
+	 * 
+	 * @param sreviewNo - 리뷰를 조회할 명소 번호
+	 * @return 조회된 리뷰 목록
+	 */
+	public List<PlaceReview> viewReview(int arrivalNum);
+
 }
