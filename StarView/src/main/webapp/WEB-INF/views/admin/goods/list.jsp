@@ -51,7 +51,7 @@ $(document).ready(function() {
 
 </script>
 
-<h1>상품 리뷰 게시글 리스트</h1>
+<h1>상품 리뷰 리스트</h1>
 <hr>
 
 <select id="category" name="category" required onchange="window.open(value,'_self')">
@@ -62,9 +62,9 @@ $(document).ready(function() {
 </select>
 <br><br>
 
-<table class="table table-striped table-hover table-condensed">
+<table class="table table-hover">
 <thead>
-	<tr>
+	<tr class="warning">
 		<th><input type='checkbox' name='all' value='selectall' onclick='selectAll(this)'/> 전체선택</th>
 		<th>작성자</th>
 		<th>제목</th>

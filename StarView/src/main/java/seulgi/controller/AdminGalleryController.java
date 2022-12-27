@@ -14,25 +14,30 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import seulgi.dto.AdminBoard;
+import seulgi.dto.AdminGallery;
 import seulgi.dto.AdminBoardFile;
-import seulgi.service.face.AdminBoardService;
+import seulgi.dto.AdminComment;
+import seulgi.service.face.AdminCommentService;
+import seulgi.service.face.AdminGalleryService;
 import seulgi.util.Paging;
 
 @Controller
-@RequestMapping(value="/admin")
-public class AdminBoardController {
+@RequestMapping(value="/admin/gallery")
+public class AdminGalleryController {
 	
 	//로그 객체
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	//서비스 객체
 	@Autowired
-	private AdminBoardService adminBoardService;
+	private AdminGalleryService adminBoardService;
+	
+	@Autowired
+	private AdminCommentService adminCommentService;
 	
 	//1. 갤러리
 	//게시글 리스트
-	@RequestMapping(value="/gallery/list")
+	@RequestMapping(value="/list")
 	public void getGalleyList(Model model, @RequestParam(defaultValue = "0") int curPage) {
 		logger.info("/list 주소 연결");
 		
@@ -42,7 +47,7 @@ public class AdminBoardController {
 		model.addAttribute("paging", paging);
 		
 		//게시글 리스트
-		List<AdminBoard> boardList = adminBoardService.list(paging);
+		List<AdminGallery> boardList = adminBoardService.list(paging);
 		
 		//for (AdminBoard b : boardList)
 			//logger.info("{}", b);
@@ -51,8 +56,8 @@ public class AdminBoardController {
 	}
 	
 	//게시글 상세 페이지
-	@RequestMapping("/gallery/view")
-	public String viewGalley(AdminBoard viewBoard, Model model) {
+	@RequestMapping("/view")
+	public String viewGalley(AdminGallery viewBoard, Model model, int galleryNo) {
 		logger.info("/view 주소 연결");
 
 		//잘못된 게시글 번호 처리
@@ -71,11 +76,18 @@ public class AdminBoardController {
 		AdminBoardFile boardFile = adminBoardService.getAttachFile(viewBoard);
 		model.addAttribute("boardFile", boardFile);
 		
+		//댓글 조회
+		List<AdminComment> commentList = adminCommentService.list(galleryNo);
+		
+		//모델값 전달
+		model.addAttribute("commentList", commentList);
+		
 		return "admin/gallery/view";
 	}
 	
+	//테스트용
 	//게시글 업로드 페이지
-	@RequestMapping(value="/gallery/insert", method = RequestMethod.GET)
+	@RequestMapping(value="/insert", method = RequestMethod.GET)
 	public void insertGallery() {
 		logger.info("/insert 주소 연결 - [GET]");
 	}
@@ -92,9 +104,10 @@ public class AdminBoardController {
 //		return "redirect:/admin/gallery/list";
 //	}
 	
+	//테스트용
 	//게시글 업로드
-	@RequestMapping(value="/gallery/insert", method = RequestMethod.POST)
-	public String insertGalleryProc(AdminBoard board, MultipartFile file, HttpSession session) {
+	@RequestMapping(value="/insert", method = RequestMethod.POST)
+	public String insertGalleryProc(AdminGallery board, MultipartFile file, HttpSession session) {
 		logger.info("/insert 주소 연결 - [POST]");
 		logger.info("게시글 정보: {}", board);
 		logger.info("파일 정보: {}", file);
@@ -109,7 +122,7 @@ public class AdminBoardController {
 	}
 	
 	//첨부파일 다운로드
-//	@RequestMapping("/gallery/download")
+//	@RequestMapping("/download")
 //	public String downloadGalleyFile(AdminBoardFile boardFile, Model model) {
 //		logger.info("download 주소 연결");
 //		
@@ -125,8 +138,8 @@ public class AdminBoardController {
 //	}
 
 	//게시글 수정 페이지
-	@RequestMapping(value="/gallery/update", method = RequestMethod.GET)
-	public String updateGalley(AdminBoard board, Model model) {
+	@RequestMapping(value="/update", method = RequestMethod.GET)
+	public String updateGalley(AdminGallery board, Model model) {
 		logger.info("/update 주소 연결 - [GET]");
 		
 		//잘못된 게시글 번호 처리
@@ -150,8 +163,8 @@ public class AdminBoardController {
 	}
 
 	//게시글 수정
-	@RequestMapping(value="/gallery/update", method = RequestMethod.POST)
-	public String updateGalleyProc(AdminBoard board, MultipartFile file) {
+	@RequestMapping(value="/update", method = RequestMethod.POST)
+	public String updateGalleyProc(AdminGallery board, MultipartFile file) {
 		logger.info("/update 주소 연결 - [POST]");
 		
 		//adminBoardService.update(board);
@@ -161,8 +174,8 @@ public class AdminBoardController {
 	}
 	
 	//게시글 삭제
-	@RequestMapping("/gallery/delete")
-	public String deleteGallery(AdminBoard board) {
+	@RequestMapping("/delete")
+	public String deleteGallery(AdminGallery board) {
 		logger.info("/delete 주소 연결");
 		
 		adminBoardService.delete(board);
@@ -172,14 +185,14 @@ public class AdminBoardController {
 	
 	//나중에 페이징 처리도 할 것
 	//게시글 검색
-	@RequestMapping("/gallery/search")
+	@RequestMapping("/search")
 	//public void searchGallery(Model model, @RequestParam(value="option", required = false) String option, @RequestParam(value="keyword", required = false) String keyword) {
 	//public void searchGallery(Model model, Search search) {
 	public void searchGallery(Model model, @RequestParam(required = false) String keyword) {
 		logger.info("/search 주소 연결");
 		
 		//검색된 게시글 리스트
-		List<AdminBoard> searchList = adminBoardService.search(keyword);
+		List<AdminGallery> searchList = adminBoardService.search(keyword);
 		
 		//for (AdminBoard b : searchList)
 		logger.info("검색된 게시글: {}", searchList);
@@ -193,51 +206,6 @@ public class AdminBoardController {
 		model.addAttribute("searchList", searchList);
 		//model.addAttribute("option", option);
 		model.addAttribute("keyword", keyword);
-	}
-	
-	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	
-	//2. 상품 리뷰
-	//하나의 매퍼로 시도하다 포기함...
-	//게시글 리스트
-	@RequestMapping(value="/goods/list")
-	public void getGoodsReviewList(Model model, @RequestParam(defaultValue = "0") int curPage) {
-		logger.info("/list 주소 연결");
-		
-		//페이징 추가
-		Paging paging = adminBoardService.getPaging2(curPage);
-		logger.info("페이징 정보: {}", paging);
-		model.addAttribute("paging", paging);
-		
-		//게시글 리스트
-		List<AdminBoard> boardList = adminBoardService.list2(paging);
-		
-		//for (AdminBoard b : boardList)
-			//logger.info("{}", b);
-		
-		model.addAttribute("boardList", boardList);
-	}
-	
-	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	
-	//3. 명소 후기
-	//게시글 리스트
-	@RequestMapping(value="/place/list")
-	public void getPlaceReviewList(Model model, @RequestParam(defaultValue = "0") int curPage) {
-		logger.info("/list 주소 연결");
-		
-		//페이징 추가
-		Paging paging = adminBoardService.getPaging3(curPage);
-		logger.info("페이징 정보: {}", paging);
-		model.addAttribute("paging", paging);
-		
-		//게시글 리스트
-		List<AdminBoard> boardList = adminBoardService.list3(paging);
-		
-		//for (AdminBoard b : boardList)
-		//logger.info("{}", b);
-		
-		model.addAttribute("boardList", boardList);
 	}
 	
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
