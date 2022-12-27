@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import yewon.dto.Goods;
+import yewon.dto.Wish;
 
 public interface GoodsDao {
 
@@ -25,7 +26,7 @@ public interface GoodsDao {
 
 	public List<Goods> latestMore(Map<String, Integer> map);
 
-	public Goods selectGoods(Map<String, Object> map);
+	public Goods selectGoods(Wish wish);
 
 	public int selectLikeCnt(Map<String, Object> map);
 

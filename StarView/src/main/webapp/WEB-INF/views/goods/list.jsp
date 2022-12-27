@@ -40,7 +40,6 @@ section {
  	margin-top: 40px;
  } 
 
-
 a {
 	text-decoration: none;
 	color: black;
@@ -203,7 +202,7 @@ $(document).ready(function() {
 		<h2>굿즈샵</h2><br>
 		<p style="float: left;"> 총 <span id="ttlCnt">${totalCount } </span>개의 상품</p>
 		<p style="float: right;">
-			<span class="sort" id="latest" style="color: black;">최신등록순</span> | 
+			<span class="sort" id="latest">최신등록순</span> | 
 			<span class="sort" id="lowPrice">낮은가격순</span> | 
 			<span class="sort" id="highPrice">높은가격순</span></p>
 	</div>
