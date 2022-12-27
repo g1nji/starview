@@ -5,6 +5,7 @@ import java.util.Date;
 public class AdminGoodsReview {
 	
 	private String uId;
+	private String uNick;
 
 	//상품 리뷰
 	//Review
@@ -16,9 +17,10 @@ public class AdminGoodsReview {
 	
 	public AdminGoodsReview() {}
 
-	public AdminGoodsReview(String uId, int rId, String rTitle, String rContent, Date regDate, int gId) {
+	public AdminGoodsReview(String uId, String uNick, int rId, String rTitle, String rContent, Date regDate, int gId) {
 		super();
 		this.uId = uId;
+		this.uNick = uNick;
 		this.rId = rId;
 		this.rTitle = rTitle;
 		this.rContent = rContent;
@@ -28,8 +30,8 @@ public class AdminGoodsReview {
 
 	@Override
 	public String toString() {
-		return "AdminGoodsReview [uId=" + uId + ", rId=" + rId + ", rTitle=" + rTitle + ", rContent=" + rContent
-				+ ", regDate=" + regDate + ", gId=" + gId + "]";
+		return "AdminGoodsReview [uId=" + uId + ", uNick=" + uNick + ", rId=" + rId + ", rTitle=" + rTitle
+				+ ", rContent=" + rContent + ", regDate=" + regDate + ", gId=" + gId + "]";
 	}
 
 	public String getuId() {
@@ -38,6 +40,14 @@ public class AdminGoodsReview {
 
 	public void setuId(String uId) {
 		this.uId = uId;
+	}
+
+	public String getuNick() {
+		return uNick;
+	}
+
+	public void setuNick(String uNick) {
+		this.uNick = uNick;
 	}
 
 	public int getrId() {

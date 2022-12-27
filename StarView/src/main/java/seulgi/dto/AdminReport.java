@@ -6,23 +6,25 @@ public class AdminReport {
 	
 	private int rpCode;
 	private Date rpDate;
-	private String uId;
 	private int galleryNo;
+	private String uId;
+	private String uNick;
 	
 	public AdminReport() {}
 
-	public AdminReport(int rpCode, Date rpDate, String uId, int galleryNo) {
+	public AdminReport(int rpCode, Date rpDate, int galleryNo, String uId, String uNick) {
 		super();
 		this.rpCode = rpCode;
 		this.rpDate = rpDate;
-		this.uId = uId;
 		this.galleryNo = galleryNo;
+		this.uId = uId;
+		this.uNick = uNick;
 	}
 
 	@Override
 	public String toString() {
-		return "AdminReport [rpCode=" + rpCode + ", rpDate=" + rpDate + ", uId=" + uId + ", galleryNo=" + galleryNo
-				+ "]";
+		return "AdminReport [rpCode=" + rpCode + ", rpDate=" + rpDate + ", galleryNo=" + galleryNo + ", uId=" + uId
+				+ ", uNick=" + uNick + "]";
 	}
 
 	public int getRpCode() {
@@ -41,6 +43,14 @@ public class AdminReport {
 		this.rpDate = rpDate;
 	}
 
+	public int getGalleryNo() {
+		return galleryNo;
+	}
+
+	public void setGalleryNo(int galleryNo) {
+		this.galleryNo = galleryNo;
+	}
+
 	public String getuId() {
 		return uId;
 	}
@@ -49,12 +59,12 @@ public class AdminReport {
 		this.uId = uId;
 	}
 
-	public int getGalleryNo() {
-		return galleryNo;
+	public String getuNick() {
+		return uNick;
 	}
 
-	public void setGalleryNo(int galleryNo) {
-		this.galleryNo = galleryNo;
+	public void setuNick(String uNick) {
+		this.uNick = uNick;
 	}
-	
+
 }

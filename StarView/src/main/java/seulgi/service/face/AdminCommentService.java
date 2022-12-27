@@ -6,6 +6,7 @@ import seulgi.dto.AdminComment;
 
 public interface AdminCommentService {
 
-	public List<AdminComment> list(int galleryNo);
+	public List<AdminComment> list();
+	public List<AdminComment> view(int galleryNo);
 
 }

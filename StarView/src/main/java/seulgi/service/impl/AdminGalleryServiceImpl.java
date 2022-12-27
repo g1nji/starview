@@ -270,5 +270,4 @@ public class AdminGalleryServiceImpl implements AdminGalleryService {
 	public List<AdminGallery> search(String keyword) {
 		return adminBoardDao.searchBoard(keyword);
 	}
-	
 }

@@ -57,7 +57,7 @@ $(document).ready(function() {
 <table class="table table-hover">
 <thead>
 	<tr class="warning">
-		<th><input type='checkbox' name='all' value='selectall' onclick='selectAll(this)'/> 전체선택</th>
+		<th><input type='checkbox' name='all' value='selectall' onclick='selectAll(this)'/></th>
 		<th>상품명</th>
 		<th>상품 가격</th>
 		<th>상품 설명</th>
@@ -82,7 +82,7 @@ $(document).ready(function() {
 
 <span class="pull-right">total : ${paging.totalCount }</span><br><br>
 
-<button id="delOk" class="btn btn-primary" style="float: right">삭제</button><br>
+<button id="delOk" class="btn btn-danger" style="float: right">삭제</button><br>
 
 <c:import url="../layout/paging.jsp" />
 

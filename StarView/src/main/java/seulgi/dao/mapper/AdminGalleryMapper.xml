@@ -24,7 +24,7 @@
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
 	</select> -->
 	
-	<select id="selectAll" resultType="seulgi.dto.AdminGallery">
+	 <select id="selectAll" resultType="seulgi.dto.AdminGallery">
 		SELECT * FROM (
 			SELECT rownum rnum, G.* FROM (
 				SELECT * FROM gallery
@@ -32,7 +32,19 @@
 			) G
 		) gallery
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
-	</select>
+	</select> 
+	
+	<!-- <select id="selectAll" resultType="seulgi.dto.AdminGallery">
+		SELECT * FROM (
+			SELECT rownum rnum, G.* FROM (
+				SELECT ga.*, u_id, u.u_nick
+				FROM gallery ga
+				LEFT OUTER JOIN users u
+				ON ga.u_id = u.u_id
+			) G
+		) gallery
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select> -->
 	
 	<!-- 게시글 개수 조회 -->
 	<!-- <select id="selectCntAllBoard" resultType="int">
@@ -45,7 +57,10 @@
 	
 	<!-- 게시글 상세 조회 -->
 	<select id="selectBoard" resultType="seulgi.dto.AdminGallery" parameterType="seulgi.dto.AdminGallery">
-		SELECT * FROM gallery
+		SELECT g.*, u.u_id, u.u_nick
+ 		FROM gallery g
+        LEFT OUTER JOIN users u
+           ON g.u_id = u.u_id
 		WHERE gallery_no = #{galleryNo }
 	</select>
 	
@@ -156,4 +171,5 @@
 		WHERE #{option } LIKE '%'||#{keyword }||'%'
 		ORDER BY gallery_no DESC
 	</select> -->
+	
 </mapper>
