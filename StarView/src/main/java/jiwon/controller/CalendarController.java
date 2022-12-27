@@ -85,7 +85,6 @@ public class CalendarController<TodolistData> {
 	public String delete(Calendar calendar) {
 		
 		calendarservice.delete(calendar);
-//		List<Calendar> todoList = calendarservice.delete(calendar);
 		
 		return "redirect:/calendar/listview";
 		
