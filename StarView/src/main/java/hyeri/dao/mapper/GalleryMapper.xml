@@ -40,7 +40,7 @@
 	
 	<select id="selectGallery" resultType="hyeri.dto.Gallery" parameterType="hyeri.dto.Gallery">
 		SELECT
-           g.gallery_no, g.gallery_title, g.gallery_content
+           g.gallery_no, g.gallery_title, g.gallery_content, g.gallery_date
            , g.gallery_loc, g.comment_cnt, g.u_id, g.stored_name, u.u_nick
         FROM gallery g
         INNER JOIN users u
@@ -133,5 +133,11 @@
 		SET like_check = 0
 		WHERE u_id = #{uId } AND gallery_no = #{galleryNo }
 	</update>
+	
+	<select id="selectGalleryNo" resultType="hyeri.dto.GTag" parameterType="int">
+		SELECT tag_no, tag_name, gallery_no
+		FROM g_tag
+		WHERE gallery_no = #{galleryNo }
+	</select>
 
 </mapper>

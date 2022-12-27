@@ -24,10 +24,17 @@ $(document).ready(function() {
 ${viewGallery.uNick }
 
 <!-- 게시글 작성자가 아닐 때 -->
+<c:if test="${uId ne viewGallery.uId }">
 <!-- 좋아요 버튼 -->
 <%-- <c:choose> --%>
 <%-- 	<c:when test="${ }" --%>
 <%-- </c:choose> --%>
+</c:if>
+
+<c:if test="${uId eq viewGallery.uId }">
+<a href="/gallery/update" style="color:#5BC0CF; padding-left:10px;">수정</a>
+<a href="/gallery/delete" style="color:#E64556; padding-left:10px;">삭제</a>
+</c:if>
 <br>
 
 <fmt:formatDate value="${viewGallery.galleryDate }" pattern="yyyy-MM-dd" />
@@ -36,8 +43,10 @@ ${viewGallery.uNick }
 <img src="/imagepath/${galleryFile.storedName }" style="width:100%;">
 ${viewGallery.galleryContent }
 
-<span>장소</span>
-<span>태그</span>
+<hr>
+
+<span>${viewGallery.galleryLoc }</span>
+<%-- <span>${tags.tagName }</span> --%>
 
 <hr>
 
