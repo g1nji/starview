@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:import url="../layout/header.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,6 +29,23 @@ fieldset{
 	margin: 0 auto;
 	paddin: 0 auto;
 	
+}
+
+button{
+	margin-left: 10px;
+	border:2px solid  #6b80f1;
+    color:#fff;
+    background-color: #6b80f1;
+    
+    padding: 4px 8px;
+    height: 32px;
+    font-size: 14px;
+    line-height: 20px;
+    
+    display: inline-block;
+    box-sizing: border-box;
+    text-align: center;
+
 }
 </style>
 
@@ -59,3 +78,4 @@ fieldset{
 
 </body>
 </html>
+<c:import url="../layout/footer.jsp" />

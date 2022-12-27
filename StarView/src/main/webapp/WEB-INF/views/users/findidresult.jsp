@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
+<c:import url="../layout/header.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,27 +18,55 @@ html {
 	padding: 0 auto;
 	display: 
 }
+
+button{
+	margin-left: 10px;
+	border:2px solid  #6b80f1;
+    color:#fff;
+    background-color: #6b80f1;
+    
+    padding: 4px 8px;
+    height: 32px;
+    font-size: 14px;
+    line-height: 20px;
+    
+    display: inline-block;
+    box-sizing: border-box;
+    text-align: center;
+    margin-top: 20px;
+
+}
+
+#idcon{
+margin-bottom: 200px;
+}
+
+fieldset{
+width:500px;
+border:1px solid #ccc;
+height:200px;
+margin: 0 auto;
+padding: 0 auto;
+vertical-align: middle;
+}
 </style>
 
 </head>
 <body>
 
-<h1>별보러가자</h1>
 <br>
-<h3>아이디 찾기</h3>
+<h2 id="idfind">아이디 찾기 결과</h2>
 <br>
 <br>
 
 
-<div>
+<div id="idcon">
 
-<fieldset style="width:1200px; height: 300px; margin: 0 auto; padding: 0 auto; vertical-align: middle;">
-
-<legend>결과 확인</legend>
+<fieldset>
 
 <br>
 <c:forEach items="${userId }" var="user">
-
+<br>
 <h3>${user.uName }님의 아이디는 ${user.uId }입니다</h3>
 
 </c:forEach>
@@ -54,3 +81,4 @@ html {
 
 </body>
 </html>
+<c:import url="../layout/footer.jsp" />
