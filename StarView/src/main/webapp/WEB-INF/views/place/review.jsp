@@ -3,21 +3,77 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	var uid = '<%=session.getAttribute("uId") %>'
+	
+	if( uid == "null" ) {
+		
+		$("textarea#content").attr("placeholder", "로그인 후 이용가능합니다.");
+		$("textarea#content").attr("readonly", true);
+		$("textarea#content").click(function() {
+			alert("로그인 후 이용가능합니다");
+			location.href = "/users/login"
+		})
+		
+		$(".filebox").addClass("noClick");
+		
+	} else {
+		
+		$("textarea#content").attr("placeholder", "내용을 작성해 주세요.");
+		
+		$(".filebox").addClass("Click");
+		$(".filebox").mouseover(function() {
+			$(this).addClass("fmo");
+		});
+		$(".filebox").mouseleave(function() {
+			$(this).removeClass("fmo");
+		});
+	}
+	
+	$(".deleteBtn").click(function() {
+		if(confirm("리뷰를 삭제하시겠습니까?") == true) {
+			alert("리뷰가 삭제되었습니다");
+		} else {
+			return;
+		}
+	})
+	
+})
+</script>
+
 <style type="text/css">
-.filebox {
+.noClick {
 	border: none;
     border-radius: 10px;
     display: flex;
     font-size: 16px;
     align-items: center;
-    width: 80px;
+    width: 70px;
     height: 35px;
     background-color: #FFEBBA;
     justify-content: center;
     font-weight: 500;
+	opacity: 0.6;
+	cursor: not-allowed;
 }
 
-.filebox:hover {
+.Click {
+	border: none;
+    border-radius: 10px;
+    display: flex;
+    font-size: 16px;
+    align-items: center;
+    width: 70px;
+    height: 46px;
+    background-color: #FFEBBA;
+    justify-content: center;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.fmo {
 	background-color: #FFB703;
     font-weight: 700;
     cursor: pointer;
@@ -29,8 +85,16 @@
 }
 
 tr, td {
-	border: 1px solid black;
 	border-collapse: collapse;
+}
+
+td {
+	padding: 10px 0;
+	border-bottom: 1px solid #ccc;
+}
+
+.review {
+	margin-top: 20px;
 }
 
 </style>
@@ -40,17 +104,60 @@ tr, td {
 
 <div class="review-list">
 	
-	<h4>리뷰</h4>
+	<h3>리뷰 (${review.size() })</h3>
 	
-	<table style="width:100%;">
-		<tr>
-			<td style="width:10%;">닉네임</td>
-			<td style="width:10%;">날짜</td>
-			<td style="width:70%;">내용</td>
-			<td style="width:10%;">사진</td>
-		</tr>
-	</table>
-
+	<c:forEach items="${review }" var="review">
+		<table style="width:100%;">
+			<tr>
+				
+				<!-- 리뷰에 사진이 있을 때 -->
+				<c:if test="${not empty review.storedName }">
+					<!-- 작성자 = 로그인한사람 -->
+					<c:if test="${uId eq review.uId }">
+						<td style="width:10%; font-weight:600; text-align: center;">${review.uNick }</td>
+						<td style="width:10%; color: #ccc;"><fmt:formatDate value="${review.sreviewDate }" pattern="yy.MM.dd HH:mm"/></td>
+						<td style="width:68%;">${review.sreviewContent }</td>
+						<td style="width:10%;">
+							<img src="/imagepath/${review.storedName }" style="width:100%;">
+						</td>
+						<td style="width:2%; text-align: center;">
+							<a href="/place/review-delete?sreviewNo=${review.sreviewNo }" class="deleteBtn">X</a>
+						</td>
+					</c:if>
+					<!-- 작성자 != 로그인한사람 -->
+					<c:if test="${uId ne review.uId }">
+						<td style="width:10%; font-weight:600; text-align: center;">${review.uNick }</td>
+						<td style="width:10%; color: #ccc;"><fmt:formatDate value="${review.sreviewDate }" pattern="yy.MM.dd HH:mm"/></td>
+						<td style="width:70%;">${review.sreviewContent }</td>
+						<td style="width:10%;">
+							<img src="/imagepath/${review.storedName }" style="width:100%;">
+						</td>
+					</c:if>
+				</c:if>
+			</tr>
+			<tr>
+				<!-- 리뷰에 사진이 없을 때 -->
+				<c:if test="${empty review.storedName }">
+					<!-- 작성자 == 로그인한사람 -->
+					<c:if test="${uId eq review.uId }">
+						<td style="width:10%; font-weight:600; text-align: center;">${review.uNick }</td>
+						<td style="width:10%; color: #ccc;"><fmt:formatDate value="${review.sreviewDate }" pattern="yy.MM.dd HH:mm"/></td>
+						<td style="width:78%;">${review.sreviewContent }</td>
+						<td style="width:2%; text-align: center;">
+							<a href="/place/review-delete?sreviewNo=${review.sreviewNo }" class="deleteBtn">X</a>
+						</td>
+					<!-- 작성자 != 로그인한사람 -->
+					</c:if>
+					<c:if test="${uId ne review.uId }">
+						<td style="width:10%; font-weight:600; text-align: center;">${review.uNick }</td>
+						<td style="width:10%; color: #ccc;"><fmt:formatDate value="${review.sreviewDate }" pattern="yy.MM.dd HH:mm"/></td>
+						<td style="width:80%;">${review.sreviewContent }</td>
+					</c:if>
+				</c:if>
+			</tr>
+		</table>
+	</c:forEach>
+	
 </div>
 
 <div class="review">
@@ -59,19 +166,19 @@ tr, td {
 	
 		<table style="width:100%;">
 			<tr>
-				<td style="width:90%;">
-					<input type="hidden" name="arrivalNum">
-					<input type="hidden" name="uId">
-					<input type="hidden" name="uNick">
-					<textarea style="width:100%;" name="sreviewContent" placeholder="내용을 입력해주세요"></textarea>
+				<td style="width:85%; border:none;">
+					<input type="hidden" name="arrivalNum" value="${viewStarplace.arrivalNum}">
+					<input type="hidden" name="uId" value="${uId }">
+					<input type="hidden" name="uNick" value="${uNick }">
+					<textarea id="content" style="width:100%;" name="sreviewContent"></textarea>
 				</td>
-				<td style="width:5%; text-align: center;">
+				<td style="width:10%; text-align: center; border:none;">
 					<label for="image">
-						<div class="filebox">사진첨부</div>
+						<div class="filebox">사진<br>첨부</div>
 					</label>
 					<input type="file" id="image" name="file" accept="image/*">
 				</td>
-				<td style="width:5%; text-align: center;">
+				<td style="width:5%; text-align: center; border:none;">
 					<button type="submit" class="filebox">등록</button>
 				</td>
 			</tr>

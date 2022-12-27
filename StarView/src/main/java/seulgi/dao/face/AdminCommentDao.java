@@ -6,6 +6,8 @@ import seulgi.dto.AdminComment;
 
 public interface AdminCommentDao {
 
-	public List<AdminComment> selectAll(int galleryNo);
+	public List<AdminComment> selectComment(int galleryNo);
+
+	public List<AdminComment> selectAll();
 
 }

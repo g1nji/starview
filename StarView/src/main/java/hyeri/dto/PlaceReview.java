@@ -8,23 +8,29 @@ public class PlaceReview {
 	private String sreviewContent;
 	private Date sreviewDate;
 	private String uId;
+	private String uNick;
 	private int arrivalNum;
+	private String storedName;
 	
 	public PlaceReview() {}
 
-	public PlaceReview(int sreviewNo, String sreviewContent, Date sreviewDate, String uId, int arrivalNum) {
+	public PlaceReview(int sreviewNo, String sreviewContent, Date sreviewDate, String uId, String uNick, int arrivalNum,
+			String storedName) {
 		super();
 		this.sreviewNo = sreviewNo;
 		this.sreviewContent = sreviewContent;
 		this.sreviewDate = sreviewDate;
 		this.uId = uId;
+		this.uNick = uNick;
 		this.arrivalNum = arrivalNum;
+		this.storedName = storedName;
 	}
 
 	@Override
 	public String toString() {
 		return "PlaceReview [sreviewNo=" + sreviewNo + ", sreviewContent=" + sreviewContent + ", sreviewDate="
-				+ sreviewDate + ", uId=" + uId + ", arrivalNum=" + arrivalNum + "]";
+				+ sreviewDate + ", uId=" + uId + ", uNick=" + uNick + ", arrivalNum=" + arrivalNum + ", storedName="
+				+ storedName + "]";
 	}
 
 	public int getSreviewNo() {
@@ -59,6 +65,14 @@ public class PlaceReview {
 		this.uId = uId;
 	}
 
+	public String getuNick() {
+		return uNick;
+	}
+
+	public void setuNick(String uNick) {
+		this.uNick = uNick;
+	}
+
 	public int getArrivalNum() {
 		return arrivalNum;
 	}
@@ -66,5 +80,13 @@ public class PlaceReview {
 	public void setArrivalNum(int arrivalNum) {
 		this.arrivalNum = arrivalNum;
 	}
-	
+
+	public String getStoredName() {
+		return storedName;
+	}
+
+	public void setStoredName(String storedName) {
+		this.storedName = storedName;
+	}
+
 }

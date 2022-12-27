@@ -254,17 +254,17 @@ public class GalleryServiceImpl implements GalleryService {
 		galleryFile.setStoredName(storedName);
 		
 		//기존에 게시글에 연결된 첨부파일 삭제
-		galleryDao.deleteFile(viewGallery);
+		galleryDao.deleteFile(galleryFile);
 		
 		galleryDao.insertPhoto(galleryFile);
 		
 	}
 	
 	@Override
-	public void delete(Gallery gallery) {
+	public void delete(Gallery gallery, GalleryFile galleryFile) {
 
 		//첨부파일 삭제
-		galleryDao.deleteFile(gallery);
+		galleryDao.deleteFile(galleryFile);
 		
 		//게시글 삭제
 		galleryDao.delete(gallery);
@@ -279,6 +279,11 @@ public class GalleryServiceImpl implements GalleryService {
 	@Override
 	public List<GComment> clist(Paging paging) {
 		return galleryDao.selectCList(paging);
+	}
+	
+	@Override
+	public List<GTag> viewTag(int galleryNo) {
+		return galleryDao.selectGalleryNo(galleryNo);
 	}
 	
 }

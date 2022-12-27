@@ -72,8 +72,9 @@ public interface GalleryService {
 	 * 게시글 삭제
 	 * 
 	 * @param gallery - 게시글 정보 객체
+	 * @param galleryFile 
 	 */
-	public void delete(Gallery gallery);
+	public void delete(Gallery gallery, GalleryFile galleryFile);
 
 	/**
 	 * 게시글 검색
@@ -84,5 +85,7 @@ public interface GalleryService {
 	public List<Gallery> search(String keywordInput);
 
 	public List<GComment> clist(Paging paging);
+
+	public List<GTag> viewTag(int galleryNo);
 
 }

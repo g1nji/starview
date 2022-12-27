@@ -76,9 +76,9 @@ public interface GalleryDao {
 	/**
 	 * 게시글을 참조하고 있는 모든 첨부파일 삭제ㅔ
 	 * 
-	 * @param viewGallery - 첨부파일을 삭제할 게시글 번호
+	 * @param galleryFile - 첨부파일을 삭제할 게시글 번호
 	 */
-	public void deleteFile(Gallery viewGallery);
+	public void deleteFile(GalleryFile galleryFile);
 
 	/**
 	 * 게시글 삭제
@@ -103,6 +103,8 @@ public interface GalleryDao {
 	public List<GComment> selectCList(Paging paging);
 
 	public void updateFilepath(Gallery gallery);
+
+	public List<GTag> selectGalleryNo(int galleryNo);
 
 
 }
