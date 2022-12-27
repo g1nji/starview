@@ -103,7 +103,7 @@ $(document).ready(function() {
 	$("#moreBtn").click(function() {
 		startIdx += step;
 		showMore(startIdx);
-	
+		
 		function showMore(idx){
 			let endIdx = idx+step-1;
 			
@@ -118,9 +118,11 @@ $(document).ready(function() {
 				, contentType: "application/json; charset=UTF-8"
 				, dataType: "html"
 				, success: function( res ) {
+					console.log(startIdx)
+					console.log(endIdx)
 					console.log("AJAX 성공")
 				
-					$(".more").html( res ).slideDown();
+					$(".more").append( res );
 					
 					//더보기 버튼 삭제
 					if(startIdx + step > total){

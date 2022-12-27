@@ -53,9 +53,7 @@ public class GoodsController {
 //		map.put("step", param.get("step"));
 		
 		System.out.println(map);
-		
 		List<Goods> moreGoods = goodsService.getMoreGoods(map);
-		
 		model.addAttribute("moreGoods", moreGoods);
 	}
 	
