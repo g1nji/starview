@@ -22,6 +22,20 @@ public interface CalendarDao {
 	public List<Calendar> selectAll();
 
 
+	/**
+	 * sDate에 해당하는 값 조회
+	 * 
+	 * @param sDate
+	 * @return
+	 */
 	public List<Calendar> selectTodoListSDate(String sDate);
+
+	
+	/**
+	 * 게시글 삭제
+	 * 
+	 * @param calendar - 삭제할 게시글 번호
+	 */
+	public void delete(Calendar calendar);
 
 }

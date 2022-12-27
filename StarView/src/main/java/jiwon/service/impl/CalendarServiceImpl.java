@@ -44,6 +44,12 @@ public class CalendarServiceImpl implements CalendarService {
 	}
 
 	
+	@Override
+	public void delete(Calendar calendar) {
+		calendarDao.delete(calendar);
+	}
+
+	
 //	@Override
 //	public Calendar view() {
 //		return null;

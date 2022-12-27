@@ -194,7 +194,7 @@ $(document).ready(function() {
 	            //투두리스트 폼 만들기
 	    		$("#todolist").css("display", "block");
 	            $("#selectDay").text( todoDay );
-	            
+
 	        //날짜 선택 시(.selectDay 클래스 선택 시) ajax로 요청 보내서 새로운 url 띄우기 (여기에 list 출력)
 	        	$.ajax({
 	        		type:"GET"
@@ -215,13 +215,12 @@ $(document).ready(function() {
 	        
 	        });
 	        
-	        
-
 		     
 	        //todolist 버튼 클릭해서 제출하면 선택한 날짜 값 들어가게
 		     $("#todoBtn").on("click", function () {
 		    	 var inputTodo = $("#inputbox").val();
 		    	 var todoDay = $("#selectDay").text();
+		    	 var sNo = $()
 // 		    	 console.log( todoDay );
 // 		    	 console.log(inputTodo);
 		    	 
@@ -238,25 +237,28 @@ $(document).ready(function() {
 							var list = res.todoList
 							
 							for(var i = 0; i < list.length; i++ ){
-								$("#listbox").append('<div>'+list[i].todoList+'<button>'+"✖"+'</button>'+'</div>');
-							
+								$("#listbox").append('<div>'+list[i].todoList+'<a href=/calendar/delete?sNo=${calendar.sNo }>'+'<button id=dBtn>'+"✖"+'</button>'+'</a>'+'</div>');
 							}
-							
+
 						}
 						
 						//$("#listbox").html(inputTodo);
 // 						location.reload();
-						
 					}
 		    	 	, error: function(request, error) {
 		    	 		console.log("AJAX 실패")
 		    	 		console.log("code:"+request.status+"\n"+"message"+request.responseText+"\n"+"error:"+error);
 		    	 		
 		    	 	}
+		    	 	
 		    	 })
 	    	 });
 	        
-	        
+	
+	        	$("#dBtn").click(function() {
+// 	        		location.href = "/calendar/delete?sNo=${todoList.sNo }"
+					alert("끝!");
+	        	})
 	        
 	        //토글 클래스
 // 	        $(".claendarTable").on("click", "td", function() {

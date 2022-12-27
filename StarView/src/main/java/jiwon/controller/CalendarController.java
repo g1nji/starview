@@ -66,6 +66,7 @@ public class CalendarController<TodolistData> {
 			cal.setuId( (String) session.getAttribute("uId"));
 			cal.setTodoList(calMap.get("todoList").toString());
 			cal.setsDate(calMap.get("sDate").toString());
+//			cal.setsNo( (int) calMap.get("sNo") );
 			
 			calendarservice.write(cal); 
 			List<Calendar> todoList = calendarservice.sDateTodolist(calMap.get("sDate").toString());
@@ -80,6 +81,14 @@ public class CalendarController<TodolistData> {
 		return map;
 	}
 
-	
+	@RequestMapping("/delete")
+	public String delete(Calendar calendar) {
+		
+		calendarservice.delete(calendar);
+//		List<Calendar> todoList = calendarservice.delete(calendar);
+		
+		return "redirect:/calendar/listview";
+		
+	}
 	
 }

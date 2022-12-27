@@ -19,7 +19,13 @@
   	
   	<select id="selectTodoListSDate" resultType="jiwon.dto.Calendar" parameterType="jiwon.dto.Calendar">
   		SELECT * FROM calendar
-  		where s_date = #{sDate}
+  		WHERE s_date = #{sDate}
   		ORDER BY s_no DESC
   	</select>
+  	
+  	<delete id="delete" parameterType="jiwon.dto.Calendar">
+  		DELETE calendar
+  		WHERE s_no = #{sNO}
+  	</delete>
+  	
 </mapper>
