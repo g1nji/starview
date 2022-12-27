@@ -94,7 +94,13 @@ html {
 		<label for="agreement2">아래 사항에 동의 합니다.</label>
 		<input id="agreement2" type="checkbox" name="agreement2"/><br>
 		<textarea id="text2" readonly cols="100" rows="5">
-			개인정보 방침 및 안내
+목적 : 이용자식별 및 본인여부확인
+항목 : 닉네임, 회원ID(이메일주소), 비밀번호, 만 14세 미만 여부
+보유기간 : 회원탈퇴 후 30일까지
+
+목적 : 계약이행 및 증빙자료발급, 민원 등 고객고충처리,주문및배송
+항목 : 결제자명, 연락처(이메일, 전화번호), 주소
+보유기간 : 회원탈퇴 후 30일까지
 		</textarea>
 	</p>
 </fieldset>
