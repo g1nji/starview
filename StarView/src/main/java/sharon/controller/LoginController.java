@@ -98,10 +98,8 @@ public class LoginController {
 		        
 		        if(result>0) {
 		        	logger.info("닉네임 중복");
-		        	model.addAttribute("msg","중복된 닉네임입니다.");
 		        }else {
 		        	logger.info("닉네임 사용 가능");
-		        	model.addAttribute("msg","사용 가능한 닉네임입니다.");
 		        }
 		        model.addAttribute("result",result);
 		        return result;
@@ -119,10 +117,8 @@ public class LoginController {
 		        
 		        if(result>0) {
 		        	logger.info("이메일 중복");
-		        	model.addAttribute("msg","중복된 이메일입니다.");
 		        }else {
 		        	logger.info("이메일 사용 가능");
-		        	model.addAttribute("msg","사용 가능한 이메일입니다.");
 		        }
 		        model.addAttribute("result",result);
 		        return result;

@@ -234,7 +234,7 @@ function validatePW( uPw ) {
 	    toastr.options.closeButton = true;
 	    toastr.options.newestOnTop = false;
 	    toastr.options.positionClass = "toast-bottom-center";
-		toastr.warning('영어대소문자, 숫자 8~16자만 입력하세요!','비밀번호', {timeOut: 10000}); 
+		toastr.info('영어 대소문자, 숫자, 특수문자 혼합  (8~16자)으로 입력하세요!','비밀번호 형식', {timeOut: 10000}); 
 		return false;
 	   }
 	
@@ -250,7 +250,7 @@ function validatePW( uPw ) {
 			    toastr.options.closeButton = true;
 			    toastr.options.newestOnTop = false;
 			    toastr.options.positionClass = "toast-bottom-center";
-			    toastr.info('이메일 형식을 맞춰주세요!  ex)abc@naver.com','이메일', {timeOut: 10000}); 
+			    toastr.error('이메일 형식을 맞춰주세요!  ex)abc@naver.com','이메일 형식', {timeOut: 10000}); 
 				return false;
 			   }
 				return true;
@@ -369,7 +369,6 @@ $(document).ready(function () {
                         <td>
                             <div class="person_field_body">
                             	<input type="text" value="${users.uNick}" id="uNick" name="uNick"><input type="button" id="nickChk" value="확인" onclick="nick_check();">
-                            	<span id="nickmsg" style="color:red;">${msg }</span>
                             </div>
                         </td>
                     </tr>

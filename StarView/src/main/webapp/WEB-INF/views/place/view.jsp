@@ -71,8 +71,6 @@ $(document).ready(function() {
 	
 </div>
 
-<button id="btnList">⬅ 길찾기</button>
-<hr>
 
 
 </body>

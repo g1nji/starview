@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import seulgi.dto.AdminBoard;
+import seulgi.dto.AdminGallery;
 import seulgi.dto.AdminProduct;
 import seulgi.dto.AdminProductFile;
 import seulgi.service.face.AdminProductService;
