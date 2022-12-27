@@ -54,9 +54,9 @@ $(document).ready(function() {
 <h1>상품 리스트</h1>
 <hr>
 
-<table class="table table-striped table-hover table-condensed">
+<table class="table table-hover">
 <thead>
-	<tr>
+	<tr class="warning">
 		<th><input type='checkbox' name='all' value='selectall' onclick='selectAll(this)'/> 전체선택</th>
 		<th>상품명</th>
 		<th>상품 가격</th>
@@ -73,8 +73,8 @@ $(document).ready(function() {
 		<td>${p.gPrice }</td>
 		<td>${p.gDetail }</td>
 		<td>${p.delPrice }</td>
-		<td>${p.fileName }</td>
 		<td><fmt:formatDate value="${p.regDate }" pattern="yy-MM-dd HH:mm:ss"/></td>
+		<%-- <td>${p.fileName }</td> --%>
 	</tr>
 </c:forEach>
 </tbody>

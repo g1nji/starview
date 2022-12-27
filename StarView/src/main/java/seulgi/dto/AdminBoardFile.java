@@ -7,22 +7,25 @@ public class AdminBoardFile {
 	private String uId;
 	private String originName;
 	private String storedName;
+	private String filepath;
 	
 	public AdminBoardFile() {}
 
-	public AdminBoardFile(int photoNo, int galleryNo, String uId, String originName, String storedName) {
+	public AdminBoardFile(int photoNo, int galleryNo, String uId, String originName, String storedName,
+			String filepath) {
 		super();
 		this.photoNo = photoNo;
 		this.galleryNo = galleryNo;
 		this.uId = uId;
 		this.originName = originName;
 		this.storedName = storedName;
+		this.filepath = filepath;
 	}
 
 	@Override
 	public String toString() {
-		return "AdminBoardPhoto [photoNo=" + photoNo + ", galleryNo=" + galleryNo + ", uId=" + uId + ", originName="
-				+ originName + ", storedName=" + storedName + "]";
+		return "AdminBoardFile [photoNo=" + photoNo + ", galleryNo=" + galleryNo + ", uId=" + uId + ", originName="
+				+ originName + ", storedName=" + storedName + ", filepath=" + filepath + "]";
 	}
 
 	public int getPhotoNo() {
@@ -63,6 +66,14 @@ public class AdminBoardFile {
 
 	public void setStoredName(String storedName) {
 		this.storedName = storedName;
+	}
+
+	public String getFilepath() {
+		return filepath;
+	}
+
+	public void setFilepath(String filepath) {
+		this.filepath = filepath;
 	}
 
 }

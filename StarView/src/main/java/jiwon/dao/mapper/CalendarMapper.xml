@@ -9,8 +9,17 @@
 
   	<insert id="insertTodolist" parameterType="jiwon.dto.Calendar">
   		INSERT INTO calendar ( s_no, u_id, todo_list, s_date )
-  		VALUES ( scheduler_seq.nextval, #{uId}, #{todoList}, #{sDate} )
+  		VALUES ( calendar_seq.nextval, #{uId}, #{todoList}, #{sDate} )
   	</insert>
   	
+  	<select id="selectAll" resultType="jiwon.dto.Calendar" parameterType="jiwon.dto.Calendar">
+  		SELECT * FROM calendar
+  		ORDER BY s_no DESC
+  	</select>
   	
+  	<select id="selectTodoListSDate" resultType="jiwon.dto.Calendar" parameterType="jiwon.dto.Calendar">
+  		SELECT * FROM calendar
+  		where s_date = #{sDate}
+  		ORDER BY s_no DESC
+  	</select>
 </mapper>

@@ -1,0 +1,73 @@
+package seulgi.dto;
+
+import java.util.Date;
+
+public class AdminPlaceReview {
+	
+	private String uId;
+
+	//명소 후기
+	//Place_Review
+	private int sreviewNo;
+	private String sreviewContent;
+	private Date sreviewDate;
+	private int arrivalNum;
+
+	public AdminPlaceReview() {}
+
+	public AdminPlaceReview(String uId, int sreviewNo, String sreviewContent, Date sreviewDate, int arrivalNum) {
+		super();
+		this.uId = uId;
+		this.sreviewNo = sreviewNo;
+		this.sreviewContent = sreviewContent;
+		this.sreviewDate = sreviewDate;
+		this.arrivalNum = arrivalNum;
+	}
+
+	@Override
+	public String toString() {
+		return "AdminPlaceReview [uId=" + uId + ", sreviewNo=" + sreviewNo + ", sreviewContent=" + sreviewContent
+				+ ", sreviewDate=" + sreviewDate + ", arrivalNum=" + arrivalNum + "]";
+	}
+
+	public String getuId() {
+		return uId;
+	}
+
+	public void setuId(String uId) {
+		this.uId = uId;
+	}
+
+	public int getSreviewNo() {
+		return sreviewNo;
+	}
+
+	public void setSreviewNo(int sreviewNo) {
+		this.sreviewNo = sreviewNo;
+	}
+
+	public String getSreviewContent() {
+		return sreviewContent;
+	}
+
+	public void setSreviewContent(String sreviewContent) {
+		this.sreviewContent = sreviewContent;
+	}
+
+	public Date getSreviewDate() {
+		return sreviewDate;
+	}
+
+	public void setSreviewDate(Date sreviewDate) {
+		this.sreviewDate = sreviewDate;
+	}
+
+	public int getArrivalNum() {
+		return arrivalNum;
+	}
+
+	public void setArrivalNum(int arrivalNum) {
+		this.arrivalNum = arrivalNum;
+	}
+
+}

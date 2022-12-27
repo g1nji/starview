@@ -7,12 +7,12 @@ public class Calendar {
 	private int sNo;
 	private Date recomDate;
 	private String uId;
-	private int sDate;
+	private String sDate;
 	private String todoList;
 	
 	public Calendar() {	}
 
-	public Calendar(int sNo, Date recomDate, String uId, int sDate, String todoList) {
+	public Calendar(int sNo, Date recomDate, String uId, String sDate, String todoList) {
 		super();
 		this.sNo = sNo;
 		this.recomDate = recomDate;
@@ -20,7 +20,7 @@ public class Calendar {
 		this.sDate = sDate;
 		this.todoList = todoList;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Calendar [sNo=" + sNo + ", recomDate=" + recomDate + ", uId=" + uId + ", sDate=" + sDate + ", todoList="
@@ -51,11 +51,11 @@ public class Calendar {
 		this.uId = uId;
 	}
 
-	public int getsDate() {
+	public String getsDate() {
 		return sDate;
 	}
 
-	public void setsDate(int sDate) {
+	public void setsDate(String sDate) {
 		this.sDate = sDate;
 	}
 
@@ -68,6 +68,5 @@ public class Calendar {
 	}
 
 
-	
 	
 }

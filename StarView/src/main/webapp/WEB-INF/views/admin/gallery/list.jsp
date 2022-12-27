@@ -77,7 +77,7 @@ $(document).ready(function() {
 
 </script>
 
-<h1>갤러리 게시글 리스트</h1>
+<h1>갤러리 리스트</h1>
 <hr>
 
 <select id="category" name="category" required onchange="window.open(value,'_self')">
@@ -99,9 +99,9 @@ $(document).ready(function() {
 </form>
 <br><br>
 
-<table class="table table-striped table-hover table-condensed">
+<table class="table table-hover">
 <thead>
-	<tr>
+	<tr class="warning">
 		<th><input type='checkbox' name='all' value='selectall' onclick='selectAll(this)'/> 전체선택</th>
 		<th>작성자</th>
 		<th>제목</th>
@@ -128,7 +128,7 @@ $(document).ready(function() {
 
 <span class="pull-right">total : ${paging.totalCount }</span><br><br>
 
-<button id="delOk" class="btn btn-primary" style="float: right">삭제</button><br>
+<button id="delOk" class="btn btn-danger" style="float: right">삭제</button><br>
 
 <c:import url="../layout/paging.jsp" />
 

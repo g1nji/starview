@@ -59,7 +59,7 @@
 
 /* 날짜 전체 설정 */
 .calendarTable tbody td {
-	background-color: #FFF8DC;
+/* 	background-color: #FFF8DC; */
     cursor: pointer;
     width: 75px;
     height: 65px;
@@ -80,6 +80,12 @@
     background-color: #191970;
     color: #fff;
     border-radius: 10px;
+}
+
+#calendarForm {
+	background-color: #FFEFD5;
+	position: flex;
+	float: right;
 }
 </style>
 
@@ -125,27 +131,27 @@ $(document).ready(function() {
 	    for (i = 1; i <= thisLastDay.getDate(); i++) {
 	        if (cnt % 7 == 0) { trTag += "<tr>"; }
 
-	        trTag += "<td>" + i + "</td>";
+	        trTag += "<td id='selectD'>" + i + "</td>";
 	        cnt++;
 	        if (cnt % 7 == 0) {
 	            trTag += "</tr>";
 	        }
 	    }
 	    $(calendar).find("#setDate").append(trTag);
-	    calMoveEvtFn();
+	    calMove();
 
 	    function assembly(year, month) {
 	        var calendarHtml =
 	        	"<div id='calendarDiv'>" +
 	            "<table class='calendarTable'>" +
 	            "<colgroup>" +
-	            "<col style='width:81px'/>" +
-	            "<col style='width:81px'/>" +
-	            "<col style='width:81px'/>" +
-	            "<col style='width:81px'/>" +
-	            "<col style='width:81px'/>" +
-	            "<col style='width:81px'/>" +
-	            "<col style='width:81px'/>" +
+	            "<col style='width:80px'/>" +
+	            "<col style='width:80px'/>" +
+	            "<col style='width:80px'/>" +
+	            "<col style='width:80px'/>" +
+	            "<col style='width:80px'/>" +
+	            "<col style='width:80px'/>" +
+	            "<col style='width:80px'/>" +
 	            "</colgroup>" +
 	            "<thead class='calDate'>" +
 	            /* 이전달 이동 버튼 추가 */
@@ -165,7 +171,7 @@ $(document).ready(function() {
 	    }
 
 	    
-	    function calMoveEvtFn() {
+	    function calMove() {
 	        //전달 클릭
 	        $(".calendarTable").on("click", ".prev", function () {
 	            nowDate = new Date(nowDate.getFullYear(), nowDate.getMonth() - 1, nowDate.getDate());
@@ -179,28 +185,95 @@ $(document).ready(function() {
 	        //일자 선택 클릭
 	        //테이블에 td 태그 클릭 시 기존 selectday 클래스를 지우고 클릭한 곳에 selectDay클래스 적용
 	        $(".calendarTable").on("click", "td", function () {
-	            $(".calendarTable .selectDay").removeClass("selectDay");
-	            $(this).removeClass("selectDay").addClass("selectDay").attr("name","sDate");
+	            $(".calendarTable .selectDay").removeClass("selectDay").removeAttr('name','sDate');
+	            $(this).removeClass("selectDay").addClass("selectDay").attr('name', 'sDate');
+
+	            var todoDay = $(".calendarTable .selectDay").html();
+// 	            console.log( todoDay );
+	            
+	            //투두리스트 폼 만들기
+	    		$("#todolist").css("display", "block");
+	            $("#selectDay").text( todoDay );
+	            
+	        //날짜 선택 시(.selectDay 클래스 선택 시) ajax로 요청 보내서 새로운 url 띄우기 (여기에 list 출력)
+	        	$.ajax({
+	        		type:"GET"
+	        		, url: "/calendar/listview"
+	        		, data: {  }
+	        		, dataType: "html"
+	        		, success: function(res) {
+	        			console.log("AJAX 성공");
+	        			
+// 	        			$("#selectDay").html( res );
+	        		}
+		    	 	, error: function(request, error) {
+		    	 		console.log("AJAX 실패")
+		    	 		console.log("code:"+request.status+"\n"+"message"+request.responseText+"\n"+"error:"+error);
+		    	 		
+		    	 	} 
+	        	})
+	        
 	        });
+	        
+	        
+
+		     
+	        //todolist 버튼 클릭해서 제출하면 선택한 날짜 값 들어가게
+		     $("#todoBtn").on("click", function () {
+		    	 var inputTodo = $("#inputbox").val();
+		    	 var todoDay = $("#selectDay").text();
+// 		    	 console.log( todoDay );
+// 		    	 console.log(inputTodo);
+		    	 
+		    	 $.ajax({
+		    		type:"POST"
+		    		, url: "/calendar/listview"
+					, data: { "todoList" : inputTodo , "sDate" : todoDay } 
+					, dataType:"json"
+					, success: function(res) {
+						console.log("AJAX 성공");
+						console.log(res);
+						if(res.result){
+							$("#listbox").html('')
+							var list = res.todoList
+							
+							for(var i = 0; i < list.length; i++ ){
+								$("#listbox").append('<div>'+list[i].todoList+'<button>'+"✖"+'</button>'+'</div>');
+							
+							}
+							
+						}
+						
+						//$("#listbox").html(inputTodo);
+// 						location.reload();
+						
+					}
+		    	 	, error: function(request, error) {
+		    	 		console.log("AJAX 실패")
+		    	 		console.log("code:"+request.status+"\n"+"message"+request.responseText+"\n"+"error:"+error);
+		    	 		
+		    	 	}
+		    	 })
+	    	 });
+	        
+	        
 	        
 	        //토글 클래스
 // 	        $(".claendarTable").on("click", "td", function() {
 // 	        	$(this).toggleClass("selectDay");
 // 	        });
 	        
+	        
 	        //투두리스트 폼 만들기
-	    	$(".calendarTable").on("click", "td", function() {
+// 	    	$(".calendarTable").on("click", "td", function() {
+// 	    		$("#todolist").css("display", "block");
 	    		
-	    		var day = $('td').attr('class');
+// 	    		var valDay = $('.selectDay').val();
 	    		
-	    		$("#todolist").css("display", "block");
-	    		$("#selectDay").css("display", "block");
-	    		$("#selectDay").text(day);
-	    	})
+// 	    		$("#selectDay").text( valDay );
+// 	    	})
 	    	
 	    }
-	    
-	    
 	    
 	}
 
@@ -214,23 +287,37 @@ $(document).ready(function() {
 <body>
 
 <!-- 캘린더 폼 띄우기 -->
-	<div id="calendarForm"></div>
+	<div id="calendarForm" style="width: 600px;"></div>
 	
 <!-- todolist 폼 -->
 	<div id="todolist" style="display:none;">
 	
-	<div id="selectDay" style="display:none;">
-		
+	<div id="selectDay" style="font-weight:bold;">
 	</div>
+	
+	
+	
 	<form id="todoform" method="POST">
-	
-	Todo List
+	List
 	<label><input type="text" name="todoList" id="inputbox"></label>
-	<button>작성</button>
-	</form>	
+	<button type="button" id="todoBtn">작성</button>
+	</form>
+	
+	<div id="listbox">
+		<table>
+		<tr>
+			<th>-------------------</th>
+		</tr>
+		
+		<tr>
+			<td>${todoList.todoList }</td>
+		</tr>
+	</table>
+	</div>
+	
 	
 	</div>
-
+	
 
 </body>	
 
