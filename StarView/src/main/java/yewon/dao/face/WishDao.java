@@ -1,15 +1,15 @@
 package yewon.dao.face;
 
-import java.util.Map;
+import yewon.dto.Wish;
 
 public interface WishDao {
 
-	public int findLike(Map<String, Object> map);
+	public int findLike(Wish wish);
 
-	public void insertLike(Map<String, Object> map);
+	public void insertLike(Wish wish);
 
-	public void deleteLike(Map<String, Object> map);
+	public void deleteLike(Wish wish);
 
-	public int selectLikeCntAll(Map<String, Object> map);
+	public int selectLikeCntAll(Wish wish);
 
 }

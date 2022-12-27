@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import yewon.dao.face.GoodsDao;
 import yewon.dto.Goods;
+import yewon.dto.Wish;
 import yewon.service.face.GoodsService;
 
 @Service
@@ -75,8 +76,8 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public Goods viewGoods(Map<String, Object> map) {
-		Goods goodsInfo = goodsDao.selectGoods(map);
+	public Goods viewGoods(Wish wish) {
+		Goods goodsInfo = goodsDao.selectGoods(wish);
 		return goodsInfo;
 	}
 
