@@ -12,7 +12,7 @@
 </c:forEach>
 	<div class="more"></div>
 
-	<div id="btn"><button id="moreBtn">상품 더보기</button></div>
+	<div id="btn"><button id="moreBtn">MORE <img style="width: 17px; height: 17px;" src="/resources/img/rightarr.png"></button></div>
 </div>
 
 	
@@ -44,7 +44,7 @@
 				, success: function( res ) {
 					console.log("AJAX 성공")
 				
-					$(".more").html( res ).slideDown();
+					$(".more").append( res );
 					
 					//더보기 버튼 삭제
 					if(startIdx + step > total){

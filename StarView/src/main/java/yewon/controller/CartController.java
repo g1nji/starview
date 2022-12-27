@@ -198,17 +198,28 @@ public class CartController {
 			@RequestBody Cart cart, 
 			HttpSession session
 			) {
+		List<Cart> cartList = (ArrayList<Cart>) session.getAttribute("cartList"); 
 		String uId = (String) session.getAttribute("uId");
+		int qty = cart.getcQty();
 
-		//비회원 장바구니 삭제
-//		if(uId == null) {
-//			cartService.updateQty(cart);
-		//회원 장바구니 삭제
-//		} else if(uId != null) {
+		//비회원 장바구니 변경
+		if(uId == null) {
+			for(int i=0; i<cartList.size(); i++) {
+				if(cart.getgId() == cartList.get(i).getgId()) {
+					int changedQty = cartList.get(i).getcQty();
+					changedQty = qty;
+				}
+				session.setAttribute("cartList", cartList);
+				session.setAttribute("totalCart", cartList.size());
+				logger.info("수량변경 cartList : {}", cartList);
+			}
+		
+//		회원 장바구니 변경
+		} else if(uId != null) {
 			cart.setuId(uId);
 			cartService.updateQty(cart);
-			
-//		}
+		}
+		
 		return "update_done";
 	}
 }

@@ -46,7 +46,7 @@
 		   		ORDER BY g.g_id ASC
 	        ) t
 	    ) GOODS
-	    WHERE rnum BETWEEN #{startIdx} AND #{endIdx} + #{step}
+	    WHERE rnum BETWEEN #{startIdx} AND #{endIdx}
     ]]>
     </select>
 
@@ -106,7 +106,7 @@
 		   		ORDER BY g.g_price DESC
 	        ) t
 	    ) GOODS
-	    WHERE rnum BETWEEN #{startIdx} AND #{endIdx} + #{step}
+	    WHERE rnum BETWEEN #{startIdx} AND #{endIdx}
     ]]>
     </select>
     
@@ -136,7 +136,7 @@
 		   		ORDER BY g.reg_date DESC
 	        ) t
 	    ) GOODS
-	    WHERE rnum BETWEEN #{startIdx} AND #{endIdx} + #{step}
+	    WHERE rnum BETWEEN #{startIdx} AND #{endIdx}
     ]]>
     </select>
     

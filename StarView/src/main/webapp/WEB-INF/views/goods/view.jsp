@@ -169,7 +169,7 @@ function like_func(){
 			if(data.findLike==1){
 				$('#login').css('background', 'url(/resources/img/empty_heart.png) no-repeat center 1px/38px');
 				$('#like-cnt').html(data.totalLike);
-				alert('찜을 취소했습니다')
+				alert('위시리스트에서 삭제했습니다')
 				
 			} else {
 				$('#login').css('background', 'url(/resources/img/heart.png) no-repeat center 1px/38px');
