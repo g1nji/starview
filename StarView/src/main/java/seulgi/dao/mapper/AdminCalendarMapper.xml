@@ -8,8 +8,8 @@
 <mapper namespace="seulgi.dao.face.AdminCalendarDao">
 
 	<insert id="insertDate" parameterType="seulgi.dto.AdminCalendar">
-		INSERT INTO admin_calendar(recom_code, recom_date, recom_loc)
-		VALUES (admin_calendar_seq.nextval, #{recomDate }, #{recomLoc })
+		INSERT INTO admin_calendar(recom_code, recom_date, recom_time, recom_loc)
+		VALUES (admin_calendar_seq.nextval, #{recomDate }, #{recomTime }, #{recomLoc })
 	</insert>
 	
 </mapper>
