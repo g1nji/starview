@@ -51,5 +51,4 @@ $(document).ready(function() {
 </div>
 </form>
 
-
 <c:import url="../layout/footer.jsp" />

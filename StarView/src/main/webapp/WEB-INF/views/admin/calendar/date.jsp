@@ -58,8 +58,8 @@ $(document).ready(() => {
 				//강수확률
 				var d = "<h3> 오늘은 " +ymd3 + " " + caseD(day) + " 입니다</h3>"
 				
-				var $table = $("<br><table class='table table-striped table table-bordered' style='width: 300px; float:left; margin-right: 20px;'>")
-				var tt = "<tr><th> 강수확률 </th>"
+				var $table = $("<br><table class='table table-hover' style='width: 300px; float:left; margin-right: 20px;'>")
+				var tt = "<tr class='warning'><th> 강수확률 </th>"
 					+ "<th> 오전 </th>"
 					+ "<th> 오후 </th></tr>"
 					
@@ -96,8 +96,8 @@ $(document).ready(() => {
 				$table.appendTo($('#resultLayout'))
 				
 				//날씨예보
-				var $table2 = $("<table class='table table-striped table table-bordered' style='width: 300px; float:left; margin-right: 20px;'>")
-				var tt2 = "<tr><th> 날씨예보 </th>"
+				var $table2 = $("<table class='table table-hover' style='width: 300px; float:left; margin-right: 100px;'>")
+				var tt2 = "<tr class='warning'><th> 날씨예보 </th>"
 					+ "<th> 오전 </th>"
 					+ "<th> 오후 </th></tr>"
 					
@@ -143,6 +143,64 @@ $(document).ready(() => {
 			}
 		})
 		
+	})
+	
+	//관측 시간 API
+	$("#btn2").click(() => {
+		console.log("#btn2 click")
+		
+		$.ajax({
+			type: "get"
+			, url: "http://apis.data.go.kr/B090041/openapi/service/RiseSetInfoService/getAreaRiseSetInfo"
+			, data: {
+				//Decoding 키로 인증키 사용할 것
+				ServiceKey: "HUX9citK/sR/IT0h00RSOT3xZiWp3Z0k53TKchVpMMHvhDlsWyt5RPdgiWNgn6stT/j7G0MOlITMLrHNSBoRHA=="
+				, locdate: selectDate($("#datepicker").val())
+				//, location: $("#b").attr("class")
+				, location: $('input[name="location"]:checked').val()
+			}
+			, dataType: "xml"
+			, success: res=>{
+				console.log("AJAX 성공")	
+				
+				//테스트
+				//xml 응답 데이터
+				console.log(res)
+				
+				//xml문서를 jQuery 객체로 변환(jQuery DOM)
+				//console.log($(res))
+				
+				//<item> 태그 추출
+				//console.log($(res).find("item"))
+				
+				var $rows = $(res).find("item");
+				
+				//결과 화면 지우기
+				resultLayout.innerHTML = '';
+				
+				var $table = $("<br><table class='table'>")
+				var tHead = "<tr class='warning'>"
+					+ "<th>일몰</th>"
+					+ "<th>천문박명(저녁)</th>"
+					+ "<th>일출</th>"
+					+ "<th>천문박명(아침)</th>"
+					+ "</tr>";
+					
+				$table.html(tHead)
+				
+				$("<tr>")
+				.	append($("<td>").html($rows.find("sunset").text()))
+				.	append($("<td>").html($rows.find("aste").text()))
+				.	append($("<td>").html($rows.find("sunrise").text()))
+				.	append($("<td>").html($rows.find("astm").text()))
+				.appendTo($table)
+				
+				$table.appendTo($('#resultLayout2'))
+			}
+			, error: ()=> {
+				console.log("AJAX 실패")
+			}
+		})
 	})
 })
 
@@ -365,6 +423,28 @@ function caseDay(day) {
 //console.log(caseDay(day));
 //console.log(caseDay(day+1));
 
+//달력 위젯
+$(document).ready(function() {
+	$("#datepicker").datepicker({
+        showOn:"button"
+        , buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif"
+        , buttonImageOnly: true
+        , changeMonth:true
+        , changeYear:true
+        , yearRange:"-22:+10"
+    });
+});
+
+//날짜 선택
+var selectDate = (d)=>{
+	d = new Date(d)
+	var y = '' + d.getFullYear()
+	var m =  ("0" + (d.getMonth() + 1)).slice(-2)
+	var dat = ("0" + d.getDate()).slice(-2)
+	
+	return y + m + dat
+}
+
 </script>
 
 </head>
@@ -389,14 +469,154 @@ function caseDay(day) {
 <input type="radio" name="regId" value="11H20000"> 부산, 울산, 경상남도
 <input type="radio" name="regId" value="11G00000"> 제주도<br><br>
 
-<button id="btn" class="btn btn-primary btn-sm">조회</button>
+<button id="btn" class="btn btn-defalut btn-sm">일자 조회</button>
 <div id="resultLayout"></div>
 
 <div id="form" style="display: none;">
 <form action="./date" method="post">
 지역 <input id="form1" name="recomLoc" type="text" style="width: 300px; height: 130px; display: none;">
 추천일 <input id="form2" name="recomDate" type="text" style="width: 300px; height: 130px; display: none;"><br>
-<input type="submit" value="등록" class="btn btn-primary btn-xs" style="margin-left: 120px">
+<input type="submit" value="등록" class="btn btn-defalut btn-sm" style="margin-left: 120px">
 </form>
 </div>
+
+<br>
+
+<h1>관측시간</h1>
+<hr>
+
+<h3><날짜 선택></h3>
+<input type="text" id="datepicker">
+
+<hr>
+
+<h3><지역 선택></h3>
+<strong>ㄱ</strong><br>
+<input type="radio" name="location" value="강릉"> 강릉
+<input type="radio" name="location" value="강화도"> 강화도
+<input type="radio" name="location" value="거제"> 거제
+<input type="radio" name="location" value="거창"> 거창
+<input type="radio" name="location" value="경산"> 경산
+<input type="radio" name="location" value="경주"> 경주
+<input type="radio" name="location" value="고성(강원)"> 고성(강원)
+<input type="radio" name="location" value="고양"> 고양
+<input type="radio" name="location" value="고흥"> 고흥
+<input type="radio" name="location" value="광양"> 광양
+<input type="radio" name="location" value="광주"> 광주
+<input type="radio" name="location" value="광주(경기)"> 광주(경기)
+<input type="radio" name="location" value="구미"> 구미 
+<input type="radio" name="location" value="군산"> 군산 
+<input type="radio" name="location" value="김천"> 김천 
+<input type="radio" name="location" value="김해"> 김해<br>
+
+<strong>ㄴ</strong><br>
+<input type="radio" name="location" value="남원"> 남원
+<input type="radio" name="location" value="남해"> 남해<br>
+
+<strong>ㄷ</strong><br>
+<input type="radio" name="location" value="대관령"> 대관령
+<input type="radio" name="location" value="대구"> 대구
+<input type="radio" name="location" value="대덕"> 대덕 
+<input type="radio" name="location" value="대전"> 대전 
+<input type="radio" name="location" value="독도"> 독도
+<input type="radio" name="location" value="동해"> 동해<br>
+
+<strong>ㅁ</strong><br>
+<input type="radio" name="location" value="마산"> 마산
+<input type="radio" name="location" value="목포"> 목포
+<input type="radio" name="location" value="무안"> ﻿무안
+<input type="radio" name="location" value="밀양"> 밀양<br>
+
+<strong>ㅂ</strong><br>
+<input type="radio" name="location" value="변산"> 변산
+<input type="radio" name="location" value="보령"> 보령
+<input type="radio" name="location" value="보성"> 보성
+<input type="radio" name="location" value="보현산"> 보현산 
+<input type="radio" name="location" value="부산"> 부산
+<input type="radio" name="location" value="부안"> 부안
+<input type="radio" name="location" value="부천"> 부천<br>
+
+<strong>ㅅ</strong><br>
+<input type="radio" name="location" value="사천"> 사천
+<input type="radio" name="location" value="삼척"> 삼척 
+<input type="radio" name="location" value="상주"> 상주 
+<input type="radio" name="location" value="서귀포"> 서귀포
+<input type="radio" name="location" value="서산"> 서산
+<input type="radio" name="location" value="서울"> 서울 
+<input type="radio" name="location" value="서천"> 서천
+<input type="radio" name="location" value="성산일출봉"> 성산일출봉 
+<input type="radio" name="location" value="세종"> 세종
+<input type="radio" name="location" value="소백산"> 소백산 
+<input type="radio" name="location" value="속초"> 속초
+<input type="radio" name="location" value="수원"> 수원
+<input type="radio" name="location" value="순천"> 순천
+<input type="radio" name="location" value="승주"> 승주 
+<input type="radio" name="location" value="시흥"> 시흥<br>
+
+<strong>ㅇ</strong><br>
+<input type="radio" name="location" value="아산"> 아산 
+<input type="radio" name="location" value="안동"> 안동
+<input type="radio" name="location" value="안산"> 안산 
+<input type="radio" name="location" value="안양"> 안양
+<input type="radio" name="location" value="양양"> 양양 
+<input type="radio" name="location" value="양평"> 양평
+<input type="radio" name="location" value="여수"> 여수
+<input type="radio" name="location" value="여수공항"> 여수공항
+<input type="radio" name="location" value="여주"> 여주
+<input type="radio" name="location" value="영광"> 영광
+<input type="radio" name="location" value="영덕"> 영덕
+<input type="radio" name="location" value="영월"> 영월 
+<input type="radio" name="location" value="영주"> 영주
+<input type="radio" name="location" value="영천"> 영천
+<input type="radio" name="location" value="완도"> 완도
+<input type="radio" name="location" value="용인"> 용인
+<input type="radio" name="location" value="울릉도"> 울릉도
+<input type="radio" name="location" value="울산"> 울산
+<input type="radio" name="location" value="울진"> 울진
+<input type="radio" name="location" value="원주"> 원주
+<input type="radio" name="location" value="의성"> 의성
+<input type="radio" name="location" value="익산"> 익산
+<input type="radio" name="location" value="인천"> 인천
+<input type="radio" name="location" value="임실"> 임실<br>
+
+<strong>ㅈ</strong><br>
+<input type="radio" name="location" value="장수"> 장수
+<input type="radio" name="location" value="장흥"> 장흥 
+<input type="radio" name="location" value="전주"> 전주
+<input type="radio" name="location" value="정읍"> 정읍
+<input type="radio" name="location" value="제주"> 제주
+<input type="radio" name="location" value="제천"> 제천
+<input type="radio" name="location" value="주문진"> 주문진
+<input type="radio" name="location" value="진도"> 진도
+<input type="radio" name="location" value="진주"> 진주
+<input type="radio" name="location" value="진해"> 진해<br>
+
+<strong>ㅊ</strong><br>
+<input type="radio" name="location" value="창원"> 창원 
+<input type="radio" name="location" value="천안"> 천안
+<input type="radio" name="location" value="청주"> 청주
+<input type="radio" name="location" value="청주공항"> 청주공항
+<input type="radio" name="location" value="추풍령"> 추풍령 
+<input type="radio" name="location" value="춘양"> 춘양
+<input type="radio" name="location" value="춘천"> 춘천
+<input type="radio" name="location" value="충주"> 충주<br>
+
+<strong>ㅌ</strong><br>
+<input type="radio" name="location" value="태백"> 태백 
+<input type="radio" name="location" value="태안"> 태안
+<input type="radio" name="location" value="통영"> 통영<br>
+
+<strong>ㅍ</strong><br>
+<input type="radio" name="location" value="파주"> 파주
+<input type="radio" name="location" value="평택"> 평택
+<input type="radio" name="location" value="포항"> 초항<br>
+
+<strong>ㅎ</strong><br>
+<input type="radio" name="location" value="해남"> 해남 
+<input type="radio" name="location" value="화성"> 화성
+<input type="radio" name="location" value="흑산도"> 흑산도<br><br>
+
+<button id="btn2" class="btn btn-defalut btn-sm">시간 조회</button>
+<div id="resultLayout2"></div>
+
 <c:import url="../layout/footer.jsp" />

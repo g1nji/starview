@@ -57,18 +57,15 @@ table {
 
 <table class="table">
 <tr>
-	<!-- 파일이 있는 경우 -->
+	<!-- 파일이 있는 경우만 -->
 	<c:if test="${not empty boardFile}">
-	<td rowspan="10">
+	<td rowspan="6">
 		<img src='/boardFile/${boardFile.storedName }' style="width: 500px; height: 500px;" /><br>
 	</td>
 	</c:if>
-	<td class="warning" style="width: 7%">글번호</td>
-	<td>${viewBoard.galleryNo }</td>
-</tr>
-<tr>
-	<td class="warning" style="width: 10%">작성자</td>
-	<td>${viewBoard.uId}</td>
+	<td class="warning" style="width: 7%">작성자</td>
+	<td><strong style="font-size: 17px;">${viewBoard.uNick}</strong> (아이디: ${viewBoard.uId})
+	</td>
 </tr>
 <tr>
 	<td class="warning" style="width: 10%">제목</td>
@@ -82,14 +79,14 @@ table {
 	<td class="warning" style="width: 10%">작성일</td>
 	<td><fmt:formatDate value="${viewBoard.galleryDate }" pattern="yy-MM-dd HH:mm:ss"/></td>
 </tr>
-<tr>
+<!-- <tr>
 	<td class="warning" style="width: 10%">조회수</td>
 	<td>${viewBoard.galleryHit }</td>
 </tr>
 <tr>
 	<td class="warning" style="width: 10%">추천수</td>
 	<td>${viewBoard.galleryLike }</td>
-</tr>
+</tr> -->
 <tr>
 	<td class="warning" style="width: 10%">위치</td>
 	<td>${viewBoard.galleryLoc }</td>
@@ -111,15 +108,16 @@ table {
 
 <hr>
 <h4><strong>댓글 목록</strong></h4>
-<c:forEach items="${commentList }" var="c">
+<c:forEach items="${viewComment }" var="c">
 	<table class="table">
 		<tr>
-			<td class="warning" style="width: 20%"><strong>${c.uNick }</strong> ( <fmt:formatDate value="${c.cmDate }" pattern="yy-MM-dd HH:mm:ss" /> )</td>
+			<td class="warning" style="width: 20%"><strong>${c.uNick }</strong> ( <fmt:formatDate value="${c.cmDate }" pattern="yy/MM/dd HH:mm" /> )</td>
 			<td colspan="2" style="width: 70%">${c.cmContent }</td>
 	
 			<td>
 				<button id="btnReportComment" class="btn btn-primary btn-sm">신고</button>
-				<form action="../comment/report" method="post" id="reportform" style="display:none;">
+				<!-- 신고 버튼 클릭 시 나타나도록 -->
+				<form action="../comment/report" method="post" id="reportform" style="display: none;">
 					<input type="text" name="uId" value="${c.uId }">
 					<input type="text" name="cmContent" value="${c.cmContent }">
 					<input type="text" name="cmDate" value="${c.cmDate }">

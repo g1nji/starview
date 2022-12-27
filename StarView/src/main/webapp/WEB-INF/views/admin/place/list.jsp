@@ -51,7 +51,7 @@ $(document).ready(function() {
 
 </script>
 
-<h1>명소 후기리스트</h1>
+<h1>명소 후기 리스트</h1>
 <hr>
 
 <select id="category" name="category" required onchange="window.open(value,'_self')">
@@ -65,8 +65,8 @@ $(document).ready(function() {
 <table class="table table-hover">
 <thead>
 	<tr class="warning">
-		<th><input type='checkbox' name='all' value='selectall' onclick='selectAll(this)'/> 전체선택</th>
-		<th>작성자</th>
+		<th><input type='checkbox' name='all' value='selectall' onclick='selectAll(this)'/></th>
+		<th style="width: 10%; text-align: left;">작성자</th>
 		<th>내용</th>
 		<th>등록일</th>
 	</tr>
@@ -85,7 +85,7 @@ $(document).ready(function() {
 
 <span class="pull-right">total : ${paging.totalCount }</span><br><br>
 
-<button id="delOk" class="btn btn-primary" style="float: right">삭제</button><br>
+<button id="delOk" class="btn btn-danger" style="float: right">삭제</button><br>
 
 <c:import url="../layout/paging.jsp" />
 

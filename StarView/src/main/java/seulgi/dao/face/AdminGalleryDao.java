@@ -83,7 +83,7 @@ public interface AdminGalleryDao {
 
 	public List<AdminGallery> searchBoard(String keyword);
 	//public List<AdminBoard> searchBoard(Search search);
-	
+
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 //	public List<AdminBoard> selectAllBoard();

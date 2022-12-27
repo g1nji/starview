@@ -22,9 +22,17 @@ public class AdminCommentServiceImpl implements AdminCommentService {
 	private AdminCommentDao adminCommentDao;
 	
 	@Override
-	public List<AdminComment> list(int galleryNo) {
-
-		return adminCommentDao.selectAll(galleryNo);
+	public List<AdminComment> list() {
+		logger.info("list() 사용");
+		
+		return adminCommentDao.selectAll();
+	}
+	
+	@Override
+	public List<AdminComment> view(int galleryNo) {
+		logger.info("view() 사용");
+		
+		return adminCommentDao.selectComment(galleryNo);
 	}
 	
 }

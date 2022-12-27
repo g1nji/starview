@@ -19,7 +19,7 @@ import seulgi.service.face.AdminProductService;
 import seulgi.util.Paging;
 
 @Controller
-@RequestMapping(value="/admin/prod")
+@RequestMapping(value="/admin/product")
 public class AdminProductController {
 	
 	//로그 객체

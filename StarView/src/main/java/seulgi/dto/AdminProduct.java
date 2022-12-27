@@ -4,7 +4,10 @@ import java.util.Date;
 
 public class AdminProduct {
 	
-	//상품
+	private String uId;
+	private String uNick;
+	
+	//상품 리뷰
 	private int gId;
 	private String gName;
 	private int gPrice;
