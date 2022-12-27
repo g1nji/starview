@@ -21,4 +21,7 @@ public interface CalendarDao {
 	 */
 	public List<Calendar> selectAll();
 
+
+	public List<Calendar> selectTodoListSDate(String sDate);
+
 }

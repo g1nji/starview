@@ -1,6 +1,8 @@
 package jiwon.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jiwon.dto.Calendar;
@@ -51,15 +54,30 @@ public class CalendarController<TodolistData> {
 	//todoList 글쓰기 처리
 	@ResponseBody
 	@PostMapping("/listview")
-	public String calendarwrite( Calendar calendar, HttpSession session, Model model) {
+	public Map<String, Object> calendarwrite(@RequestParam Map<String, Object> calMap, HttpSession session, Model model) {
 		logger.info("/calendar/todolist [POST]");
-		logger.info("{}", calendar);
+		logger.info("calendar {}", calMap);
+		Map<String, Object> map = new HashMap<>();
 		
-		//작성자 정보 추가하기
-		calendar.setuId( (String) session.getAttribute("uId"));
+		try {
+			//작성자 정보 추가하기
+			Calendar cal = new Calendar();
+			
+			cal.setuId( (String) session.getAttribute("uId"));
+			cal.setTodoList(calMap.get("todoList").toString());
+			cal.setsDate(calMap.get("sDate").toString());
+			
+			calendarservice.write(cal); 
+			List<Calendar> todoList = calendarservice.sDateTodolist(calMap.get("sDate").toString());
+			
+			map.put("todoList", todoList);
+			map.put("result", true);
+		}catch(Exception e) {
+			e.printStackTrace();
+			map.put("result", false);
+		}
 		
-		
-		return "redirect:/calendar/todolist";
+		return map;
 	}
 
 	

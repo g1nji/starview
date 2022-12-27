@@ -199,12 +199,12 @@ $(document).ready(function() {
 	        	$.ajax({
 	        		type:"GET"
 	        		, url: "/calendar/listview"
-	        		, data: { "todoList" : todoList }
+	        		, data: {  }
 	        		, dataType: "html"
 	        		, success: function(res) {
 	        			console.log("AJAX 성공");
 	        			
-	        			$("#selectDay").html( res );
+// 	        			$("#selectDay").html( res );
 	        		}
 		    	 	, error: function(request, error) {
 		    	 		console.log("AJAX 실패")
@@ -229,12 +229,22 @@ $(document).ready(function() {
 		    		type:"POST"
 		    		, url: "/calendar/listview"
 					, data: { "todoList" : inputTodo , "sDate" : todoDay } 
-					, dataType:"text"
+					, dataType:"json"
 					, success: function(res) {
 						console.log("AJAX 성공");
+						console.log(res);
+						if(res.result){
+							$("#listbox").html('')
+							var list = res.todoList
+							
+							for(var i = 0; i < list.length; i++ ){
+								$("#listbox").append('<div>'+list[i].todoList+'</div>');
+							
+							}
+							
+						}
 						
-						
-						$("#listbox").html(inputTodo);
+						//$("#listbox").html(inputTodo);
 // 						location.reload();
 						
 					}

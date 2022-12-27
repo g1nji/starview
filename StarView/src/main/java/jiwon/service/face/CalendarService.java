@@ -18,6 +18,8 @@ public interface CalendarService {
 	 * @return 조회된 list 목록
 	 */
 	public List<Calendar> list();
+	
+	public List<Calendar> sDateTodolist(String sDate);
 
 //	/**
 //	 * 조회할 게시글 번호 객체
