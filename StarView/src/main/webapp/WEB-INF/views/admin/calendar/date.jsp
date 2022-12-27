@@ -15,12 +15,16 @@
 <script type="text/javascript">
 
 $(document).ready(() => {
+	
+	//$("#btn3").click( () => {
+	//	$("#form").css("display","block") 
+	//	$("#form1").css("display","block") 
+	//	$("#form2").css("display","block") 
+	//	$("#form3").css("display","block") 
+	//})
+	
 	$("#btn").click( () => {
 		console.log("#btn click")
-		
-		$("#form").css("display","block") 
-		$("#form1").css("display","block") 
-		$("#form2").css("display","block") 
 		
 		//관측 일자 API
 		$.ajax({
@@ -58,76 +62,76 @@ $(document).ready(() => {
 				//강수확률
 				var d = "<h3> 오늘은 " +ymd3 + " " + caseD(day) + " 입니다</h3>"
 				
-				var $table = $("<br><table class='table table-hover' style='width: 300px; float:left; margin-right: 20px;'>")
+				var $table = $("<table class='table' style='width: 300px; float:left; margin-right: 20px;'>")
 				var tt = "<tr class='warning'><th> 강수확률 </th>"
 					+ "<th> 오전 </th>"
 					+ "<th> 오후 </th></tr>"
 					
-					+ "<tr><th>" + caseDay(day+3) + " (" + caseDate(date) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+3) + "</th>"
 					+ "<td>" + $rows.find("rnSt3Am").text() +"</td>"
 					+ "<td>" + $rows.find("rnSt3Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+4) + " (" + caseDate(date+1) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+4) + "</th>"
 					+ "<td>" + $rows.find("rnSt4Am").text() +"</td>"
 					+ "<td>" + $rows.find("rnSt4Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+5) + " (" + caseDate(date+2) +"일)</th>"
+					+ "<tr><th>" + caseDay(day+5) + "</th>"
 					+ "<td>" + $rows.find("rnSt5Am").text() +"</td>"
 					+ "<td>" + $rows.find("rnSt5Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+6) + " (" + caseDate(date+3) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+6) + "</th>"
 					+ "<td>" + $rows.find("rnSt6Am").text() +"</td>"
 					+ "<td>" + $rows.find("rnSt6Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+7) + " (" + caseDate(date+4) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+7) + "</th>"
 					+ "<td>" + $rows.find("rnSt7Am").text() +"</td>"
 					+ "<td>" + $rows.find("rnSt7Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+8) + " (" + caseDate(date+5) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+8) + "</th>"
 					+ "<td colspan='2'>" + $rows.find("rnSt8").text() +"</td></tr>"
 
-					+ "<tr><th>" + caseDay(day+9) + " (" + caseDate(date+6) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+9) + "</th>"
 					+ "<td colspan='2'>" + $rows.find("rnSt10").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+10) + " (" + caseDate(date+7) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+10) + "</th>"
 					+ "<td colspan='2'>" + $rows.find("rnSt10").text() +"</td></tr>"
 					
 				$table.html(tt)
 				$table.appendTo($('#resultLayout'))
 				
 				//날씨예보
-				var $table2 = $("<table class='table table-hover' style='width: 300px; float:left; margin-right: 100px;'>")
+				var $table2 = $("<table class='table' style='width: 300px; float:left; margin-right: 500px;'>")
 				var tt2 = "<tr class='warning'><th> 날씨예보 </th>"
 					+ "<th> 오전 </th>"
 					+ "<th> 오후 </th></tr>"
 					
-					+ "<tr><th>" + caseDay(day+3) + " (" + caseDate(date) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+3) + "</th>"
 					+ "<td>" + $rows.find("wf3Am").text() +"</td>"
 					+ "<td>" + $rows.find("wf3Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+4) + " (" + caseDate(date+1) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+4) + "</th>"
 					+ "<td>" + $rows.find("wf4Am").text() +"</td>"
 					+ "<td>" + $rows.find("wf4Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+5) + " (" + caseDate(date+2) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+5) + "</th>"
 					+ "<td>" + $rows.find("wf5Am").text() +"</td>"
 					+ "<td>" + $rows.find("wf5Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+6) + " (" + caseDate(date+3) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+6) + "</th>"
 					+ "<td>" + $rows.find("wf6Am").text() +"</td>"
 					+ "<td>" + $rows.find("wf6Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+7) + " (" + caseDate(date+4) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+7) + "</th>"
 					+ "<td>" + $rows.find("wf7Am").text() +"</td>"
 					+ "<td>" + $rows.find("wf7Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+8) + " (" + caseDate(date+5) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+8) + "</th>"
 					+ "<td colspan='2'>" + $rows.find("wf8").text() +"</td></tr>"
 
-					+ "<tr><th>" + caseDay(day+9) + " (" + caseDate(date+6) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+9) + "</th>"
 					+ "<td colspan='2'>" + $rows.find("wf10").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+10) + " (" + caseDate(date+7) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+10) + "</th>"
 					+ "<td colspan='2'>" + $rows.find("wf10").text() +"</td></tr>"
 					
 				$table2.html(tt2)
@@ -202,6 +206,7 @@ $(document).ready(() => {
 			}
 		})
 	})
+	
 })
 
 //함수 정의 방법1
@@ -448,16 +453,18 @@ var selectDate = (d)=>{
 </script>
 
 </head>
+
 <body>
 
-<h1>관측일자</h1>
+<div id="dateDiv">
+<h3><span style="background-color: #9EA1D4; border-radius: 10%;">관측일자</span>&nbsp;&nbsp;<button id="btn" class="btn btn-defalut btn-sm">일자 조회</button></h3>
 <hr>
 
 <!-- <h3><날짜 입력></h3>
 <h5> ex) YYYYMMDD0600(1800) *최근 24시간 이내만 조회가능합니다* </h5>
 <input type="text" id="Date"><br><br> -->
 
-<h3><지역 선택></h3>
+<h4><지역 선택></h4>
 <input type="radio" name="regId" value="11B00000"> 서울, 인천, 경기도
 <input type="radio" name="regId" value="11D10000"> 강원도(영서)
 <input type="radio" name="regId" value="11D20000"> 강원도(영동)
@@ -469,28 +476,19 @@ var selectDate = (d)=>{
 <input type="radio" name="regId" value="11H20000"> 부산, 울산, 경상남도
 <input type="radio" name="regId" value="11G00000"> 제주도<br><br>
 
-<button id="btn" class="btn btn-defalut btn-sm">일자 조회</button>
 <div id="resultLayout"></div>
 
-<div id="form" style="display: none;">
-<form action="./date" method="post">
-지역 <input id="form1" name="recomLoc" type="text" style="width: 300px; height: 130px; display: none;">
-추천일 <input id="form2" name="recomDate" type="text" style="width: 300px; height: 130px; display: none;"><br>
-<input type="submit" value="등록" class="btn btn-defalut btn-sm" style="margin-left: 120px">
-</form>
-</div>
-
-<br>
-
-<h1>관측시간</h1>
+<div id="timeDiv">
+<h3><span style="background-color: #9EA1D4; border-radius: 10%;">관측시간</span>&nbsp;&nbsp;<button id="btn2" class="btn btn-defalut btn-sm">시간 조회</button></h3>
 <hr>
 
-<h3><날짜 선택></h3>
+<h4><날짜 선택></h4>
 <input type="text" id="datepicker">
 
 <hr>
 
-<h3><지역 선택></h3>
+<h4><지역 선택></h4>
+
 <strong>ㄱ</strong><br>
 <input type="radio" name="location" value="강릉"> 강릉
 <input type="radio" name="location" value="강화도"> 강화도
@@ -616,7 +614,29 @@ var selectDate = (d)=>{
 <input type="radio" name="location" value="화성"> 화성
 <input type="radio" name="location" value="흑산도"> 흑산도<br><br>
 
-<button id="btn2" class="btn btn-defalut btn-sm">시간 조회</button>
 <div id="resultLayout2"></div>
+</div>
+
+<br>
+<hr>
+
+<div id="form">
+<form action="./date" method="post">
+
+<label for="form1">지역</label>
+<label for="form2" style="margin-left: 375px;">추천일</label>
+<label for="form3" style="margin-left: 360px;">추천시간</label><br>
+
+<input id="form1" name="recomLoc" type="text" style="width: 300px; height: 100px;">
+<input id="form2" name="recomDate" type="text" style="width: 300px; height: 100px; margin-left: 100px;">
+<input id="form3" name="recomTime" type="text" style="width: 300px; height: 100px; margin-left: 100px;">
+
+<br><br>
+
+<input type="submit" value="등록" class="btn btn-primary btn-sm" style="margin-left: 550px;">
+</form>
+</div>
+
+</div>
 
 <c:import url="../layout/footer.jsp" />
