@@ -64,6 +64,11 @@ $(document).ready(function(){
 
 .galleryImg {
 	height: 270px;
+	transition: all 0.2s linear;
+}
+
+.galleryImg:hover {
+	transform: scale(1.2);
 }
 
 .gtitle {
@@ -131,7 +136,7 @@ $(document).ready(function(){
 </div>
 
 <!-- 게시글이 12개 이상일 경우 한 페이지에 12개만 보이기 -->
-<c:if test="${list.size() > 12 }">
+<c:if test="${list.size() >= 12 }">
 	<c:forEach items="${list }" var="gallery">
 		<table class="gallerylist">
 		<tr>

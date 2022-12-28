@@ -44,6 +44,8 @@ var hour = function() {
 			$(this).css("background-color", "#CCEBF1");
 		})
 		
+		$('.moon').hide();
+		
 	/* 오후 4시부터 오후 7시 59분까지 저녁 이미지 */
 	} else if(hh>=16 && hh<=19) {
 		document.getElementById("day").style.backgroundImage = "url('/resources/image/day2.png')";
