@@ -5,21 +5,19 @@ public class Wish {
 	private int wId;
 	private int gId;
 	private String uId;
-	private int likeCheck;
 
 	public Wish() {}
 
-	public Wish(int wId, int gId, String uId, int likeCheck) {
+	public Wish(int wId, int gId, String uId) {
 		super();
 		this.wId = wId;
 		this.gId = gId;
 		this.uId = uId;
-		this.likeCheck = likeCheck;
 	}
 
 	@Override
 	public String toString() {
-		return "Wish [wId=" + wId + ", gId=" + gId + ", uId=" + uId + ", likeCheck=" + likeCheck + "]";
+		return "Wish [wId=" + wId + ", gId=" + gId + ", uId=" + uId + "]";
 	}
 
 	public int getwId() {
@@ -45,14 +43,5 @@ public class Wish {
 	public void setuId(String uId) {
 		this.uId = uId;
 	}
-
-	public int getLikeCheck() {
-		return likeCheck;
-	}
-
-	public void setLikeCheck(int likeCheck) {
-		this.likeCheck = likeCheck;
-	}
-	
 	
 }

@@ -291,7 +291,7 @@ function addCart(){
 			</c:when>
 			<c:otherwise>
 				<c:choose>
-					<c:when test="${likeCheck eq '0' or empty likeCheck }">
+					<c:when test="${findLike eq '0' or empty findLike }">
 						<button class="heart-icon" id="login" style="background: url(/resources/img/empty_heart.png) no-repeat center 1px/38px;">
 					</c:when>
 					<c:otherwise>

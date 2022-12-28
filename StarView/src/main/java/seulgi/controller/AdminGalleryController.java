@@ -77,10 +77,10 @@ public class AdminGalleryController {
 		model.addAttribute("boardFile", boardFile);
 		
 		//댓글 조회
-		List<AdminComment> commentList = adminCommentService.list(galleryNo);
+		List<AdminComment> viewComment = adminCommentService.view(galleryNo);
 		
 		//모델값 전달
-		model.addAttribute("commentList", commentList);
+		model.addAttribute("viewComment", viewComment);
 		
 		return "admin/gallery/view";
 	}
@@ -107,14 +107,11 @@ public class AdminGalleryController {
 	//테스트용
 	//게시글 업로드
 	@RequestMapping(value="/insert", method = RequestMethod.POST)
-	public String insertGalleryProc(AdminGallery board, MultipartFile file, HttpSession session) {
+	public String insertGalleryProc(AdminGallery board, MultipartFile file) {
 		logger.info("/insert 주소 연결 - [POST]");
 		logger.info("게시글 정보: {}", board);
 		logger.info("파일 정보: {}", file);
 		
-		//작성자 정보 추가
-		board.setuId( (String) session.getAttribute("uId") );
-
 		//게시글, 첨부파일 처리
 		adminBoardService.upload(board, file);
 		
@@ -206,6 +203,11 @@ public class AdminGalleryController {
 		model.addAttribute("searchList", searchList);
 		//model.addAttribute("option", option);
 		model.addAttribute("keyword", keyword);
+	}
+	
+	@RequestMapping(value="/report", method = RequestMethod.GET)
+	public void reportGallery() {
+		logger.info("/report 주소 연결");
 	}
 	
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

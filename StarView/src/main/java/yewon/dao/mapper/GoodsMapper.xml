@@ -140,7 +140,7 @@
     ]]>
     </select>
     
-    <select id="selectGoods" resultType="Goods" parameterType="map">
+    <select id="selectGoods" resultType="Goods">
     SELECT g.*, i.file_name 
     	FROM goods g, goods_img i
 	    	WHERE g.g_id = i.g_id
@@ -148,7 +148,7 @@
     		AND g.g_id = #{gId }
     </select>
     
-    <select id="selectLikeCnt" resultType="int" parameterType="map">
+    <select id="selectLikeCnt" resultType="int">
 	   	select NVL(like_cnt, 0) as likeCnt from goods
 	   	where g_id = #{gId }
     </select>

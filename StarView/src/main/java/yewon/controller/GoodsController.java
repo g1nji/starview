@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import yewon.dto.Goods;
+import yewon.dto.Wish;
 import yewon.service.face.GoodsService;
 import yewon.service.face.WishService;
 
@@ -42,15 +44,16 @@ public class GoodsController {
 	
 	//상품 더보기
 	@RequestMapping(value = "/more", produces = "application/text;charset=UTF-8", method=RequestMethod.POST)
-	public void moreGoodslist(@RequestBody Map<String, String> param, Model model) {
+	public void moreGoodslist(@RequestBody Map<String, Integer> param, Model model) {
 		
 		Map<String, Integer> map = new HashMap<>();
 		
-		map.put("startIdx", Integer.parseInt(param.get("startIdx")));
-		map.put("endIdx", Integer.parseInt(param.get("endIdx")));
-		map.put("step", Integer.parseInt(param.get("step")));
-//		map.put("endIdx", param.get("endIdx"));
-//		map.put("step", param.get("step"));
+//		map.put("startIdx", Integer.parseInt(param.get("startIdx")));
+//		map.put("endIdx", Integer.parseInt(param.get("endIdx")));
+//		map.put("step", Integer.parseInt(param.get("step")));
+		map.put("startIdx", param.get("startIdx"));
+		map.put("endIdx", param.get("endIdx"));
+		map.put("step", param.get("step"));
 		
 		System.out.println(map);
 		List<Goods> moreGoods = goodsService.getMoreGoods(map);
@@ -71,18 +74,16 @@ public class GoodsController {
 	
 	//낮은가격순 더보기
 	@RequestMapping(value = "/more2", produces = "application/text;charset=UTF-8", method=RequestMethod.POST)
-	public void lowPriceMore(@RequestBody Map<String, String> param, Model model) {
+	public void lowPriceMore(@RequestBody Map<String, Integer> param, Model model) {
 		
 		Map<String, Integer> map = new HashMap<>();
 		
-		map.put("startIdx", Integer.parseInt(param.get("startIdx")));
-		map.put("endIdx", Integer.parseInt(param.get("endIdx")));
-		map.put("step", Integer.parseInt(param.get("step")));
+		map.put("startIdx", param.get("startIdx"));
+		map.put("endIdx", param.get("endIdx"));
+		map.put("step", param.get("step"));
 		
 		System.out.println(map);
-		
 		List<Goods> lowPriceMore = goodsService.lowPriceMore(map);
-		
 		model.addAttribute("lowPriceMore", lowPriceMore);
 	}
 	
@@ -100,13 +101,13 @@ public class GoodsController {
 	
 	//높은가격순 더보기
 	@RequestMapping(value = "/more3", produces = "application/text;charset=UTF-8", method=RequestMethod.POST)
-	public void highPriceMore(@RequestBody Map<String, String> param, Model model) {
+	public void highPriceMore(@RequestBody Map<String, Integer> param, Model model) {
 		
 		Map<String, Integer> map = new HashMap<>();
 		
-		map.put("startIdx", Integer.parseInt(param.get("startIdx")));
-		map.put("endIdx", Integer.parseInt(param.get("endIdx")));
-		map.put("step", Integer.parseInt(param.get("step")));
+		map.put("startIdx", param.get("startIdx"));
+		map.put("endIdx", param.get("endIdx"));
+		map.put("step", param.get("step"));
 		
 		System.out.println(map);
 		
@@ -129,33 +130,33 @@ public class GoodsController {
 	
 	//최신등록순 더보기
 	@RequestMapping(value = "/more4", produces = "application/text;charset=UTF-8", method=RequestMethod.POST)
-	public void latestMore(@RequestBody Map<String, String> param, Model model) {
+	public void latestMore(@RequestBody Map<String, Integer> param, Model model) {
 		
 		Map<String, Integer> map = new HashMap<>();
 		
-		map.put("startIdx", Integer.parseInt(param.get("startIdx")));
-		map.put("endIdx", Integer.parseInt(param.get("endIdx")));
-		map.put("step", Integer.parseInt(param.get("step")));
+		map.put("startIdx", param.get("startIdx"));
+		map.put("endIdx", param.get("endIdx"));
+		map.put("step", param.get("step"));
 		
 		System.out.println(map);
-		
 		List<Goods> latestMore = goodsService.latestMore(map);
-		
 		model.addAttribute("latestMore", latestMore);
 	}
 	
 	//상품 상세보기
 	@RequestMapping("/view")
-	public void viewGoods(@RequestParam Map<String, Object> map, Model model) {
+	public void viewGoods(Wish wish, HttpSession session, Model model) {
 		
-		System.out.println(map);
+		Goods goodsInfo = goodsService.viewGoods(wish);
 		
-		Goods goodsInfo = goodsService.viewGoods(map);
+		wish.setuId((String) session.getAttribute("uId"));
+		logger.info("viewGoods - param: {}", wish);
 		
-		//wishlist tb에서 사용자가 해당 상품에 좋아요를 눌렀는지 확인
-		int findLike = wishService.findLike(map);
-		int likeCntAll = wishService.getLikeCntAll(map);
-		logger.info("likeCntAll: {}", likeCntAll);
+		//uId, gId로 좋아요 여부 확인
+		int findLike = wishService.findLike(wish);
+		int likeCntAll = wishService.getLikeCntAll(wish);
+		logger.info("viewGoods - findLike: {}", findLike);
+		logger.info("viewGoods - likeCntAll: {}", likeCntAll);
 		
 		model.addAttribute("goodsInfo", goodsInfo);
 		model.addAttribute("findLike", findLike);

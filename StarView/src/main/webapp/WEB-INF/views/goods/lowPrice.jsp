@@ -12,7 +12,7 @@
 </c:forEach>
 	<div class="more"></div>
 
-	<div id="btn"><button id="moreBtn">MORE <img style="width: 17px; height: 17px;" src="/resources/img/rightarr.png"></button></div>
+	<div id="btn"><button id="moreBtn">MORE<img class="arrdown" src="/resources/img/arrdown.png"></button></div>
 </div>
 
 	

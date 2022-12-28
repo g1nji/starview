@@ -22,7 +22,7 @@ public interface GoodsService {
 
 	public List<Goods> highPriceMore(Map<String, Integer> map);
 
-	public Goods viewGoods(Map<String, Object> map);
+	public Goods viewGoods(Wish wish);
 
 	public List<Goods> sortByDate();
 

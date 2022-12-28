@@ -38,4 +38,9 @@ public class AdminCalendarController {
 		logger.info("/time 연결");
 	}
 	
+	@RequestMapping("/list")
+	public void calendarList() {
+		logger.info("/list 연결");
+	}
+	
 }

@@ -5,14 +5,14 @@
 
    	<c:forEach items="${latestList }" var="goods">
 	<ul class="items">
-		<li><a href="/goods/detail.jsp?gId=${goods.gId }"><img class="thumb" src="${goods.fileName }"></li>
+		<li><a href="/goods/view?gId=${goods.gId }"><img class="thumb" src="${goods.fileName }"></li>
 		<li class="title">${goods.gName}</a></li>
 		<li class="price"><fmt:formatNumber value="${goods.gPrice}" type="number" groupingUsed="true" />원</li>
 	</ul>
 </c:forEach>
 	<div class="more"></div>
 
-	<div id="btn"><button id="moreBtn">MORE <img style="width: 17px; height: 17px;" src="/resources/img/rightarr.png"></button></div>
+	<div id="btn"><button id="moreBtn">MORE<img class="arrdown" src="/resources/img/arrdown.png"></button></div>
 </div>
 
 	
