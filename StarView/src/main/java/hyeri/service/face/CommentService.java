@@ -20,4 +20,15 @@ public interface CommentService {
 	 */
 	public List<GComment> view(int galleryNo);
 
+
+	/**
+	 * 
+	 * @param gComment
+	 */
+	public void delete(GComment gComment);
+
+
+
+
+
 }
