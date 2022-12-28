@@ -21,11 +21,13 @@ public class AdminCalendarController {
 	@Autowired
 	private AdminCalendarService adminCalendarService;
 	
+	//관측 일자, 시간 API 조회
 	@RequestMapping(value="/date", method = RequestMethod.GET)
 	public void calendarDate() {
 		logger.info("/date 연결 - [GET]");
 	}
 	
+	//추천일 등록
 	@RequestMapping(value="/date", method = RequestMethod.POST)
 	public void insertcalendarDate(AdminCalendar calendar) {
 		logger.info("/date 연결 - [POST]");
@@ -33,11 +35,13 @@ public class AdminCalendarController {
 		adminCalendarService.upload(calendar);
 	}
 	
+	//관측 시간 API 조회
 	@RequestMapping("/time")
 	public void calendarTime() {
 		logger.info("/time 연결");
 	}
 	
+	//추천일 리스트
 	@RequestMapping("/list")
 	public void calendarList() {
 		logger.info("/list 연결");

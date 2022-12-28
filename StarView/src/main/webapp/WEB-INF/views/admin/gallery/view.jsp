@@ -9,39 +9,71 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	
-	//게시글 리스트로 돌아가기
+	//게시글 리스트로 이동
 	$("#btnList").click(function() {
 		location.href = "./list"
 	})
 	
-	//게시글 수정 버튼
-	/* $("#btnUpdate").click(function() {
-		location.href = "./update?galleryNo=${viewBoard.galleryNo }"
-	}) */
-	
-	//게시글 삭제 버튼
-	$("#btnDelete").click(function() {
-		if(confirm('[게시글] \n삭제하시면 복구할 수 없습니다. \n정말로 삭제하시겠습니까?') == true) {
-			alert("게시글이 삭제되었습니다")
-			document.location.href = "./delete?galleryNo=${viewBoard.galleryNo }"
-		}
-	})
-	
-	//댓글 신고 버튼
-	$("#btnReportComment").click(function() {
-		if(confirm("[댓글] \n신고하시겠습니까?") == true ) {
-			alert("댓글이 신고되었습니다");
-			document.location.href = ""
+	//신고 기능 구현 후 여기서는 주석 처리할 것
+	//게시글 신고
+	$("#btnReport").click(function() {
+		if(confirm("[게시글] \n신고하시겠습니까?") == true ) {
+			alert("게시글이 신고되었습니다");
+			location.href = "./report?galleryNo=${viewBoard.galleryNo }"
 		} 
 	})
 	
-	//댓글 삭제 버튼
-	$("#btnDeleteComment").click(function() {
-		if(confirm("[댓글] \n삭제하시면 복구할 수 없습니다. \n정말로 삭제하시겠습니까?") == true ) {
-			alert("댓글이 삭제되었습니다");
-			document.location.href = ""
+	//게시글 삭제
+	$("#btnDelete").click(function() {
+		if(confirm('[게시글] \n삭제하시면 복구할 수 없습니다. \n정말로 삭제하시겠습니까?') == true) {
+			alert("게시글이 삭제되었습니다")
+			location.href = "./delete?galleryNo=${viewBoard.galleryNo }"
 		}
 	})
+	
+	//댓글 삭제
+	$(".delete_btn").click(function(){
+	  var confirm_val = confirm("[댓글] \n삭제하시면 복구할 수 없습니다. \n정말로 삭제하시겠습니까?");
+	  
+	  if(confirm_val) {
+	   var checkArr = new Array();
+	   
+	   checkArr.push($(this).attr("select_data"));
+	   
+	   $.ajax({
+	    url : "./deletesel",
+	    type : "post",
+	    data : { chbox : checkArr },
+	    success : function(result){
+	     if(result == 1) {            
+	      alert("댓글이 삭제되었습니다");
+	     } else {
+	      alert("삭제 실패");
+	     }
+		}
+	   });
+	  } 
+	 });
+	
+	//신고 기능 구현 후 여기서는 주석 처리할 것
+	//댓글 신고
+	$("#btnReportComment").click(function() {
+		if(confirm("[댓글] \n신고하시겠습니까?") == true ) {
+			alert("댓글이 신고되었습니다");
+			location.href = ""
+		} 
+	})
+	
+	//댓글 삭제 기능 수정하기
+	//삭제가 안 된다...
+	/*
+	$(".delete_btn").click(function(){
+		if(confirm('[댓글] \n삭제하시면 복구할 수 없습니다. \n정말로 삭제하시겠습니까?') == true) {
+			alert("댓글이 삭제되었습니다")
+			location.href = "../comment/delete?cmNo=${c.cmNo }"
+		}
+	})
+	*/
 })
 
 </script>
@@ -64,7 +96,7 @@ table {
 	</td>
 	</c:if>
 	<td class="warning" style="width: 7%">작성자</td>
-	<td><strong style="font-size: 17px;">${viewBoard.uNick}</strong> (아이디: ${viewBoard.uId})
+	<td>${viewBoard.uNick} (아이디: ${viewBoard.uId})
 	</td>
 </tr>
 <tr>
@@ -102,17 +134,17 @@ table {
 <button id="btnList" class="btn btn-default" style="display: inline-block;">목록</button>
 
 <!-- 아이디 추가 -->
-<!-- <button id="btnUpdate" class="btn btn-primary">수정</button> -->
+<button id="btnReport" class="btn btn-primary">신고</button>
 <button id="btnDelete" class="btn btn-danger" style="display: inline-block;">삭제</button>
 </div>
 
 <hr>
 <h4><strong>댓글 목록</strong></h4>
-<c:forEach items="${viewComment }" var="c">
+<c:forEach items="${viewComm }" var="c">
 	<table class="table">
 		<tr>
 			<td class="warning" style="width: 20%"><strong>${c.uNick }</strong> ( <fmt:formatDate value="${c.cmDate }" pattern="yy/MM/dd HH:mm" /> )</td>
-			<td colspan="2" style="width: 70%">${c.cmContent }</td>
+			<td colspan="2" style="width: 68%">${c.cmContent }</td>
 	
 			<td>
 				<button id="btnReportComment" class="btn btn-primary btn-sm">신고</button>
@@ -124,7 +156,7 @@ table {
 					<input type="text" name="reporter" value="${uId }">
 				</form>
 				
-				<button id="btnDeleteComment" class="btn btn-danger btn-sm">삭제</button>
+				<button type="button" class="delete_btn btn-danger btn-sm" value="${c.cmNo }" select_data="${c.cmNo }">삭제</button>
 			</td>
 		</tr>
 	</table>

@@ -19,11 +19,14 @@ public class AdminCalendarServiceImpl implements AdminCalendarService {
 	@Autowired
 	private AdminCalendarDao adminCalendarDao;
 	
+	//추천일 등록
 	@Override
 	public void upload(AdminCalendar calendar) {
 		logger.info("upload() 사용");
 		
 		adminCalendarDao.insertDate(calendar);
 	}
+
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
