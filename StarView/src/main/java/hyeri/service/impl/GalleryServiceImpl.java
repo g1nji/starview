@@ -232,4 +232,28 @@ public class GalleryServiceImpl implements GalleryService {
 		return galleryDao.selectGalleryNo(galleryNo);
 	}
 	
+	@Override
+	public int findLike(int galleryNo, String uId) {
+		return galleryDao.findLike(galleryNo, uId);
+	}
+	
+	@Override
+	public void likeUp(int galleryNo, String uId) {
+		galleryDao.likeUp(galleryNo, uId);
+		
+		galleryDao.updateLike(galleryNo);
+	}
+	
+	@Override
+	public void likeDown(int galleryNo, String uId) {
+		galleryDao.likeDown(galleryNo, uId);
+		
+		galleryDao.updateLike(galleryNo);
+	}
+	
+	@Override
+	public int getLike(int galleryNo) {
+		return galleryDao.getLike(galleryNo);
+	}
+	
 }

@@ -82,4 +82,33 @@ public interface GalleryService {
 
 	public List<GTag> viewTag(int galleryNo);
 
+	/**
+	 * 좋아요 확인
+	 * 
+	 * @param galleryNo
+	 * @param uId
+	 */
+	public int findLike(int galleryNo, String uId);
+
+	/**
+	 * 좋아요 +1
+	 * @param galleryNo
+	 * @param uId
+	 */
+	public void likeUp(int galleryNo, String uId);
+
+	/**
+	 * 좋아요 -1
+	 * @param galleryNo
+	 * @param uId
+	 */
+	public void likeDown(int galleryNo, String uId);
+
+	/**
+	 * 좋아요 갯수
+	 * @param galleryNo
+	 * @return
+	 */
+	public int getLike(int galleryNo);
+
 }
