@@ -68,7 +68,7 @@ span {
 .sort {
 	color: #C5C6B6; 
 	padding-left: 8px;
-	padding-right: 8px;
+	padding-right: 11px;
 }
 
 .l { 
@@ -154,7 +154,7 @@ $(document).ready(function() {
 	}) //-- .click() 
 	
 	//정렬선택시 체크아이콘 삽입
-	var chkimg = '<img style="width: 22px; height: 22px;" src="/resources/img/checkicon.png">';
+	var chkimg = '<img style="width: 17px; height: 17px; margin-right: 3px;" src="/resources/img/check.png">';
 	
 	$('#latest').click(function() {
 		$('.chkicon').empty();
