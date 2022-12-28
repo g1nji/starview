@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import seulgi.dao.face.AdminCommentDao;
 import seulgi.dto.AdminComment;
+import seulgi.dto.AdminGallery;
 import seulgi.service.face.AdminCommentService;
 
 @Service
@@ -21,6 +22,7 @@ public class AdminCommentServiceImpl implements AdminCommentService {
 	@Autowired
 	private AdminCommentDao adminCommentDao;
 	
+	//댓글 리스트
 	@Override
 	public List<AdminComment> list() {
 		logger.info("list() 사용");
@@ -28,11 +30,24 @@ public class AdminCommentServiceImpl implements AdminCommentService {
 		return adminCommentDao.selectAll();
 	}
 	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	//댓글 상세 조회
 	@Override
-	public List<AdminComment> view(int galleryNo) {
+	public List<AdminComment> view(AdminGallery viewBoard) {
 		logger.info("view() 사용");
+
+		return adminCommentDao.selectComment(viewBoard);
+	}
+	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	//댓글 삭제
+	@Override
+	public void delete(AdminComment board) {
+		logger.info("delete() 사용");
 		
-		return adminCommentDao.selectComment(galleryNo);
+		adminCommentDao.delete(board);
 	}
 	
 }

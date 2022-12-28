@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import seulgi.dao.face.AdminCommentDao;
 import seulgi.dao.face.AdminGalleryDao;
 import seulgi.dto.AdminBoardFile;
 import seulgi.dto.AdminGallery;
@@ -29,6 +30,9 @@ public class AdminGalleryServiceImpl implements AdminGalleryService {
 	//DAO 객체
 	@Autowired
 	private AdminGalleryDao adminBoardDao; 
+	
+	@Autowired
+	private AdminCommentDao adminCommentDao; 
 	
 	//ServletContext 객체
 	@Autowired
@@ -161,6 +165,8 @@ public class AdminGalleryServiceImpl implements AdminGalleryService {
 		adminBoardDao.insertFile(boardFile);
 	}
 	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	//첨부파일 정보 얻어오기
 	@Override
 	public AdminBoardFile getAttachFile(AdminGallery viewBoard) {
@@ -258,6 +264,9 @@ public class AdminGalleryServiceImpl implements AdminGalleryService {
 		
 		//첨부파일 삭제
 		adminBoardDao.deleteFile(board);
+		
+		//댓글 삭제
+		adminBoardDao.deleteComm(board);
 		
 		//게시글 삭제
 		adminBoardDao.delete(board);

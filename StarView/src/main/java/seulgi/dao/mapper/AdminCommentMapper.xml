@@ -7,14 +7,22 @@
 
 <mapper namespace="seulgi.dao.face.AdminCommentDao">
 
-	<select id="selectComment" resultType="seulgi.dto.AdminComment" parameterType="int">
-		SELECT * FROM g_comment
-		WHERE gallery_no = #{galleryNo }
-	</select>
-	
+	<!-- 댓글 리스트 -->
 	<select id="selectAll" resultType="seulgi.dto.AdminComment">
 		SELECT * FROM g_comment
 		ORDER BY cm_no DESC
 	</select>
-
+	
+	<!-- 댓글 상세 조회 -->
+	<select id="selectComment" resultType="seulgi.dto.AdminComment" parameterType="seulgi.dto.AdminGallery">
+		SELECT * FROM g_comment
+		WHERE gallery_no = #{galleryNo }
+	</select>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="delete" parameterType="seulgi.dto.AdminComment">
+		DELETE g_comment
+		WHERE cm_no = #{cmNo }
+	</delete>
+	
 </mapper>
