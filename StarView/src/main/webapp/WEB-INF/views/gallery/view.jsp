@@ -8,23 +8,64 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	
-	var uid = '<%=session.getAttribute("uId") %>'
+	var u_id = '<%=session.getAttribute("uId") %>'
+	var likeval = ${like }
 	
-	$("#btnReport").click(function() {
+	if(likeval > 0 ) {
+		$(".like_img").attr("src", "/resources/image/heart-fill.png")
+		$(".like_img").click(function() {
+			console.log("좋아요 클릭")
+			
+			if(u_id != "null" ) {
+				$.ajax({
+					url : "/gallery/likedown",
+					type : "post",
+					data : {
+						galleryNo : ${viewGallery.galleryNo },
+						uId : '<%=session.getAttribute("uId") %>'
+					},
+					success : function() {
+						$(".like_img").attr("src", "/resources/image/heart-empty.png")
+						console.log("좋아요 취소")
+					},
+					error : function() {
+						console.log("실패")
+					}
+				})
+			} else {
+				alert("로그인 후 이용 가능합니다")
+				location.href="/users/login"
+			}
+		})
 		
-		if(confirm("덧글을 신고하시겠습니까?") == true ) {
-			alert("신고가 완료되었습니다");
-		} else {
-			return;
-		}
-	})
+	} else {
+		
+		$(".like_img").click(function() {
+			console.log("좋아요 클릭")
+			
+			if(u_id != "null" ) {
+				$.ajax({
+					url : "/gallery/likeup",
+					type : "post",
+					data : {
+						galleryNo : ${viewGallery.galleryNo },
+						uId : '<%=session.getAttribute("uId") %>'
+					},
+					success : function() {
+						$(".like_img").attr("src", "/resources/image/heart-fill.png")
+						console.log("좋아요 성공")
+					},
+					error : function() {
+						console.log("실패")
+					}
+				})
+			} else {
+				alert("로그인 후 이용 가능합니다")
+				location.href="/users/login"
+			}
+		})
+	}
 	
-// 	$(".heart-click").click(function() {
-		
-// 		let no = $(this).attr('idx');
-		
-// 		if($(this).children('img').attr('class') == )
-// 	})
 	
 	$(".BtnDelete").click(function() {
 		if(confirm("게시글을 삭제하시겠습니까?") == true) {
@@ -38,6 +79,15 @@ $(document).ready(function() {
 	$(".BtnCmDelete").click(function() {
 		if(confirm("덧글을 삭제하시겠습니까?") == true) {
 			alert("덧글이 삭제되었습니다");
+		} else {
+			return;
+		}
+	})
+	
+	$("#btnReport").click(function() {
+		
+		if(confirm("덧글을 신고하시겠습니까?") == true ) {
+			alert("신고가 완료되었습니다");
 		} else {
 			return;
 		}
@@ -103,14 +153,7 @@ $(document).ready(function() {
 ${viewGallery.uNick }
 
 <%-- 좋아요 버튼 --%>
-<c:choose>
-  <c:when test="${uId ne null}">
-    <a href='javascript: like_func();'><img src='/resources/image/heart-empty.png' class="like_img"></a>
-  </c:when>
-  <c:otherwise>
-    <a href='javascript: login_need();'><img src='/resources/image/heart-empty.png' class="like_img"></a>
-  </c:otherwise>
-</c:choose>
+<span style="float:right;">${getLike }</span> <a style="cursor:pointer;"><img src="/resources/image/heart-empty.png" class="like_img"></a>
 
 <!-- 게시글 수정, 삭제 버튼 -->
 <c:if test="${uId eq viewGallery.uId }">
@@ -184,22 +227,19 @@ ${viewGallery.galleryContent }
 	
 	<form action="/comment/write" method="post">
 	
-		<table>
+		<table style="width:100%;">
 			<tr>
 				<th>${uNick }</th>
 			</tr>
 
 			<tr>
-				<td>
+				<td style="width:90%">
 					<input type="hidden" name="galleryNo" value="${viewGallery.galleryNo }">
 					<input type="hidden" name="uId" value="${uId }">
 					<input type="hidden" name="uNick" value="${uNick }">
-					<textarea rows="5" cols="50" name="cmContent"></textarea>
+					<textarea style="width:100%;" name="cmContent"></textarea>
 				</td>
-			</tr>
-			
-			<tr>
-				<td><button type="submit">댓글 작성</button></td>
+				<td style="width:10%;"><button type="submit">댓글 작성</button></td>
 			</tr>
 		</table>
 	</form>

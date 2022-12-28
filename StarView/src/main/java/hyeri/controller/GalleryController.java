@@ -84,6 +84,41 @@ public class GalleryController {
 		//모델값 전달
 		model.addAttribute("tags", list2);
 		
+		//좋아요 확인
+		String uId = (String)session.getAttribute("uId");
+		int like = galleryService.findLike(galleryNo, uId);
+		int getLike = galleryService.getLike(galleryNo);
+		
+		//모델값 전달
+		model.addAttribute("like", like);
+		model.addAttribute("getLike", getLike);
+		
+	}
+	
+	//좋아요 추가
+	@PostMapping("/likeup")
+	public String likeupPost(
+			Gallery viewGallery
+			, int galleryNo
+			, String uId
+			, Model model) {
+		
+		galleryService.likeUp(galleryNo, uId);
+		
+		return "redirect:/gallery/view?galleryNo=" + viewGallery.getGalleryNo();
+	}
+	
+	//좋아요 취소
+	@PostMapping("/likedown")
+	public String likedownPost(
+			Gallery viewGallery
+			, int galleryNo
+			, String uId
+			, Model model) {
+		
+		galleryService.likeDown(galleryNo, uId);
+		
+		return "redirect:/gallery/view?galleryNo=" + viewGallery.getGalleryNo();
 	}
 	
 //	게시글 작성 get
@@ -186,7 +221,6 @@ public class GalleryController {
 		
 		return "redirect:./list";
 	}
-	
 	
 //	게시글 검색
 	@PostMapping("/search")

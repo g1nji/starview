@@ -79,8 +79,6 @@
 		) data
 	</insert>
 	
-	
-	
 	<update id="updateFilepath" parameterType="hyeri.dto.Gallery">
 		UPDATE gallery
 		SET stored_name = (SELECT stored_name FROM gallery_file
@@ -149,17 +147,31 @@
 		WHERE gallery_no = #{galleryNo }
 	</select>
 	
-	 <update id="like_check" parameterType="HashMap">
-	    UPDATE gallery_like
-	    SET like_check = like_check + 1 
-	    WHERE u_id = #{uId } AND gallery_no = #{galleryNo }
-	  </update>
-	  
-	  <update id="like_check_cancel" parameterType="HashMap">
-	    UPDATE gallery_like
-	    SET like_check = 0
-	    WHERE u_id = #{uId } AND gallery_no = #{galleryNo }
-	  </update>
-		
+	<select id="findLike" resultType="int">
+		SELECT count(*) FROM gallery_like
+		WHERE gallery_no = #{galleryNo } AND u_id = #{uId }
+	</select>
+	
+	<select id="getLike" resultType="int" parameterType="int">
+		SELECT count(like_check) FROM gallery_like
+		WHERE gallery_no = #{galleryNo }
+	</select>
+	
+	<insert id="likeUp">
+		INSERT INTO gallery_like ( like_no, gallery_no, u_id, like_check )
+		VALUES ( (SELECT * FROM ( SELECT max(like_no)+1 FROM gallery_like WHERE gallery_no = #{galleryNo } ) next), #{galleryNo }, #{uId }, 1)
+	</insert>
+	
+	<update id="updateLike">
+		UPDATE gallery
+		SET gallery_like = (SELECT count(like_check) FROM gallery_like
+			WHERE gallery_no = #{galleryNo })
+		WHERE gallery_no = #{galleryNo }
+	</update>
+	
+	<delete id="likeDown">
+		DELETE FROM gallery_like
+		WHERE gallery_no = #{galleryNo } AND u_id = #{uId }
+	</delete>
 
 </mapper>

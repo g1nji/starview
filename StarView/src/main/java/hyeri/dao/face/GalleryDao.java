@@ -94,4 +94,14 @@ public interface GalleryDao {
 
 	public List<GTag> selectGalleryNo(int galleryNo);
 
+	public int findLike(@Param("galleryNo") int galleryNo, @Param("uId")String uId);
+
+	public void likeUp(@Param("galleryNo") int galleryNo, @Param("uId") String uId);
+
+	public void likeDown(@Param("galleryNo") int galleryNo, @Param("uId") String uId);
+
+	public int getLike(int galleryNo);
+
+	public void updateLike(int galleryNo);
+
 }
