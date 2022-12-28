@@ -15,6 +15,7 @@
 * {
     margin: 0;
     padding: 0
+    max-width: 1100px !important;
 }
 
 /* 캘린더 */
@@ -68,7 +69,7 @@
 
 /* 일요일 색상 빨갛게 */
 .calendarTable tbody td:nth-child(1) {
-    color: red;
+    color: #E64556;
 }
 
 /* 토요일 색상 바꾸기 */
@@ -83,9 +84,50 @@
 }
 
 #calendarForm {
-	background-color: #FFEFD5;
-	position: flex;
-	float: right;
+ 	background-color: #FFF6DE;
+	border: 4px solid;
+    border-color: #FFEBBA;
+    border-radius: 5px;
+    position: relative;
+    float: right;
+	width: 530px;
+    padding: 10px 10px 10px 10px;
+    right: 98px;
+    margin-bottom: 50px;
+}
+
+#calendarDiv {
+    position: relative;
+    float: none;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: column;
+}
+/* div css */
+#todolist {
+    width: 400px;
+    left: 115px;
+    height: 420px;
+    background-color: #FFEBBA;
+    border: 4px solid;
+    border-color: #FFEBBA;
+    border-radius: 5px;
+    position: relative;
+}
+
+#selectDay {
+    font-size: 100px;
+    color: darkslategray;
+    text-align: center;
+    position: relative;
+    right: 15px;
+}
+
+#todoform {
+	position: relative;
+	text-align: center;
+	
 }
 </style>
 
@@ -204,7 +246,7 @@ $(document).ready(function() {
 	        		, success: function(res) {
 	        			console.log("AJAX 성공");
 	        			
-// 	        			$("#selectDay").html( res );
+	        			 
 	        		}
 		    	 	, error: function(request, error) {
 		    	 		console.log("AJAX 실패")
@@ -212,7 +254,6 @@ $(document).ready(function() {
 		    	 		
 		    	 	} 
 	        	})
-	        
 	        });
 	        
 		     
@@ -220,14 +261,14 @@ $(document).ready(function() {
 		     $("#todoBtn").on("click", function () {
 		    	 var inputTodo = $("#inputbox").val();
 		    	 var todoDay = $("#selectDay").text();
-		    	 var sNo = $()
+		    	 var sNo = ${list[i].sNo}
 // 		    	 console.log( todoDay );
 // 		    	 console.log(inputTodo);
 		    	 
 		    	 $.ajax({
 		    		type:"POST"
 		    		, url: "/calendar/listview"
-					, data: { "todoList" : inputTodo , "sDate" : todoDay } 
+					, data: { "todoList" : inputTodo , "sDate" : todoDay , "sNo" : sNo } 
 					, dataType:"json"
 					, success: function(res) {
 						console.log("AJAX 성공");
@@ -237,28 +278,34 @@ $(document).ready(function() {
 							var list = res.todoList
 							
 							for(var i = 0; i < list.length; i++ ){
-								$("#listbox").append('<div>'+list[i].todoList+'<a href=/calendar/delete?sNo=${calendar.sNo }>'+'<button id=dBtn>'+"✖"+'</button>'+'</a>'+'</div>');
+								$("#listbox").append('<div>'+list[i].todoList+'<button type="button" class="btnDel" onclick="deletelist('+list[i].sNo+')">'+"✖"+'</button>'+'</div>');
+// 								$("#listbox").append('<div>'+list[i].todoList+'</div>');
+// 								$("#listbox").append('<div>'+list[i].todoList+'<button class="btnDel">'+"✖"+'</button>'+'</div>');
+// 								$("#listbox").append('<div id="listbox">'+list[i].todoList+'<a href="/calendar/delete?sNo='sNo'">'+"✖"+'</a>'+'</div>');
 							}
-
 						}
-						
-						//$("#listbox").html(inputTodo);
-// 						location.reload();
+						$('#inputbox').val('');
 					}
 		    	 	, error: function(request, error) {
 		    	 		console.log("AJAX 실패")
 		    	 		console.log("code:"+request.status+"\n"+"message"+request.responseText+"\n"+"error:"+error);
 		    	 		
 		    	 	}
-		    	 	
-		    	 })
+		    	 }) //ajax 끝
+		    	 
+		    	 
+		    	 
 	    	 });
 	        
-	
-	        	$("#dBtn").click(function() {
-// 	        		location.href = "/calendar/delete?sNo=${todoList.sNo }"
-					alert("끝!");
-	        	})
+// 	        	$(".btnDel").on('click', function (){
+// 	        		console.log("button 삭제");
+// 	        		location.href = "/calendar/delete?sNo=${sNO }"
+// 	        	})
+				
+				$("#btnDel").on("click", function() {
+					
+
+				});
 	        
 	        //토글 클래스
 // 	        $(".claendarTable").on("click", "td", function() {
@@ -278,10 +325,28 @@ $(document).ready(function() {
 	    }
 	    
 	}
-
 })
+		function deletelist(sNo) {
+			console.log(sNo);
+			
+			$.ajax({
+				type: "GET"
+				, url: "/calendar/delete"
+				, data: { "sNo" : sNo }
+				, dataType: "json"
+				, success: function(res){
+					
+					console.log("delete ajax 성공");
+					
+				}
+				, error: function(error) {
+			 		console.log("code:"+request.status+"\n"+"message"+request.responseText+"\n"+"error:"+error);
+				}
+			})
+		}
 
 
+// 	location.href = "/calendar/delete?sNo="+sNo
 </script>
 </head>
 
@@ -289,7 +354,7 @@ $(document).ready(function() {
 <body>
 
 <!-- 캘린더 폼 띄우기 -->
-	<div id="calendarForm" style="width: 600px;"></div>
+	<div id="calendarForm" ></div>
 	
 <!-- todolist 폼 -->
 	<div id="todolist" style="display:none;">
@@ -308,7 +373,7 @@ $(document).ready(function() {
 	<div id="listbox">
 		<table>
 		<tr>
-			<th>-------------------</th>
+		<th>---------------------------</th>
 		</tr>
 		
 		<tr>

@@ -24,8 +24,8 @@
   	</select>
   	
   	<delete id="delete" parameterType="jiwon.dto.Calendar">
-  		DELETE calendar
-  		WHERE s_no = #{sNO}
+  		DELETE FROM calendar
+  		WHERE s_no = #{sNo}
   	</delete>
   	
 </mapper>

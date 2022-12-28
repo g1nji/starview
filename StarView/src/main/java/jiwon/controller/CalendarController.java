@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -81,12 +82,28 @@ public class CalendarController<TodolistData> {
 		return map;
 	}
 
+	@ResponseBody
 	@RequestMapping("/delete")
-	public String delete(Calendar calendar) {
+	public Map<String, Object> delete(@RequestParam int sNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
 		
-		calendarservice.delete(calendar);
+			logger.info("/delete/");
+			logger.info("sNo {}", sNo);
+			
+		try {
+			Calendar calendar = new Calendar();
+			
+			calendar.setsNo(sNo);
+			calendarservice.delete(calendar);
+			
+			map.put("result", "success");
+		}catch(Exception e) {
+			e.printStackTrace();
+			map.put("result", false);
+		}
 		
-		return "redirect:/calendar/listview";
+//		return "redirect:/calendar/listview";
+		return map;
 		
 	}
 	
