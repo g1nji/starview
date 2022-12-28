@@ -20,5 +20,14 @@
 		WHERE gallery_no = #{galleryNo }
 	</select>
 	
+	<update id="modify" parameterType="hyeri.dto.GComment">
+		UPDATE g_comment SET cm_content = #{cmContent }
+		WHERE cm_no = #{cmNo }
+	</update>
+	
+	<delete id="delete" parameterType="hyeri.dto.GComment">
+		DELETE g_comment
+		WHERE cm_no = #{cmNo }
+	</delete>
 
 </mapper>

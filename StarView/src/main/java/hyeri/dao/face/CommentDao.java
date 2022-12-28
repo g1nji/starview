@@ -20,4 +20,6 @@ public interface CommentDao {
 	 */
 	public List<GComment> selectGalleryNo(int galleryNo);
 
+	public void delete(GComment gComment);
+
 }
