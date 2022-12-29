@@ -20,7 +20,7 @@ td:nth-child(2) {
 }
 </style>
 
-<h1>추천일 조회</h1>
+<h1>추천일 리스트</h1>
 <hr>
 
 <table class="table table-hover">
