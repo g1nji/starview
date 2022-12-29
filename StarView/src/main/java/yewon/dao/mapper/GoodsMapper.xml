@@ -76,7 +76,7 @@
 		   		ORDER BY g.g_price ASC
 	        ) t
 	    ) GOODS
-	    WHERE rnum BETWEEN #{startIdx} AND #{endIdx} + #{step}
+	    WHERE rnum BETWEEN #{startIdx} AND #{endIdx}
     ]]>
     </select>
 	
