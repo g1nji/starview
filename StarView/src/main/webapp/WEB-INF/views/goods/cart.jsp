@@ -12,6 +12,38 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
 
 <script type="text/javascript">
+
+//체크박스 전체 선택
+function selectAll(allCheck) {
+  const checkboxes = document.querySelectorAll('.chBox');
+
+  checkboxes.forEach((checkbox) => {
+    checkbox.checked = allCheck.checked
+	  })
+}
+
+//수량변경
+function changeQty(type, ths){
+	var input = $(ths).parents("td").find("input[class='input-qty']");
+	var min = 1;
+	var max = 9;
+	
+	var count = Number(input.val());
+	if(type=='p'){
+		if(count < max){
+		input.val(count+1)
+		} else if(count == max) {
+			input.val(max);
+		}
+	} else if(type=='m'){
+		if(count > min){
+		input.val(count-1)
+		} else if(count == min) {
+			input.val(min);
+		}
+	}
+}
+
 $(document).ready(function() {
 
 	//DOM객체 로딩시 총금액 보이도록 이벤트 발생시키기
@@ -210,16 +242,6 @@ $(document).ready(function() {
 <thead>
 <tr>
 	<th><input type="checkbox" name="chBox" id="allCheck" onclick="selectAll(allCheck)"></th>
-		<script>
-		//체크박스 전체 선택
-		function selectAll(allCheck) {
-		  const checkboxes = document.querySelectorAll('.chBox');
-	  
-		  checkboxes.forEach((checkbox) => {
-		    checkbox.checked = allCheck.checked
-	  	  })
-		}
-		</script>
 	<th style="width: 35%">상품정보</th>
 	<th style="width: 15%">수량</th>
 	<th style="width: 15%">가격</th>
@@ -310,28 +332,6 @@ $(document).ready(function() {
 
 <br><br><br><br>
 
-					
-<script>
-	function changeQty(type, ths){
-		var input = $(ths).parents("td").find("input[class='input-qty']");
-		var min = 1;
-		var max = 9;
-		
-		var count = Number(input.val());
-		if(type=='p'){
-			if(count < max){
-			input.val(count+1)
-			} else if(count == max) {
-				input.val(max);
-			}
-		} else if(type=='m'){
-			if(count > min){
-			input.val(count-1)
-			} else if(count == min) {
-				input.val(min);
-			}
-		}
-	}
-</script>
+
 
 <c:import url="../layout/footer.jsp" />

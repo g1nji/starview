@@ -154,7 +154,7 @@ $(document).ready(function() {
 	}) //-- .click() 
 	
 	//정렬선택시 체크아이콘 삽입
-	var chkimg = '<img style="width: 17px; height: 17px; margin-right: 3px;" src="/resources/img/check.png">';
+	var chkimg = '<img style="width: 17px; height: 17px; margin-right: 3px;" src="/resources/img/checkicon.png">';
 	
 	$('#latest').click(function() {
 		$('.chkicon').empty();
