@@ -20,6 +20,35 @@ table, th {
 
 $(document).ready(function() {
 	
+	//checkBox 선택된 게시글 삭제
+	$(".selectDelete_btn").click(function(){
+	  var confirm_val = confirm("[게시글] \n삭제하시면 복구할 수 없습니다. \n정말로 삭제하시겠습니까?");
+	  
+	  if(confirm_val) {
+	   var checkArr = new Array();
+	   
+	   $("input[class='chBox']:checked").each(function(){
+	    checkArr.push($(this).attr("select_data"));
+	   });
+	    
+	   console.log(checkArr);
+	   
+	   $.ajax({
+	    url : "./deletee",
+	    type : "post",
+	    data : { chbox : checkArr },
+	    success : function(result){
+	     if(result == 1) {            
+	      alert("댓글이 삭제되었습니다");
+	      history.go(0);
+	     } else {
+	      alert("삭제 실패");
+	     }
+		}
+	   });
+	  } 
+	 });
+
 	//검색
 	$("#btnSearch").click(function() {
 		location.href = "./search?keyword" + $('input[name="keyword"]:checked').val();
@@ -51,7 +80,7 @@ $(document).ready(function() {
 </select>
 
 <form id="searchForm" action="./search" method="get" style="float: right;">
-    <input id="keyword" name="keyword" type="text" placeholder="검색할 상품명을 입력하세요" value="">
+    <input id="keyword" name="keyword" type="text" placeholder="검색할 아이디를 입력하세요" value="">
 	<button class="btnSearch">검색</button>
 </form>
 
@@ -60,8 +89,20 @@ $(document).ready(function() {
 <table class="table table-hover">
 <thead>
 	<tr class="warning">
-		<th style="width: 10%"><input type='checkbox' name='all' value='selectall' onclick='selectAll(this)'/></th>
-		<th style="width: 15%;">작성자</th>
+		<th style="width: 10%;"><input type="checkbox" name="allCheck" id="allCheck" /></th>
+		
+		<script>
+		$("#allCheck").click(function(){
+		 var chk = $("#allCheck").prop("checked");
+		 if(chk) {
+		  $(".chBox").prop("checked", true);
+		 } else {
+		  $(".chBox").prop("checked", false);
+		 }
+		});
+		</script>
+		
+		<th>작성자</th>
 		<th>제목</th>
 		<th>내용</th>
 		<th>등록일</th>
@@ -70,8 +111,15 @@ $(document).ready(function() {
 <tbody>
 <c:forEach items="${boardList }" var="b">
 	<tr>
-		<td style="width: 10%"><input id="select" type="checkbox" name="select" value="${b.rId }"></td>
-		<td style="width: 20%">${b.uId }</td>
+		<td><input type="checkbox" name="chBox" class="chBox" select_data="${b.rId }"></td>
+		
+		<script>
+		 $(".chBox").click(function(){
+		  $("#allCheck").prop("checked", false);
+		 });
+		</script>
+		
+		<td>${b.uId }</td>
 		<td><a href="./view?rId=${b.rId }">${b.rTitle }</a></td>
 		<td>${b.rContent }</td>
 		<td><fmt:formatDate value="${b.regDate }" pattern="yy-MM-dd HH:mm:ss"/></td>
@@ -82,7 +130,7 @@ $(document).ready(function() {
 
 <span class="pull-right">total : ${paging.totalCount }</span><br><br>
 
-<button id="delOk" class="btn btn-danger" style="float: right">삭제</button><br>
+<button type="button" class="selectDelete_btn btn btn-danger" style="float: right;">선택 삭제</button> 
 
 <c:import url="../layout/paging.jsp" />
 

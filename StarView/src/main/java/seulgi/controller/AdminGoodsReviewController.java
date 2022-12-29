@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import seulgi.dto.AdminGoodsReview;
 import seulgi.dto.AdminProduct;
@@ -87,7 +88,28 @@ public class AdminGoodsReviewController {
 		return "admin/goods/view";
 	}
 	
-	//게시글 삭제
+	//왜 안 돼...
+	//게시글 삭제 - list에서
+	@ResponseBody
+	@RequestMapping("/deletee")
+	public int deleteselGallery(@RequestParam(value = "chbox[]") List<String> chArr, AdminGoodsReview board) {
+		logger.info("/deletee 주소 연결");
+		
+		int result = 0;
+		int select_data = 0;
+		 
+		for(String i : chArr) {   
+			select_data = Integer.parseInt(i);
+			board.setgId(select_data);
+			adminBoardService.delete2(board);
+		}
+		
+		result = 1;
+			  
+		return result;  
+	}
+	
+	//게시글 삭제 - view에서
 	@RequestMapping("/delete")
 	public String deleteGoodsReview(AdminGoodsReview board) {
 		logger.info("/delete 주소 연결");
@@ -97,5 +119,22 @@ public class AdminGoodsReviewController {
 		return "redirect:/admin/goods/list";
 	}
 	
-	//검색-상품명, 페이징
+	//페이징 추가
+	//게시글 검색
+	@RequestMapping("/search")
+	public void searchGoodsReview(Model model, @RequestParam(required = false) String keyword) {
+		logger.info("/search 주소 연결");
+		
+		//검색된 게시글 리스트
+		List<AdminGoodsReview> searchList = adminBoardService.search(keyword);
+		
+		//for (AdminGoodsReview b : searchList)
+		//logger.info("검색된 게시글: {}", searchList);
+		logger.info("검색어: {}", keyword);
+	
+		//모델값 전달
+		model.addAttribute("searchList", searchList);
+		model.addAttribute("keyword", keyword);
+	}
+	
 }

@@ -17,6 +17,7 @@ table, th {
 
 </style>
 
+
 <h1>'${keyword }'의 검색 결과</h1>
 <hr>
 
@@ -37,18 +38,14 @@ table, th {
 		</script>
 		
 		<th>작성자</th>
-		<th>제목</th>
 		<th>내용</th>
-		<th>위치</th>
-		<th>태그</th>
 		<th>등록일</th>
 	</tr>
 </thead>	
 <tbody>
-
-<c:forEach items="${searchList }" var="b">
+<c:forEach items="${searchList }" var="c">
 	<tr>
-		<td><input type="checkbox" name="chBox" class="chBox" select_data="${b.galleryNo }"></td>
+		<td><input type="checkbox" name="chBox" class="chBox" select_data="${c.cmNo }"></td>
 		
 		<script>
 		 $(".chBox").click(function(){
@@ -56,12 +53,12 @@ table, th {
 		 });
 		</script>
 		
-		<td>${b.uId }</td>
-		<td><a href="./view?galleryNo=${b.galleryNo }">${b.galleryTitle }</a></td>
-		<td>${b.galleryContent }</td>
-		<td>${b.galleryLoc }</td>
-		<td>${b.galleryTag }</td>
-		<td><fmt:formatDate value="${b.galleryDate }" pattern="yy-MM-dd HH:mm:ss"/></td>
+		<td>
+			<strong style="font-size: 17px;">${c.uNick }</strong>
+			<br> ${c.uId }
+		</td>
+		<td><a href="../gallery/view?galleryNo=${c.galleryNo }">${c.cmContent }</a></td>
+		<td><fmt:formatDate value="${c.cmDate }" pattern="yy-MM-dd HH:mm:ss"/></td>
 	</tr>
 </c:forEach>
 </tbody>
