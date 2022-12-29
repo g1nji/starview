@@ -176,9 +176,9 @@ public class AdminGalleryController {
 	
 	//게시글 삭제 - list에서
 	@ResponseBody
-	@RequestMapping("/deletesel")
+	@RequestMapping("/deletee")
 	public int deleteselGallery(@RequestParam(value = "chbox[]") List<String> chArr, AdminGallery board) {
-		logger.info("/deletesel 주소 연결");
+		logger.info("/deletee 주소 연결");
 		
 		int result = 0;
 		int select_data = 0;
@@ -216,7 +216,7 @@ public class AdminGalleryController {
 		List<AdminGallery> searchList = adminBoardService.search(keyword);
 		
 		//for (AdminBoard b : searchList)
-		logger.info("검색된 게시글: {}", searchList);
+		//logger.info("검색된 게시글: {}", searchList);
 		
 		//String option = search.getOption();
 		//String keyword = search.getKeyword();
@@ -249,12 +249,12 @@ public class AdminGalleryController {
 		return result; 
 	}
 	
+	//페이징 추가
 	//게시글 신고 리스트
 	@RequestMapping(value="/report")
 	public void reportList() {
 		logger.info("/report 주소 연결");
 	}
-	
 	
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
