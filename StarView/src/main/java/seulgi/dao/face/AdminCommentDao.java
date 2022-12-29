@@ -10,5 +10,6 @@ public interface AdminCommentDao {
 	public List<AdminComment> selectAll();
 	public List<AdminComment> selectComment(AdminGallery viewBoard);
 	public void delete(AdminComment board);
+	public void insertBoard(AdminComment board);
 
 }

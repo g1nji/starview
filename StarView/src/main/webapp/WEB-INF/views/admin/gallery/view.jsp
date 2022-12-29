@@ -16,12 +16,28 @@ $(document).ready(function() {
 	
 	//신고 기능 구현 후 여기서는 주석 처리할 것
 	//게시글 신고
-	$("#btnReport").click(function() {
-		if(confirm("[게시글] \n신고하시겠습니까?") == true ) {
-			alert("게시글이 신고되었습니다");
-			location.href = "./report?galleryNo=${viewBoard.galleryNo }"
-		} 
-	})
+	$("#btnReport").click(function(){
+	  var confirm_val = confirm("[게시글] \n정말로 신고하시겠습니까?");
+	  
+	  if(confirm_val) {
+	   var checkArr = new Array();
+	   
+	   checkArr.push($(this).attr("select_data"));
+	   
+	   $.ajax({
+	    url : "./reportt",
+	    type : "post",
+	    data : { chbox : checkArr },
+	    success : function(result){
+	     if(result == 1) {            
+	      alert("게시글이 신고되었습니다");
+	     } else {
+	      alert("신고 실패");
+	     }
+		}
+	   });
+	  } 
+	 });
 	
 	//게시글 삭제
 	$("#btnDelete").click(function() {
@@ -31,22 +47,46 @@ $(document).ready(function() {
 		}
 	})
 	
+	//신고 기능 구현 후 여기서는 주석 처리할 것
+	//댓글 신고
+	$(".report_btn").click(function(){
+	  var confirm_val = confirm("[댓글] \n정말로 신고하시겠습니까?");
+	  
+	  if(confirm_val) {
+	   var checkArr = $(this).attr("select_data");
+	   console.log(checkArr);
+	   
+	   $.ajax({
+	    url : "../comment/reportt",
+	    type : "post",
+	    data : { checkArr },
+	    success : function(result){
+	     if(result == 1) {            
+	      alert("댓글이 신고되었습니다");
+	     } else {
+	      alert("신고 실패");
+	     }
+		}
+	   });
+	  } 
+	 });
+	
 	//댓글 삭제
 	$(".delete_btn").click(function(){
 	  var confirm_val = confirm("[댓글] \n삭제하시면 복구할 수 없습니다. \n정말로 삭제하시겠습니까?");
 	  
 	  if(confirm_val) {
-	   var checkArr = new Array();
-	   
-	   checkArr.push($(this).attr("select_data"));
+	   var checkArr = $(this).attr("select_data");
+	   console.log(checkArr);
 	   
 	   $.ajax({
-	    url : "./deletesel",
+	    url : "../comment/delete",
 	    type : "post",
-	    data : { chbox : checkArr },
+	    data : { checkArr },
 	    success : function(result){
 	     if(result == 1) {            
 	      alert("댓글이 삭제되었습니다");
+	      history.go(0);
 	     } else {
 	      alert("삭제 실패");
 	     }
@@ -55,28 +95,10 @@ $(document).ready(function() {
 	  } 
 	 });
 	
-	//신고 기능 구현 후 여기서는 주석 처리할 것
-	//댓글 신고
-	$("#btnReportComment").click(function() {
-		if(confirm("[댓글] \n신고하시겠습니까?") == true ) {
-			alert("댓글이 신고되었습니다");
-			location.href = ""
-		} 
-	})
-	
-	//댓글 삭제 기능 수정하기
-	//삭제가 안 된다...
-	/*
-	$(".delete_btn").click(function(){
-		if(confirm('[댓글] \n삭제하시면 복구할 수 없습니다. \n정말로 삭제하시겠습니까?') == true) {
-			alert("댓글이 삭제되었습니다")
-			location.href = "../comment/delete?cmNo=${c.cmNo }"
-		}
-	})
-	*/
 })
 
 </script>
+
 
 <style type="text/css">
 table {
@@ -129,12 +151,9 @@ table {
 </tr>
 </table>
 
-<div class="btns" style="text-align: center">
-<%-- <a href="admin/gallery/download?photoNo=${boardFile.photoNo }">${boardFile.storedName } 다운로드</a> --%>
-<button id="btnList" class="btn btn-default" style="display: inline-block;">목록</button>
-
 <!-- 아이디 추가 -->
-<button id="btnReport" class="btn btn-primary">신고</button>
+<div class="btns" style="text-align: center">
+<button id="btnReport" class="btn btn-primary" style="display: inline-block;" value="${viewBoard.galleryNo }" select_data="${viewBoard.galleryNo }">신고</button>
 <button id="btnDelete" class="btn btn-danger" style="display: inline-block;">삭제</button>
 </div>
 
@@ -147,15 +166,7 @@ table {
 			<td colspan="2" style="width: 68%">${c.cmContent }</td>
 	
 			<td>
-				<button id="btnReportComment" class="btn btn-primary btn-sm">신고</button>
-				<!-- 신고 버튼 클릭 시 나타나도록 -->
-				<form action="../comment/report" method="post" id="reportform" style="display: none;">
-					<input type="text" name="uId" value="${c.uId }">
-					<input type="text" name="cmContent" value="${c.cmContent }">
-					<input type="text" name="cmDate" value="${c.cmDate }">
-					<input type="text" name="reporter" value="${uId }">
-				</form>
-				
+				<button type="button" class="report_btn btn-primary btn-sm" value="${c.cmNo }" select_data="${c.cmNo }">신고</button>
 				<button type="button" class="delete_btn btn-danger btn-sm" value="${c.cmNo }" select_data="${c.cmNo }">삭제</button>
 			</td>
 		</tr>

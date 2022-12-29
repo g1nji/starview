@@ -277,6 +277,18 @@ public class AdminGalleryServiceImpl implements AdminGalleryService {
 	//게시글 검색
 	@Override
 	public List<AdminGallery> search(String keyword) {
+		logger.info("search() 사용");
+		
 		return adminBoardDao.searchBoard(keyword);
+	}
+	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	//게시글 신고
+	@Override
+	public void report(AdminGallery board) {
+		logger.info("report() 사용");
+		
+		adminBoardDao.insertBoard2(board);
 	}
 }
