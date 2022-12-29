@@ -104,4 +104,6 @@ public interface GalleryDao {
 
 	public void updateLike(int galleryNo);
 
+	public void updateHit2(int galleryNo);
+
 }
