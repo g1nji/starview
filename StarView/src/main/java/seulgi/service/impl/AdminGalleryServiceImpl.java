@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import seulgi.dao.face.AdminCommentDao;
 import seulgi.dao.face.AdminGalleryDao;
 import seulgi.dto.AdminBoardFile;
 import seulgi.dto.AdminGallery;
@@ -30,9 +29,6 @@ public class AdminGalleryServiceImpl implements AdminGalleryService {
 	//DAO 객체
 	@Autowired
 	private AdminGalleryDao adminBoardDao; 
-	
-	@Autowired
-	private AdminCommentDao adminCommentDao; 
 	
 	//ServletContext 객체
 	@Autowired
@@ -277,6 +273,18 @@ public class AdminGalleryServiceImpl implements AdminGalleryService {
 	//게시글 검색
 	@Override
 	public List<AdminGallery> search(String keyword) {
+		logger.info("search() 사용");
+		
 		return adminBoardDao.searchBoard(keyword);
+	}
+	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	//게시글 신고
+	@Override
+	public void report(AdminGallery board) {
+		logger.info("report() 사용");
+		
+		adminBoardDao.insertBoard2(board);
 	}
 }

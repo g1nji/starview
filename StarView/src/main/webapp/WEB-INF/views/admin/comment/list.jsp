@@ -15,9 +15,6 @@ table, th {
 	text-align: center;
 }
 
-td:nth-child(2) {
-	text-align: left;
-}
 </style>
 
 <script type="text/javascript">
@@ -44,17 +41,17 @@ $(document).ready(function() {
 	   var checkArr = new Array();
 	   
 	   $("input[class='chBox']:checked").each(function(){
-	   		checkArr.push($(this).attr("select_data"));
+	    checkArr.push($(this).attr("select_data"));
 	   });
 	    
 	   $.ajax({
-	    url : "./deletesel",
+	    url : "./deletee",
 	    type : "post",
 	    data : { chbox : checkArr },
 	    success : function(result){
 	     if(result == 1) {            
 	      alert("댓글이 삭제되었습니다");
-	      location.href = "./list";
+	      history.go(0);
 	     } else {
 	      alert("삭제 실패");
 	     }
@@ -96,7 +93,7 @@ $(document).ready(function() {
 <table class="table table-hover">
 <thead>
 	<tr class="warning">
-		<th><input type="checkbox" name="allCheck" id="allCheck" /></th>
+		<th style="width: 10%;"><input type="checkbox" name="allCheck" id="allCheck" /></th>
 		
 		<script>
 		$("#allCheck").click(function(){
@@ -109,9 +106,9 @@ $(document).ready(function() {
 		});
 		</script>
 		
-		<th style="width: 10%; text-align: left;">작성자</th>
-		<th style="width: 60%;">내용</th>
-		<th style="width: 20%;">등록일</th>
+		<th>작성자</th>
+		<th>내용</th>
+		<th>등록일</th>
 	</tr>
 </thead>	
 <tbody>
@@ -136,6 +133,10 @@ $(document).ready(function() {
 </tbody>
 </table>
 
+<span class="pull-right">total : ${paging.totalCount }</span><br><br>
+
 <button type="button" class="selectDelete_btn btn btn-danger" style="float: right;">선택 삭제</button> 
+
+<c:import url="../layout/paging.jsp" />
 
 <c:import url="../layout/footer.jsp" />

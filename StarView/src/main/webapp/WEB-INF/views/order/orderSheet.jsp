@@ -5,38 +5,313 @@
 
 <c:import url="../layout/header.jsp" />
 
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if(data.userSelectedType === 'R'){
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    // 조합된 참고항목을 해당 필드에 넣는다.
+                    document.getElementById("sample6_extraAddress").value = extraAddr;
+                
+                } else {
+                    document.getElementById("sample6_extraAddress").value = '';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample6_postcode').value = data.zonecode;
+                document.getElementById("sample6_address").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("sample6_detailAddress").focus();
+            }
+        }).open();
+    }
+</script>
+
+<script type="text/javascript">
+const autoHyphen2 = (target) => {
+	 target.value = target.value
+	   .replace(/[^0-9]/g, '')
+	  .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+	}
+</script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$('.submitBtn').click(function() {
+		location.href="/order/result"
+	})
+	
+})
+</script>
+
+<style type="text/css">
+h2 {
+	text-align: center;
+}
+
+.step {
+	width: 60%;
+	margin: 0 auto;
+	padding-top: 20px;
+	text-align: center;
+}
+
+.stepImg {
+	margin: 0 auto;
+	width: 70px;
+	height: 70px;
+	border-radius: 50px;
+	background-color: #f6f6f6;
+}
+
+.stepImg2 {
+	margin: 0 auto;
+	width: 75px;
+	height: 75px;
+	border-radius: 50px;
+	background-color: #FFB703;
+}
+
+.orderlist {
+	padding: 10px 0;
+	width: 15%;
+	height: 140px;
+	border-top: 1px solid #eee;
+}
+
+.buyerset {
+	height: 50px;
+    text-align: center;
+    width: 20%;
+    background-color: #f6f6f6;
+    border-bottom: #eee
+}
+
+.paymentmethod {
+    width: 60%;
+    height: 250px;
+    margin-right: 2%;
+    float: left;
+    display: inline-block;
+}
+
+.paymentamount {
+    float: left;
+    width: 38%;
+    height: 250px;
+    margin-bottom: 30px;
+}
+
+.paT {
+	font-size: 17px;
+	font-weight: 400;
+	color: #bbb;
+	padding: 7px 0;
+}
+
+.paT2 {
+	font-size: 17px;
+	text-align: right;
+}
+
+.submitBtn {
+    text-align: center;
+    font-size: 19px;
+    color: white;
+    background-color: black;
+    height: 50px;
+    margin-top: 5px;
+    padding: 11px 0;
+}
+
+</style>
+
 <div class="wrap">
 
-<h1>주문/결제</h1>
-<hr>
+<h2>주문/결제</h2>
+<div class="step">
+	<table style="width:100%;">
+		<tr>
+			<td><div class="stepImg"><img src="/resources/image/shopping-cart.png" style="width:45%; padding-top: 10px;"></div></td>
+			<td>-></td>
+			<td><div class="stepImg2"><img src="/resources/image/credit.png" style="width:50%; margin-top: 23px;"></div></td>
+			<td>-></td>
+			<td><div class="stepImg"><img src="/resources/image/order-finish.png" style="width:50%; margin-top: 21px;"></div></td>
+		</tr>
+		<tr>
+			<td style="padding-top: 10px;">장바구니</td>
+			<td></td>
+			<td style="padding-top: 10px;">주문/결제</td>
+			<td></td>
+			<td style="padding-top: 10px;">주문완료</td>
+		</tr>
+	</table>
+</div>
 
 <form action="/order/result">
 <h3>주문내역</h3>
-<p>주문상품정보</p>
-상품이미지 / 상품명 / 단가 / 수량 / 소계금액<br>
-<p>총 주문금액</p>
+<table style="border-top: 2px solid black; border-bottom: 1px solid #eee; width: 100%; text-align: center;">
+	<tr>
+		<th colspan="2" style="padding:10px 0; text-align: center;">상품명</th>
+		<th style="text-align: center;">단가</th>
+		<th style="text-align: center;">수량</th>
+		<th style="text-align: center;">소계금액</th>
+	</tr>
+	<c:forEach items="${cartList }" var="cart">
+	<tr>
+		<td class="orderlist" style="text-align: left;"><img src="${cart.fileName }" style="width:150px; border:1px solid #eee;"></td>
+		<td class="orderlist" style="width:40%; text-align: left; font-weight: 500;">${cart.gName }</td>
+		<td class="orderlist">${cart.gPrice }</td>
+		<td class="orderlist">${cart.cQty }</td>
+		<td class="orderlist">${cart.gPrice * cart.cQty }</td>
+	</tr>
+	</c:forEach>
+</table>
 
-<hr>
+<div style="width:100%; height: 70px; margin: 20px 0; text-align:center; background-color: #f6f6f6;">
+총 주문금액
+</div>
 
 <h3>주문자 정보</h3>
-주문자명 / 전화번호 / 이메일
-
-<hr>
+<table style="border-top: 2px solid black; border-bottom: 1px solid #eee; width: 100%; text-align: left;">
+	<c:if test="${uId eq null }">
+	<tr>
+		<th class="buyerset">주문자명</th>
+		<td style="padding-left: 20px;"><input type="text"></td>
+	</tr>
+	<tr>
+		<th class="buyerset">전화번호</th>
+		<td style="padding-left: 20px;">
+		<div id="resultPhone" class="resultDiv"></div>
+		<input type="text" id="uPhone" name="uPhone" oninput="autoHyphen2(this)" maxlength="13">
+		</td>
+	</tr>
+	<tr>
+		<th class="buyerset">이메일</th>
+		<td style="padding-left: 20px;"><input type="text"></td>
+	</tr>
+	</c:if>
+	<c:if test="${uId ne null }">
+	<tr>
+		<th class="buyerset">주문자명</th>
+		<td style="padding-left: 20px;">${uName }</td>
+	</tr>
+	<tr>
+		<th class="buyerset">전화번호</th>
+		<td style="padding-left: 20px;">
+		<input type="text" id="uPhone" name="uPhone" oninput="autoHyphen2(this)" maxlength="13">
+		</td>
+	</tr>
+	<tr>
+		<th class="buyerset">이메일</th>
+		<td style="padding-left: 20px;"><input type="text"></td>
+	</tr>
+	</c:if>
+</table>
 
 <h3>수취인 정보</h3>
-받으실 분 / 받으실 곳 / 전화번호 / 배송요청사항
+<table style="border-top: 2px solid black; border-bottom: 1px solid #eee; width: 100%; text-align: left;">
+	<tr>
+		<th class="buyerset">받으실분</th>
+		<td style="padding-left: 20px;"><input type="text"></td>
+	</tr>
+	<tr>
+		<th class="buyerset" rowspan="3">받으실곳</th>
+		<td style="padding-left: 20px;">
+			<input type="text" id="sample6_postcode" placeholder="우편번호" style="width:250px;" onclick="sample6_execDaumPostcode()">
+			<input type="button" onclick="sample6_execDaumPostcode()" value="주소찾기" style="width:80px;" id="addbtn"><br>
+		</td>
+	</tr>
+	<tr>
+		<td style="padding-left: 20px;">
+			<input type="text" id="sample6_address" name="uAdd1" placeholder="주소" disabled="disabled"><br>
+			<input type="text" id="sample6_extraAddress" placeholder="참고항목">
+		</td>
+	</tr>
+	<tr>
+		<td style="padding-left: 20px;">
+			<input type="text" id="sample6_detailAddress" name="uAdd2" placeholder="상세주소"><br>
+			<input type="text" id="uAddress" name="uAddress" hidden="hidden">
+		</td>
+	</tr>
+	<tr>
+		<th class="buyerset">전화번호</th>
+		<td style="padding-left: 20px;">
+			<input type="text" id="uPhone" name="uPhone" oninput="autoHyphen2(this)" maxlength="13">
+		</td>
+	</tr>
+	<tr>
+		<th class="buyerset">배송요청사항</th>
+		<td style="padding-left: 20px;">
+			<textarea rows="5" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
 
-<hr>
-
+<div class="paymentmethod">
 <h3>결제 수단</h3>
-~결제수단 목록~
+<label class="radio_paymethod">
+<input type="radio" class="radio_paymethod" name="radio_paymethod" value="A">
+신용카드
+</label>
+<br>
+<label class="radio_paymethod">
+<input type="radio" class="radio_paymethod" name="radio_paymethod" value="B">
+무통장입금
+</label>
+</div>
 
+<div class="paymentamount">
 <h3>결제 금액</h3>
-<p>주문금액</p>
-<p>배송비</p>
-<p>총 결제금액</p>
+<table style="border-top: 2px solid black; width: 100%; text-align: left;">
+	<tr>
+		<td class="paT">주문금액</td>
+		<td class="paT2" style="font-weight:600;">얼마</td>
+	</tr>
+	<tr>
+		<td class="paT">배송비</td>
+		<td class="paT2" style="font-weight:600;">얼마</td>
+	</tr>
+	<tr style="border-top: 1px solid #eee;">
+		<td class="paT">총 결제금액</td>
+		<td class="paT2" style="font-weight:600;">얼마</td>
+	</tr>
+	<tr>
+		<th colspan="2"><div class="submitBtn">다음으로</div></th>
+	</tr>
+</table>
+</div>
 
-<button>다음으로</button>
 </form>
 
 </div>

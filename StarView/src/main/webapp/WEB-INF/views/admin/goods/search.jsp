@@ -17,6 +17,7 @@ table, th {
 
 </style>
 
+
 <h1>'${keyword }'의 검색 결과</h1>
 <hr>
 
@@ -39,16 +40,13 @@ table, th {
 		<th>작성자</th>
 		<th>제목</th>
 		<th>내용</th>
-		<th>위치</th>
-		<th>태그</th>
 		<th>등록일</th>
 	</tr>
 </thead>	
 <tbody>
-
 <c:forEach items="${searchList }" var="b">
 	<tr>
-		<td><input type="checkbox" name="chBox" class="chBox" select_data="${b.galleryNo }"></td>
+		<td><input type="checkbox" name="chBox" class="chBox" select_data="${b.rId }"></td>
 		
 		<script>
 		 $(".chBox").click(function(){
@@ -56,12 +54,10 @@ table, th {
 		 });
 		</script>
 		
-		<td>${b.uId }</td>
-		<td><a href="./view?galleryNo=${b.galleryNo }">${b.galleryTitle }</a></td>
-		<td>${b.galleryContent }</td>
-		<td>${b.galleryLoc }</td>
-		<td>${b.galleryTag }</td>
-		<td><fmt:formatDate value="${b.galleryDate }" pattern="yy-MM-dd HH:mm:ss"/></td>
+		<td style="width: 20%">${b.uId }</td>
+		<td><a href="./view?rId=${b.rId }">${b.rTitle }</a></td>
+		<td>${b.rContent }</td>
+		<td><fmt:formatDate value="${b.regDate }" pattern="yy-MM-dd HH:mm:ss"/></td>
 	</tr>
 </c:forEach>
 </tbody>

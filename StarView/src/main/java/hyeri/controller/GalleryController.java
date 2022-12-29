@@ -235,7 +235,13 @@ public class GalleryController {
 			
 			model.addAttribute("gallery", gallery);
 			
-			return "redirect:./search_list";
+			logger.info("검색결과 : {}", gallery);
+			
+			if( gallery.isEmpty() ) {
+				return "redirect:./search_not-found";
+			}
+			
+			return "redirect:./search_list?keyword=" + keywordInput;
 
 		} else {
 		

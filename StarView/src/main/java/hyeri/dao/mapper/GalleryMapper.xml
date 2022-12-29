@@ -121,8 +121,8 @@
 
 	<select id="selectByKeyword" resultType="hyeri.dto.Gallery" parameterType="String">
 		SELECT * FROM gallery
-		WHERE gallery_title LIKE #{keywordInput }
-			or gallery_content LIKE #{keywordInput }
+		WHERE gallery_title LIKE '%'||#{keywordInput }||'%'
+			or gallery_content LIKE '%'||#{keywordInput }||'%'
 		ORDER BY gallery_no DESC
 	</select>
 	
@@ -167,6 +167,12 @@
 		SET gallery_like = (SELECT count(like_check) FROM gallery_like
 			WHERE gallery_no = #{galleryNo })
 		WHERE gallery_no = #{galleryNo }
+	</update>
+	
+	<update id="updateHit2">
+		UPDATE gallery
+		SET gallery_hit = gallery_hit - 2
+		WHERE gallery_no = #{galleryNo}
 	</update>
 	
 	<delete id="likeDown">

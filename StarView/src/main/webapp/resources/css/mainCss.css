@@ -94,13 +94,12 @@ ul.mainnav > li:hover > ul {
 .monthly {
 	width: 55%;
 	height: 200px;
-	margin: 15px 30px 15px 0;
+	margin: 15px 20px 15px 0;
 	display: inline-block;
 	float: left;
 }
 
 .weather {
-	width: 20%;
 	height: auto;
 	margin: 15px 20px 0 0;
 	display: inline-block;
@@ -110,7 +109,6 @@ ul.mainnav > li:hover > ul {
 
 .etc {
 	width: 20%;
-	height: 200px;
 	display: inline-block;
 	margin-top: 15px;
 	float: left;
@@ -142,6 +140,7 @@ height:120px;
 border-radius: 50%;
 box-shadow:20px 20px 10px rgba(0,0,0,0.2);
 }
+
 #moonimg:hover{
 transition:0.5s;
 box-shadow:20px 20px 10px rgba(0,0,0,0.4);
