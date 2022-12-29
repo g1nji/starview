@@ -7,7 +7,8 @@
 
 <mapper namespace="seulgi.dao.face.AdminProductDao">
 
-	<select id="selectAll" resultType="seulgi.dto.AdminProduct">
+	<!-- 상품 리스트 -->
+	<!-- <select id="selectAll" resultType="seulgi.dto.AdminProduct">
 		SELECT * FROM (
 			SELECT rownum rnum, G.* FROM (
 				SELECT * FROM goods
@@ -15,17 +16,37 @@
 			) G
 		) goods
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
-	</select>
+	</select> -->
 	
+	<select id="selectAll" resultType="seulgi.dto.AdminProduct">
+	SELECT * FROM (
+	    SELECT ROWNUM rnum, t.* FROM (
+	      SELECT g.*, i.file_name 
+	    	FROM goods g, goods_img i
+		    	WHERE g.g_id = i.g_id
+		    	<!-- AND i.file_type = 'main_img' -->
+		   		ORDER BY g.g_id DESC
+	        ) t
+	    ) GOODS
+    </select>
+	
+	<!-- 상품 개수 조회 -->
 	<select id="selectCntAll" resultType="int">
 		SELECT count(*) FROM goods
 	</select>
 	
+	<!-- 상품 상세 조회 -->
 	<select id="selectProd" resultType="seulgi.dto.AdminProduct" parameterType="seulgi.dto.AdminProduct">
 		SELECT * FROM goods
 		WHERE g_id = #{gId }
 	</select>
+	
+	<select id="selectProd2" resultType="seulgi.dto.AdminProduct" parameterType="seulgi.dto.AdminGoodsReview">
+		SELECT * FROM goods
+		WHERE g_id = #{gId }
+	</select>
 
+	<!-- 상품 업로드 -->
 	<insert id="insertProd" parameterType="seulgi.dto.AdminProduct">
 		<selectKey order="BEFORE" resultType="int" keyProperty="gId">
 			SELECT goods_seq.nextval FROM dual
@@ -35,16 +56,32 @@
 		VALUES (#{gId }, #{gName }, #{gPrice }, #{gDetail })
 	</insert>
 	
+	<!-- 파일 업로드 -->
 	<insert id="insertFile" parameterType="seulgi.dto.AdminProductFile">
 		INSERT INTO goods_img ( img_id, g_id, file_name)
 		VALUES ( goods_img_seq.nextval, #{gId }, #{fileName })
 	</insert>
 
+	<!-- 파일 조회 -->
 	<select id="selectImageFile" resultType="seulgi.dto.AdminProductFile" parameterType="seulgi.dto.AdminProduct">
 		SELECT * FROM goods_img
 		WHERE g_id = #{gId }
 	</select>
 	
+	<select id="selectImageFile2" resultType="seulgi.dto.AdminProductFile" parameterType="seulgi.dto.AdminGoodsReview">
+		SELECT * FROM goods_img
+		WHERE g_id = #{gId }
+	</select>
+	
+	<!-- <select id="selectFile" resultType="seulgi.dto.AdminProductFile" parameterType="int">
+		SELECT g.*, r.*
+ 		FROM goods_img g
+        LEFT OUTER JOIN review r
+           ON g.g_id = r.g_id
+		WHERE g.g_id = #{gId }
+	</select> -->
+	
+	<!-- 상품 수정 -->
 	<update id="updateProd" parameterType="seulgi.dto.AdminProduct">
 		UPDATE goods
 		SET g_name = #{gName }
@@ -53,14 +90,21 @@
 		WHERE g_id = #{gId }
 	</update>
 
+	<!-- 상품 삭제 -->
+	<delete id="delete" parameterType="seulgi.dto.AdminProduct">
+		DELETE goods
+		WHERE g_id = #{gId }
+	</delete>
+	
+	<!-- 파일 삭제 -->
 	<delete id="deleteFile" parameterType="seulgi.dto.AdminProduct">
 		DELETE goods_img
 		WHERE g_id = #{gId }	
 	</delete>
 	
-	<delete id="delete" parameterType="seulgi.dto.AdminProduct">
-		DELETE goods
-		WHERE g_id = #{gId }
+	<delete id="deleteFile2" parameterType="seulgi.dto.AdminGoodsReview">
+		DELETE goods_img
+		WHERE g_id = #{gId }	
 	</delete>
 	
 </mapper>

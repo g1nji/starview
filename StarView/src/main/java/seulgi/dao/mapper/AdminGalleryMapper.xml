@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="seulgi.dao.face.AdminGalleryDao">
+	
+	<!-- 게시글 리스트 -->
+	<!-- <select id="selectAllBoard" resultType="seulgi.dto.AdminBoard">
+		SELECT * FROM (
+		SELECT rownum rnum, A.* FROM (SELECT n.notice_code, n.notice_title, n.notice_content, g.gallery_title, g.gallery_content, r.r_title, r.r_content, p.sreview_content
+		FROM admin_notice n
+			LEFT JOIN gallery g
+				ON n.notice_content = g.gallery_content
+			LEFT JOIN review r
+				ON n.notice_content = r.r_content
+			LEFT JOIN place_review p
+				ON n.notice_content = p.sreview_content
+			ORDER BY n.notice_code DESC
+		) A
+		) admin_notice
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select> -->
+	
+	<select id="selectAll" resultType="seulgi.dto.AdminGallery">
+		SELECT * FROM (
+			SELECT rownum rnum, G.* FROM (
+				SELECT * FROM gallery
+				ORDER BY gallery_no DESC
+			) G
+		) gallery
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
+	
+	 <!-- <select id="selectAll" resultType="seulgi.dto.AdminGallery">
+		SELECT * FROM (
+			SELECT rownum rnum, G.* FROM (
+				SELECT ga.*, u_id, u.u_nick
+				FROM gallery ga
+				LEFT OUTER JOIN users u
+				ON ga.u_id = u.u_id
+			) G
+		) gallery
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select> -->
+	
+	<!-- 게시글 개수 조회 -->
+	<!-- <select id="selectCntAllBoard" resultType="int">
+		select count(*) from admin_notice
+	</select> -->
+
+	<select id="selectCntAll" resultType="int">
+		select count(*) from gallery
+	</select>
+	
+	<!-- 게시글 상세 조회 -->
+	<select id="selectBoard" resultType="seulgi.dto.AdminGallery" parameterType="seulgi.dto.AdminGallery">
+		SELECT g.*, u.u_id, u.u_nick
+ 		FROM gallery g
+        LEFT OUTER JOIN users u
+           ON g.u_id = u.u_id
+		WHERE gallery_no = #{galleryNo }
+	</select>
+	
+	<!-- 게시글 업로드 -->
+	<!-- <insert id="insertAllBoard" parameterType="seulgi.dto.AdminBoard">
+		<selectKey order="BEFORE" resultType="int" keyProperty="noticeCode">
+			SELECT admin_notice_seq.nextval FROM dual
+		</selectKey>
+	
+		INSERT INTO admin_notice (notice_code, notice_title, notice_content)
+		VALUES (#{noticeCode}, #{noticeTitle }, #{noticeContent })
+		
+		INSERT ALL
+		INTO admin_notice (notice_code, notice_title, notice_content)
+			VALUES (#{noticeCode }, #{noticeTitle }, #{noticeContent })
+		INTO gallery (gallery_no, gallery_title, gallery_content)
+			VALUES (#{noticeCode }, #{noticeTitle }, #{noticeContent })
+		INTO review (r_id, r_title, r_content)
+			VALUES (#{noticeCode }, #{noticeTitle }, #{noticeContent })
+    	INTO place_review (sreview_no, sreview_content)
+    		VALUES (#{noticeCode }, #{noticeContent })
+		SELECT * FROM dual
+	</insert> -->
+	
+	<insert id="insertBoard" parameterType="seulgi.dto.AdminGallery">
+		<selectKey order="BEFORE" resultType="int" keyProperty="galleryNo" keyColumn="galleryNo">
+			SELECT gallery_seq.nextval FROM dual
+		</selectKey>
+	
+		INSERT INTO gallery (gallery_no, gallery_title, gallery_content, gallery_loc, gallery_tag, u_id)
+		VALUES (#{galleryNo}, #{galleryTitle }, #{galleryContent }, #{galleryLoc }, #{galleryTag }, #{uId })
+	</insert>
+	
+	<!-- 파일 업로드 -->
+	<insert id="insertFile" parameterType="seulgi.dto.AdminBoardFile">
+		INSERT INTO gallery_file ( photo_no, gallery_no, origin_name, stored_name)
+		VALUES ( gallery_file_seq.nextval, #{galleryNo }, #{originName }, #{storedName } )
+	</insert>
+	
+	<!-- 파일 조회 -->
+	<select id="selectFileByBoard" resultType="seulgi.dto.AdminBoardFile" parameterType="seulgi.dto.AdminGallery">
+		SELECT * FROM gallery_file
+		WHERE gallery_no = #{galleryNo }
+	</select>
+	
+	<!-- 파일 다운로드 -->
+	<select id="selectFileByFile" resultType="seulgi.dto.AdminBoardFile" parameterType="seulgi.dto.AdminBoardFile">
+		SELECT * FROM gallery_file
+		WHERE gallery_no = #{galleryNo }
+	</select>
+	
+	<!-- 게시글 수정 -->
+	<update id="updateBoard" parameterType="seulgi.dto.AdminGallery">
+		UPDATE gallery
+		SET gallery_title = #{galleryTitle }
+			, gallery_content = #{galleryContent }
+		WHERE gallery_no = #{galleryNo }
+	</update>
+
+	<!-- 게시글 삭제 -->
+	<delete id="delete" parameterType="seulgi.dto.AdminGallery">
+		DELETE gallery
+		WHERE gallery_no = #{galleryNo }
+	</delete>
+	
+	<!-- 파일 삭제 -->
+	<delete id="deleteFile" parameterType="seulgi.dto.AdminGallery">
+		DELETE gallery_file
+		WHERE gallery_no = #{galleryNo }	
+	</delete>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteComm" parameterType="seulgi.dto.AdminGallery">
+		DELETE g_comment
+		WHERE gallery_no = #{galleryNo }
+	</delete>
+	
+		<!-- WHERE gallery_title LIKE '%'||#{galleryTitle }||'%' -->
+		<!-- WHERE gallery_content LIKE '%'||#{galleryContent }||'%' -->
+		<!-- WHERE u_id LIKE '%'||#{uId }||'%' -->
+		<!-- <if test="galleryTitle != null">
+			WHERE gallery_title LIKE '%'||#{galleryTitle }||'%'
+		</if>							
+		<if test="galleryContent != null">
+			WHERE gallery_content LIKE '%'||#{galleryContent }||'%'
+		</if>
+		<if test="uId != null">
+			WHERE u_id LIKE '%'||#{uId}||'%'
+		</if>
+		
+		쿼리 고치기...
+	<choose>
+		<when test="galleryTitle != null">
+			WHERE gallery_title LIKE '%'||#{galleryTitle }||'%'
+		</when>							
+		<when test="galleryContent != null">
+			WHERE gallery_content LIKE '%'||#{galleryContent }||'%'
+		</when>
+		<when test="uId != null">
+			WHERE u_id LIKE '%'||#{uId }||'%'
+		</when>
+	</choose> -->
+	<!-- 게시글 검색 -->
+	<select id="searchBoard" resultType="seulgi.dto.AdminGallery" parameterType="String">
+		<![CDATA[
+		SELECT * FROM gallery
+		WHERE u_id LIKE '%'||#{uId }||'%'
+		ORDER BY gallery_no DESC
+		]]>
+	</select>
+	
+	<!-- <select id="searchBoard" resultType="seulgi.dto.AdminBoard" parameterType="seulgi.util.Search">
+		SELECT * FROM gallery
+		WHERE #{option } LIKE '%'||#{keyword }||'%'
+		ORDER BY gallery_no DESC
+	</select> -->
+	
+</mapper>

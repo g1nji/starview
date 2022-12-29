@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hyeri.dao.face.ReviewDao">
+	
+	<insert id="insertReview" parameterType="hyeri.dto.PlaceReview">
+		<selectKey order="BEFORE" resultType="int" keyProperty="sreviewNo">
+			SELECT place_review_seq.nextval FROM dual
+		</selectKey>
+		INSERT INTO place_review ( sreview_no, sreview_content, u_id, u_nick, arrival_num)
+		VALUES ( #{sreviewNo }, #{sreviewContent }, #{uId }, #{uNick }, #{arrivalNum })
+	</insert>
+	
+	<insert id="insertPhoto" parameterType="hyeri.dto.ReviewFile">
+		<selectKey order="BEFORE" resultType="int" keyProperty="photoNo">
+			SELECT review_file_seq.nextval FROM dual
+		</selectKey>
+		INSERT INTO review_file ( photo_no, origin_name, stored_name, sreview_no)
+		VALUES ( #{photoNo }, #{originName }, #{storedName }, #{sreviewNo } )
+	</insert>
+	
+	<update id="updateFilepath">
+		UPDATE place_review
+		SET stored_name = (SELECT stored_name FROM review_file
+		WHERE place_review.sreview_no = review_file.sreview_no)
+	</update>
+	
+	<delete id="deleteFile" parameterType="hyeri.dto.PlaceReview">
+		DELETE review_file
+		WHERE sreview_no = #{sreviewNo }
+	</delete>
+	
+	<delete id="delete" parameterType="hyeri.dto.PlaceReview">
+		DELETE place_review
+		WHERE sreview_no = #{sreviewNo }
+	</delete>
+</mapper>

@@ -66,33 +66,21 @@ public interface GalleryDao {
 	 */
 	public GalleryFile selectGalleryFileByGalleryNo(Gallery viewGallery);
 
-	/**
-	 * 게시글 정보 수정
-	 * 
-	 * @param viewGallery - 수정할 게시글 정보
-	 */
-	public void updatePhoto(Gallery viewGallery);
 	
 	/**
-	 * 게시글을 참조하고 있는 모든 첨부파일 삭제ㅔ
 	 * 
-	 * @param viewGallery - 첨부파일을 삭제할 게시글 번호
+	 * @param tagList
 	 */
+	public void insertTag(List<GTag> tagList);
+
 	public void deleteFile(Gallery viewGallery);
 
-	/**
-	 * 게시글 삭제
-	 * 
-	 * @param gallery - 삭제할 게시글 번호
-	 */
-	public void delete(Gallery gallery);
-
-	/**
-	 * 
-	 * @param gTag
-	 */
-	public void insertTag(GTag gTag);
-
+	public void deleteTag(Gallery viewGallery);
+	
+	public void deleteComment(Gallery viewGallery);
+	
+	public void delete(Gallery viewGallery);
+	
 	/**
 	 * 
 	 * @param keywordInput
@@ -104,5 +92,16 @@ public interface GalleryDao {
 
 	public void updateFilepath(Gallery gallery);
 
+	public List<GTag> selectGalleryNo(int galleryNo);
+
+	public int findLike(@Param("galleryNo") int galleryNo, @Param("uId")String uId);
+
+	public void likeUp(@Param("galleryNo") int galleryNo, @Param("uId") String uId);
+
+	public void likeDown(@Param("galleryNo") int galleryNo, @Param("uId") String uId);
+
+	public int getLike(int galleryNo);
+
+	public void updateLike(int galleryNo);
 
 }

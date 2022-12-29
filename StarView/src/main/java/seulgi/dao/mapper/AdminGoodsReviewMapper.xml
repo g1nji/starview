@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="seulgi.dao.face.AdminGoodsReviewDao">
+	
+	<!-- 게시글 리스트 -->
+	<select id="selectAll" resultType="seulgi.dto.AdminGoodsReview">
+		SELECT * FROM (
+			SELECT rownum rnum, R.* FROM (
+				SELECT * FROM review
+				ORDER BY r_id DESC
+			) R
+		) review
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
+	
+	<!-- 게시글 개수 조회 -->
+	<select id="selectCntAll" resultType="int">
+		SELECT count(*) FROM review
+	</select>
+	
+	<!-- 게시글 상세 조회 -->
+	<select id="selectBoard" resultType="seulgi.dto.AdminGoodsReview" parameterType="seulgi.dto.AdminGoodsReview">
+		SELECT r.*, u.u_id, u.u_nick
+ 		FROM review r
+        LEFT OUTER JOIN users u
+           ON r.u_id = u.u_id
+		WHERE r_id = #{rId }
+	</select>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="delete" parameterType="seulgi.dto.AdminGoodsReview">
+		DELETE review
+		WHERE r_id = #{rId }
+	</delete>
+	
+</mapper>

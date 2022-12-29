@@ -14,37 +14,41 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import seulgi.dao.face.AdminBoardDao;
-import seulgi.dto.AdminBoard;
+import seulgi.dao.face.AdminCommentDao;
+import seulgi.dao.face.AdminGalleryDao;
 import seulgi.dto.AdminBoardFile;
-import seulgi.service.face.AdminBoardService;
+import seulgi.dto.AdminGallery;
+import seulgi.service.face.AdminGalleryService;
 import seulgi.util.Paging;
 
 @Service
-public class AdminBoardServiceImpl implements AdminBoardService {
+public class AdminGalleryServiceImpl implements AdminGalleryService {
 
 	//로그 객체
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	//DAO 객체
 	@Autowired
-	private AdminBoardDao adminBoardDao; 
+	private AdminGalleryDao adminBoardDao; 
+	
+	@Autowired
+	private AdminCommentDao adminCommentDao; 
 	
 	//ServletContext 객체
 	@Autowired
 	ServletContext context;
 	
 	//페이징 처리
-	@Override
-	public Paging getPagingAll(int curPage) {
-		//총 게시글 수 조회
-		int totalCount = adminBoardDao.selectCntAllBoard();
-		
-		//페이징 계산
-		Paging paging = new Paging(totalCount, curPage);
-		
-		return paging;
-	}
+//	@Override
+//	public Paging getPagingAll(int curPage) {
+//		//총 게시글 수 조회
+//		int totalCount = adminBoardDao.selectCntAllBoard();
+//		
+//		//페이징 계산
+//		Paging paging = new Paging(totalCount, curPage);
+//		
+//		return paging;
+//	}
 	
 	@Override
 	public Paging getPaging(int curPage) {
@@ -57,88 +61,60 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 		return paging;
 	}
 	
-	@Override
-	public Paging getPaging2(int curPage) {
-		//총 게시글 수 조회
-		int totalCount = adminBoardDao.selectCntAll2();
-		
-		//페이징 계산
-		Paging paging = new Paging(totalCount, curPage);
-		
-		return paging;
-	}
-	
-	@Override
-	public Paging getPaging3(int curPage) {
-		//총 게시글 수 조회
-		int totalCount = adminBoardDao.selectCntAll3();
-		
-		//페이징 계산
-		Paging paging = new Paging(totalCount, curPage);
-		
-		return paging;
-	}
-	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	//게시글 리스트
-	@Override
-	public List<AdminBoard> list() {
-		logger.info("list() 사용");
-		
-		return adminBoardDao.selectAllBoard();
-	}
+	//페이징 처리 없이
+//	@Override
+//	public List<AdminBoard> list() {
+//		logger.info("list() 사용");
+//		
+//		return adminBoardDao.selectAllBoard();
+//	}
+
+	//페이징 처리 추가
+//	@Override
+//	public List<AdminBoard> listAll(Paging paging) {
+//		logger.info("list() 사용");
+//		
+//		return adminBoardDao.selectAllBoard(paging);
+//	}
 	
 	@Override
-	public List<AdminBoard> listAll(Paging paging) {
-		logger.info("list() 사용");
-		
-		return adminBoardDao.selectAllBoard(paging);
-	}
-	
-	@Override
-	public List<AdminBoard> list(Paging paging) {
+	public List<AdminGallery> list(Paging paging) {
 		logger.info("list() 사용");
 		
 		return adminBoardDao.selectAll(paging);
 	}
 	
-	@Override
-	public List<AdminBoard> list2(Paging paging) {
-		logger.info("list() 사용");
-		
-		return adminBoardDao.selectAll2(paging);
-	}
-	
-	@Override
-	public List<AdminBoard> list3(Paging paging) {
-		logger.info("list() 사용");
-		
-		return adminBoardDao.selectAll3(paging);
-	}
-	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	//게시글 상세 조회
 	@Override
-	public AdminBoard view(AdminBoard viewBoard) {
+	public AdminGallery view(AdminGallery viewBoard) {
 		logger.info("view() 사용");
 		
 		return adminBoardDao.selectBoard(viewBoard);
 	}
 	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
 	//게시글만 업로드
-	@Override
-	public void upload(AdminBoard board) {
-		logger.info("upload() 사용");
-		
-		//게시글 업로드
-		if("".equals(board.getNoticeTitle())) {
-			board.setGalleryTitle("(공지사항입니다)");
-		} else {
-			adminBoardDao.insertAllBoard(board);
-		}
-	}
+//	@Override
+//	public void upload(AdminBoard board) {
+//		logger.info("upload() 사용");
+//		
+//		//게시글 업로드
+//		if("".equals(board.getNoticeTitle())) {
+//			board.setGalleryTitle("(공지사항입니다)");
+//		} else {
+//			adminBoardDao.insertAllBoard(board);
+//		}
+//	}
 	
 	//게시글, 첨부파일 업로드
 	@Override
-	public void upload(AdminBoard board, MultipartFile file) {
+	public void upload(AdminGallery board, MultipartFile file) {
 		logger.info("upload() 사용");
 		
 		//게시글 업로드
@@ -189,13 +165,17 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 		adminBoardDao.insertFile(boardFile);
 	}
 	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	//첨부파일 정보 얻어오기
 	@Override
-	public AdminBoardFile getAttachFile(AdminBoard viewBoard) {
+	public AdminBoardFile getAttachFile(AdminGallery viewBoard) {
 		logger.info("getAttachFile() 사용");
 		
 		return adminBoardDao.selectFileByBoard(viewBoard);
 	}
+	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
 	//첨부파일 다운로드
 	@Override
@@ -205,9 +185,11 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 		return adminBoardDao.selectFileByFile(boardFile);
 	}
 	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	//게시글만 수정
 	@Override
-	public void update(AdminBoard board) {
+	public void update(AdminGallery board) {
 		logger.info("update() 사용");
 		
 		//게시글 처리
@@ -220,7 +202,7 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 	
 	//게시글, 첨부파일 수정
 	@Override
-	public void update(AdminBoard board, MultipartFile file) {
+	public void update(AdminGallery board, MultipartFile file) {
 		logger.info("update() 사용");
 		
 		//게시글 수정
@@ -273,15 +255,28 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 		adminBoardDao.insertFile(boardFile);
 	}
 	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	//게시글 삭제
 	@Override
-	public void delete(AdminBoard board) {
+	public void delete(AdminGallery board) {
 		logger.info("delete() 사용");
 		
 		//첨부파일 삭제
 		adminBoardDao.deleteFile(board);
 		
+		//댓글 삭제
+		adminBoardDao.deleteComm(board);
+		
 		//게시글 삭제
 		adminBoardDao.delete(board);
+	}
+	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	//게시글 검색
+	@Override
+	public List<AdminGallery> search(String keyword) {
+		return adminBoardDao.searchBoard(keyword);
 	}
 }

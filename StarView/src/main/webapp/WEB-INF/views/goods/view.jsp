@@ -143,8 +143,6 @@ td {
 $(document).ready(function() {
 	const uId = '${sessionScope.uId }'
 	const gId = '${goodsInfo.gId }'
-	console.log(uId);
-	console.log(gId);
 	
 	//찜하기 클릭시 로그인 검증
 	$('#nologin').click(function() {
@@ -171,7 +169,7 @@ function like_func(){
 			if(data.findLike==1){
 				$('#login').css('background', 'url(/resources/img/empty_heart.png) no-repeat center 1px/38px');
 				$('#like-cnt').html(data.totalLike);
-				alert('찜을 취소했습니다')
+				alert('위시리스트에서 삭제했습니다')
 				
 			} else {
 				$('#login').css('background', 'url(/resources/img/heart.png) no-repeat center 1px/38px');
@@ -184,7 +182,23 @@ function like_func(){
 }
 	
 	$('#cart').click(function() {
+// 	var cQty = $('#selectQty').val();
+// 		console.log(gId +','+uId)
+// 		if(!uId.length){
+// 			if(localStorage.getItem('cart') == null) {
+// 			var cartObj = {gId:gId, cQty:cQty}
+// 			localStorage.setItem('cart', JSON.stringify([cartObj]))
+// 			} else {
+// 				var cartArr = JSON.parse(localStorage.getItem('cart'));
+// 				var cartObj = {gId:gId, cQty:cQty}
+// 				cartArr.push(cartObj);
+// 				localStorage.setItem('cart', JSON.stringify(cartArr) );
+				
+// 				location.href="./nonmember"
+// 			}
+// 		} else {
 		addCart();
+		
 	})
 	
 	//까만배경 누르면 모달창 닫기
@@ -198,7 +212,7 @@ function addCart(){
 	console.log('addCart() 실행')
 
 	var cQty = $('#selectQty').val();
-	var sendData = {"gId":gId, "uId":uId, "cQty":cQty};
+	var sendData = {"gId":gId, "cQty":cQty};
 	console.log(sendData)
 
 	$.ajax({
@@ -214,9 +228,12 @@ function addCart(){
 				$('#keep-on').on('click', function() {
 					$('.black-bg').toggleClass('show-modal')
 				})
-					
 				$('#goto-cart').on('click', function() {
-				   	location.href="./cart"
+					if(!uId.length){
+					   	location.href="./nonuser"
+					} else {
+					   	location.href="./cart"
+					}
 				})					
 			} else if(res=='already_exist') {
 				alert('이미 등록된 상품입니다.')
@@ -274,7 +291,7 @@ function addCart(){
 			</c:when>
 			<c:otherwise>
 				<c:choose>
-					<c:when test="${likeCheck eq '0' or empty likeCheck }">
+					<c:when test="${findLike eq '0' or empty findLike }">
 						<button class="heart-icon" id="login" style="background: url(/resources/img/empty_heart.png) no-repeat center 1px/38px;">
 					</c:when>
 					<c:otherwise>

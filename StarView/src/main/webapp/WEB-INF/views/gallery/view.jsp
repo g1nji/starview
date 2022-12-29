@@ -8,6 +8,82 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	
+	var u_id = '<%=session.getAttribute("uId") %>'
+	var likeval = ${like }
+	
+	if(likeval > 0 ) {
+		$(".like_img").attr("src", "/resources/image/heart-fill.png")
+		$(".like_img").click(function() {
+			console.log("좋아요 클릭")
+			
+			if(u_id != "null" ) {
+				$.ajax({
+					url : "/gallery/likedown",
+					type : "post",
+					data : {
+						galleryNo : ${viewGallery.galleryNo },
+						uId : '<%=session.getAttribute("uId") %>'
+					},
+					success : function() {
+						$(".like_img").attr("src", "/resources/image/heart-empty.png")
+						console.log("좋아요 취소")
+					},
+					error : function() {
+						console.log("실패")
+					}
+				})
+			} else {
+				alert("로그인 후 이용 가능합니다")
+				location.href="/users/login"
+			}
+		})
+		
+	} else {
+		
+		$(".like_img").click(function() {
+			console.log("좋아요 클릭")
+			
+			if(u_id != "null" ) {
+				$.ajax({
+					url : "/gallery/likeup",
+					type : "post",
+					data : {
+						galleryNo : ${viewGallery.galleryNo },
+						uId : '<%=session.getAttribute("uId") %>'
+					},
+					success : function() {
+						$(".like_img").attr("src", "/resources/image/heart-fill.png")
+						console.log("좋아요 성공")
+					},
+					error : function() {
+						console.log("실패")
+					}
+				})
+			} else {
+				alert("로그인 후 이용 가능합니다")
+				location.href="/users/login"
+			}
+		})
+	}
+	
+	
+	$(".BtnDelete").click(function() {
+		if(confirm("게시글을 삭제하시겠습니까?") == true) {
+			alert("게시글이 삭제되었습니다");
+			location.href = "/gallery/delete?galleryNo=${viewGallery.galleryNo }"
+		} else {
+			return;
+		}
+	})
+	
+	$(".BtnCmDelete").click(function() {
+		if(confirm("덧글을 삭제하시겠습니까?") == true) {
+			alert("덧글이 삭제되었습니다");
+		} else {
+			return;
+		}
+	})
+	
 	$("#btnReport").click(function() {
 		
 		if(confirm("덧글을 신고하시겠습니까?") == true ) {
@@ -18,16 +94,72 @@ $(document).ready(function() {
 	})
 	
 })
+
+// /* 좋아요 */
+// function like_func(){
+//   var frm_read = $('#frm_read');
+//   var boardno = $('#boardno', frm_read).val();
+//   //var mno = $('#mno', frm_read).val();
+//   //console.log("boardno, mno : " + boardno +","+ mno);
+  
+//   $.ajax({
+//     url: "/gallery/like",
+//     type: "GET",
+//     cache: false,
+//     dataType: "json",
+//     data: 'boardno=' +boardno,
+//     success: function(data) {
+//       var msg = '';
+//       var like_img = '';
+//       msg += data.msg;
+//       alert(msg);
+      
+//       if(data.like_check == 0){
+//         like_img = "./images/dislike.png";
+//       } else {
+//         like_img = "./images/like.png";
+//       }      
+//       $('#like_img', frm_read).attr('src', like_img);
+//       $('#like_cnt').html(data.like_cnt);
+//       $('#like_check').html(data.like_check);
+//     },
+//     error: function(request, status, error){
+//       alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+//     }
+//   });
+// }
+
 </script>
+
+<style type="text/css">
+.tags {
+	background-color: #FFEBBA;
+	margin-top: 10px;
+    margin-right: 5px;
+    padding: 0 10px;
+    border-radius: 10px;
+    height: 20px;
+    display: inline-block;
+    font-weight: 300;
+}
+
+.like_img {
+	height: 25px;
+	float: right;
+}
+</style>
 
 <h2>${viewGallery.galleryTitle }</h2>
 ${viewGallery.uNick }
 
-<!-- 게시글 작성자가 아닐 때 -->
-<!-- 좋아요 버튼 -->
-<%-- <c:choose> --%>
-<%-- 	<c:when test="${ }" --%>
-<%-- </c:choose> --%>
+<%-- 좋아요 버튼 --%>
+<span style="float:right;">${getLike }</span> <a style="cursor:pointer;"><img src="/resources/image/heart-empty.png" class="like_img"></a>
+
+<!-- 게시글 수정, 삭제 버튼 -->
+<c:if test="${uId eq viewGallery.uId }">
+<a href="/gallery/update?galleryNo=${viewGallery.galleryNo }" style="color:#5BC0CF; padding-left:10px;">수정</a>
+<a class="BtnDelete" style="color:#E64556; padding-left:10px; cursor:pointer;">삭제</a>
+</c:if>
 <br>
 
 <fmt:formatDate value="${viewGallery.galleryDate }" pattern="yyyy-MM-dd" />
@@ -36,8 +168,14 @@ ${viewGallery.uNick }
 <img src="/imagepath/${galleryFile.storedName }" style="width:100%;">
 ${viewGallery.galleryContent }
 
-<span>장소</span>
-<span>태그</span>
+<hr>
+
+<span class="glyphicon glyphicon-map-marker"></span>
+<span>${viewGallery.galleryLoc }</span><br>
+<c:forEach items="${tags }" var="tags">
+	<div class="tags">${tags.tagName }</div>
+</c:forEach>
+<%-- <span>${tags.tagName }</span> --%>
 
 <hr>
 
@@ -46,6 +184,7 @@ ${viewGallery.galleryContent }
 	<h4>댓글</h4>
 	
 	<c:forEach items="${comment }" var="comment">
+		<div style="border-bottom:1px solid #eee; padding-top: 20px;">
 		<table style="margin-bottom:20px;">
 			<tr>
 				<th>${comment.uNick }</th>
@@ -68,16 +207,17 @@ ${viewGallery.galleryContent }
 				</c:if>
 				<c:if test="${uId eq comment.uId }">
 					<td style="padding-left:10px;">
-					<a href="" style="color:#5BC0CF;">수정</a>
+					<a href="/comment/modify?cmNo=${comment.cmNo }" style="color:#5BC0CF;">수정</a>
 					</td>
 				</c:if>
 				<c:if test="${uId eq comment.uId }">
 					<td style="padding-left:10px;">
-					<a href="" style="color:#E64556;">삭제</a>
+					<a href="/comment/delete?cmNo=${comment.cmNo }" class="BtnCmDelete" style="color:#E64556;">삭제</a>
 					</td>
 				</c:if>
 			</tr>
 		</table>
+		</div>
 	</c:forEach>
 
 </div>
@@ -87,22 +227,19 @@ ${viewGallery.galleryContent }
 	
 	<form action="/comment/write" method="post">
 	
-		<table>
+		<table style="width:100%;">
 			<tr>
 				<th>${uNick }</th>
 			</tr>
 
 			<tr>
-				<td>
+				<td style="width:90%">
 					<input type="hidden" name="galleryNo" value="${viewGallery.galleryNo }">
 					<input type="hidden" name="uId" value="${uId }">
 					<input type="hidden" name="uNick" value="${uNick }">
-					<textarea rows="5" cols="50" name="cmContent"></textarea>
+					<textarea style="width:100%;" name="cmContent"></textarea>
 				</td>
-			</tr>
-			
-			<tr>
-				<td><button type="submit">댓글 작성</button></td>
+				<td style="width:10%;"><button type="submit">댓글 작성</button></td>
 			</tr>
 		</table>
 	</form>

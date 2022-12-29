@@ -2,6 +2,7 @@ package seulgi.dao.face;
 
 import java.util.List;
 
+import seulgi.dto.AdminGoodsReview;
 import seulgi.dto.AdminProduct;
 import seulgi.dto.AdminProductFile;
 import seulgi.util.Paging;
@@ -73,4 +74,11 @@ public interface AdminProductDao {
 	 * @param prod - 삭제할 상품 번호
 	 */
 	public void delete(AdminProduct prod);
+
+	public AdminProductFile selectImageFile2(AdminGoodsReview viewBoard);
+
+	public void deleteFile2(AdminGoodsReview board);
+
+	public AdminProduct selectProd2(AdminGoodsReview viewBoard);
+
 }

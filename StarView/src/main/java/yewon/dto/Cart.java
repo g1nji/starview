@@ -1,7 +1,11 @@
 package yewon.dto;
 
-public class Cart {
+import java.io.Serializable;
 
+public class Cart implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+		
 	private int cId;
 	private int gId;
 	private String uId;
@@ -13,7 +17,8 @@ public class Cart {
 	
 	public Cart() {}
 
-	public Cart(int cId, int gId, String uId, int cQty, int gPrice, int delPrice, String fileName, String gName) {
+	public Cart(int cId, int gId, String uId, int cQty, int gPrice, int delPrice, String fileName, String gName
+			) {
 		super();
 		this.cId = cId;
 		this.gId = gId;

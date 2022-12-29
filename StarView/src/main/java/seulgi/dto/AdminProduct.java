@@ -4,7 +4,10 @@ import java.util.Date;
 
 public class AdminProduct {
 	
-	//상품
+	private String uId;
+	private String uNick;
+	
+	//상품 리뷰
 	private int gId;
 	private String gName;
 	private int gPrice;
@@ -15,12 +18,13 @@ public class AdminProduct {
 	
 	//상품 이미지
 	//private int imgId;
-	//private String fileName;
+	private String fileName;
 	//private String fileType;
 	
 	public AdminProduct() {}
 
-	public AdminProduct(int gId, String gName, int gPrice, Date delivery, Date regDate, String gDetail, int delPrice) {
+	public AdminProduct(int gId, String gName, int gPrice, Date delivery, Date regDate, String gDetail, int delPrice,
+			String fileName) {
 		super();
 		this.gId = gId;
 		this.gName = gName;
@@ -29,12 +33,14 @@ public class AdminProduct {
 		this.regDate = regDate;
 		this.gDetail = gDetail;
 		this.delPrice = delPrice;
+		this.fileName = fileName;
 	}
 
 	@Override
 	public String toString() {
 		return "AdminProduct [gId=" + gId + ", gName=" + gName + ", gPrice=" + gPrice + ", delivery=" + delivery
-				+ ", regDate=" + regDate + ", gDetail=" + gDetail + ", delPrice=" + delPrice + "]";
+				+ ", regDate=" + regDate + ", gDetail=" + gDetail + ", delPrice=" + delPrice + ", fileName=" + fileName
+				+ "]";
 	}
 
 	public int getgId() {
@@ -92,5 +98,13 @@ public class AdminProduct {
 	public void setDelPrice(int delPrice) {
 		this.delPrice = delPrice;
 	}
-	
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
 }

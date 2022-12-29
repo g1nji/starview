@@ -12,7 +12,7 @@
 </c:forEach>
 	<div class="more"></div>
 
-	<div id="btn"><button id="moreBtn">More...</button></div>
+	<div id="btn"><button id="moreBtn">MORE<img class="arrdown" src="/resources/img/arrdown.png"></button></div>
 </div>
 
 	
@@ -44,7 +44,7 @@
 				, success: function( res ) {
 					console.log("AJAX 성공")
 				
-					$(".more").html( res ).slideDown();
+					$(".more").append( res );
 					
 					//더보기 버튼 삭제
 					if(startIdx + step > total){

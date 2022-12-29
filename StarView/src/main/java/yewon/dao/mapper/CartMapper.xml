@@ -7,15 +7,6 @@
 
 <mapper namespace="yewon.dao.face.CartDao">
     
-    <insert id="insertCart" parameterType="Cart">
-    insert into cart (c_id, g_id, u_id) 
-    values ( cart_seq.nextval, #{gId}, #{uId} )
-    </insert>
-    
-    <delete id="deleteCart" parameterType="Cart">
-    delete from cart where c_id = #{cId }
-    </delete>
-    
     <select id="selectCartTotal" resultType="int">
     select count(*) from cart where u_id = #{uId }
     </select>
@@ -24,16 +15,39 @@
     SELECT c.*, i.file_name, g.g_name, g.g_price, g.del_price 
     FROM cart c, goods_img i, goods g 
     WHERE c.g_id = i.g_id 
-	AND i.file_type = 'main_img'
-	AND c.g_id = g.g_id
+		AND i.file_type = 'main_img'
+		AND c.g_id = g.g_id
+		AND c.u_id = #{uId }
+<!-- 		<if test='uId != null and !"".equals(uId)'> -->
+<!-- 		</if> -->
     </select>
+    
+    <select id="nonuserList" resultType="Cart">
+    SELECT g.g_id, i.file_name, g.g_name, g.g_price, g.del_price 
+    FROM goods_img i, goods g 
+    WHERE
+    	g.g_id = i.g_id
+		AND i.file_type = 'main_img'
+		AND g.g_id = #{gId } 
+    </select>
+    
+    <insert id="insertCart" parameterType="Cart">
+    insert into cart (c_id, g_id, c_qty, u_id ) 
+    values ( cart_seq.nextval, #{gId }, #{cQty }, #{uId } )
+    </insert>
     
     <select id="addCheck" resultType="int">
-    select count(*) from cart where g_id = #{gId } 
+    select count(*) from cart where g_id = #{gId } AND u_id = #{uId }
     </select>
     
+    <delete id="deleteCart" parameterType="Cart">
+    delete from cart where g_id = #{gId }
+		AND u_id = #{uId }
+    </delete>
+
     <update id="updateQty">
     UPDATE cart SET c_qty = #{cQty }
-    WHERE c_id = #{cId }
+    	WHERE g_id = #{gId }
     </update>
+    
 </mapper>

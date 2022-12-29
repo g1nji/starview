@@ -9,7 +9,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <link rel="stylesheet" href="/resources/css/cartCss.css" />
-
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -18,15 +18,6 @@ $(document).ready(function() {
 	$('#allCheck').trigger("click");
 	calOrderPrice();
 	calTotalPrice();
-
-	// 	var res = sessionStorage.getItem('qtyArr')
-// 	if(res!=null){
-// 		console.log(res);
-// 		res = JSON.parse(res);
-// 		var qtyarr = res.flatMap(Object.values)
-// 		console.log(qtyarr);
-// 		})
-// 	}
 	
 	
 	//개별 체크박스 선택시 전체 선택 해제
@@ -40,15 +31,14 @@ $(document).ready(function() {
 		var confirm_val = confirm("정말 삭제하시겠습니까?");
 		
 		if(confirm_val) {
-		var checkArr = new Array();
-			checkArr.push($(this).attr("data-cId"));
-		 console.log(checkArr)
+		var gId = $(this).attr("data-gId");
+		 console.log(gId)
 			  
 			$.ajax({
 				url : "/goods/deleteCart",
 				type : "post",
 				traditional: true,
-				data : JSON.stringify({"chbox":checkArr}),
+				data : JSON.stringify({"gId":gId}),
 				contentType: 'application/json; charset=UTF-8',
 				success : function(res){
 					if(res=="delete_success"){
@@ -72,13 +62,13 @@ $(document).ready(function() {
 			for(var i=0; i<list.length; i++){
 				if( list[i].checked ){
 //				checkArr.push(list[i].attr("data-cId"));
-				checkArr.push(list.eq(i).attr("data-cId"));
+				checkArr.push(list.eq(i).attr("data-gId"));
 				}
 			}
 			console.log(checkArr)
 			  
 			$.ajax({
-				url : "/goods/deleteCart",
+				url : "/goods/selectDelete",
 				type : "post",
 				traditional: true,
 				data : JSON.stringify({chbox:checkArr}),
@@ -140,10 +130,10 @@ $(document).ready(function() {
 	//수량 변경
 	$('.qty-update').click(function(){
 		if(confirm('수량을 변경하시겠습니까?')){
-			let cId = $(this).attr("data-cId"); 	//현 jQuery버전에서는 .data()적용안됨
+			let gId = $(this).attr("data-gId"); 	//현 jQuery버전에서는 .data()적용안됨
 			let gPrice = $(this).attr("data-gPrice");
 			let cQty = $(this).parent("td").find("input").val();
-			var data = { cId:cId, cQty:cQty }
+			var data = { gId:gId, cQty:cQty }
 			
 			console.log(data);
 			
@@ -198,22 +188,6 @@ $(document).ready(function() {
 	}
 	
 
-// 			var qtyArr = sessionStorage.getItem("qtyArr");
-			
-// 			if(qtyArr==null){
-// 				qtyArr = [];
-// 				var entry = {"cQty": cQty}
-// 				qtyArr.push(entry);
-// 				sessionStorage.setItem('qtyArr', JSON.stringify(qtyArr));
-// 			} else {
-// 				var entry = {"cQty": cQty}
-// 				qtyArr = JSON.parse(qtyArr)
-// 				console.log(qtyArr)
-// 				qtyArr.push(entry);
-// 				sessionStorage.setItem('qtyArr', JSON.stringify(qtyArr));
-// 			}
-// 			console.log(qtyArr)
-			
 			//form태그로 값 전달
 // 			$(".update-cId").val(cId);
 // 			$(".update-cQty").val(cQty);
@@ -225,7 +199,7 @@ $(document).ready(function() {
 
 </head>
 <body>
-
+<h1 style="text-align: center; font-size: 44px; font-family: 'Raleway', sans-serif;">SHOPPING BAG</h1>
 <h3 class="bag-title">쇼핑백 상품(${totalCart})</h3>
 
 <section>
@@ -256,14 +230,19 @@ $(document).ready(function() {
 </thead>
 
 <tbody id="cart">
+<c:choose>
+	<c:when test="${empty cartList}">
+		<tr><td colspan="7" style="text-align: center; height: 73px;">쇼핑백에 담긴 상품이 없습니다</td></tr>
+	</c:when>
+	<c:otherwise>
 	<c:forEach items="${cartList }" var="cart">
 		<tr>
 			<td>
-			<input type="checkbox" name="chBox" class="chBox" data-cId="${cart.cId }" data-gPrice="${cart.gPrice }"  data-delPrice="${cart.delPrice }">
+			<input type="checkbox" name="chBox" class="chBox" data-gId="${cart.gId }" data-gPrice="${cart.gPrice }"  data-delPrice="${cart.delPrice }">
 			</td>
 			<td class="prod">
 				<img class="thumbnail" src="${cart.fileName }">
-				<span style="">${cart.gName }</span>
+				<span>${cart.gName }</span>
 			</td>
 			
 			<td class="prodQty" style="text-align: center;">
@@ -271,37 +250,15 @@ $(document).ready(function() {
 				<div class="each">
 				<form action="/goods/updateQty" method="post" class="qty-update-form">
 					<button type="button" name="button" class="btn-up" onclick="changeQty('p', this)">수량올림</button>
-					<input type="text" class="input-qty"  value="1" readonly="readonly">
+					<input type="text" class="input-qty"  value="${cart.cQty }" readonly="readonly">
 					<button type="button" name="button" class="btn-down" onclick="changeQty('m', this)">수량내림</button>
 <!-- 					<input type="number" class="input-qty" min="1" max="9" value="1"> -->
 <!-- 						<input type="hidden" name="cId" class="update-cId"> -->
 <!-- 						<input type="hidden" name="cQty" class="update-cQty"> -->
-					
-					<script>
-						function changeQty(type, ths){
-							var input = $(ths).parents("td").find("input[class='input-qty']");
-							var min = 1;
-							var max = 9;
-							
-							var count = Number(input.val());
-							if(type=='p'){
-								if(count < max){
-								input.val(count+1)
-								} else if(count == max) {
-									input.val(max);
-								}
-							} else if(type=='m'){
-								if(count > min){
-								input.val(count-1)
-								} else if(count == min) {
-									input.val(min);
-								}
-							}
-						}
-					</script>
+
 				</form>
 				</div>
-				<button class="qty-update" data-cId="${cart.cId }" data-gPrice="${cart.gPrice }">변경</button>
+				<button class="qty-update" data-gId="${cart.gId }" data-gPrice="${cart.gPrice }">변경</button>
 			</td>	
 			
 			<td><fmt:formatNumber value="${cart.gPrice }" type="number" groupingUsed="true" />원</td>
@@ -310,18 +267,20 @@ $(document).ready(function() {
 			
 			<!-- 단일상품 삭제 버튼 -->
 			<td>
-				<button class="deleteBtn" data-cId="${cart.cId }">
+				<button class="deleteBtn" data-gId="${cart.gId }">
 				<span style="font-size: 12px; margin-right: 3px;">삭제</span><span style="size: 15px;">x</span></button>
 			</td>
 		</tr>
 	</c:forEach>
+	</c:otherwise>
+</c:choose>	
 </tbody>
 </table>
 
 <br><br>
 <!-- 선택상품 삭제 버튼 -->
 <button class="bottom-btn" id="selectDeleteBtn">선택상품삭제</button>
-<button class="bottom-btn" id="goto-cart" onclick="history.go(-1);">쇼핑계속하기</button>
+<button class="bottom-btn" id="goto-cart" onclick="history.go(-2);">쇼핑계속하기</button>
 
 </div>
 </section>
@@ -350,5 +309,29 @@ $(document).ready(function() {
 <div class="clear"></div>
 
 <br><br><br><br>
+
+					
+<script>
+	function changeQty(type, ths){
+		var input = $(ths).parents("td").find("input[class='input-qty']");
+		var min = 1;
+		var max = 9;
+		
+		var count = Number(input.val());
+		if(type=='p'){
+			if(count < max){
+			input.val(count+1)
+			} else if(count == max) {
+				input.val(max);
+			}
+		} else if(type=='m'){
+			if(count > min){
+			input.val(count-1)
+			} else if(count == min) {
+				input.val(min);
+			}
+		}
+	}
+</script>
 
 <c:import url="../layout/footer.jsp" />

@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import hyeri.dto.PlaceReview;
+import hyeri.dto.ReviewFile;
 import jiwon.dao.face.StarPlaceDao;
 import jiwon.dto.StarPlace;
 import jiwon.service.face.StarPlaceService;
@@ -42,8 +44,14 @@ public class StarPlaceServiceImpl implements StarPlaceService {
 		//상세보기 조회 결과 리턴하기
 		return starplaceDao.selectStarplace(viewStarplace);
 	}
-
-
-
+	
+	//명소 리뷰 조회
+	@Override
+	public List<PlaceReview> viewReview(int arrivalNum) {
+		
+		//리뷰 조회 결과 리턴
+		return starplaceDao.selectArrivalNum(arrivalNum);
+	}
+	
 	
 }

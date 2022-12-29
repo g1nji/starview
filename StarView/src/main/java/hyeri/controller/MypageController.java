@@ -12,10 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import hyeri.dto.GComment;
 import hyeri.dto.Gallery;
 import hyeri.service.face.MypageService;
 import hyeri.util.Paging2;
-import ydg.dto.Users;
 
 @Controller
 @RequestMapping("/mypage")
@@ -40,6 +40,22 @@ public class MypageController {
 		List<Gallery> list = mypageService.list(paging, uId);
 		for( Gallery g : list ) logger.info("{}", g);
 		model.addAttribute("list", list);
+	}
+	
+	@RequestMapping("/writeCList")
+	public void writeCList(@RequestParam(defaultValue = "0") int curPage
+		, Model model
+		, HttpSession session) {
+		
+		String uId = (String) session.getAttribute("uId");
+		
+		Paging2 paging = mypageService.getPaging2(curPage, uId);
+		model.addAttribute("paging", paging);
+		
+		//작성한 덧글 조회
+		List<GComment> clist = mypageService.clist(paging, uId);
+		for( GComment c : clist ) logger.info("{}", c);
+		model.addAttribute("clist", clist);
 	}
 
 }

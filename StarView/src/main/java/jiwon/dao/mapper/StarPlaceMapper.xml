@@ -8,15 +8,23 @@
 <mapper namespace="jiwon.dao.face.StarPlaceDao">
 
 	<select id="selectAll" resultType="jiwon.dto.StarPlace">
-		SELECT arrival_num, e_lttd, e_lngtd, arrival
+		SELECT arrival_num, e_lttd, e_lngtd, arrival, p_adr
 		FROM starplace
 		ORDER BY arrival_num
 	</select>
 	
 	<select id="selectStarplace" resultType="jiwon.dto.StarPlace" parameterType="jiwon.dto.StarPlace" >
-		SELECT arrival, p_adr, p_expln
+		SELECT arrival, p_adr, p_expln, arrival_num
 		FROM starplace
 		WHERE arrival_num = #{arrivalNum}
 	</select>
-
+	
+	<select id="selectArrivalNum" resultType="hyeri.dto.PlaceReview" parameterType="int">
+		SELECT sreview_no, sreview_content, sreview_date, u_id, u_nick,
+			arrival_num, stored_name
+		FROM place_review
+		WHERE arrival_num = #{arrivalNum }
+		ORDER BY sreview_no DESC
+	</select>
+	
 </mapper>

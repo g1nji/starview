@@ -61,7 +61,7 @@ $(document).ready(function() {
 				<li><a href="/sunset/time">일몰시간</a></li>
 				<li><a href="/data/weather3">날씨</a></li>
 				<li><a href="/data/moonToday">달 모양</a></li>
-				<li><a href="">별 사진 명소</a></li>
+				<li><a href="/place/main">별 사진 명소</a></li>
 				<li><a href="/data/astroMonth">이달의 천문현상</a></li>
 			</ul>
 		</li>
@@ -74,7 +74,7 @@ $(document).ready(function() {
 		<!-- 비로그인 상태 -->
 		<c:if test="${empty login }">
 			<li style="padding-top: 53px;"><a href="/users/login">로그인/회원가입</a></li>
-			<li><a href="/goods/cart"><img src="/resources/image/shopping-cart.png" style="height:25px;"></a></li>
+			<li><a href="/goods/nonuser"><img src="/resources/image/shopping-cart.png" style="height:25px;"></a></li>
 		</c:if>
 		
 		<!-- 로그인 상태 -->

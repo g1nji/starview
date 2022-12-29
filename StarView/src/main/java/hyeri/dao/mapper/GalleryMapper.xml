@@ -40,7 +40,7 @@
 	
 	<select id="selectGallery" resultType="hyeri.dto.Gallery" parameterType="hyeri.dto.Gallery">
 		SELECT
-           g.gallery_no, g.gallery_title, g.gallery_content
+           g.gallery_no, g.gallery_title, g.gallery_content, g.gallery_date
            , g.gallery_loc, g.comment_cnt, g.u_id, g.stored_name, u.u_nick
         FROM gallery g
         INNER JOIN users u
@@ -48,6 +48,9 @@
 		WHERE gallery_no = #{galleryNo}
 	</select>
 
+
+
+	<!-- 게시글 작성 -->
 	<insert id="uploadPhoto" parameterType="hyeri.dto.Gallery">
 		<selectKey order="BEFORE" resultType="int" keyProperty="galleryNo">
 			SELECT gallery_seq.nextval FROM dual
@@ -57,12 +60,23 @@
 		VALUES ( #{galleryNo }, #{galleryTitle }, #{galleryContent }, #{galleryLoc }, #{uId }, #{uNick } )
 	</insert>
 	
+	<!-- 게시글 작성 시 사진 추가 -->
 	<insert id="insertPhoto" parameterType="hyeri.dto.GalleryFile">
 		<selectKey order="BEFORE" resultType="int" keyProperty="photoNo">
 			SELECT gallery_file_seq.nextval FROM dual
 		</selectKey>
 		INSERT INTO gallery_file ( photo_no, gallery_no, stored_name, origin_name, filepath )
 		VALUES ( #{photoNo }, #{galleryNo }, #{storedName }, #{originName }, #{filepath })
+	</insert>
+	
+	<!-- 게시글 작성 시 태그 추가 -->
+	<insert id="insertTag" parameterType="java.util.List">
+		INSERT INTO g_tag ( tag_no, tag_name, gallery_no )
+		SELECT g_tag_seq.nextval, data.* FROM (
+		<foreach item="item" collection="list" separator="UNION ALL">
+			SELECT #{item.tagName }, #{item.galleryNo } FROM DUAL
+		</foreach>
+		) data
 	</insert>
 	
 	<update id="updateFilepath" parameterType="hyeri.dto.Gallery">
@@ -85,8 +99,18 @@
 		WHERE gallery_no = #{galleryNo }
 	</update>
 	
-	<delete id="deleteFile" parameterType="hyeri.dto.GalleryFile">
+	<delete id="deleteFile" parameterType="hyeri.dto.Gallery">
 		DELETE gallery_file
+		WHERE gallery_no = #{galleryNo }
+	</delete>
+	
+	<delete id="deleteTag" parameterType="hyeri.dto.Gallery">
+		DELETE g_tag
+		WHERE gallery_no = #{galleryNo }
+	</delete>
+	
+	<delete id="deleteComment" parameterType="hyeri.dto.Gallery">
+		DELETE g_comment
 		WHERE gallery_no = #{galleryNo }
 	</delete>
 	
@@ -94,11 +118,6 @@
 		DELETE gallery
 		WHERE gallery_no = #{galleryNo }
 	</delete>
-	
-	<insert id="insertTag" parameterType="hyeri.dto.GTag">
-		INSERT INTO g_tag ( tag_no, tag_name, gallery_no )
-		VALUES ( g_tag_seq.nextval, #{tagName }, #{galleryNo } )
-	</insert>
 
 	<select id="selectByKeyword" resultType="hyeri.dto.Gallery" parameterType="String">
 		SELECT * FROM gallery
@@ -122,16 +141,37 @@
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
 	</select>
 	
-	<update id="likeCheck" parameterType="HashMap">
-		UPDATE gallery_like
-		SET like_check = like_check + 1
-		WHERE u_id = #{uId } AND gallery_no = #{galleryNo }
+	<select id="selectGalleryNo" resultType="hyeri.dto.GTag" parameterType="int">
+		SELECT tag_no, tag_name, gallery_no
+		FROM g_tag
+		WHERE gallery_no = #{galleryNo }
+	</select>
+	
+	<select id="findLike" resultType="int">
+		SELECT count(*) FROM gallery_like
+		WHERE gallery_no = #{galleryNo } AND u_id = #{uId }
+	</select>
+	
+	<select id="getLike" resultType="int" parameterType="int">
+		SELECT count(like_check) FROM gallery_like
+		WHERE gallery_no = #{galleryNo }
+	</select>
+	
+	<insert id="likeUp">
+		INSERT INTO gallery_like ( like_no, gallery_no, u_id, like_check )
+		VALUES ( (SELECT * FROM ( SELECT max(like_no)+1 FROM gallery_like WHERE gallery_no = #{galleryNo } ) next), #{galleryNo }, #{uId }, 1)
+	</insert>
+	
+	<update id="updateLike">
+		UPDATE gallery
+		SET gallery_like = (SELECT count(like_check) FROM gallery_like
+			WHERE gallery_no = #{galleryNo })
+		WHERE gallery_no = #{galleryNo }
 	</update>
 	
-	<update id="likeCheckCancel" parameterType="HashMap">
-		UPDATE gallery_like
-		SET like_check = 0
-		WHERE u_id = #{uId } AND gallery_no = #{galleryNo }
-	</update>
+	<delete id="likeDown">
+		DELETE FROM gallery_like
+		WHERE gallery_no = #{galleryNo } AND u_id = #{uId }
+	</delete>
 
 </mapper>
