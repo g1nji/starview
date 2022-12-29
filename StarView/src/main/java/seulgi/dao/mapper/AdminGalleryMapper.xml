@@ -178,4 +178,11 @@
 		ORDER BY gallery_no DESC
 	</select> -->
 	
+	<!-- 게시글 신고 -->
+	<insert id="insertBoard2" parameterType="seulgi.dto.AdminGallery">
+		INSERT INTO admin_board_report (report_code, gallery_no)
+		VALUES (abr_seq.nextval, #{galleryNo })
+	</insert>
+	
+	
 </mapper>

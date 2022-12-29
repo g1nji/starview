@@ -6,13 +6,12 @@
 
 <c:import url="../layout/header.jsp" />
 
-<h1>검색 페이지</h1>
+<h1>'${keyword }'의 검색 결과</h1>
+<hr>
 
-검색어: ${keyword }
-
-<table class="table table-striped table-hover table-condensed">
+<table class="table table-hover">
 <thead>
-	<tr>
+	<tr class="warning">
 		<th><input type='checkbox' name='all' value='selectall' onclick='selectAll(this)'/> 전체선택</th>
 		<th>작성자</th>
 		<th>제목</th>

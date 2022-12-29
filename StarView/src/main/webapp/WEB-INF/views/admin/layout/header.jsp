@@ -202,9 +202,11 @@ html .container {
 			<ul>
 				<li><a href="../gallery/list">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;회원 글 조회</a></li>
 				<li><a href="../comment/list">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;회원 댓글 조회</a></li>
-				<li><!-- <a href="../report/list"> --> <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;신고사항 조회</a></li>
+				<li><a href="../gallery/report">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;신고 글 조회</a></li>
+				<li><a href="../comment/report">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;신고 댓글 조회</a></li>
 			</ul>
 		</li>
+			<br>
 		<li>
 			<a>캘린더 관리</a>
 			<br>
@@ -217,7 +219,7 @@ html .container {
 			<a>상품 관리</a>
 			<br>
 			<ul>
-				<li><a href="../product/insert">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상품 등록</a></li>
+				<li><a href="../product/insert">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상품 업로드</a></li>
 				<li><a href="../product/list">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상품 목록</a></li>
 			</ul>
 		</li>

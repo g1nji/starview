@@ -50,4 +50,11 @@ public class AdminCommentServiceImpl implements AdminCommentService {
 		adminCommentDao.delete(board);
 	}
 	
+	//댓글 신고
+	@Override
+	public void report(AdminComment board) {
+		logger.info("report() 사용");
+		
+		adminCommentDao.insertBoard(board);
+	}
 }
