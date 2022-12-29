@@ -44,6 +44,8 @@ var hour = function() {
 			$(this).css("background-color", "#CCEBF1");
 		})
 		
+		$('.title').css("color", "#5BC0CF");
+		
 		$('.moon').hide();
 		
 	/* 오후 4시부터 오후 7시 59분까지 저녁 이미지 */
@@ -62,6 +64,8 @@ var hour = function() {
 			$(this).css("background-color", "#F7C8CC");
 		})
 		
+		$('.title').css("color", "#E64556");
+		
 	/* 오후 8시부터 오전 6시 58분까지 밤 이미지 */
 	} else {
 		document.getElementById("day").style.backgroundImage = "url('/resources/image/day3.png')";
@@ -77,6 +81,9 @@ var hour = function() {
 		$('ul.mainnav > li > ul').each(function() {
 			$(this).css("background-color", "#FFEBBA");
 		})
+		
+		$('.title').css("background-color", "#FFB703");
+		$('.title').css("color", "white");
 	}
 	
 }
@@ -325,7 +332,187 @@ $(document).ready(() => {
 </script>
 
 <!-- css -->
-<link rel="stylesheet" type="text/css" href="../resources/css/mainCss.css">
+<!-- <link rel="stylesheet" type="text/css" href="../resources/css/mainCss.css"> -->
+
+<style type="text/css">
+/* 웹폰트(NotoSans) */
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 100;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 300;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 400;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 500;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 700;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 900;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.otf) format('opentype');}
+body, h1, h2, h3, h4, h5, h6, input, textarea, select {
+	font-family: 'Noto Sans KR', sans-serif;
+}
+/* ----------------- */
+body {
+	margin: 0;
+}
+a {
+	color: black;
+}
+a:hover {
+	text-decoration: underline;
+}
+/* ----------------- */
+#logo {
+	height: 100px;
+	padding: 0;
+	margin-top: 0;
+	margin-right: 20px;
+}
+ul.subnav {
+	padding: 0 100px 0 0;
+}
+ul.subnav > li {
+	float: right;
+	list-style-type: none;
+}
+#menu {
+	height: 100px;
+}
+ul.mainnav > li {
+	float: left;
+	position: relative;
+	width: 150px;
+	height: 30px;
+	text-align: center;
+	margin-top: 50px;
+	padding: 0 10px 40px 10px;
+	list-style-type: none;
+}
+ul.subnav > li {
+	padding: 50px 5px 5px 5px;
+}
+ul.mainnav > li > a {
+	text-decoration: none;
+    font-size: 19px;
+    font-weight: 500;
+}
+ul.mainnav > li > ul {
+	display: none;
+	width: 480px;
+	height: 45px;
+	margin-top: 6px;
+	margin-left: -10px;
+	padding: 10px 12px;
+	border-radius: 30px;
+}
+ul.mainnav > li > ul > li {
+	list-style-type: none;
+	text-align: left;
+	float: left;
+	padding: 0 0 10px 20px;
+}
+ul.mainnav > li > ul > li > a {
+	text-decoration: none;
+	font-size: 16px;
+	font-weight: 400;
+}
+
+ul.mainnav > li > ul > li > a:hover {
+	font-weight: 500;
+}
+ul.mainnav > li:hover > ul {
+	display: block;
+}
+#footer {
+	padding: 30px 0;
+	background-color: lightgray;
+	font-size: 12px;
+	text-align: center;
+}
+.wrap {
+	margin: 0 auto;
+}
+.monthly {
+	width: 55%;
+	height: 200px;
+	margin: 15px 29px 15px 0;
+	display: inline-block;
+	float: left;
+}
+
+.weather {
+	display: inline-block;
+	cursor: pointer;
+	text-align: left;
+}
+
+.etc {
+	width: 20%;
+	display: inline-block;
+	margin-top: 15px;
+	float: left;
+}
+
+#day {
+	width:80%;
+	height: 500px;
+	margin: 0 auto;
+	background-size: 100%;
+	border-radius: 100px;
+	background-size : cover;
+}
+
+.moon {
+	width: 120px;
+	height: 120px;
+	margin: 70px 230px;
+	float: right;
+	border-radius: 120px;
+	text-align: center;
+}
+
+#moonimg{
+display: block;
+margin:0 auto;
+height:120px;
+border-radius: 50%;
+}
+
+#moonimg2{
+display: block;
+margin:0 auto;
+height:120px;
+border-radius: 50%;
+box-shadow:20px 20px 10px rgba(0,0,0,0.2);
+}
+
+
+#moonimg:hover{
+transition:0.5s;
+/* box-shadow:20px 20px 10px rgba(0,0,0,0.4); */
+transform:scale(1.05,1.05);
+}
+
+.title {
+    width: 140px;
+    height: 26px;
+/*     border-top: 2px solid; */
+/*     border-left: 2px solid; */
+/*     border-right: 2px solid; */
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+    z-index: 9999;
+    position: absolute;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.contents {
+	position: relative;
+    border: 2px solid;
+    border-radius: 0 10px 10px 10px;
+    z-index: 11;
+    margin-top: 24px;
+    padding: 10px;
+    height: 300px;
+    line-height: 25px;
+}
+
+</style>
 
 </head>
 
@@ -355,7 +542,7 @@ $(document).ready(() => {
 		<!-- 비로그인 상태 -->
 		<c:if test="${empty login }">
 			<li style="padding-top: 53px;"><a href="/users/login">로그인/회원가입</a></li>
-			<li><a href="/goods/cart"><img src="/resources/image/shopping-cart.png" style="height:25px;"></a></li>
+			<li><a href="/goods/nonuser"><img src="/resources/image/shopping-cart.png" style="height:25px;"></a></li>
 		</c:if>
 		
 		<!-- 로그인 상태 -->
@@ -431,21 +618,44 @@ $(document).ready(() => {
 <div class="wrap">
 
 	<div class="monthly">
-	이달의 천문현상
-		<div id="Layout" class="Layout"></div>
-		<div id="Layout2" class="Layout2"></div>
+		<div class="title">
+			이달의 천문현상
+		</div>
+		<div class="contents">
+			<div id="Layout" class="Layout"></div>
+			<div id="Layout2" class="Layout2"></div>
+		</div>
 	</div>
 	
-	<div class="weather" onclick="location.href='/data/weather3'"><!--weather  -->
-	<!-- 현재 날씨 -->
-<!-- 		<ul class="list-group list-group-flush weather" style="font-weight:600;"></ul> -->
+	<div class="etc" style="margin-right: 28px;">
+		<div class="title">
+			오늘의 날씨
+		</div>
+		<div class="contents" style="text-align: center;">
+			<div class="weather" onclick="location.href='/data/weather3'"><!--weather  -->
+			<!-- 현재 날씨 -->
+		<!-- 		<ul class="list-group list-group-flush weather" style="font-weight:600;"></ul> -->
+			</div>
+		</div>
 	</div>
 	
 	<div class="etc">
-	오늘의 달 모양
-		<div>
+		<div class="title">
+			오늘의 달 모양
+		</div>
+		<div class="contents">
 		<img id="moonimg2" src=""/>
 		</div>
+	</div>
+	
+	<div class="clearfix"></div>
+	
+	<div style="margin-top:30px; background-color: pink; height: 300px;">
+		갤러리 이미지 추천순
+	</div>
+	
+	<div style="margin-top:30px; background-color: pink; height: 300px;">
+		굿즈샵 상품 추천순
 	</div>
 
 </div>

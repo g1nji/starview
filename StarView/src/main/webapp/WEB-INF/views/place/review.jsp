@@ -58,10 +58,10 @@ $(document).ready(function() {
 	border: none;
     border-radius: 10px;
     display: flex;
-    font-size: 16px;
+    font-size: 14px;
     align-items: center;
     width: 70px;
-    height: 35px;
+    height: 46px;
     background-color: #FFEBBA;
     justify-content: center;
     font-weight: 500;
@@ -73,7 +73,7 @@ $(document).ready(function() {
 	border: none;
     border-radius: 10px;
     display: flex;
-    font-size: 16px;
+    font-size: 14px;
     align-items: center;
     width: 70px;
     height: 46px;
