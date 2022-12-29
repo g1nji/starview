@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import seulgi.dao.face.AdminProductDao;
+import seulgi.dto.AdminGoodsReview;
 import seulgi.dto.AdminProduct;
 import seulgi.dto.AdminProductFile;
 import seulgi.service.face.AdminProductService;
@@ -46,6 +47,8 @@ public class AdminProductServiceImpl implements AdminProductService {
 		return paging;
 	}
 	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	//상품 리스트
 	@Override
 	public List<AdminProduct> list(Paging paging) {
@@ -54,6 +57,8 @@ public class AdminProductServiceImpl implements AdminProductService {
 		return adminProductDao.selectAll(paging);
 	}
 	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	//상품 상세 조회
 	@Override
 	public AdminProduct view(AdminProduct viewProd) {
@@ -62,6 +67,15 @@ public class AdminProductServiceImpl implements AdminProductService {
 		return adminProductDao.selectProd(viewProd);
 	}
 	
+	@Override
+	public AdminProduct view(AdminGoodsReview viewBoard) {
+		logger.info("view() 사용");
+		
+		return adminProductDao.selectProd2(viewBoard);
+	}
+	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	//상품, 첨부파일 업로드
 	@Override
 	public void upload(AdminProduct prod, MultipartFile file) {
@@ -119,6 +133,8 @@ public class AdminProductServiceImpl implements AdminProductService {
 		adminProductDao.insertFile(prodFile);
 	}
 	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	//첨부파일 정보 얻어오기
 	@Override
 	public AdminProductFile getAttachFile(AdminProduct viewProd) {
@@ -127,6 +143,15 @@ public class AdminProductServiceImpl implements AdminProductService {
 		return adminProductDao.selectImageFile(viewProd);
 	}
 	
+	@Override
+	public AdminProductFile getAttachFile(AdminGoodsReview viewBoard) {
+		logger.info("getAttachFile() 사용");
+		
+		return adminProductDao.selectImageFile2(viewBoard);
+	}
+	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	//상품 수정
 	@Override
 	public void update(AdminProduct prod, MultipartFile file) {
@@ -198,6 +223,9 @@ public class AdminProductServiceImpl implements AdminProductService {
 		}
 	}
 	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	//상품 삭제
 	@Override
 	public void delete(AdminProduct prod) {
 		logger.info("delete() 사용");

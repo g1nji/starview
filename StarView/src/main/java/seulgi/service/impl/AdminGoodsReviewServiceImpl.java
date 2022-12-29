@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import seulgi.dao.face.AdminGoodsReviewDao;
+import seulgi.dao.face.AdminProductDao;
 import seulgi.dto.AdminGoodsReview;
 import seulgi.service.face.AdminGoodsReviewService;
 import seulgi.util.Paging;
@@ -24,10 +25,14 @@ public class AdminGoodsReviewServiceImpl implements AdminGoodsReviewService {
 	@Autowired
 	private AdminGoodsReviewDao adminBoardDao; 
 	
+	@Autowired
+	private AdminProductDao adminProductDao; 
+	
 	//ServletContext 객체
 	@Autowired
 	ServletContext context;
 	
+	//페이징 처리
 	@Override
 	public Paging getPaging(int curPage) {
 		//총 게시글 수 조회
@@ -39,14 +44,37 @@ public class AdminGoodsReviewServiceImpl implements AdminGoodsReviewService {
 		return paging;
 	}
 	
-	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	//게시글 리스트
 	@Override
 	public List<AdminGoodsReview> list(Paging paging) {
 		logger.info("list() 사용");
 		
 		return adminBoardDao.selectAll(paging);
 	}
+
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	//게시글 상세 조회
+	@Override
+	public AdminGoodsReview view(AdminGoodsReview viewBoard) {
+		logger.info("view() 사용");
+		
+		return adminBoardDao.selectBoard(viewBoard);
+	}
 	
-	
-	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	@Override
+	public void delete(AdminGoodsReview board) {
+		logger.info("delete() 사용");
+		
+		//첨부파일 삭제
+		adminProductDao.deleteFile2(board);
+		
+		//게시글 삭제
+		adminBoardDao.delete(board);
+		
+	}
 }

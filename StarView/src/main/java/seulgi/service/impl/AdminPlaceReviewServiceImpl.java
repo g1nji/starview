@@ -28,6 +28,7 @@ public class AdminPlaceReviewServiceImpl implements AdminPlaceReviewService {
 	@Autowired
 	ServletContext context;
 	
+	//페이징 처리
 	@Override
 	public Paging getPaging3(int curPage) {
 		//총 게시글 수 조회
@@ -39,6 +40,9 @@ public class AdminPlaceReviewServiceImpl implements AdminPlaceReviewService {
 		return paging;
 	}
 	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	//게시글 리스트
 	@Override
 	public List<AdminPlaceReview> list3(Paging paging) {
 		logger.info("list() 사용");

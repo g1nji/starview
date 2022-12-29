@@ -1,5 +1,7 @@
 package hyeri.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,11 +45,14 @@ public class ReviewController {
 	public String deleteReview(
 			PlaceReview placeReview
 			, StarPlace starPlace
+			, HttpServletRequest req
 			) {
 		
 		reviewService.delete(placeReview);
 		
-		return "redirect:/place/view?arrivalNum=" + starPlace.getArrivalNum();
+		String referer = req.getHeader("Referer");
+	    return "redirect:"+ referer;
+//		return "redirect:/place/view?arrivalNum=" + starPlace.getArrivalNum();
 	}
 	
 	

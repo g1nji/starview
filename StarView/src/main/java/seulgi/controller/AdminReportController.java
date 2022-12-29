@@ -17,5 +17,7 @@ public class AdminReportController {
 	@Autowired
 	private AdminReportService adminReportService;
 	
-	
+	//조회-페이징
+	//상세 조회
+	//삭제
 }

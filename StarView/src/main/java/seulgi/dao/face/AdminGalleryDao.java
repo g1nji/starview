@@ -84,12 +84,18 @@ public interface AdminGalleryDao {
 	public List<AdminGallery> searchBoard(String keyword);
 	//public List<AdminBoard> searchBoard(Search search);
 
+	/**
+	 * 게시글이 참조하고 있는 모든 댓글 삭제하기
+	 * 
+	 * @param board - 댓글을 삭제할 게시글 번호
+	 */
+	public void deleteComm(AdminGallery board);
+
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 //	public List<AdminBoard> selectAllBoard();
 //	public List<AdminBoard> selectAllBoard(Paging paging);
 //	public int selectCntAllBoard();
 //	public void insertAllBoard(AdminBoard board);
-
 
 }

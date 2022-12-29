@@ -33,6 +33,7 @@ function selectAll(selectAll)  {
 
 $(document).ready(function() {
 	
+	//구현중
 	//선택
 	$('#select').click(function() {
 		var sel = $('input[name="select"]:checked').val()
@@ -48,11 +49,17 @@ $(document).ready(function() {
 
 })
 
-
 </script>
 
 <h1>상품 리스트</h1>
 <hr>
+
+<form id="searchForm" action="./search" method="get" style="float: right;">
+    <input id="keyword" name="keyword" type="text" placeholder="검색할 아이디를 입력하세요" value="">
+	<button class="btnSearch">검색</button>
+</form>
+
+<br><br>
 
 <table class="table table-hover">
 <thead>

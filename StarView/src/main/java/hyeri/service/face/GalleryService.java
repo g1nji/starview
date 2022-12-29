@@ -25,6 +25,7 @@ public interface GalleryService {
 	 */
 	public Paging getPaging(int curPage);
 
+	
 	/**
 	 * 페이징이 적용된 게시글 목록 조회
 	 * 
@@ -33,6 +34,7 @@ public interface GalleryService {
 	 */
 	public List<Gallery> list(Paging paging);
 
+	
 	/**
 	 * 게시글 정보, 첨부파일을 함께 처리한다
 	 * 
@@ -42,6 +44,12 @@ public interface GalleryService {
 	 */
 	public void write(Gallery gallery, MultipartFile file, List<GTag> tagList);
 
+	/**
+	 * 게시글 정보, 첨부파일을 함께 처리한다
+	 * 
+	 * @param writeParam - 게시글 정보 객체
+	 * @param file - 첨부파일 정보 객체
+	 */
 	public void write2(Gallery gallery, MultipartFile file);
 
 	/**
@@ -60,21 +68,7 @@ public interface GalleryService {
 	 */
 	public GalleryFile getAttachFile(Gallery viewGallery);
 
-	/**
-	 * 게시글 정보, 첨부파일 수정
-	 * 
-	 * @param viewGallery - 게시글 정보 객체
-	 * @param file - 첨부파일 정보 객체
-	 */
-	public void update(Gallery viewGallery, MultipartFile file);
-
-	/**
-	 * 게시글 삭제
-	 * 
-	 * @param gallery - 게시글 정보 객체
-	 * @param galleryFile 
-	 */
-	public void delete(Gallery gallery, GalleryFile galleryFile);
+	public void delete(Gallery viewGallery);
 
 	/**
 	 * 게시글 검색
@@ -87,5 +81,34 @@ public interface GalleryService {
 	public List<GComment> clist(Paging paging);
 
 	public List<GTag> viewTag(int galleryNo);
+
+	/**
+	 * 좋아요 확인
+	 * 
+	 * @param galleryNo
+	 * @param uId
+	 */
+	public int findLike(int galleryNo, String uId);
+
+	/**
+	 * 좋아요 +1
+	 * @param galleryNo
+	 * @param uId
+	 */
+	public void likeUp(int galleryNo, String uId);
+
+	/**
+	 * 좋아요 -1
+	 * @param galleryNo
+	 * @param uId
+	 */
+	public void likeDown(int galleryNo, String uId);
+
+	/**
+	 * 좋아요 갯수
+	 * @param galleryNo
+	 * @return
+	 */
+	public int getLike(int galleryNo);
 
 }

@@ -22,32 +22,48 @@ td:nth-child(2) {
 
 <script type="text/javascript">
 
-//전체 선택
-function selectAll(selectAll)  {
-	var checkboxes 
-	   = document.querySelectorAll('input[type="checkbox"]');
-	
-	checkboxes.forEach((checkbox) => {
-	  checkbox.checked = selectAll.checked
-	})
+//선택한 input태그 값 가져오기
+function getCheckboxValue(e)  {
+	  var sel = '';
+	  if(e.target.checked)  {
+	    sel = e.target.value;
+	  } else {
+	    sel = '';
+	  }
+	  
+	  //console.log(sel);
 }
-
+	  
 $(document).ready(function() {
 	
-	//선택
-	$('#select').click(function() {
-		var sel = $('input[name="select"]:checked').val()
-		console.log(sel)
-		
-		//왜 위의 2개만 인식하지...
-		//삭제
-		$('#delOk').click(function() {
-			if (confirm('삭제하시면 복구할 수 없습니다. \n정말로 삭제하시겠습니까?')) {
-				location.href = "./delete?galleryNo=" + sel
-			}
-		})
-	})
+	//checkBox 선택된 댓글 삭제
+	$(".selectDelete_btn").click(function(){
+	  var confirm_val = confirm("[댓글] \n삭제하시면 복구할 수 없습니다. \n정말로 삭제하시겠습니까?");
+	  
+	  if(confirm_val) {
+	   var checkArr = new Array();
+	   
+	   $("input[class='chBox']:checked").each(function(){
+	   		checkArr.push($(this).attr("select_data"));
+	   });
+	    
+	   $.ajax({
+	    url : "./deletesel",
+	    type : "post",
+	    data : { chbox : checkArr },
+	    success : function(result){
+	     if(result == 1) {            
+	      alert("댓글이 삭제되었습니다");
+	      location.href = "./list";
+	     } else {
+	      alert("삭제 실패");
+	     }
+		}
+	   });
+	  } 
+	 });
 
+	//검색
 	$("#btnSearch").click(function() {
 		location.href = "./search?keyword" + $('input[name="keyword"]:checked').val();
 	})
@@ -67,7 +83,7 @@ $(document).ready(function() {
 
 </script>
 
-<h1>댓글 리스트</h1>
+<h1>갤러리 댓글 리스트</h1>
 <hr>
 
 <form id="searchForm" action="./search" method="get" style="float: right;">
@@ -80,29 +96,46 @@ $(document).ready(function() {
 <table class="table table-hover">
 <thead>
 	<tr class="warning">
-		<th><input type='checkbox' name='all' value='selectall' onclick='selectAll(this)'/></th>
+		<th><input type="checkbox" name="allCheck" id="allCheck" /></th>
+		
+		<script>
+		$("#allCheck").click(function(){
+		 var chk = $("#allCheck").prop("checked");
+		 if(chk) {
+		  $(".chBox").prop("checked", true);
+		 } else {
+		  $(".chBox").prop("checked", false);
+		 }
+		});
+		</script>
+		
 		<th style="width: 10%; text-align: left;">작성자</th>
-		<th style="width: 30%;">내용</th>
-		<th style="width: 20%;">원글</th>
+		<th style="width: 60%;">내용</th>
 		<th style="width: 20%;">등록일</th>
 	</tr>
 </thead>	
 <tbody>
-<c:forEach items="${commentList }" var="c">
+<c:forEach items="${commList }" var="c">
 	<tr>
-		<td><input id="select" type="checkbox" name="select" value="${c.cmNo }"></td>
+		<td><input type="checkbox" name="chBox" class="chBox" select_data="${c.cmNo }"></td>
+		
+		<script>
+		 $(".chBox").click(function(){
+		  $("#allCheck").prop("checked", false);
+		 });
+		</script>
+		
 		<td>
 			<strong style="font-size: 17px;">${c.uNick }</strong>
 			<br> ${c.uId }
 		</td>
-		<td>${c.cmContent }</td>
-		<td><a href="../gallery/view?galleryNo=${c.galleryNo }">원글</a>${c.galleryContent }</td>
+		<td><a href="../gallery/view?galleryNo=${c.galleryNo }">${c.cmContent }</a></td>
 		<td><fmt:formatDate value="${c.cmDate }" pattern="yy-MM-dd HH:mm:ss"/></td>
 	</tr>
 </c:forEach>
 </tbody>
 </table>
 
-<button id="delOk" class="btn btn-danger" style="float: right">삭제</button><br>
+<button type="button" class="selectDelete_btn btn btn-danger" style="float: right;">선택 삭제</button> 
 
 <c:import url="../layout/footer.jsp" />
