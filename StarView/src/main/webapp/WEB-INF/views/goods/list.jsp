@@ -146,9 +146,9 @@ $(document).ready(function() {
 					//더보기 버튼 삭제
 					if(startIdx + step > total){
 						$('#moreBtn').remove();
-					}// if
-				}// success
-			}) //ajax	
+					}
+				}
+			})	
 		} 
 					
 	}) //-- .click() 
