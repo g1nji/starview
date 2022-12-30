@@ -192,4 +192,9 @@ public class UsersServiceImpl implements UsersService {
 		return usersDao.finduNick(users);
 	}
 	
+	@Override
+	public String findName(Users users) {
+		return usersDao.findName(users);
+	}
+	
 }

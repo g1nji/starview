@@ -110,13 +110,53 @@ $(document).ready(function() {
 		}
 	})
 	
-	$("#btnReport").click(function() {
-		
-		if(confirm("덧글을 신고하시겠습니까?") == true ) {
-			alert("신고가 완료되었습니다");
-		} else {
-			return;
+	//게시글 신고
+	$("#btnReport").click(function(){
+	  var confirm_val = confirm("[게시글] \n정말로 신고하시겠습니까?");
+	  
+	  if(confirm_val) {
+	   var checkArr = new Array();
+	   
+	   checkArr.push($(this).attr("select_data"));
+	   
+	   $.ajax({
+		   url : "./reportt",
+		   type : "post",
+		   data : { chbox : checkArr },
+		   success : function(result){
+			   if(result == 1) {
+				   alert("게시글이 신고되었습니다");
+			   } else {
+				   alert("신고 실패");
+			}
+			}
+	   })
+	  } 
+	 })
+	
+	//댓글 신고
+	$(".report_btn").click(function(){
+	  var confirm_val = confirm("[댓글] \n정말로 신고하시겠습니까?");
+	  
+	  if(confirm_val) {
+	   var checkArr = $(this).attr("select_data");
+	   console.log(checkArr);
+	   
+	  $.ajax({
+		  url : "../comment/reportt",
+		  type : "post",
+		  data : { checkArr },
+		  success : function(result){
+			if(result == 1) {
+				alert("댓글이 신고되었습니다");
+			} else {
+				alert("신고 실패");
+	     	}
 		}
+	   })
+	   
+	  } 
+	
 	})
 	
 })
@@ -181,6 +221,7 @@ ${viewGallery.uNick }
 
 <%-- 좋아요 버튼 --%>
 <span style="float:right;">${getLike }</span> <a style="cursor:pointer;"><img src="/resources/image/heart-empty.png" class="like_img"></a>
+<button id="btnReport" class="btn btn-primary" value="${viewGallery.galleryNo }" select_data="${viewGallery.galleryNo }">신고</button>
 
 <!-- 게시글 수정, 삭제 버튼 -->
 <c:if test="${uId eq viewGallery.uId }">
@@ -229,7 +270,7 @@ ${viewGallery.galleryContent }
 							<input type="text" name="cmDate" value="${comment.cmDate }">
 							<input type="text" name="reporter" value="${uId }">
 						</form>
-						<a href="" id="btnReport" style="color:gray;">신고</a>
+						<button type="button" class="report_btn btn-primary btn-sm" value="${comment.cmNo }" select_data="${comment.cmNo }">신고</button>
 					</td>
 				</c:if>
 				<c:if test="${uId eq comment.uId }">

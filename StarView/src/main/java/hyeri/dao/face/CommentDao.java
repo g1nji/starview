@@ -21,5 +21,7 @@ public interface CommentDao {
 	public List<GComment> selectGalleryNo(int galleryNo);
 
 	public void delete(GComment gComment);
+	
+	public void insertBoard(GComment board);
 
 }

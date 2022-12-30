@@ -106,4 +106,7 @@ public interface GalleryDao {
 
 	public void updateHit2(int galleryNo);
 
+	public void updatePhoto(Gallery viewGallery);
+
+	public void insertBoard(Gallery board);
 }
