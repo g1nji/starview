@@ -5,17 +5,6 @@
 
 <c:import url="../layout/header.jsp" />
 
-<style type="text/css">
-table {
-	table-layout: fixed;
-}
-
-table, th {
-	text-align: center;
-}
-
-</style>
-
 <script type="text/javascript">
 
 $(document).ready(function() {
@@ -25,19 +14,19 @@ $(document).ready(function() {
 
 </script>
 
-<h1>명소 후기 리스트</h1>
+<h1 style="text-align: center;">명소 후기 리스트</h1>
 <hr>
 
 <select id="category" name="category" required onchange="window.open(value,'_self')">
     <option value="" disabled selected>카테고리</option>
     <option value="/admin/gallery/list">갤러리</option>
-    <option value="/admin/goods/list">상품리뷰</option>
+    <!-- <option value="/admin/goods/list">상품리뷰</option> -->
     <option value="/admin/place/list">명소후기</option>
 </select>
 
 <form id="searchForm" action="./search" method="get" style="float: right;">
-    <input id="keyword" name="keyword" type="text" placeholder="검색할 장소명를 입력하세요" value="">
-	<button class="btnSearch">검색</button>
+    <input id="keyword" name="keyword" type="text" placeholder="검색할 아이디를 입력하세요" value="">
+	<button class="btnSearch btn btn-default">검색</button>
 </form>
 
 

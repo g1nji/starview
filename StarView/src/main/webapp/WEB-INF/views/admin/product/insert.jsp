@@ -5,6 +5,7 @@
 <c:import url="../layout/header.jsp" />
 
 <script type="text/javascript">
+
 $(document).ready(function() {
 	
 	$("#btnUpload").click(function() {
@@ -16,7 +17,7 @@ $(document).ready(function() {
 
 </script>
 
-<h1>상품 업로드</h1>
+<h1 style="text-align: center;">상품 업로드</h1>
 <hr>
 
 <!-- <form action="./insert" method="post"> -->

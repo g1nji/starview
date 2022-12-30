@@ -31,35 +31,28 @@ $(document).ready(function() {
 
 </script>
 
-<style type="text/css">
-table {
-	table-layout: fixed;
-}
-
-</style>
-
-<h1>게시글 상세 조회</h1>
+<h1 style="text-align: center;">추천일 상세 조회</h1>
 <hr>
 
-<table class="table">
-<tr class="warning">
-	<td>지역</td>
+<table class="table table-bordered">
+<tr>
+	<td class="warning" style="width: 7%;">지역</td>
 	<td>${viewBoard.recomLoc }</td>
 </tr>
 <tr>
-	<td>추천일</td>
+	<td class="warning" style="width: 10%;">추천일</td>
 	<td>${viewBoard.recomDate }</td>
 </tr>
 <tr>
-	<td>추천 시간</td>
+	<td class="warning" style="width: 10%;">추천 시간</td>
 	<td>${viewBoard.recomTime }</td>
 </tr>
 <tr>
-	<td>강수 확률</td>
+	<td class="warning" style="width: 10%;">강수 확률</td>
 	<td>${viewBoard.rain }</td>
 </tr>
 <tr>
-	<td>하늘 상태</td>
+	<td class="warning" style="width: 10%;">기상 상태</td>
 	<td>${viewBoard.sky }</td>
 </tr>
 </table>

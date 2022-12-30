@@ -6,17 +6,6 @@
 
 <c:import url="../layout/header.jsp" />
 
-<style type="text/css">
-table {
-	table-layout: fixed;
-}
-
-table, th {
-	text-align: center;
-}
-
-</style>
-
 <script type="text/javascript">
 
 //선택한 input태그 값 가져오기
@@ -80,12 +69,12 @@ $(document).ready(function() {
 
 </script>
 
-<h1>갤러리 댓글 리스트</h1>
+<h1 style="text-align: center;">갤러리 댓글 리스트</h1>
 <hr>
 
 <form id="searchForm" action="./search" method="get" style="float: right;">
     <input id="keyword" name="keyword" type="text" placeholder="검색할 아이디를 입력하세요" value="">
-	<button class="btnSearch">검색</button>
+	<button class="btnSearch btn btn-default">검색</button>
 </form>
 
 <br><br>
