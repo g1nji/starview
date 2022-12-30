@@ -94,8 +94,9 @@ public class CalendarController<TodolistData> {
 			Calendar calendar = new Calendar();
 			
 			calendar.setsNo(sNo);
-			calendarservice.delete(calendar);
+			calendarservice.delete(sNo);
 			
+			map.put("sNo", sNo);
 			map.put("result", "success");
 		}catch(Exception e) {
 			e.printStackTrace();

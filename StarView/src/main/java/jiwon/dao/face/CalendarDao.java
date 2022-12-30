@@ -36,6 +36,6 @@ public interface CalendarDao {
 	 * 
 	 * @param sNO - 삭제할 게시글 번호
 	 */
-	public void delete(Calendar calendar);
+	public void delete(int sNo);
 
 }

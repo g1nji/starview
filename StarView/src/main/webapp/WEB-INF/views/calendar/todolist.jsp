@@ -17,18 +17,13 @@
     padding: 0
     max-width: 1100px !important;
 }
-
 /* 캘린더 */
 .calendarTable {
 	float: right;
-
 }
-
-
 .calendarTable td {
     text-align: center;
 }
-
 /* yyyy년 MM월 */
 .calendarTable thead.calDate th {
     font-size: 18px;
@@ -36,24 +31,37 @@
     position: relative;
     left:115px;
     bottom: 10px;
+    color: #696969;
 }
 
 .calendarTable thead.calDate th p {
 	position: relative;
-	top:7px;
+	top:18px;
 }
 
 /* < > 버튼 */
 .calendarTable thead.calDate th button {
-    font-size: 28px;
+	font-size: 15px;
+    top: 12px;
+    position: relative;
     background: none;
     border: none;
 }
 
+#yymm {
+	top:12px;
+	position: relative;
+}
+
+.calWeek {
+	position: relative;
+	top:12px;
+}
+
 /* sun - sat 부분 */
 .calendarTable thead.calWeek th {
-    background-color: #191970;
-    color: #fff;
+    background-color: #FFEBBA;
+    color: #696969;
     text-align : center;
     height: 25px;
 }
@@ -65,6 +73,7 @@
     width: 75px;
     height: 65px;
     font-size: 17px;
+    color: #696969;
 }
 
 /* 일요일 색상 빨갛게 */
@@ -78,9 +87,17 @@
 /* } */
 
 .calendarTable tbody td.selectDay {
-    background-color: #191970;
+	background-color: #FFB703;
+    position: relative;
+    width: 5px;
     color: #fff;
-    border-radius: 10px;
+    border-radius: 164px;
+}
+
+.calDate {
+    top: 6px;
+    right: 12px;
+    position: relative;
 }
 
 #calendarForm {
@@ -90,9 +107,9 @@
     border-radius: 5px;
     position: relative;
     float: right;
-	width: 530px;
+	width: 490px;
     padding: 10px 10px 10px 10px;
-    right: 98px;
+    right: 100px;
     margin-bottom: 50px;
 }
 
@@ -107,8 +124,8 @@
 /* div css */
 #todolist {
     width: 400px;
-    left: 115px;
-    height: 420px;
+    left: 152px;
+    height: 414px;
     background-color: #FFEBBA;
     border: 4px solid;
     border-color: #FFEBBA;
@@ -118,17 +135,83 @@
 
 #selectDay {
     font-size: 100px;
-    color: darkslategray;
+    color: #414091;
     text-align: center;
     position: relative;
     right: 15px;
+    top: 10px;
 }
+
 
 #todoform {
 	position: relative;
-	text-align: center;
+	top: 10px;
+	left: 10px;
+/* 	text-align: center; */
 	
 }
+
+#inputbox {
+	left: 36px;
+    top: 24px;
+    position: relative;
+    width: 200px;
+    height: 30px;
+    font-size: 13px;
+    font-weight: 600;
+    border: 0;
+    border-radius: 10px;
+    outline: none;
+    padding-left: 15px;
+    background-color: rgb(233, 233, 233);
+    
+}
+
+/* TodoList 글자 */
+#todotext {
+	font-size: 20px;
+	font-weight: 600;
+	color: #FFB703;
+	position: relative;
+	left: 40px;
+	top: 20px;
+}
+
+/* input 버튼 */
+#todoBtn {
+    left: 46px;
+    width: 50px;
+    height: 28px;
+    top: 23px;
+    position: relative;
+    border: 0;
+    border-radius: 10px;
+    background-color: #FFB703;
+    FONT-SIZE: 11px;
+    font-weight: 500;
+}
+
+#listbox {
+    position: relative;
+    left: 60px;
+    top: 67px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+#listbox div {
+	width: 140px;
+}
+.btnDel {
+    position: relative;
+    margin-left: 52px;
+    left: 107px;
+    border: none;
+    background-color: transparent;
+}
+
+
+
 </style>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -187,20 +270,20 @@ $(document).ready(function() {
 	        	"<div id='calendarDiv'>" +
 	            "<table class='calendarTable'>" +
 	            "<colgroup>" +
-	            "<col style='width:80px'/>" +
-	            "<col style='width:80px'/>" +
-	            "<col style='width:80px'/>" +
-	            "<col style='width:80px'/>" +
-	            "<col style='width:80px'/>" +
-	            "<col style='width:80px'/>" +
-	            "<col style='width:80px'/>" +
+	            "<col style='width:60px'/>" +
+	            "<col style='width:60px'/>" +
+	            "<col style='width:60px'/>" +
+	            "<col style='width:60px'/>" +
+	            "<col style='width:60px'/>" +
+	            "<col style='width:60px'/>" +
+	            "<col style='width:60px'/>" +
 	            "</colgroup>" +
 	            "<thead class='calDate'>" +
 	            /* 이전달 이동 버튼 추가 */
-	            "<th><button type='button' class='prev'>‹</button></th>" +
-	            "<th colspan='2'><p><span>" + year + "</span>년 <span>" + month + "</span>월</p></th>" +
+	            "<th><button type='button' class='prev'>❮</button></th>" +
+	            "<th colspan='2'><p 'id=yymm'><span>" + year + "</span>년 <span>" + month + "</span>월</p></th>" +
 	            /* 다음달 이동 버튼 추가 */
-	            "<th><button type='button' class='next'>›</button></th>" +
+	            "<th><button type='button' class='next'>❯</button></th>" +
 	            "</thead>" +
 	            "<thead  class='calWeek'>" +
 	            "<th>SUN</th><th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th>" +
@@ -278,7 +361,7 @@ $(document).ready(function() {
 							var list = res.todoList
 							
 							for(var i = 0; i < list.length; i++ ){
-								$("#listbox").append('<div>'+list[i].todoList+'<button type="button" class="btnDel" onclick="deletelist('+list[i].sNo+')">'+"✖"+'</button>'+'</div>');
+								$("#listbox").append('<div id="listcontent">'+list[i].todoList+'<button type="button" class="btnDel" onclick="deletelist('+list[i].sNo+')">'+"✖"+'</button>'+'</div>');
 // 								$("#listbox").append('<div>'+list[i].todoList+'</div>');
 // 								$("#listbox").append('<div>'+list[i].todoList+'<button class="btnDel">'+"✖"+'</button>'+'</div>');
 // 								$("#listbox").append('<div id="listbox">'+list[i].todoList+'<a href="/calendar/delete?sNo='sNo'">'+"✖"+'</a>'+'</div>');
@@ -296,16 +379,6 @@ $(document).ready(function() {
 		    	 
 		    	 
 	    	 });
-	        
-// 	        	$(".btnDel").on('click', function (){
-// 	        		console.log("button 삭제");
-// 	        		location.href = "/calendar/delete?sNo=${sNO }"
-// 	        	})
-				
-				$("#btnDel").on("click", function() {
-					
-
-				});
 	        
 	        //토글 클래스
 // 	        $(".claendarTable").on("click", "td", function() {
@@ -337,7 +410,9 @@ $(document).ready(function() {
 				, success: function(res){
 					
 					console.log("delete ajax 성공");
-					
+// 					location.reload();
+// 					$("#listcontent").load("/calendar/listview");
+					$("#listcontent").remove();
 				}
 				, error: function(error) {
 			 		console.log("code:"+request.status+"\n"+"message"+request.responseText+"\n"+"error:"+error);
@@ -365,15 +440,15 @@ $(document).ready(function() {
 	
 	
 	<form id="todoform" method="POST">
-	List
+	<p id="todotext">Todo List<p>
 	<label><input type="text" name="todoList" id="inputbox"></label>
-	<button type="button" id="todoBtn">작성</button>
+	<button type="button" id="todoBtn">INPUT</button>
 	</form>
 	
 	<div id="listbox">
 		<table>
 		<tr>
-		<th>---------------------------</th>
+<!-- 		<th>---------------------------</th> -->
 		</tr>
 		
 		<tr>

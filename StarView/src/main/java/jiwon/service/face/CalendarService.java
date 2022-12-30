@@ -23,9 +23,9 @@ public interface CalendarService {
 
 	/**
 	 * 선택한 게시글 삭제하기
-	 * @param calendar
+	 * @param sNo
 	 */
-	public void delete(Calendar calendar);
+	public void delete(int sNo);
 
 
 //	/**
