@@ -101,9 +101,11 @@ $(document).ready(function() {
 
 
 <style type="text/css">
+
 table {
 	table-layout: fixed;
 }
+
 </style>
 
 <h1>게시글 상세 조회</h1>

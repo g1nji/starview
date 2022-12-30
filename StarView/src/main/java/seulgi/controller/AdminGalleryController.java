@@ -177,7 +177,7 @@ public class AdminGalleryController {
 	//게시글 삭제 - list에서
 	@ResponseBody
 	@RequestMapping("/deletee")
-	public int deleteselGallery(@RequestParam(value = "chbox[]") List<String> chArr, AdminGallery board) {
+	public int deleteeGallery(@RequestParam(value = "chbox[]") List<String> chArr, AdminGallery board) {
 		logger.info("/deletee 주소 연결");
 		
 		int result = 0;
