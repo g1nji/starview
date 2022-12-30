@@ -167,7 +167,7 @@ $(document).ready(() => {
 <div class="locBg" id="locDiv">
 <h4>지역 선택</h4>
 
-<label for="loc1" style="top:45px; left:220px;">
+<label for="loc1" style="top:30px; left:212px;">
 <span>강릉</span>
 <input type="radio" name="location" id="loc1" value="강릉">
 </label>
@@ -182,7 +182,7 @@ $(document).ready(() => {
 <span>대관령</span>
 </label>
 
-<label for="loc4" style="top:230px; left:50px;">
+<label for="loc4" style="top:230px; left:44px;">
 <input type="radio" name="location" id="loc4" value="대구">
 <span>대구</span>
 </label>
@@ -197,19 +197,89 @@ $(document).ready(() => {
 <span>서울</span>
 </label>
 
-<label for="loc7" style="top:13px; right:96px;">
+<label for="loc7" style="top:7px; right:110px;">
 <span>양양</span>
 <input type="radio" name="location" id="loc7" value="양양">
 </label>
 
-<label for="loc8" style="top:61px; left:154px;">
+<label for="loc8" style="top:54px; left:154px;">
 <input type="radio" name="location" id="loc8" value="양평">
 <span>양평</span>
 </label>
 
+<label for="loc9" style="top:73px; left:188px;">
+<input type="radio" name="location" id="loc9" value="태백">
+<span>태백</span>
+</label>
+
+<label for="loc10" style="top:236px; left:28px;">
+<input type="radio" name="location" id="loc10" value="남원">
+<span>남원</span>
+</label>
+
+<label for="loc11" style="top:395px; right:55px;">
+<input type="radio" name="location" id="loc11" value="제주">
+<span>제주</span>
+</label>
+
+<label for="loc12" style="top:46px; left:140px;">
+<input type="radio" name="location" id="loc12" value="울릉도">
+<span style="color: black;">울릉도</span>
+</label>
+
+<label for="loc13" style="top:80px; left:101px;">
+<input type="radio" name="location" id="loc13" value="독도">
+<span style="color: black;">독도</span>
+</label>
+
+<label for="loc14" style="top:284px; right:112px;">
+<input type="radio" name="location" id="loc3" value="진주">
+<span>진주</span>
+</label>
+
+<label for="loc3" style="top:88px; left:97px;">
+<input type="radio" name="location" id="loc3" value="천안">
+<span>천안</span>
+</label>
+
+<label for="loc3" style="top:114px; left:81px;">
+<input type="radio" name="location" id="loc3" value="대전">
+<span>대전</span>
+</label>
+
+<label for="loc3" style="top:203px; left:155px;">
+<span>울산</span>
+<input type="radio" name="location" id="loc14" value="울산">
+</label>
+
+<label for="loc15" style="top:178px; right:20px;">
+<input type="radio" name="location" id="loc15" value="전주">
+<span>전주</span>
+</label>
+
+<label for="loc16" style="top:43px; left:5px;">
+<input type="radio" name="location" id="loc16" value="영월">
+<span>영월</span>
+</label>
+
+<label for="loc17" style="top:241px; right:137px;">
+<input type="radio" name="location" id="loc17" value="광주">
+<span>광주</span>
+</label>
+
+<label for="loc18" style="top:164px; right:19px;">
+<span>포항</span>
+<input type="radio" name="location" id="loc18" value="포항">
+</label>
+
+<label for="loc19" style="top:303px; right:205px;">
+<span>여수</span>
+<input type="radio" name="location" id="loc19" value="여수">
+</label>
+
 </div>
 
-<button id="btn">조회</button>
+<button id="btn">일몰시간 출력하기</button>
 
 <div id="resultLayout"></div>
 
