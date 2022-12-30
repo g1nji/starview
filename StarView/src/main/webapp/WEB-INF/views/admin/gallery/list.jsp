@@ -33,13 +33,13 @@ $(document).ready(function() {
 	   });
 	    
 	   $.ajax({
-	    url : "./deletesel",
+	    url : "./deletee",
 	    type : "post",
 	    data : { chbox : checkArr },
 	    success : function(result){
 		     if(result == 1) {            
 		      alert("게시글이 삭제되었습니다");
-		      location.href = "./list";
+		      history.go(0);
 		     } else {
 		      alert("삭제 실패");
 		     }

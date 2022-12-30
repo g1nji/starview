@@ -35,12 +35,15 @@ table {
 
 td { 
 	width: 70px; 
+	padding: 3px 0;
 }
 
 .detail-img {
 	border-top: 2px solid black;
 	margin-top: 100px;
 }
+
+#selectQty { width: 50px; }
 
 .btn {
 	padding: 15px 30px;

@@ -66,6 +66,7 @@ public class AdminGoodsReviewServiceImpl implements AdminGoodsReviewService {
 	
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+	//게시글 삭제
 	@Override
 	public void delete(AdminGoodsReview board) {
 		logger.info("delete() 사용");
@@ -77,4 +78,27 @@ public class AdminGoodsReviewServiceImpl implements AdminGoodsReviewService {
 		adminBoardDao.delete(board);
 		
 	}
+	
+	//게시글 삭제
+	@Override
+	public void delete2(AdminGoodsReview board) {
+		logger.info("delete2() 사용");
+		
+		//게시글 삭제
+		adminBoardDao.delete(board);
+		
+	}
+	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	//게시글 검색
+	@Override
+	public List<AdminGoodsReview> search(String keyword) {
+		logger.info("search() 사용");
+		
+		return adminBoardDao.searchBoard(keyword);
+	}
+	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 }

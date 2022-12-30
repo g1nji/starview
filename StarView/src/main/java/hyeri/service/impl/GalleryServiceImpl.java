@@ -242,6 +242,8 @@ public class GalleryServiceImpl implements GalleryService {
 		galleryDao.likeUp(galleryNo, uId);
 		
 		galleryDao.updateLike(galleryNo);
+		
+		galleryDao.updateHit2(galleryNo);
 	}
 	
 	@Override
@@ -249,6 +251,8 @@ public class GalleryServiceImpl implements GalleryService {
 		galleryDao.likeDown(galleryNo, uId);
 		
 		galleryDao.updateLike(galleryNo);
+		
+		galleryDao.updateHit2(galleryNo);
 	}
 	
 	@Override

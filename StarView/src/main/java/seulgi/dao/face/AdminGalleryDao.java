@@ -91,6 +91,8 @@ public interface AdminGalleryDao {
 	 */
 	public void deleteComm(AdminGallery board);
 
+	public void insertBoard2(AdminGallery board);
+
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 //	public List<AdminBoard> selectAllBoard();

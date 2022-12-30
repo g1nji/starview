@@ -66,9 +66,9 @@ span {
 }
 
 .sort {
-	color: #C5C6B6; 
+	color: #999; 
 	padding-left: 8px;
-	padding-right: 8px;
+	padding-right: 11px;
 }
 
 .l { 
@@ -122,61 +122,62 @@ $(document).ready(function() {
 	$("#moreBtn").click(function() {
 		startIdx += step;
 		showMore(startIdx);
+	}) 
+	
+	function showMore(idx){
+		let endIdx = idx+step-1;
 		
-		function showMore(idx){
-			let endIdx = idx+step-1;
+		$.ajax({
+			type: "post"
+			, url: "/goods/more"
+			, data: JSON.stringify({
+				startIdx: idx,
+				endIdx: endIdx,
+				step: step
+			})
+			, contentType: "application/json; charset=UTF-8"
+			, dataType: "html"
+			, success: function( res ) {
+				console.log(startIdx)
+				console.log(endIdx)
+				console.log("AJAX 성공")
 			
-			$.ajax({
-				type: "post"
-				, url: "/goods/more"
-				, data: JSON.stringify({
-					startIdx: idx,
-					endIdx: endIdx,
-					step: step
-				})
-				, contentType: "application/json; charset=UTF-8"
-				, dataType: "html"
-				, success: function( res ) {
-					console.log(startIdx)
-					console.log(endIdx)
-					console.log("AJAX 성공")
+				$(".more").append( res );
 				
-					$(".more").append( res );
-					
-					//더보기 버튼 삭제
-					if(startIdx + step > total){
-						$('#moreBtn').remove();
-					}// if
-				}// success
-			}) //ajax	
-		} //--showMore()
-					
-	}) //-- .click() 
-	
+				//더보기 버튼 삭제
+				if(startIdx + step > total){
+					$('#moreBtn').remove();
+				}
+			}
+		})	
+	} 
 	//정렬선택시 체크아이콘 삽입
-	var chkimg = '<img style="width: 22px; height: 22px;" src="/resources/img/checkicon.png">';
+	var chkimg = '<img style="width: 17px; height: 17px; margin-right: 3px;" src="/resources/img/check.png">';
 	
+	//최신순 정렬
 	$('#latest').click(function() {
 		$('.chkicon').empty();
 		$('#chk1').append(chkimg)	
-		$('.sort').css('color', '#C5C6B6');
+		$('.sort').css('color', '#999');
 		$('#latest').css('color', 'black');
 		sortByDate();
 	})
 	
+	//낮은가격순 정렬
 	$('#lowPrice').click(function() {
 		$('.chkicon').empty()
 		$('#chk2').html(chkimg)	
-		$('.sort').css('color', '#C5C6B6');
+		$('.sort').css('color', '#999');
 		$('#lowPrice').css('color', 'black');
 		
 		sortByLowPrice();
 	})
 	
+	//높은가격순 정렬
 	$('#highPrice').click(function() {
 		$('.chkicon').empty()
 		$('#chk3').html(chkimg)	
-		$('.sort').css('color', '#C5C6B6');
+		$('.sort').css('color', '#999');
 		$('#highPrice').css('color', 'black');
 		sortByHighPrice();
 	})

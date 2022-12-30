@@ -451,10 +451,11 @@ var selectDate = (d)=>{
 }
 
 </script>
-
 </head>
-
 <body>
+
+<h1>추천일 등록</h1>
+<hr>
 
 <div id="dateDiv">
 <h3><span style="background-color: #9EA1D4; border-radius: 10%;">관측일자</span>&nbsp;&nbsp;<button id="btn" class="btn btn-defalut btn-sm">일자 조회</button></h3>
@@ -617,23 +618,27 @@ var selectDate = (d)=>{
 <div id="resultLayout2"></div>
 </div>
 
-<br>
 <hr>
 
 <div id="form">
 <form action="./date" method="post">
 
-<label for="form1">지역</label>
-<label for="form2" style="margin-left: 375px;">추천일</label>
-<label for="form3" style="margin-left: 360px;">추천시간</label><br>
+<label for="form1">지역</label><br>
+<input id="form1" name="recomLoc" type="text" style="width: 300px; height: 50px;"><br><br>
 
-<input id="form1" name="recomLoc" type="text" style="width: 300px; height: 100px;">
-<input id="form2" name="recomDate" type="text" style="width: 300px; height: 100px; margin-left: 100px;">
-<input id="form3" name="recomTime" type="text" style="width: 300px; height: 100px; margin-left: 100px;">
+<label for="form2">추천일</label><br>
+<input id="form2" name="recomDate" type="text" style="width: 300px; height: 50px;"><br><br>
 
-<br><br>
+<label for="form3">추천시간</label><br>
+<input id="form3" name="recomTime" type="text" style="width: 300px; height: 50px;"><br><br>
 
-<input type="submit" value="등록" class="btn btn-primary btn-sm" style="margin-left: 550px;">
+<label for="form4">강수확률</label><br>
+<input id="form4" name="rain" type="text" style="width: 300px; height: 50px;"><br><br>
+
+<label for="form4">하늘상태</label><br>
+<input id="form5" name="sky" type="text" style="width: 300px; height: 50px;"><br><br>
+
+<input type="submit" value="등록" class="btn btn-primary">
 </form>
 </div>
 

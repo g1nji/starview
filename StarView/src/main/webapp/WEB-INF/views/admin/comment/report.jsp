@@ -17,8 +17,14 @@ table, th {
 
 </style>
 
-<h1>'${keyword }'의 검색 결과</h1>
-<hr>
+<h1>신고 댓글 리스트</h1>
+
+<form id="searchForm" action="./search" method="get" style="float: right;">
+    <input id="keyword" name="keyword" type="text" placeholder="검색할 아이디를 입력하세요" value="">
+	<button class="btnSearch">검색</button>
+</form>
+
+<br><br>
 
 <table class="table table-hover">
 <thead>
@@ -37,18 +43,14 @@ table, th {
 		</script>
 		
 		<th>작성자</th>
-		<th>제목</th>
-		<th>내용</th>
-		<th>위치</th>
-		<th>태그</th>
-		<th>등록일</th>
+		<th>댓글내용</th>
+		<th>신고일</th>
 	</tr>
 </thead>	
 <tbody>
-
-<c:forEach items="${searchList }" var="b">
+<c:forEach items="${CommList }" var="c">
 	<tr>
-		<td><input type="checkbox" name="chBox" class="chBox" select_data="${b.galleryNo }"></td>
+		<td><input type="checkbox" name="chBox" class="chBox" select_data="${c.cmNo }"></td>
 		
 		<script>
 		 $(".chBox").click(function(){
@@ -56,17 +58,15 @@ table, th {
 		 });
 		</script>
 		
-		<td>${b.uId }</td>
-		<td><a href="./view?galleryNo=${b.galleryNo }">${b.galleryTitle }</a></td>
-		<td>${b.galleryContent }</td>
-		<td>${b.galleryLoc }</td>
-		<td>${b.galleryTag }</td>
-		<td><fmt:formatDate value="${b.galleryDate }" pattern="yy-MM-dd HH:mm:ss"/></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
 	</tr>
 </c:forEach>
 </tbody>
 </table>
 
-<button class="btnBack btn btn-default" onclick="location.href='./list'" style="float:right;">다시 검색하기</button>
+<button type="button" class="selectDelete_btn btn btn-danger" style="float: right;">선택 삭제</button>
 
 <c:import url="../layout/footer.jsp" />

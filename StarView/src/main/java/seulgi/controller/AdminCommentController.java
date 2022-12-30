@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import seulgi.dto.AdminComment;
 import seulgi.service.face.AdminCommentService;
+import seulgi.util.Paging;
 
 @Controller
 @RequestMapping(value="/admin/comment")
@@ -26,14 +26,20 @@ public class AdminCommentController {
 	@Autowired
 	private AdminCommentService adminCommentService;
 	
-	//페이징 추가
 	//댓글 리스트
 	@RequestMapping(value="/list")
-	public void commList(Model model) {
+	public void commList(Model model, @RequestParam(defaultValue = "0") int curPage) {
 		logger.info("/list 주소 연결");
 		
-		//댓글 조회
-		List<AdminComment> commList = adminCommentService.list();
+		//페이징 추가
+		Paging paging = adminCommentService.getPaging(curPage);
+		logger.info("페이징 정보: {}", paging);
+		
+		//모델값 전달
+		model.addAttribute("paging", paging);
+		
+		//댓글 리스트
+		List<AdminComment> commList = adminCommentService.list(paging);
 		
 		//모델값 전달
 		model.addAttribute("commList", commList);
@@ -42,9 +48,9 @@ public class AdminCommentController {
 
 	//댓글 삭제 - list에서
 	@ResponseBody
-	@RequestMapping("/deletesel")
-	public int deleteselComm(@RequestParam(value = "chbox[]") List<String> chArr, AdminComment board) {
-		logger.info("/delete 주소 연결");
+	@RequestMapping("/deletee")
+	public int deleteselGallery(@RequestParam(value = "chbox[]") List<String> chArr, AdminComment board) {
+		logger.info("/deletee 주소 연결");
 		
 		int result = 0;
 		int select_data = 0;
@@ -61,20 +67,74 @@ public class AdminCommentController {
 	}
 	
 	//댓글 삭제 - view에서
+	@ResponseBody
 	@RequestMapping("/delete")
-	public String deleteComm(AdminComment board) {
+	public int deleteselComm(@RequestParam String checkArr, AdminComment board) {
 		logger.info("/delete 주소 연결");
+		
+		int result = 0;
+		int select_data = 0;
+		 
+		select_data = Integer.parseInt(checkArr);
+		board.setCmNo(select_data);
 		
 		adminCommentService.delete(board);
 		
-		return "redirect:/admin/comment/list";
+		result = 1;
+			  
+		return result;  
 	}
 	
-	//검색-아이디, 페이징
+	//댓글 삭제
+//	@RequestMapping("/delete")
+//	public String deleteComm(AdminComment board) {
+//		logger.info("/delete 주소 연결");
+//		
+//		adminCommentService.delete(board);
+//		
+//		return "redirect:/admin/comment/list";
+//	}
+	
+	//댓글 검색
+	@RequestMapping("/search")
+	public void searchGallery(Model model, @RequestParam(required = false) String keyword) {
+		logger.info("/search 주소 연결");
+		
+		//검색된 댓글 리스트
+		List<AdminComment> searchList = adminCommentService.search(keyword);
+		
+		//for (AdminComment b : searchList)
+		//logger.info("검색된 댓글: {}", searchList);
+		logger.info("검색어: {}", keyword);
+	
+		//모델값 전달
+		model.addAttribute("searchList", searchList);
+		model.addAttribute("keyword", keyword);
+	}
 	
 	//댓글 신고
-	@RequestMapping(value="/report", method = RequestMethod.GET)
-	public void reportComment() {
+	@ResponseBody
+	@RequestMapping(value="/reportt")
+	public int reportComment(@RequestParam String checkArr, AdminComment board) {
+		logger.info("/reportt 주소 연결");
+		
+		int result = 0;
+		int select_data = 0;
+		 
+		select_data = Integer.parseInt(checkArr);
+		board.setCmNo(select_data);
+		
+		adminCommentService.report(board);
+		
+		result = 1;
+			  
+		return result; 
+	}
+	
+	//페이징 추가
+	//댓글 신고 리스트
+	@RequestMapping(value="/report")
+	public void reportCommList(Model model) {
 		logger.info("/report 주소 연결");
 	}
 	

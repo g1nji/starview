@@ -9,11 +9,21 @@
 
 	<!-- 댓글 리스트 -->
 	<select id="selectAll" resultType="seulgi.dto.AdminComment">
-		SELECT * FROM g_comment
-		ORDER BY cm_no DESC
+		SELECT * FROM (
+			SELECT rownum rnum, G.* FROM (
+				SELECT * FROM g_comment
+				ORDER BY cm_no DESC
+			) G
+		) g_comment
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
 	</select>
 	
-	<!-- 댓글 상세 조회 -->
+	<!-- 댓글 개수 조회 -->
+	<select id="selectCntAll" resultType="int">
+		select count(*) from g_comment
+	</select>
+	
+	<!-- 게시글에서 댓글 조회 -->
 	<select id="selectComment" resultType="seulgi.dto.AdminComment" parameterType="seulgi.dto.AdminGallery">
 		SELECT * FROM g_comment
 		WHERE gallery_no = #{galleryNo }
@@ -24,5 +34,20 @@
 		DELETE g_comment
 		WHERE cm_no = #{cmNo }
 	</delete>
+	
+	<!-- 댓글 검색 -->
+	<select id="searchBoard" resultType="seulgi.dto.AdminComment" parameterType="String">
+		<![CDATA[
+		SELECT * FROM g_comment
+		WHERE u_id LIKE '%'||#{uId }||'%'
+		ORDER BY cm_no DESC
+		]]>
+	</select>
+	
+	<!-- 댓글 신고 -->
+	<insert id="insertBoard" parameterType="seulgi.dto.AdminComment">
+		INSERT INTO admin_comment_report (report_code, cm_no)
+		VALUES (acr_seq.nextval, #{cmNo })
+	</insert>
 	
 </mapper>
