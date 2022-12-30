@@ -39,9 +39,12 @@ table {
 
 <table class="table">
 <tr class="">
-	<td rowspan="5">
+	<!-- 파일이 있는 경우만 -->
+	<c:if test="${not empty prodFile}">
+	<th rowspan="5">
 		<img src='/prodFile/${prodFile.fileName }' style="width: 400px; height: 400px;" /><br>
-	</td>
+	</th>
+	</c:if>
 	<th class="warning" style="width: 10%">상품명</th><td>${viewProd.gName}</td>
 	</tr>
 	<tr>

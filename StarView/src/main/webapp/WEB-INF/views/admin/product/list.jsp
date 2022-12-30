@@ -33,19 +33,48 @@ function selectAll(selectAll)  {
 
 $(document).ready(function() {
 	
-	//구현중
-	//선택
-	$('#select').click(function() {
-		var sel = $('input[name="select"]:checked').val()
-		//console.log(sel)
-		
-		//삭제
-		$('#delOk').click(function() {
-			if (confirm('삭제하시면 복구할 수 없습니다. \n정말로 삭제하시겠습니까?')) {
-				location.href = "./delete?gId=" + sel
-			}
-		})
+	//checkBox 선택된 게시글 삭제
+	$(".selectDelete_btn").click(function(){
+	  var confirm_val = confirm("[게시글] \n삭제하시면 복구할 수 없습니다. \n정말로 삭제하시겠습니까?");
+	  
+	  if(confirm_val) {
+	   var checkArr = new Array();
+	   
+	   $("input[class='chBox']:checked").each(function(){
+	    checkArr.push($(this).attr("select_data"));
+	   });
+	    
+	   $.ajax({
+	    url : "./deletee",
+	    type : "post",
+	    data : { chbox : checkArr },
+	    success : function(result){
+		     if(result == 1) {            
+		      alert("상품이 삭제되었습니다");
+		      history.go(0);
+		     } else {
+		      alert("삭제 실패");
+		     }
+		    }
+	   });
+	  } 
+	 });
+
+	//검색
+	$("#btnSearch").click(function() {
+		location.href = "./search?keyword" + $('input[name="keyword"]:checked').val();
 	})
+	
+	var searchForm = $('#searchForm');
+	$('#searchForm button').on('click', function(e) {
+		if (!searchForm.find('input[name="keyword"]').val()) {
+			alert('검색어를 입력하세요');
+			return false;
+		}
+		e.preventDefault();
+		searchForm.submit();
+		location.href = "./search?keyword=" + document.getElementById('keyword').value;
+	});
 
 })
 
@@ -64,7 +93,19 @@ $(document).ready(function() {
 <table class="table table-hover">
 <thead>
 	<tr class="warning">
-		<th><input type='checkbox' name='all' value='selectall' onclick='selectAll(this)'/></th>
+		<th style="width: 10%;"><input type="checkbox" name="allCheck" id="allCheck" /></th>
+
+		<script>
+		$("#allCheck").click(function(){
+		 var chk = $("#allCheck").prop("checked");
+		 if(chk) {
+		  $(".chBox").prop("checked", true);
+		 } else {
+		  $(".chBox").prop("checked", false);
+		 }
+		});
+		</script>
+		
 		<th>상품명</th>
 		<th>상품 가격</th>
 		<th>상품 설명</th>
@@ -73,9 +114,17 @@ $(document).ready(function() {
 	</tr>
 </thead>	
 <tbody>
+
 <c:forEach items="${prodList }" var="p">
 	<tr>
-		<td><input id="select" type="checkbox" name="select" value="${p.gId }"></td>
+		<td><input type="checkbox" name="chBox" class="chBox" select_data="${p.gId }"></td>
+		
+		<script>
+		 $(".chBox").click(function(){
+		  $("#allCheck").prop("checked", false);
+		 });
+		</script>
+		
 		<td><a href="./view?gId=${p.gId }">${p.gName }</a></td>
 		<td>${p.gPrice }</td>
 		<td>${p.gDetail }</td>
@@ -89,7 +138,7 @@ $(document).ready(function() {
 
 <span class="pull-right">total : ${paging.totalCount }</span><br><br>
 
-<button id="delOk" class="btn btn-danger" style="float: right">삭제</button><br>
+<button type="button" class="selectDelete_btn btn btn-danger" style="float: right;">선택 삭제</button> 
 
 <c:import url="../layout/paging.jsp" />
 

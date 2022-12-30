@@ -155,7 +155,9 @@ table {
 
 <!-- 아이디 추가 -->
 <div class="btns" style="text-align: center">
+<!-- 
 <button id="btnReport" class="btn btn-primary" style="display: inline-block;" value="${viewBoard.galleryNo }" select_data="${viewBoard.galleryNo }">신고</button>
+ -->
 <button id="btnDelete" class="btn btn-danger" style="display: inline-block;">삭제</button>
 </div>
 
@@ -168,7 +170,10 @@ table {
 			<td colspan="2" style="width: 68%">${c.cmContent }</td>
 	
 			<td>
+				<!-- 
 				<button type="button" class="report_btn btn-primary btn-sm" value="${c.cmNo }" select_data="${c.cmNo }">신고</button>
+				 -->
+				
 				<button type="button" class="delete_btn btn-danger btn-sm" value="${c.cmNo }" select_data="${c.cmNo }">삭제</button>
 			</td>
 		</tr>

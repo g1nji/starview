@@ -49,7 +49,7 @@ public class AdminCommentController {
 	//댓글 삭제 - list에서
 	@ResponseBody
 	@RequestMapping("/deletee")
-	public int deleteselGallery(@RequestParam(value = "chbox[]") List<String> chArr, AdminComment board) {
+	public int deleteeComm(@RequestParam(value = "chbox[]") List<String> chArr, AdminComment board) {
 		logger.info("/deletee 주소 연결");
 		
 		int result = 0;
@@ -69,7 +69,7 @@ public class AdminCommentController {
 	//댓글 삭제 - view에서
 	@ResponseBody
 	@RequestMapping("/delete")
-	public int deleteselComm(@RequestParam String checkArr, AdminComment board) {
+	public int deleteComm(@RequestParam String checkArr, AdminComment board) {
 		logger.info("/delete 주소 연결");
 		
 		int result = 0;

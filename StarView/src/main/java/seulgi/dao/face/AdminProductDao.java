@@ -73,12 +73,12 @@ public interface AdminProductDao {
 	 * 
 	 * @param prod - 삭제할 상품 번호
 	 */
-	public void delete(AdminProduct prod);
+	public void deleteProd(AdminProduct prod);
 
 	public AdminProductFile selectImageFile2(AdminGoodsReview viewBoard);
-
 	public void deleteFile2(AdminGoodsReview board);
-
 	public AdminProduct selectProd2(AdminGoodsReview viewBoard);
+
+	public List<AdminProduct> searchProd(String keyword);
 
 }

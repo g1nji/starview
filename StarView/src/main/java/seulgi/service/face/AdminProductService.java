@@ -80,5 +80,7 @@ public interface AdminProductService {
 	public AdminProductFile getAttachFile(AdminGoodsReview viewBoard);
 
 	public AdminProduct view(AdminGoodsReview viewBoard);
+
+	public List<AdminProduct> search(String keyword);
 	
 }

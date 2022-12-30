@@ -184,5 +184,4 @@
 		VALUES (abr_seq.nextval, #{galleryNo })
 	</insert>
 	
-	
 </mapper>

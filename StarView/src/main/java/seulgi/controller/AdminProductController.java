@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import seulgi.dto.AdminProduct;
@@ -131,7 +132,27 @@ public class AdminProductController {
 		return "redirect:/admin/product/view?gId=" + prod.getgId();
 	}
 	
-	//상품 삭제
+	//상품 삭제 - list에서
+	@ResponseBody
+	@RequestMapping("/deletee")
+	public int deleteeProd(@RequestParam(value = "chbox[]") List<String> chArr, AdminProduct prod) {
+		logger.info("/deletee 주소 연결");
+		
+		int result = 0;
+		int select_data = 0;
+		 
+		for(String i : chArr) {   
+			select_data = Integer.parseInt(i);
+			prod.setgId(select_data);
+			adminProductService.delete(prod);
+		}
+		
+		result = 1;
+			  
+		return result;  
+	}
+	
+	//상품 삭제 - view에서
 	@RequestMapping("/delete")
 	public String deleteProd(AdminProduct prod) {
 		logger.info("/delete 주소 연결");
@@ -141,6 +162,22 @@ public class AdminProductController {
 		return "redirect:/admin/product/list";
 	}
 	
-	//검색-상품명, 페이징
+	//상품 검색
+	@RequestMapping("/search")
+	public void searchProd(Model model, @RequestParam(required = false) String keyword) {
+		logger.info("/search 주소 연결");
+		
+		//검색된 게시글 리스트
+		List<AdminProduct> searchList = adminProductService.search(keyword);
+		
+		//for (AdminProduct b : searchList)
+		//logger.info("검색된 게시글: {}", searchList);
+		
+		logger.info("검색어: {}", keyword);
+	
+		//모델값 전달
+		model.addAttribute("searchList", searchList);
+		model.addAttribute("keyword", keyword);
+	}
 	
 }
