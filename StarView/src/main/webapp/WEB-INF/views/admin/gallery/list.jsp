@@ -137,7 +137,10 @@ $(document).ready(function() {
 		</script>
 		
 		<td>${b.uId }</td>
-		<td><a href="./view?galleryNo=${b.galleryNo }">${b.galleryTitle }</a></td>
+		<td>
+			<a href="./view?galleryNo=${b.galleryNo }">${b.galleryTitle }</a><br>
+			<a href="/gallery/view?galleryNo=${b.galleryNo }">게시글 확인</a>
+		</td>
 		<td>${b.galleryContent }</td>
 		<td>${b.galleryLoc }</td>
 		<td>${b.galleryTag }</td>

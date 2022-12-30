@@ -234,7 +234,16 @@ public class AdminProductServiceImpl implements AdminProductService {
 		adminProductDao.deleteFile(prod);
 		
 		//게시글 삭제
-		adminProductDao.delete(prod);
+		adminProductDao.deleteProd(prod);
+	}
+
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	@Override
+	public List<AdminProduct> search(String keyword) {
+		logger.info("search() 사용");
+		
+		return adminProductDao.searchProd(keyword);
 	}
 	
 }

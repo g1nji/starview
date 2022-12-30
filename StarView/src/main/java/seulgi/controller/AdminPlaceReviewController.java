@@ -49,6 +49,7 @@ public class AdminPlaceReviewController {
 	
 	//상세
 	//삭제
+	//선택 삭제
 	//검색-장소명, 페이징
 	
 }

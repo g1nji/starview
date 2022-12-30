@@ -126,7 +126,11 @@ $(document).ready(function() {
 			<strong style="font-size: 17px;">${c.uNick }</strong>
 			<br> ${c.uId }
 		</td>
-		<td><a href="../gallery/view?galleryNo=${c.galleryNo }">${c.cmContent }</a></td>
+		<td>
+			<a href="../gallery/view?galleryNo=${c.galleryNo }">${c.cmContent }</a>
+			<br>
+			<a href="/gallery/view?galleryNo=${c.galleryNo }">댓글 확인</a>
+		</td>
 		<td><fmt:formatDate value="${c.cmDate }" pattern="yy-MM-dd HH:mm:ss"/></td>
 	</tr>
 </c:forEach>
