@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,34 +38,34 @@ public class GalleryController {
 	@Autowired GalleryService galleryService;
 	@Autowired CommentService commentService;
 	
+//	게시글 리스트 조회
 	@RequestMapping("/list")
 	public void list(@RequestParam(defaultValue = "0") int curPage, Model model,
 			Gallery viewGallery, GComment gComment) {
 		
 		Paging paging = galleryService.getPaging(curPage);
-//		logger.info("{}", paging);
 		model.addAttribute("paging", paging);
 		
 		List<Gallery> list = galleryService.list(paging);
-		for( Gallery g : list ) logger.info("{}", g);
+//		for( Gallery g : list ) logger.info("{}", g);
 		model.addAttribute("list", list);
 		
 	}
 	
+	
+//	게시글 상세 조회
 	@RequestMapping("/view")
-	public void view(Gallery viewGallery, int galleryNo, Model model) {
+	public void view(Gallery viewGallery, int galleryNo, Model model, HttpSession session) {
 		logger.info("/view");
 		
 		//게시글 조회
 		viewGallery = galleryService.view(viewGallery);
-//		logger.info("{}", viewGallery);
 		
 		//모델값 전달
 		model.addAttribute("viewGallery", viewGallery);
 		
 		//첨부파일 모델값 전달
 		GalleryFile galleryFile = galleryService.getAttachFile(viewGallery);
-//		logger.info("{}", galleryFile);
 		model.addAttribute("galleryFile", galleryFile);
 		
 		//덧글 조회
@@ -74,16 +75,60 @@ public class GalleryController {
 		//모델값 전달
 		model.addAttribute("comment", list);
 		
-		//좋아요 기능
+		//태그 조회
+		List<GTag> list2 = null;
+		list2 = galleryService.viewTag(galleryNo);
+		
+		logger.info("태그 리스트 : {}", list2);
+		
+		//모델값 전달
+		model.addAttribute("tags", list2);
+		
+		//좋아요 확인
+		String uId = (String)session.getAttribute("uId");
+		int like = galleryService.findLike(galleryNo, uId);
+		int getLike = galleryService.getLike(galleryNo);
+		
+		//모델값 전달
+		model.addAttribute("like", like);
+		model.addAttribute("getLike", getLike);
 		
 	}
 	
+	//좋아요 추가
+	@PostMapping("/likeup")
+	public String likeupPost(
+			Gallery viewGallery
+			, int galleryNo
+			, String uId
+			, Model model) {
+		
+		galleryService.likeUp(galleryNo, uId);
+		
+		return "redirect:/gallery/view?galleryNo=" + viewGallery.getGalleryNo();
+	}
+	
+	//좋아요 취소
+	@PostMapping("/likedown")
+	public String likedownPost(
+			Gallery viewGallery
+			, int galleryNo
+			, String uId
+			, Model model) {
+		
+		galleryService.likeDown(galleryNo, uId);
+		
+		return "redirect:/gallery/view?galleryNo=" + viewGallery.getGalleryNo();
+	}
+	
+//	게시글 작성 get
 	@GetMapping("/write")
 	public void write() {
 		logger.info("/write [GET]");
 		
 	}
 	
+//	게시글 작성 post
 	@PostMapping("/write")
 	public String writeProc(
 			Gallery gallery,
@@ -99,6 +144,7 @@ public class GalleryController {
 
 		logger.info("{}", tag);
 		
+//		태그가 있을 경우
 		if( tag != null && !tag.equals("") ) {
 			
 			JsonArray jsonArray = JsonParser.parseString(tag).getAsJsonArray();
@@ -119,6 +165,7 @@ public class GalleryController {
 			galleryService.write(gallery, file, tagList);
 			
 			
+//		태그가 없을 경우
 		} else {
 			galleryService.write2(gallery, file);
 		}
@@ -131,6 +178,8 @@ public class GalleryController {
 		return "redirect:./list";
 	}
 	
+	
+//	게시글 수정 get
 	@GetMapping("/update")
 	public String update(Gallery viewGallery, Model model) {
 		logger.info("{}", viewGallery);
@@ -151,23 +200,29 @@ public class GalleryController {
 		return "/gallery/update";
 	}
 	
+	
+//	게시글 수정 post
 	@PostMapping("/update")
 	public String updateProcess(Gallery viewGallery, MultipartFile file) {
 		logger.info("/update [POST]");
 		
-		galleryService.update(viewGallery, file);
+//		galleryService.update(viewGallery, file);
 		
 		return "redirect:/gallery/view?galleryNo=" + viewGallery.getGalleryNo();
 	}
 	
+	
+//	게시글 삭제
 	@RequestMapping("/delete")
-	public String delete(Gallery gallery) {
+	public String delete(
+			Gallery viewGallery) {
 		
-		galleryService.delete(gallery);
+		galleryService.delete(viewGallery);
 		
 		return "redirect:./list";
 	}
 	
+//	게시글 검색
 	@PostMapping("/search")
 	public String search(String keywordInput, Model model) {
 		
@@ -180,7 +235,13 @@ public class GalleryController {
 			
 			model.addAttribute("gallery", gallery);
 			
-			return "redirect:./search_list";
+			logger.info("검색결과 : {}", gallery);
+			
+			if( gallery.isEmpty() ) {
+				return "redirect:./search_not-found";
+			}
+			
+			return "redirect:./search_list?keyword=" + keywordInput;
 
 		} else {
 		

@@ -12,14 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import seulgi.dto.AdminGallery;
 import seulgi.dto.AdminProduct;
 import seulgi.dto.AdminProductFile;
 import seulgi.service.face.AdminProductService;
 import seulgi.util.Paging;
 
 @Controller
-@RequestMapping(value="/admin/prod")
+@RequestMapping(value="/admin/product")
 public class AdminProductController {
 	
 	//로그 객체
@@ -37,6 +36,8 @@ public class AdminProductController {
 		//페이징 추가
 		Paging paging = adminProductService.getPaging(curPage);
 		logger.info("페이징 정보: {}", paging);
+		
+		//모델값 전달
 		model.addAttribute("paging", paging);
 		
 		//상품 리스트 조회
@@ -45,6 +46,7 @@ public class AdminProductController {
 		//for (AdminProduct p : prodList)
 			//logger.info("{}", p);
 		
+		//모델값 전달
 		model.addAttribute("prodList", prodList);
 	}
 	
@@ -55,7 +57,7 @@ public class AdminProductController {
 
 		//잘못된 상품 번호 처리
 		if( viewProd.getgId() < 0 ) {
-			return "redirect:/admin/prod/list";
+			return "redirect:/admin/product/list";
 		}
 		
 		//상품 상세 조회
@@ -65,11 +67,13 @@ public class AdminProductController {
 		//모델값 전달
 		model.addAttribute("viewProd", viewProd);
 		
-		//첨부파일 모델값 전달
+		//첨부파일 조회
 		AdminProductFile prodFile = adminProductService.getAttachFile(viewProd);
+		
+		//모델값 전달
 		model.addAttribute("prodFile", prodFile);
 		
-		return "admin/prod/view";
+		return "admin/product/view";
 	}
 	
 	//상품 업로드 페이지
@@ -87,7 +91,7 @@ public class AdminProductController {
 		//게시글, 첨부파일 처리
 		adminProductService.upload(prod, file);
 		
-		return "redirect:/admin/prod/list";
+		return "redirect:/admin/product/list";
 	}
 	
 	//상품 수정 페이지
@@ -97,21 +101,23 @@ public class AdminProductController {
 		
 		//잘못된 상품 번호 처리
 		if( prod.getgId() < 0 ) {
-			return "redirect:/admin/prod/list";
+			return "redirect:/admin/product/list";
 		}
 		
 		//상품 상세 조회
 		prod = adminProductService.view(prod);
 		logger.info("조회된 상품: {}", prod);
 		
-		//첨부파일 모델값 전달
+		//첨부파일 조회
 		AdminProductFile prodFile = adminProductService.getAttachFile(prod);
+		
+		//모델값 전달
 		model.addAttribute("prodFile", prodFile);
 		
 		//모델값 전달
 		model.addAttribute("updateProd", prod);
 		
-		return "admin/prod/update";
+		return "admin/product/update";
 	}
 
 	//상품 수정
@@ -122,7 +128,7 @@ public class AdminProductController {
 		//adminProductService.update(prod);
 		adminProductService.update(prod, file);
 		
-		return "redirect:/admin/prod/view?gId=" + prod.getgId();
+		return "redirect:/admin/product/view?gId=" + prod.getgId();
 	}
 	
 	//상품 삭제
@@ -132,7 +138,9 @@ public class AdminProductController {
 		
 		adminProductService.delete(prod);
 		
-		return "redirect:/admin/prod/list";
+		return "redirect:/admin/product/list";
 	}
+	
+	//검색-상품명, 페이징
 	
 }

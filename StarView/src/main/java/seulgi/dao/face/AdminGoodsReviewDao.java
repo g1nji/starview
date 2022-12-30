@@ -9,5 +9,8 @@ public interface AdminGoodsReviewDao {
 
 	public int selectCntAll();
 	public List<AdminGoodsReview> selectAll(Paging paging);
+	public AdminGoodsReview selectBoard(AdminGoodsReview viewBoard);
+	public void delete(AdminGoodsReview board);
+	public List<AdminGoodsReview> searchBoard(String keyword);
 
 }

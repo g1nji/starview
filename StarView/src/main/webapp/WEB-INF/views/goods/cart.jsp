@@ -9,9 +9,41 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <link rel="stylesheet" href="/resources/css/cartCss.css" />
-
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
 
 <script type="text/javascript">
+
+//체크박스 전체 선택
+function selectAll(allCheck) {
+  const checkboxes = document.querySelectorAll('.chBox');
+
+  checkboxes.forEach((checkbox) => {
+    checkbox.checked = allCheck.checked
+	  })
+}
+
+//수량변경
+function changeQty(type, ths){
+	var input = $(ths).parents("td").find("input[class='input-qty']");
+	var min = 1;
+	var max = 9;
+	
+	var count = Number(input.val());
+	if(type=='p'){
+		if(count < max){
+		input.val(count+1)
+		} else if(count == max) {
+			input.val(max);
+		}
+	} else if(type=='m'){
+		if(count > min){
+		input.val(count-1)
+		} else if(count == min) {
+			input.val(min);
+		}
+	}
+}
+
 $(document).ready(function() {
 
 	//DOM객체 로딩시 총금액 보이도록 이벤트 발생시키기
@@ -130,10 +162,10 @@ $(document).ready(function() {
 	//수량 변경
 	$('.qty-update').click(function(){
 		if(confirm('수량을 변경하시겠습니까?')){
-			let cId = $(this).attr("data-cId"); 	//현 jQuery버전에서는 .data()적용안됨
+			let gId = $(this).attr("data-gId"); 	//현 jQuery버전에서는 .data()적용안됨
 			let gPrice = $(this).attr("data-gPrice");
 			let cQty = $(this).parent("td").find("input").val();
-			var data = { cId:cId, cQty:cQty }
+			var data = { gId:gId, cQty:cQty }
 			
 			console.log(data);
 			
@@ -199,7 +231,7 @@ $(document).ready(function() {
 
 </head>
 <body>
-
+<h1 style="text-align: center; font-size: 44px; font-family: 'Raleway', sans-serif;">SHOPPING BAG</h1>
 <h3 class="bag-title">쇼핑백 상품(${totalCart})</h3>
 
 <section>
@@ -210,16 +242,6 @@ $(document).ready(function() {
 <thead>
 <tr>
 	<th><input type="checkbox" name="chBox" id="allCheck" onclick="selectAll(allCheck)"></th>
-		<script>
-		//체크박스 전체 선택
-		function selectAll(allCheck) {
-		  const checkboxes = document.querySelectorAll('.chBox');
-	  
-		  checkboxes.forEach((checkbox) => {
-		    checkbox.checked = allCheck.checked
-	  	  })
-		}
-		</script>
 	<th style="width: 35%">상품정보</th>
 	<th style="width: 15%">수량</th>
 	<th style="width: 15%">가격</th>
@@ -230,6 +252,11 @@ $(document).ready(function() {
 </thead>
 
 <tbody id="cart">
+<c:choose>
+	<c:when test="${empty cartList}">
+		<tr><td colspan="7" style="text-align: center; height: 73px;">쇼핑백에 담긴 상품이 없습니다</td></tr>
+	</c:when>
+	<c:otherwise>
 	<c:forEach items="${cartList }" var="cart">
 		<tr>
 			<td>
@@ -237,7 +264,7 @@ $(document).ready(function() {
 			</td>
 			<td class="prod">
 				<img class="thumbnail" src="${cart.fileName }">
-				<span style="">${cart.gName }</span>
+				<span>${cart.gName }</span>
 			</td>
 			
 			<td class="prodQty" style="text-align: center;">
@@ -250,29 +277,7 @@ $(document).ready(function() {
 <!-- 					<input type="number" class="input-qty" min="1" max="9" value="1"> -->
 <!-- 						<input type="hidden" name="cId" class="update-cId"> -->
 <!-- 						<input type="hidden" name="cQty" class="update-cQty"> -->
-					
-					<script>
-						function changeQty(type, ths){
-							var input = $(ths).parents("td").find("input[class='input-qty']");
-							var min = 1;
-							var max = 9;
-							
-							var count = Number(input.val());
-							if(type=='p'){
-								if(count < max){
-								input.val(count+1)
-								} else if(count == max) {
-									input.val(max);
-								}
-							} else if(type=='m'){
-								if(count > min){
-								input.val(count-1)
-								} else if(count == min) {
-									input.val(min);
-								}
-							}
-						}
-					</script>
+
 				</form>
 				</div>
 				<button class="qty-update" data-gId="${cart.gId }" data-gPrice="${cart.gPrice }">변경</button>
@@ -289,6 +294,8 @@ $(document).ready(function() {
 			</td>
 		</tr>
 	</c:forEach>
+	</c:otherwise>
+</c:choose>	
 </tbody>
 </table>
 
@@ -324,5 +331,7 @@ $(document).ready(function() {
 <div class="clear"></div>
 
 <br><br><br><br>
+
+
 
 <c:import url="../layout/footer.jsp" />

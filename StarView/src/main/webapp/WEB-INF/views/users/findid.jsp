@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<c:import url="../layout/header.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +17,35 @@ html {
 	text-align: center;
 	margin: 0 auto;
 	padding: 0 auto;
-	display: 
+}
+
+button{
+	margin-left: 10px;
+	border:2px solid  #6b80f1;
+    color:#fff;
+    background-color: #6b80f1;
+    
+    padding: 4px 8px;
+    height: 32px;
+    font-size: 14px;
+    line-height: 20px;
+    
+    display: inline-block;
+    box-sizing: border-box;
+    text-align: center;
+    margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+form{
+	border:1px solid #ccc;
+	width:500px;
+	margin: 0 auto 250px;
+	
+}
+
+#phone{
+	margin-top: 20px;
 }
 </style>
 
@@ -70,7 +98,6 @@ const autoHyphen2 = (target) => {
 </head>
 <body>
 
-<h1>별보러가자</h1>
 <br>
 <h3>아이디 찾기</h3>
 <br>
@@ -87,8 +114,8 @@ const autoHyphen2 = (target) => {
 
 <label for="uPhone">전화번호</label>
 <input type="text" id="uPhone" name="uPhone" oninput="autoHyphen2(this)" maxlength="13" placeholder="전화번호를 입력해보세요!">
-<button type="button">인증번호</button><br>
-<input type="text" id="passPhone" name="passPhone">
+<!-- <button type="button">인증번호</button><br>
+<input type="text" id="passPhone" name="passPhone"> -->
 
 </div>
 
@@ -104,8 +131,8 @@ const autoHyphen2 = (target) => {
 
 <label for="name">이메일</label>
 <input type="text" id="uEmail" name="uEmail">
-<button type="button">인증번호</button><br>
-<input type="text" id="passMail" name="passMail">
+<!-- <button type="button">인증번호</button><br>
+<input type="text" id="passMail" name="passMail"> -->
 
 </div>
 
@@ -115,3 +142,4 @@ const autoHyphen2 = (target) => {
 
 </body>
 </html>
+<c:import url="../layout/footer.jsp" />

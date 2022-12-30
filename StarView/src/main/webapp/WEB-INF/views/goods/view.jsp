@@ -35,12 +35,15 @@ table {
 
 td { 
 	width: 70px; 
+	padding: 3px 0;
 }
 
 .detail-img {
 	border-top: 2px solid black;
 	margin-top: 100px;
 }
+
+#selectQty { width: 50px; }
 
 .btn {
 	padding: 15px 30px;
@@ -169,7 +172,7 @@ function like_func(){
 			if(data.findLike==1){
 				$('#login').css('background', 'url(/resources/img/empty_heart.png) no-repeat center 1px/38px');
 				$('#like-cnt').html(data.totalLike);
-				alert('찜을 취소했습니다')
+				alert('위시리스트에서 삭제했습니다')
 				
 			} else {
 				$('#login').css('background', 'url(/resources/img/heart.png) no-repeat center 1px/38px');
@@ -291,7 +294,7 @@ function addCart(){
 			</c:when>
 			<c:otherwise>
 				<c:choose>
-					<c:when test="${likeCheck eq '0' or empty likeCheck }">
+					<c:when test="${findLike eq '0' or empty findLike }">
 						<button class="heart-icon" id="login" style="background: url(/resources/img/empty_heart.png) no-repeat center 1px/38px;">
 					</c:when>
 					<c:otherwise>

@@ -37,6 +37,28 @@ select {
     font-size: 20px;
 }
 
+#addbtn, #btngo, #btnBack, #checkId{
+	margin-left: 10px;
+	border:2px solid  #6b80f1;
+    color:#fff;
+    background-color: #6b80f1;
+    
+    padding: 4px 8px;
+    height: 32px;
+    font-size: 14px;
+    line-height: 20px;
+    
+    display: inline-block;
+    box-sizing: border-box;
+    text-align: center;
+
+}
+
+
+form{
+margin-bottom: 50px;
+
+}
 </style>
 
 <!-- jQuery 2.2.4 -->
@@ -361,7 +383,7 @@ const autoHyphen2 = (target) => {
 <h4><label for="uId"></label>아이디</h4>
 <div id="resultId" class="resultDiv"></div>
 <input type="text" id="uId" name="uId" style="width:250px;">
-<input type="button" id="checkId" style="width:80px; font-size: 10px;" value="중복 검사">
+<input type="button" id="checkId" style="width:80px;" value="중복 검사">
 <div id="resultCheckId"></div>
 </div>
 
@@ -393,7 +415,7 @@ const autoHyphen2 = (target) => {
 <h4><label for="uAddress"></label>주소</h4>
 <div id="add2Div" class="resultDiv"></div>
 <input type="text" id="sample6_postcode" placeholder="우편번호" style="width:250px;" disabled="disabled">
-<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="width:80px; font-size: 10px;"><br>
+<input type="button" onclick="sample6_execDaumPostcode()" value="주소찾기" style="width:80px;" id="addbtn"><br>
 <input type="text" id="sample6_address" name="uAdd1" placeholder="주소" disabled="disabled"><br>
 <input type="text" id="sample6_detailAddress" name="uAdd2" placeholder="상세주소"><br>
 <input type="text" id="sample6_extraAddress" placeholder="참고항목">

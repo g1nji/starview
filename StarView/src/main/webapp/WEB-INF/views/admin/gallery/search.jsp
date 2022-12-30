@@ -6,14 +6,36 @@
 
 <c:import url="../layout/header.jsp" />
 
-<h1>검색 페이지</h1>
+<style type="text/css">
+table {
+	table-layout: fixed;
+}
 
-검색어: ${keyword }
+table, th {
+	text-align: center;
+}
 
-<table class="table table-striped table-hover table-condensed">
+</style>
+
+<h1>'${keyword }'의 검색 결과</h1>
+<hr>
+
+<table class="table table-hover">
 <thead>
-	<tr>
-		<th><input type='checkbox' name='all' value='selectall' onclick='selectAll(this)'/> 전체선택</th>
+	<tr class="warning">
+		<th style="width: 10%;"><input type="checkbox" name="allCheck" id="allCheck" /></th>
+		
+		<script>
+		$("#allCheck").click(function(){
+		 var chk = $("#allCheck").prop("checked");
+		 if(chk) {
+		  $(".chBox").prop("checked", true);
+		 } else {
+		  $(".chBox").prop("checked", false);
+		 }
+		});
+		</script>
+		
 		<th>작성자</th>
 		<th>제목</th>
 		<th>내용</th>
@@ -26,7 +48,14 @@
 
 <c:forEach items="${searchList }" var="b">
 	<tr>
-		<td><input id="select" type="checkbox" name="select" value="${b.galleryNo }"></td>
+		<td><input type="checkbox" name="chBox" class="chBox" select_data="${b.galleryNo }"></td>
+		
+		<script>
+		 $(".chBox").click(function(){
+		  $("#allCheck").prop("checked", false);
+		 });
+		</script>
+		
 		<td>${b.uId }</td>
 		<td><a href="./view?galleryNo=${b.galleryNo }">${b.galleryTitle }</a></td>
 		<td>${b.galleryContent }</td>
@@ -38,6 +67,6 @@
 </tbody>
 </table>
 
-<button class="btnBack" onclick="location.href='./list'">다시 검색하기</button>
+<button class="btnBack btn btn-default" onclick="location.href='./list'" style="float:right;">다시 검색하기</button>
 
 <c:import url="../layout/footer.jsp" />

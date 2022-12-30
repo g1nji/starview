@@ -28,5 +28,11 @@ public class CommentServiceImpl implements CommentService {
 		return commentDao.selectGalleryNo(galleryNo);
 	}
 
+	@Override
+	public void delete(GComment gComment) {
+		
+		commentDao.delete(gComment);
+		
+	}
 	
 }

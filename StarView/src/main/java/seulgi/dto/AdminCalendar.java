@@ -1,21 +1,46 @@
 package seulgi.dto;
 
+import java.util.Date;
+
 public class AdminCalendar {
 	
-	private String recomDate;
+	private int recomCode;
 	private String recomLoc;
+	private String recomDate;
+	private String recomTime;
+	private Date regDate;
 	
 	public AdminCalendar() {}
 
-	public AdminCalendar(String recomDate, String recomLoc) {
+	public AdminCalendar(int recomCode, String recomLoc, String recomDate, String recomTime, Date regDate) {
 		super();
-		this.recomDate = recomDate;
+		this.recomCode = recomCode;
 		this.recomLoc = recomLoc;
+		this.recomDate = recomDate;
+		this.recomTime = recomTime;
+		this.regDate = regDate;
 	}
 
 	@Override
 	public String toString() {
-		return "AdminCalendar [recomDate=" + recomDate + ", recomLoc=" + recomLoc + "]";
+		return "AdminCalendar [recomCode=" + recomCode + ", recomLoc=" + recomLoc + ", recomDate=" + recomDate
+				+ ", recomTime=" + recomTime + ", regDate=" + regDate + "]";
+	}
+
+	public int getRecomCode() {
+		return recomCode;
+	}
+
+	public void setRecomCode(int recomCode) {
+		this.recomCode = recomCode;
+	}
+
+	public String getRecomLoc() {
+		return recomLoc;
+	}
+
+	public void setRecomLoc(String recomLoc) {
+		this.recomLoc = recomLoc;
 	}
 
 	public String getRecomDate() {
@@ -26,12 +51,20 @@ public class AdminCalendar {
 		this.recomDate = recomDate;
 	}
 
-	public String getRecomLoc() {
-		return recomLoc;
+	public String getRecomTime() {
+		return recomTime;
 	}
 
-	public void setRecomLoc(String recomLoc) {
-		this.recomLoc = recomLoc;
+	public void setRecomTime(String recomTime) {
+		this.recomTime = recomTime;
 	}
-	
+
+	public Date getRegDate() {
+		return regDate;
+	}
+
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
+
 }

@@ -33,6 +33,7 @@ function selectAll(selectAll)  {
 
 $(document).ready(function() {
 	
+	//구현중
 	//선택
 	$('#select').click(function() {
 		var sel = $('input[name="select"]:checked').val()
@@ -48,16 +49,22 @@ $(document).ready(function() {
 
 })
 
-
 </script>
 
 <h1>상품 리스트</h1>
 <hr>
 
+<form id="searchForm" action="./search" method="get" style="float: right;">
+    <input id="keyword" name="keyword" type="text" placeholder="검색할 아이디를 입력하세요" value="">
+	<button class="btnSearch">검색</button>
+</form>
+
+<br><br>
+
 <table class="table table-hover">
 <thead>
 	<tr class="warning">
-		<th><input type='checkbox' name='all' value='selectall' onclick='selectAll(this)'/> 전체선택</th>
+		<th><input type='checkbox' name='all' value='selectall' onclick='selectAll(this)'/></th>
 		<th>상품명</th>
 		<th>상품 가격</th>
 		<th>상품 설명</th>
@@ -82,7 +89,7 @@ $(document).ready(function() {
 
 <span class="pull-right">total : ${paging.totalCount }</span><br><br>
 
-<button id="delOk" class="btn btn-primary" style="float: right">삭제</button><br>
+<button id="delOk" class="btn btn-danger" style="float: right">삭제</button><br>
 
 <c:import url="../layout/paging.jsp" />
 

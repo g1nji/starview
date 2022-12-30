@@ -34,6 +34,18 @@
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
 	</select>
 	
+	 <!-- <select id="selectAll" resultType="seulgi.dto.AdminGallery">
+		SELECT * FROM (
+			SELECT rownum rnum, G.* FROM (
+				SELECT ga.*, u_id, u.u_nick
+				FROM gallery ga
+				LEFT OUTER JOIN users u
+				ON ga.u_id = u.u_id
+			) G
+		) gallery
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select> -->
+	
 	<!-- 게시글 개수 조회 -->
 	<!-- <select id="selectCntAllBoard" resultType="int">
 		select count(*) from admin_notice
@@ -45,7 +57,10 @@
 	
 	<!-- 게시글 상세 조회 -->
 	<select id="selectBoard" resultType="seulgi.dto.AdminGallery" parameterType="seulgi.dto.AdminGallery">
-		SELECT * FROM gallery
+		SELECT g.*, u.u_id, u.u_nick
+ 		FROM gallery g
+        LEFT OUTER JOIN users u
+           ON g.u_id = u.u_id
 		WHERE gallery_no = #{galleryNo }
 	</select>
 	
@@ -117,6 +132,12 @@
 		WHERE gallery_no = #{galleryNo }	
 	</delete>
 	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteComm" parameterType="seulgi.dto.AdminGallery">
+		DELETE g_comment
+		WHERE gallery_no = #{galleryNo }
+	</delete>
+	
 		<!-- WHERE gallery_title LIKE '%'||#{galleryTitle }||'%' -->
 		<!-- WHERE gallery_content LIKE '%'||#{galleryContent }||'%' -->
 		<!-- WHERE u_id LIKE '%'||#{uId }||'%' -->
@@ -156,4 +177,12 @@
 		WHERE #{option } LIKE '%'||#{keyword }||'%'
 		ORDER BY gallery_no DESC
 	</select> -->
+	
+	<!-- 게시글 신고 -->
+	<insert id="insertBoard2" parameterType="seulgi.dto.AdminGallery">
+		INSERT INTO admin_board_report (report_code, gallery_no)
+		VALUES (abr_seq.nextval, #{galleryNo })
+	</insert>
+	
+	
 </mapper>

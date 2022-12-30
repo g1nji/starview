@@ -12,11 +12,12 @@
 
 section {
 	width: 1100px; 
+	position: relative;
 	margin: 0 auto;
 }
 
 .header {
-	padding-top: 100px; 
+	padding-top: 55px; 
 }
 
 .header p {
@@ -26,10 +27,15 @@ section {
 .header p #ttlCnt {
 	font-size: 25px;
 }
-/* .chkicon { */
-/* 	width: 10px; */
-/* 	height: 10px; */
-/* } */
+
+/* .sort+.sort::before {
+	position: absolute; 
+    top: 146px; 
+    width: 1px;
+    height: 15px;
+    background-color: #e1e1e1;
+    content: "";
+} */
 
 .items {  
  	list-style: none;  
@@ -40,10 +46,34 @@ section {
  	margin-top: 40px;
  } 
 
-
 a {
 	text-decoration: none;
 	color: black;
+}
+
+.arrdown {
+	width: 17px; 
+	height: 17px;
+	margin-left: 6px;
+}
+
+.clear {
+	clear: both;
+}
+
+span {
+	cursor: pointer;
+}
+
+.sort {
+	color: #999; 
+	padding-left: 8px;
+	padding-right: 11px;
+}
+
+.l { 
+	font-size: 12px; 
+	color: #e1e1e1;
 }
 
 .thumb {
@@ -59,31 +89,20 @@ a {
 
 #moreBtn {
 	padding: 10px 40px;
-	border-radius: 16px;
+	border-radius: 28px;
 	border: none;
 	font-weight: 500;
     font-family: 'Noto Sans KR', sans-serif;
-/*     font-style: italic; */
     color: black;
     background-color: #FFEBBA;
-    width: 530px;
+    width: 150px;
+    height: 52px;
 }
 
 #moreBtn:hover {
     background-color: #f8ca00;
 }
 
-.clear {
-	clear: both;
-}
-
-span {
-	cursor: pointer;
-}
-
-.sort {
-	color: #C5C6B6; 
-}
 
 	
 </style>
@@ -103,50 +122,62 @@ $(document).ready(function() {
 	$("#moreBtn").click(function() {
 		startIdx += step;
 		showMore(startIdx);
+	}) 
 	
-		function showMore(idx){
-			let endIdx = idx+step-1;
+	function showMore(idx){
+		let endIdx = idx+step-1;
+		
+		$.ajax({
+			type: "post"
+			, url: "/goods/more"
+			, data: JSON.stringify({
+				startIdx: idx,
+				endIdx: endIdx,
+				step: step
+			})
+			, contentType: "application/json; charset=UTF-8"
+			, dataType: "html"
+			, success: function( res ) {
+				console.log(startIdx)
+				console.log(endIdx)
+				console.log("AJAX 성공")
 			
-			$.ajax({
-				type: "post"
-				, url: "/goods/more"
-				, data: JSON.stringify({
-					startIdx: idx,
-					endIdx: endIdx,
-					step: step
-				})
-				, contentType: "application/json; charset=UTF-8"
-				, dataType: "html"
-				, success: function( res ) {
-					console.log("AJAX 성공")
+				$(".more").append( res );
 				
-					$(".more").html( res ).slideDown();
-					
-					//더보기 버튼 삭제
-					if(startIdx + step > total){
-						$('#moreBtn').remove();
-					}// if
-				}// success
-			}) //ajax	
-		} //--showMore()
-					
-	}) //-- .click() 
+				//더보기 버튼 삭제
+				if(startIdx + step > total){
+					$('#moreBtn').remove();
+				}
+			}
+		})	
+	} 
+	//정렬선택시 체크아이콘 삽입
+	var chkimg = '<img style="width: 17px; height: 17px; margin-right: 3px;" src="/resources/img/check.png">';
 	
+	//최신순 정렬
 	$('#latest').click(function() {
-		$('.sort').css('color', '#C5C6B6');
+		$('.chkicon').empty();
+		$('#chk1').append(chkimg)	
+		$('.sort').css('color', '#999');
 		$('#latest').css('color', 'black');
 		sortByDate();
 	})
 	
+	//낮은가격순 정렬
 	$('#lowPrice').click(function() {
-		$('.sort').css('color', '#C5C6B6');
+		$('.chkicon').empty()
+		$('#chk2').html(chkimg)	
+		$('.sort').css('color', '#999');
 		$('#lowPrice').css('color', 'black');
 		
 		sortByLowPrice();
 	})
 	
+	//높은가격순 정렬
 	$('#highPrice').click(function() {
-		$('.sort').css('color', '#C5C6B6');
+		$('.chkicon').empty()
+		$('#chk3').html(chkimg)	
+		$('.sort').css('color', '#999');
 		$('#highPrice').css('color', 'black');
 		sortByHighPrice();
 	})
@@ -201,9 +232,10 @@ $(document).ready(function() {
 		<h2>굿즈샵</h2><br>
 		<p style="float: left;"> 총 <span id="ttlCnt">${totalCount } </span>개의 상품</p>
 		<p style="float: right;">
-			<span class="sort" id="latest" style="color: black;">최신등록순</span> | 
-			<span class="sort" id="lowPrice">낮은가격순</span> | 
-			<span class="sort" id="highPrice">높은가격순</span></p>
+
+			<span class="sort" id="latest"><span class="chkicon" id="chk1"></span>최신등록순</span><span class="l">|</span>
+			<span class="sort" id="lowPrice"><span class="chkicon" id="chk2"></span>낮은가격순</span><span class="l">|</span> 
+			<span class="sort" id="highPrice"><span class="chkicon" id="chk3"></span>높은가격순</span></p>
 	</div>
 		<div class="clear"></div>
 		
@@ -216,7 +248,7 @@ $(document).ready(function() {
 		</ul>
 	</c:forEach>
 		<div class="more"></div>
-	<div id="btn"><button id="moreBtn">MORE <img style="width: 17px; height: 17px;" src="/resources/img/rightarr.png"></button></div>
+	<div id="btn"><button id="moreBtn">MORE<img class="arrdown" src="/resources/img/arrdown.png"></button></div>
 </div>
 
 
