@@ -141,6 +141,7 @@ ul.nav > li > ul {
 	height: 60px;
 	width: 100%;
 	bottom: 0;
+	left:0;
 	padding: 20px 0;
 }
 
@@ -163,11 +164,79 @@ html .container {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #FCF8E3;
+  background-color: black;
 }
 
 ::-webkit-scrollbar-track {
   background-color: grey;
+}
+
+#datepicker {
+  width: 200px;
+  height: 40px;
+  font-size: 15px;
+  border: 0;
+  border-radius: 15px;
+  outline: none;
+  padding-left: 10px;
+  background-color: #EEF2FF;
+}
+
+#keyword {
+  width: 500px;
+  height: 40px;
+  font-size: 15px;
+  border: 0;
+  border-radius: 15px;
+  outline: none;
+  padding-left: 10px;
+  background-color: #EEF2FF;
+}
+
+.form-control {
+  width: 1150px;
+  height: 40px;
+  font-size: 15px;
+  border: 0;
+  border-radius: 15px;
+  outline: none;
+  padding-left: 10px;
+  background-color: #EEF2FF;
+}
+
+textarea {
+  width: 800px;
+  height: 300px;
+  font-size: 15px;
+  border: 0;
+  border-radius: 15px;
+  outline: none;
+  padding-left: 10px;
+  background-color: #EEF2FF;
+}
+
+select {
+	width: 150px; 
+	padding: 10px;
+	border: 1px solid #999;
+	font-family: inherit;  
+	border-radius: 0px; 
+}
+
+table {
+	margin-top: 20px;
+	table-layout: fixed;
+	border-collapse: collapse;
+    border-radius: 1em;
+    overflow: hidden;
+    border-radius: 10px;
+    width: 1150px;
+    box-shadow: 0 0 20px rgb(0 0 0 / 10%);
+    height: auto;
+}
+
+table, th {
+	text-align: center;
 }
 
 </style>

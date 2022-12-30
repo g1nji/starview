@@ -5,20 +5,6 @@
 
 <c:import url="../layout/header.jsp" />
 
-<style type="text/css">
-table {
-	table-layout: fixed;
-}
-
-table, th {
-	text-align: center;
-}
-
-td:nth-child(2) {
-	text-align: left;
-}
-</style>
-
 <script type="text/javascript">
 
 //전체 선택
@@ -80,12 +66,12 @@ $(document).ready(function() {
 
 </script>
 
-<h1>상품 리스트</h1>
+<h1 style="text-align: center;">상품 리스트</h1>
 <hr>
 
 <form id="searchForm" action="./search" method="get" style="float: right;">
     <input id="keyword" name="keyword" type="text" placeholder="검색할 아이디를 입력하세요" value="">
-	<button class="btnSearch">검색</button>
+	<button class="btnSearch btn btn-default">검색</button>
 </form>
 
 <br><br>

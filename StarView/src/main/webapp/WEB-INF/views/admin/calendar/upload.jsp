@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,97 +35,55 @@ body {
 	margin: 0;
 }
 
-table {
-	table-layout: fixed;
-	border-collapse: collapse;
-    border-radius: 1em;
-    overflow: hidden;
-    border-radius: 10px;
-    width: 1150px;
-    box-shadow: 0 0 20px rgb(0 0 0 / 10%);
-    height: auto;
-}
-
-table, th {
-	text-align: center;
-}
-
-th {
-    background-color: #191970;
-    color: white;
+#form {
+	width: 300px; 
+	margin: 0 auto;
 }
 
 </style>
 
-<script>
-$(document).ready(() => {
-
-	//결과 화면 지우기
-	resultLayout.innerHTML = '';
-	
-	var d = "<h4 style='color: #191970; text-align: center; color: #FFB703;'> 추천일 조회는 오늘(" +ymd+ ")로부터 10일 이내만 가능합니다</h4><br>";
-	document.getElementById("resultLayout").innerHTML=d;
-})
-
-//함수 정의 방법1
-function func1(a,b) {
-	return a + b;
-}
-
-//함수 정의 방법2
-var func2 = (a, b) => {
-	return a + b;
-}
-
-//날짜
-var today = new Date();
-
-//연도
-var year = today.getFullYear();
-
-//월
-var month = today.getMonth() + 1;
-
-//일
-var date = today.getDate();
-
-//오늘 날짜
-var ymd = year + "년 " + month + "월 " +date + "일";
-
-</script>
 </head>
 <body>
 
-<div class="container">
+<div class="contadiner">
 
-<h2 style="text-align: center;">추천일 🔭</h2>
+<h2 style="text-align: center;">추천일 등록</h2>
+<hr>
 
-<br>
+<div id="form">
+<form action="./date" method="post" enctype="multipart/form-data">
 
-<div id="resultLayout"></div>
- 
-<br>
- 
-<table class="table table-hover">
-<thead>
-	<tr>
-		<th style="width: 10%;">지역</th>
-		<th style="width: 15%;">추천일</th>
-		<th style="width: 30%;">추천 시간</th>
-		<th>내용</th>
-	</tr>
-</thead>	
-<tbody>
-<c:forEach items="${boardList }" var="b">
-	<tr>
-		<td>${b.recomLoc }</td>
-		<td>${b.recomDate }</td>
-		<td>${b.recomTime }</td>
-		<td><span style="color: #FF9494;">${b.rain}%</span>의 강수 확률로 예상되며, 기상 상태는 <span style="color: #FF9494;">${b.sky}</span>으로 예상됩니다.</td>
-	</tr>
-</c:forEach>
-</tbody>
-</table>
+<div class="form-group">
+	<label for="recomLoc">지역</label>
+	<input type="text" id="recomLoc" name="recomLoc" class="form-control">
+</div>
+<div class="form-group">
+	<label for="recomDate">추천일</label>
+	<input type="text" id="recomDate" name="recomDate" class="form-control">
+</div>
+<div class="form-group">
+	<label for="recomTime">추천 시간</label>
+	<input type="text" id="recomTime" name="recomTime" class="form-control">
+</div>
+<div class="form-group">
+	<label for="rain">강수 확률</label>
+	<input type="text" id="rain" name="rain" class="form-control">
+</div>
+<div class="form-group">
+	<label for="sky">기상 상태</label>
+	<input type="text" id="sky" name="sky" class="form-control">
+</div>
+
+<br><br>
+
+<div class="text-center">
+	<button class="btn btn-default btn-sm" id="btnList">목록</button>
+	<button class="btn btn-primary btn-sm" id="btnUpload">등록</button>
+	<input type="reset" id="cancel" class="btn btn-danger btn-sm" value="작성 취소">
+</div>
+</form>
+
+</div>
 
 </div><!-- .container end -->
 

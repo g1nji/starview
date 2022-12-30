@@ -42,6 +42,20 @@ public class AdminCalendarController {
 		adminCalendarService.upload(calendar);
 	}
 	
+	@RequestMapping(value="/upload", method = RequestMethod.GET)
+	public void insertCalendar2(AdminCalendar calendar) {
+		logger.info("/upload 연결 - [GET]");
+	}
+	
+	@RequestMapping(value="/upload", method = RequestMethod.POST)
+	public String insertCalendarProc2(AdminCalendar calendar) {
+		logger.info("/upload 연결 - [POST]");
+		
+		adminCalendarService.upload(calendar);
+		
+		return "redirect:/admin/calendar/list";
+	}
+	
 	//관측 시간 API 조회
 	@RequestMapping("/time")
 	public void calendarTime() {

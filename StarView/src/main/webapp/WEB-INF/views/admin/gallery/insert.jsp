@@ -22,7 +22,7 @@ $(document).ready(function() {
 
 </script>
 
-<h1>사진 갤러리 업로드</h1>
+<h1 style="text-align: center;">사진 갤러리 업로드</h1>
 <hr>
 
 <!-- <form action="./insert" method="post"> -->

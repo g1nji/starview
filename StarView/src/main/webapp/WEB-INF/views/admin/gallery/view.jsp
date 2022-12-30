@@ -99,16 +99,7 @@ $(document).ready(function() {
 
 </script>
 
-
-<style type="text/css">
-
-table {
-	table-layout: fixed;
-}
-
-</style>
-
-<h1>게시글 상세 조회</h1>
+<h1 style="text-align: center;">게시글 상세 조회</h1>
 <hr>
 
 <table class="table">
@@ -169,7 +160,7 @@ table {
 			<td class="warning" style="width: 20%"><strong>${c.uNick }</strong> ( <fmt:formatDate value="${c.cmDate }" pattern="yy/MM/dd HH:mm" /> )</td>
 			<td colspan="2" style="width: 68%">${c.cmContent }</td>
 	
-			<td>
+			<td style="width: 6%">
 				<!-- 
 				<button type="button" class="report_btn btn-primary btn-sm" value="${c.cmNo }" select_data="${c.cmNo }">신고</button>
 				 -->

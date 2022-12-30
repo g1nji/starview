@@ -4,7 +4,7 @@
 
 <c:import url="../layout/header.jsp" />
 
-<h1>게시글 수정</h1>
+<h1 style="text-align: center;">추천일 수정</h1>
 <hr>
 
 <form action="./update" method="post" enctype="multipart/form-data">

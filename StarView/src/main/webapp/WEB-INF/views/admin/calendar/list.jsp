@@ -6,17 +6,6 @@
 
 <c:import url="../layout/header.jsp" />
 
-<style type="text/css">
-table {
-	table-layout: fixed;
-}
-
-table, th {
-	text-align: center;
-}
-
-</style>
-
 <script type="text/javascript">
 
 $(document).ready(function() {
@@ -51,7 +40,7 @@ $(document).ready(function() {
 
 </script>
 
-<h1>추천일 리스트</h1>
+<h1 style="text-align: center;">추천일 리스트</h1>
 <hr>
 
 <table class="table table-hover">
@@ -70,9 +59,9 @@ $(document).ready(function() {
 		});
 		</script>
 		
-		<th>지역</th>
-		<th>추천일</th>
-		<th>추천 시간</th>
+		<th style="width: 10%;">지역</th>
+		<th style="width: 20%;">추천일</th>
+		<th style="width: 20%;">추천 시간</th>
 		<th>내용</th>
 	</tr>
 </thead>	
@@ -88,9 +77,12 @@ $(document).ready(function() {
 		</script>
 		
 		<td>${b.recomLoc }</td>
-		<td><a href="../calendar/view?recomCode=${b.recomCode }">${b.recomDate }</a></td>
+		<td>
+			<a href="../calendar/view?recomCode=${b.recomCode }">${b.recomDate }</a>&nbsp;
+			<button id="btnUpdate" class="btn btn-primary btn-xs" onclick="location.href='./update?recomCode=${b.recomCode }'" style="display: inline-block;">수정</button>
+		</td>
 		<td>${b.recomTime }</td>
-		<td>${b.rain} %의 강수 확률로 예상되며, 기상 상태는 ${b.sky} 로 예상됩니다.</td>
+		<td><span style="color: #FF9494;">${b.rain}%</span>의 강수 확률로 예상되며, 기상 상태는 <span style="color: #FF9494;">${b.sky}</span>으로 예상됩니다.</td>
 	</tr>
 </c:forEach>
 </tbody>
