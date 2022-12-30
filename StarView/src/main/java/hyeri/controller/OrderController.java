@@ -29,11 +29,51 @@ public class OrderController {
 		
 	}
 	
+	@PostMapping("/payment")
+	public void payment(AfterOrder afOrder, Model model) {
+		
+		logger.info("{}", afOrder.getPaymentAmount());
+		logger.info("{}", afOrder.getBuyerName());
+		logger.info("{}", afOrder.getBuyerPhone());
+		logger.info("{}", afOrder.getBuyerEmail());
+		
+		model.addAttribute("amount", afOrder.getPaymentAmount());
+		model.addAttribute("buyerName", afOrder.getBuyerName());
+		model.addAttribute("buyerTel", afOrder.getBuyerPhone());
+		model.addAttribute("buyerEmail", afOrder.getBuyerEmail());
+	}
+	
+	@PostMapping("/complete")
+	public void paymentComplete(AfterOrder afOrder) {
+		
+		logger.info("{}", afOrder);
+	}
+	
+	@RequestMapping("/finish")
+	public void orderFinish(AfterOrder afOrder, Model model) {
+		
+		logger.info("afOrder : {}", afOrder);
+		
+		model.addAttribute("paymentMethod", afOrder.getPaymentMethod());
+		model.addAttribute("perchantUid", afOrder.getPerchantUid());
+		model.addAttribute("amount", afOrder.getPaymentAmount());
+		model.addAttribute("buyerName", afOrder.getBuyerName());
+		model.addAttribute("buyerTel", afOrder.getBuyerPhone());
+		model.addAttribute("buyerEmail", afOrder.getBuyerEmail());
+	}
+	
 	@PostMapping("/result")
-	public void orderResult(BeforeOrder bfOrder, AfterOrder afOrder) {
+	public void orderResult(BeforeOrder bfOrder, AfterOrder afOrder, Model model) {
 		
 		logger.info("bfOrder : {}", bfOrder);
 		logger.info("afOrder : {}", afOrder);
+		
+		model.addAttribute("paymentMethod", afOrder.getPaymentMethod());
+		model.addAttribute("perchantUid", afOrder.getPerchantUid());
+		model.addAttribute("amount", afOrder.getPaymentAmount());
+		model.addAttribute("buyerName", afOrder.getBuyerName());
+		model.addAttribute("buyerTel", afOrder.getBuyerPhone());
+		model.addAttribute("buyerEmail", afOrder.getBuyerEmail());
 		
 	}
 }

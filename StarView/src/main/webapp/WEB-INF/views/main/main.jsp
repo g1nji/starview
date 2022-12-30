@@ -47,6 +47,9 @@ var hour = function() {
 		$('.title').css("background-color", "#5BC0CF");
 		$('.title').css("color", "white");
 		
+		$('footer').css("background-color", "#5BC0CF");
+		$('footer').css("color", "white");
+		
 		$('.moon').hide();
 		
 	/* 오후 4시부터 오후 7시 59분까지 저녁 이미지 */
@@ -68,6 +71,9 @@ var hour = function() {
 		$('.title').css("background-color", "#E64556");
 		$('.title').css("color", "white");
 		
+		$('footer').css("background-color", "#E64556");
+		$('footer').css("color", "white");
+		
 	/* 오후 8시부터 오전 6시 58분까지 밤 이미지 */
 	} else {
 		document.getElementById("day").style.backgroundImage = "url('/resources/image/day3.png')";
@@ -86,6 +92,9 @@ var hour = function() {
 		
 		$('.title').css("background-color", "#FFB703");
 		$('.title').css("color", "white");
+		
+		$('footer').css("background-color", "#20275C");
+		$('footer').css("color", "white");
 	}
 	
 }
@@ -420,9 +429,11 @@ ul.mainnav > li:hover > ul {
 	display: block;
 }
 #footer {
+	margin-top: 30px;
 	padding: 30px 0;
-	background-color: lightgray;
 	font-size: 12px;
+	background-color: black;
+	color: black;
 	text-align: center;
 }
 .wrap {
@@ -476,7 +487,7 @@ border-radius: 50%;
 
 #moonimg2{
 display: block;
-margin:0 auto;
+margin:12px auto;
 height:120px;
 border-radius: 50%;
 box-shadow:20px 20px 10px rgba(0,0,0,0.2);
@@ -486,6 +497,12 @@ box-shadow:20px 20px 10px rgba(0,0,0,0.2);
 #moonimg:hover{
 transition:0.5s;
 /* box-shadow:20px 20px 10px rgba(0,0,0,0.4); */
+transform:scale(1.05,1.05);
+}
+
+#moonimg2:hover{
+transition:0.5s;
+box-shadow:20px 20px 10px rgba(0,0,0,0.4);
 transform:scale(1.05,1.05);
 }
 
@@ -505,13 +522,26 @@ transform:scale(1.05,1.05);
 
 .contents {
 	position: relative;
-    border: 2px solid;
-    border-radius: 0 10px 10px 10px;
+    border: 2px solid #f6f6f6;
+    background-color: #f6f6f6;
+    border-radius: 0 30px 30px 30px;
     z-index: 11;
     margin-top: 24px;
     padding: 10px;
     height: 300px;
     line-height: 25px;
+}
+
+#Layout {
+	font-size: 20px;
+    font-weight: 500;
+    margin: 10px 0;
+}
+
+#Layout2 {
+	line-height: 25px;
+    font-size: 16px;
+    font-weight: 300;
 }
 
 </style>
@@ -608,7 +638,7 @@ transform:scale(1.05,1.05);
 		<option value="30">30일</option>
 		<option value="31">31일</option>
 	</select>
-	<div class="moon">
+	<div class="moon" onclick="location.href='/data/moonToday'" style="cursor: pointer;">
 		<img id="moonimg" src=""/>
 		<div id="resultLayout"></div>
 		<div id="result"></div>
@@ -620,17 +650,17 @@ transform:scale(1.05,1.05);
 <div class="wrap">
 
 	<div class="monthly">
-		<div class="title">
+		<div class="title" onclick="location.href='/data/astroMonth'" style="cursor: pointer; width:160px;">
 			이달의 천문현상
 		</div>
-		<div class="contents">
+		<div class="contents" style="padding: 10px 20px 0 20px;">
 			<div id="Layout" class="Layout"></div>
 			<div id="Layout2" class="Layout2"></div>
 		</div>
 	</div>
 	
 	<div class="etc" style="margin-right: 28px;">
-		<div class="title">
+		<div class="title" onclick="location.href='/data/weather3'" style="cursor: pointer;">
 			오늘의 날씨
 		</div>
 		<div class="contents" style="text-align: center;">
@@ -642,7 +672,7 @@ transform:scale(1.05,1.05);
 	</div>
 	
 	<div class="etc">
-		<div class="title">
+		<div class="title" onclick="location.href='/data/moonToday'" style="cursor: pointer;">
 			오늘의 달 모양
 		</div>
 		<div class="contents">
@@ -652,13 +682,13 @@ transform:scale(1.05,1.05);
 	
 	<div class="clearfix"></div>
 	
-	<div style="margin-top:30px; background-color: pink; height: 300px;">
-		갤러리 이미지 추천순
-	</div>
+<!-- 	<div style="margin-top:30px; background-color: pink; height: 300px;"> -->
+<!-- 		갤러리 이미지 추천순 -->
+<!-- 	</div> -->
 	
-	<div style="margin-top:30px; background-color: pink; height: 300px;">
-		굿즈샵 상품 추천순
-	</div>
+<!-- 	<div style="margin-top:30px; background-color: pink; height: 300px;"> -->
+<!-- 		굿즈샵 상품 추천순 -->
+<!-- 	</div> -->
 
 </div>
 <c:import url="../layout/footer.jsp" />
