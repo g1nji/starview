@@ -16,6 +16,12 @@
 
 $(document).ready(() => {
 	
+	//추천일 업로드
+	$("#btnUpload").click(function() {
+		
+		$("form").submit();
+	})
+	
 	//$("#btn3").click( () => {
 	//	$("#form").css("display","block") 
 	//	$("#form1").css("display","block") 
@@ -620,6 +626,7 @@ var selectDate = (d)=>{
 
 <hr>
 
+<!-- 
 <div id="form">
 <form action="./date" method="post">
 
@@ -641,7 +648,36 @@ var selectDate = (d)=>{
 <input type="submit" value="등록" class="btn btn-primary">
 </form>
 </div>
+ -->
+ 
+<form action="./date" method="post" enctype="multipart/form-data">
 
+<div class="form-group">
+	<label for="recomLoc">지역</label>
+	<input type="text" id="recomLoc" name="recomLoc" class="form-control">
 </div>
+<div class="form-group">
+	<label for="recomDate">추천일</label>
+	<input type="text" id="recomDate" name="recomDate" class="form-control">
+</div>
+<div class="form-group">
+	<label for="recomTime">추천 시간</label>
+	<input type="text" id="recomTime" name="recomTime" class="form-control">
+</div>
+<div class="form-group">
+	<label for="rain">강수 확률</label>
+	<input type="text" id="rain" name="rain" class="form-control">
+</div>
+<div class="form-group">
+	<label for="sky">기상 상태</label>
+	<input type="text" id="sky" name="sky" class="form-control">
+</div>
+
+<div class="text-center">
+	<button class="btn btn-default btn-sm" id="btnList">목록</button>
+	<button class="btn btn-primary btn-sm" id="btnUpload">업로드</button>
+	<input type="reset" id="cancel" class="btn btn-danger btn-sm" value="작성 취소">
+</div>
+</form>
 
 <c:import url="../layout/footer.jsp" />
