@@ -7,9 +7,6 @@
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
- <!-- iamport.payment.js -->
-  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-{SDK-최신버전}.js"></script>
-
 <script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
@@ -93,41 +90,24 @@ $(document).ready(function() {
 	console.log( totalPrice + delfee);
 	var resultPrice = totalPrice + delfee;
 	
-	$('.resultPrice').text(resultPrice)
+	$('.resultPrice').text(resultPrice);
+	$(".paymentAmount").val(resultPrice);	
+	
+	$('.submitBtn').click(function() {
+		
+		var radio = $('input:radio[name="paymentMethod"]:checked').val();
+		
+		if( radio == "A" ) {
+// 			location.href="/order/payment"
+			$('form').attr("method", "post");
+			$('form').attr("action", "/order/payment");
+		} else {
+			$('form').attr("method", "post");
+			$('form').attr("action", "/order/result");
+		}
+	})
 	
 })
-</script>
-
-<script type="text/javascript">
-//카카오 결제 API
-var IMP = window.IMP; // 생략가능
-IMP.init('impxxxxxxxx');  // 가맹점 식별코드
-// IMP.request_pay(param, callback) 결제창 호출
-IMP.request_pay({
-    pg : 'kakaopay', //pg사 선택 (kakao, kakaopay 둘다 가능)
-    pay_method: 'card',
-    merchant_uid : 'merchant_' + new Date().getTime(), //주문번호
-    name : 'Bunddeuk', // 상품명
-    amount : amount,
-    //customer_uid 파라메터가 있어야 빌링키 발급을 시도함
-    customer_uid : buyer_name + new Date().getTime(),
-    buyer_email : email,
-    buyer_name : buyer_name,
-    buyer_tel : hp,
-    buyer_addr : addr,
-}, function(rsp) { //callback
-    if ( rsp.success ) {
-      console.log('빌링키 발급 성공', rsp)
-      //빌링키 발급이 완료되었으므로, 서버에 결제 요청
-      alert('예약 결제가 완료되었습니다!');
-    } else {
-      var msg = '결제에 실패하였습니다.\n';
-      msg += rsp.error_msg;
-      alert(msg);
-      return false;
-    }
-    $("#final-support-submit").submit();
-});
 </script>
 
 <style type="text/css">
@@ -234,7 +214,7 @@ h2 {
 	</table>
 </div>
 
-<form action="/order/result" method="post">
+<form>
 <h3>주문내역</h3>
 <table style="border-top: 2px solid black; border-bottom: 1px solid #eee; width: 100%; text-align: center;">
 	<tr>
@@ -264,18 +244,18 @@ h2 {
 	<c:if test="${uId eq null }">
 	<tr>
 		<th class="buyerset">주문자명</th>
-		<td style="padding-left: 20px;"><input type="text"></td>
+		<td style="padding-left: 20px;"><input type="text" name="buyerName"></td>
 	</tr>
 	<tr>
 		<th class="buyerset">전화번호</th>
 		<td style="padding-left: 20px;">
 		<div id="resultPhone" class="resultDiv"></div>
-		<input type="text" id="uPhone" name="uPhone" oninput="autoHyphen2(this)" maxlength="13">
+		<input type="text" id="buyerPhone" name="buyerPhone" oninput="autoHyphen2(this)" maxlength="13">
 		</td>
 	</tr>
 	<tr>
 		<th class="buyerset">이메일</th>
-		<td style="padding-left: 20px;"><input type="text"></td>
+		<td style="padding-left: 20px;"><input type="text" name="buyerEmail"></td>
 	</tr>
 	</c:if>
 	<c:if test="${uId ne null }">
@@ -288,12 +268,12 @@ h2 {
 	<tr>
 		<th class="buyerset">전화번호</th>
 		<td style="padding-left: 20px;">
-		<input type="text" id="uPhone" name="uPhone" oninput="autoHyphen2(this)" maxlength="13">
+		<input type="text" id="uPhone" name="buyerPhone" oninput="autoHyphen2(this)" maxlength="13">
 		</td>
 	</tr>
 	<tr>
 		<th class="buyerset">이메일</th>
-		<td style="padding-left: 20px;"><input type="text"></td>
+		<td style="padding-left: 20px;"><input type="text" name="buyerEmail"></td>
 	</tr>
 	</c:if>
 </table>
@@ -341,7 +321,7 @@ h2 {
 <h3>결제 수단</h3>
 <label class="radio_paymethod">
 <input type="radio" class="radio_paymethod" name="paymentMethod" value="A">
-신용카드
+카카오페이
 </label>
 <br>
 <label class="radio_paymethod">
@@ -363,10 +343,14 @@ h2 {
 	</tr>
 	<tr style="border-top: 1px solid #eee;">
 		<td class="paT">총 결제금액</td>
-		<td class="paT2" style="font-weight:600;"><span class="resultPrice" style="color:#fa5500;"></span>원</td>
+		<td class="paT2" style="font-weight:600;">
+			<span class="resultPrice" style="color:#fa5500;"></span>원
+			<input type="hidden" class="paymentAmount" name="paymentAmount">
+		</td>
+		
 	</tr>
 	<tr>
-		<th colspan="2"><div class="submitBtn"><button type="submit" id="final-support-submit" style="background-color: black; border:none;">다음으로</button></div></th>
+		<th colspan="2"><div class="submitBtn"><button style="background-color: black; border:none;">다음으로</button></div></th>
 	</tr>
 </table>
 </div>

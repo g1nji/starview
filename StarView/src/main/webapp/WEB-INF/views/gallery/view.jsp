@@ -214,6 +214,19 @@ $(document).ready(function() {
     font-weight: 700;
     cursor: pointer;
 }
+
+#btnReport {
+    border: none;
+    background-color: white;
+    color: #ccc;
+}
+
+.report_btn {
+    border: none;
+    background-color: white;
+    color: #ccc;
+}
+
 </style>
 
 <h2>${viewGallery.galleryTitle }</h2>
@@ -221,7 +234,7 @@ ${viewGallery.uNick }
 
 <%-- 좋아요 버튼 --%>
 <span style="float:right;">${getLike }</span> <a style="cursor:pointer;"><img src="/resources/image/heart-empty.png" class="like_img"></a>
-<button id="btnReport" class="btn btn-primary" value="${viewGallery.galleryNo }" select_data="${viewGallery.galleryNo }">신고</button>
+<button id="btnReport" value="${viewGallery.galleryNo }" select_data="${viewGallery.galleryNo }">신고</button>
 
 <!-- 게시글 수정, 삭제 버튼 -->
 <c:if test="${uId eq viewGallery.uId }">
@@ -270,7 +283,7 @@ ${viewGallery.galleryContent }
 							<input type="text" name="cmDate" value="${comment.cmDate }">
 							<input type="text" name="reporter" value="${uId }">
 						</form>
-						<button type="button" class="report_btn btn-primary btn-sm" value="${comment.cmNo }" select_data="${comment.cmNo }">신고</button>
+						<button type="button" class="report_btn" value="${comment.cmNo }" select_data="${comment.cmNo }">신고</button>
 					</td>
 				</c:if>
 				<c:if test="${uId eq comment.uId }">
