@@ -96,6 +96,7 @@
 		UPDATE gallery
 		SET gallery_title = #{galleryTitle }
 			, gallery_content = #{galleryContent }
+			, gallery_loc = #{galleryLoc }
 		WHERE gallery_no = #{galleryNo }
 	</update>
 	
@@ -179,5 +180,11 @@
 		DELETE FROM gallery_like
 		WHERE gallery_no = #{galleryNo } AND u_id = #{uId }
 	</delete>
+	
+	<!-- 게시글 신고 -->
+	<insert id="insertBoard" parameterType="hyeri.dto.Gallery">
+		INSERT INTO admin_board_report (report_code, gallery_no)
+		VALUES (abr_seq.nextval, #{galleryNo })
+	</insert>
 
 </mapper>

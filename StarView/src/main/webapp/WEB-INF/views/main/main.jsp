@@ -44,7 +44,8 @@ var hour = function() {
 			$(this).css("background-color", "#CCEBF1");
 		})
 		
-		$('.title').css("color", "#5BC0CF");
+		$('.title').css("background-color", "#5BC0CF");
+		$('.title').css("color", "white");
 		
 		$('.moon').hide();
 		
@@ -64,7 +65,8 @@ var hour = function() {
 			$(this).css("background-color", "#F7C8CC");
 		})
 		
-		$('.title').css("color", "#E64556");
+		$('.title').css("background-color", "#E64556");
+		$('.title').css("color", "white");
 		
 	/* 오후 8시부터 오전 6시 58분까지 밤 이미지 */
 	} else {

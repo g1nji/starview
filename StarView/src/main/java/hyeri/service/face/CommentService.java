@@ -27,7 +27,7 @@ public interface CommentService {
 	 */
 	public void delete(GComment gComment);
 
-
+	public void report(GComment board);
 
 
 

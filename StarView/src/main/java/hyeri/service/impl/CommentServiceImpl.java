@@ -35,4 +35,11 @@ public class CommentServiceImpl implements CommentService {
 		
 	}
 	
+	@Override
+	public void report(GComment board) {
+		//logger.info("report() 사용");
+		
+		commentDao.insertBoard(board);
+	}
+	
 }

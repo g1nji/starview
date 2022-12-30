@@ -111,4 +111,12 @@ public interface GalleryService {
 	 */
 	public int getLike(int galleryNo);
 
+
+	public void update(Gallery viewGallery, MultipartFile file, List<GTag> tagList);
+
+
+	public void update2(Gallery viewGallery, MultipartFile file);
+	
+	public void report(Gallery board);
+
 }

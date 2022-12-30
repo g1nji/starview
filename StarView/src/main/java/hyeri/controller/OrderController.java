@@ -6,8 +6,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import hyeri.dto.AfterOrder;
+import hyeri.dto.BeforeOrder;
 
 @Controller
 @RequestMapping("/order")
@@ -26,7 +30,10 @@ public class OrderController {
 	}
 	
 	@PostMapping("/result")
-	public void orderResult() {
+	public void orderResult(BeforeOrder bfOrder, AfterOrder afOrder) {
+		
+		logger.info("bfOrder : {}", bfOrder);
+		logger.info("afOrder : {}", afOrder);
 		
 	}
 }
