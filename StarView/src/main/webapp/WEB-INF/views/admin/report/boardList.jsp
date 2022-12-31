@@ -6,6 +6,41 @@
 
 <c:import url="../layout/header.jsp" />
 
+<script type="text/javascript">
+
+$(document).ready(function() {
+	
+	//checkBox 선택된 게시글 삭제
+	$(".selectDelete_btn").click(function(){
+	  var confirm_val = confirm("[게시글] \n삭제하시면 복구할 수 없습니다. \n정말로 삭제하시겠습니까?");
+	  
+	  if(confirm_val) {
+	   var checkArr = new Array();
+	   
+	   $("input[class='chBox']:checked").each(function(){
+	    checkArr.push($(this).attr("select_data"));
+	   });
+	    
+	   $.ajax({
+	    url : "./deletee",
+	    type : "post",
+	    data : { chbox : checkArr },
+	    success : function(result){
+		     if(result == 1) {            
+		      alert("게시글이 삭제되었습니다");
+		      history.go(0);
+		     } else {
+		      alert("삭제 실패");
+		     }
+		    }
+	   });
+	  } 
+	 });
+
+})
+
+</script>
+
 <h1 style="text-align: center;">신고 글 리스트</h1>
 <hr>
 
@@ -39,7 +74,7 @@
 <tbody>
 <c:forEach items="${boardList }" var="b">
 	<tr>
-		<td><input type="checkbox" name="chBox" class="chBox" select_data="${b.reportCode }"></td>
+		<td><input type="checkbox" name="chBox" class="chBox" select_data="${b.galleryNo }"></td>
 		
 		<script>
 		 $(".chBox").click(function(){

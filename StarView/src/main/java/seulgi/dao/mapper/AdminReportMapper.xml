@@ -38,6 +38,15 @@
 	</select>
 	
 	<!-- 게시글 삭제 -->
+	<delete id="delete" parameterType="seulgi.dto.AdminReport">
+		DELETE admin_board_report
+		WHERE gallery_no = #{galleryNo }
+	</delete>
+	
 	<!-- 댓글 삭제 -->
+	<delete id="delete2" parameterType="seulgi.dto.AdminReport">
+		DELETE admin_comment_report
+		WHERE cm_no = #{cmNo }
+	</delete>
 	
 </mapper>
