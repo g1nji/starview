@@ -15,12 +15,22 @@
 <script type="text/javascript">
 
 $(document).ready(() => {
+	
+	//추천일 업로드
+	$("#btnUpload").click(function() {
+		
+		$("form").submit();
+	})
+	
+	//$("#btn3").click( () => {
+	//	$("#form").css("display","block") 
+	//	$("#form1").css("display","block") 
+	//	$("#form2").css("display","block") 
+	//	$("#form3").css("display","block") 
+	//})
+	
 	$("#btn").click( () => {
 		console.log("#btn click")
-		
-		$("#form").css("display","block") 
-		$("#form1").css("display","block") 
-		$("#form2").css("display","block") 
 		
 		//관측 일자 API
 		$.ajax({
@@ -58,76 +68,76 @@ $(document).ready(() => {
 				//강수확률
 				var d = "<h3> 오늘은 " +ymd3 + " " + caseD(day) + " 입니다</h3>"
 				
-				var $table = $("<br><table class='table table-striped table table-bordered' style='width: 300px; float:left; margin-right: 20px;'>")
-				var tt = "<tr><th> 강수확률 </th>"
+				var $table = $("<table class='table table-bordered' style='width: 550px; float:left; margin-right: 20px;'>")
+				var tt = "<tr class='warning'><th style='width: 15%;'> 강수 확률 </th>"
 					+ "<th> 오전 </th>"
 					+ "<th> 오후 </th></tr>"
 					
-					+ "<tr><th>" + caseDay(day+3) + " (" + caseDate(date) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+3) + "</th>"
 					+ "<td>" + $rows.find("rnSt3Am").text() +"</td>"
 					+ "<td>" + $rows.find("rnSt3Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+4) + " (" + caseDate(date+1) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+4) + "</th>"
 					+ "<td>" + $rows.find("rnSt4Am").text() +"</td>"
 					+ "<td>" + $rows.find("rnSt4Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+5) + " (" + caseDate(date+2) +"일)</th>"
+					+ "<tr><th>" + caseDay(day+5) + "</th>"
 					+ "<td>" + $rows.find("rnSt5Am").text() +"</td>"
 					+ "<td>" + $rows.find("rnSt5Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+6) + " (" + caseDate(date+3) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+6) + "</th>"
 					+ "<td>" + $rows.find("rnSt6Am").text() +"</td>"
 					+ "<td>" + $rows.find("rnSt6Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+7) + " (" + caseDate(date+4) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+7) + "</th>"
 					+ "<td>" + $rows.find("rnSt7Am").text() +"</td>"
 					+ "<td>" + $rows.find("rnSt7Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+8) + " (" + caseDate(date+5) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+8) + "</th>"
 					+ "<td colspan='2'>" + $rows.find("rnSt8").text() +"</td></tr>"
 
-					+ "<tr><th>" + caseDay(day+9) + " (" + caseDate(date+6) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+9) + "</th>"
 					+ "<td colspan='2'>" + $rows.find("rnSt10").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+10) + " (" + caseDate(date+7) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+10) + "</th>"
 					+ "<td colspan='2'>" + $rows.find("rnSt10").text() +"</td></tr>"
 					
 				$table.html(tt)
 				$table.appendTo($('#resultLayout'))
 				
 				//날씨예보
-				var $table2 = $("<table class='table table-striped table table-bordered' style='width: 300px; float:left; margin-right: 20px;'>")
-				var tt2 = "<tr><th> 날씨예보 </th>"
+				var $table2 = $("<table class='table table-bordered' style='width: 550px; float:left; margin-right: 10px;'>")
+				var tt2 = "<tr class='warning'><th style='width: 15%;'> 기상 상태 </th>"
 					+ "<th> 오전 </th>"
 					+ "<th> 오후 </th></tr>"
 					
-					+ "<tr><th>" + caseDay(day+3) + " (" + caseDate(date) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+3) + "</th>"
 					+ "<td>" + $rows.find("wf3Am").text() +"</td>"
 					+ "<td>" + $rows.find("wf3Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+4) + " (" + caseDate(date+1) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+4) + "</th>"
 					+ "<td>" + $rows.find("wf4Am").text() +"</td>"
 					+ "<td>" + $rows.find("wf4Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+5) + " (" + caseDate(date+2) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+5) + "</th>"
 					+ "<td>" + $rows.find("wf5Am").text() +"</td>"
 					+ "<td>" + $rows.find("wf5Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+6) + " (" + caseDate(date+3) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+6) + "</th>"
 					+ "<td>" + $rows.find("wf6Am").text() +"</td>"
 					+ "<td>" + $rows.find("wf6Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+7) + " (" + caseDate(date+4) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+7) + "</th>"
 					+ "<td>" + $rows.find("wf7Am").text() +"</td>"
 					+ "<td>" + $rows.find("wf7Pm").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+8) + " (" + caseDate(date+5) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+8) + "</th>"
 					+ "<td colspan='2'>" + $rows.find("wf8").text() +"</td></tr>"
 
-					+ "<tr><th>" + caseDay(day+9) + " (" + caseDate(date+6) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+9) + "</th>"
 					+ "<td colspan='2'>" + $rows.find("wf10").text() +"</td></tr>"
 					
-					+ "<tr><th>" + caseDay(day+10) + " (" + caseDate(date+7) + "일)</th>"
+					+ "<tr><th>" + caseDay(day+10) + "</th>"
 					+ "<td colspan='2'>" + $rows.find("wf10").text() +"</td></tr>"
 					
 				$table2.html(tt2)
@@ -144,6 +154,65 @@ $(document).ready(() => {
 		})
 		
 	})
+	
+	//관측 시간 API
+	$("#btn2").click(() => {
+		console.log("#btn2 click")
+		
+		$.ajax({
+			type: "get"
+			, url: "http://apis.data.go.kr/B090041/openapi/service/RiseSetInfoService/getAreaRiseSetInfo"
+			, data: {
+				//Decoding 키로 인증키 사용할 것
+				ServiceKey: "HUX9citK/sR/IT0h00RSOT3xZiWp3Z0k53TKchVpMMHvhDlsWyt5RPdgiWNgn6stT/j7G0MOlITMLrHNSBoRHA=="
+				, locdate: selectDate($("#datepicker").val())
+				//, location: $("#b").attr("class")
+				, location: $('input[name="location"]:checked').val()
+			}
+			, dataType: "xml"
+			, success: res=>{
+				console.log("AJAX 성공")	
+				
+				//테스트
+				//xml 응답 데이터
+				console.log(res)
+				
+				//xml문서를 jQuery 객체로 변환(jQuery DOM)
+				//console.log($(res))
+				
+				//<item> 태그 추출
+				//console.log($(res).find("item"))
+				
+				var $rows = $(res).find("item");
+				
+				//결과 화면 지우기
+				resultLayout.innerHTML = '';
+				
+				var $table = $("<br><table class='table table-bordered'>")
+				var tHead = "<tr class='warning'>"
+					+ "<th>일몰</th>"
+					+ "<th>천문박명(저녁)</th>"
+					+ "<th>천문박명(아침)</th>"
+					+ "<th>일출</th>"
+					+ "</tr>";
+					
+				$table.html(tHead)
+				
+				$("<tr>")
+				.	append($("<td>").html($rows.find("sunset").text()))
+				.	append($("<td>").html($rows.find("aste").text()))
+				.	append($("<td>").html($rows.find("astm").text()))
+				.	append($("<td>").html($rows.find("sunrise").text()))
+				.appendTo($table)
+				
+				$table.appendTo($('#resultLayout2'))
+			}
+			, error: ()=> {
+				console.log("AJAX 실패")
+			}
+		})
+	})
+	
 })
 
 //함수 정의 방법1
@@ -365,38 +434,268 @@ function caseDay(day) {
 //console.log(caseDay(day));
 //console.log(caseDay(day+1));
 
+//달력 위젯
+$(document).ready(function() {
+	$("#datepicker").datepicker({
+        showOn:"button"
+        , buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif"
+        , buttonImageOnly: true
+        , changeMonth:true
+        , changeYear:true
+        , yearRange:"-22:+10"
+    });
+});
+
+//날짜 선택
+var selectDate = (d)=>{
+	d = new Date(d)
+	var y = '' + d.getFullYear()
+	var m =  ("0" + (d.getMonth() + 1)).slice(-2)
+	var dat = ("0" + d.getDate()).slice(-2)
+	
+	return y + m + dat
+}
+
 </script>
 
-</head>
-<body>
-
-<h1>관측일자</h1>
+<h1 style="text-align: center;">추천일 조회&nbsp;
+<button class="btn" style="background-color: #9BA3EB;" onclick="window.open('http://localhost:8888/admin/calendar/upload','추천일 등록','width=500,height=500,top=500px,left=500px');">추천일 등록</button></h1>
 <hr>
+
+<div id="dateDiv">
+<h3><span style="color: #B1BCE6;">✔ 관측일자</span>&nbsp;&nbsp;&nbsp;<button id="btn" class="btn btn-defalut">일자 조회</button></h3>
+
+<br>
 
 <!-- <h3><날짜 입력></h3>
 <h5> ex) YYYYMMDD0600(1800) *최근 24시간 이내만 조회가능합니다* </h5>
 <input type="text" id="Date"><br><br> -->
 
-<h3><지역 선택></h3>
-<input type="radio" name="regId" value="11B00000"> 서울, 인천, 경기도
-<input type="radio" name="regId" value="11D10000"> 강원도(영서)
-<input type="radio" name="regId" value="11D20000"> 강원도(영동)
-<input type="radio" name="regId" value="11C20000"> 대전, 세종, 충청남도
-<input type="radio" name="regId" value="11C10000"> 충청북도<br>
-<input type="radio" name="regId" value="11F20000"> 광주, 전라남도
-<input type="radio" name="regId" value="11F10000"> 전라북도
-<input type="radio" name="regId" value="11H10000"> 대구, 경상북도
-<input type="radio" name="regId" value="11H20000"> 부산, 울산, 경상남도
-<input type="radio" name="regId" value="11G00000"> 제주도<br><br>
+<h4><span style="background-color: #B1BCE6; border-radius: 10%; color: white">&nbsp;지역 선택&nbsp;</span></h4>
+<br>
+<input type="radio" name="regId" value="11B00000">서울, 인천, 경기도&nbsp;&nbsp;&nbsp;
+<input type="radio" name="regId" value="11D10000">강원도(영서)&nbsp;&nbsp;&nbsp;
+<input type="radio" name="regId" value="11D20000">강원도(영동)&nbsp;&nbsp;&nbsp;
+<input type="radio" name="regId" value="11C20000">대전, 세종, 충청남도&nbsp;&nbsp;&nbsp;
+<input type="radio" name="regId" value="11C10000">충청북도<br>
+<input type="radio" name="regId" value="11F20000">광주, 전라남도&nbsp;&nbsp;&nbsp;
+<input type="radio" name="regId" value="11F10000">전라북도&nbsp;&nbsp;&nbsp;
+<input type="radio" name="regId" value="11H10000">대구, 경상북도&nbsp;&nbsp;&nbsp;
+<input type="radio" name="regId" value="11H20000">부산, 울산, 경상남도&nbsp;&nbsp;&nbsp;
+<input type="radio" name="regId" value="11G00000">제주도<br><br>
 
-<button id="btn" class="btn btn-primary btn-sm">조회</button>
 <div id="resultLayout"></div>
+</div>
 
-<div id="form" style="display: none;">
+<hr>
+
+<div style="display: flex; width: 56%; height: 10px;"></div>
+
+<div id="timeDiv">
+<h3><span style="color: #B1BCE6;">✔ 관측시간</span>&nbsp;&nbsp;&nbsp;<button id="btn2" class="btn btn-defalut">시간 조회</button></h3>
+<br>
+
+<h4><span style="background-color: #B1BCE6; border-radius: 10%; color: white">&nbsp;날짜 선택&nbsp;</span></h4>
+<br>
+<input type="text" id="datepicker">
+
+<br><br>
+
+<h4><span style="background-color: #B1BCE6; border-radius: 10%; color: white">&nbsp;지역 선택&nbsp;</span></h4>
+<br>
+<strong>ㄱ</strong><br>
+<input type="radio" name="location" value="강릉">강릉&nbsp;&nbsp;
+<input type="radio" name="location" value="강화도">강화도&nbsp;&nbsp;
+<input type="radio" name="location" value="거제">거제&nbsp;&nbsp;
+<input type="radio" name="location" value="거창">거창&nbsp;&nbsp;
+<input type="radio" name="location" value="경산">경산&nbsp;&nbsp;
+<input type="radio" name="location" value="경주">경주&nbsp;&nbsp;
+<input type="radio" name="location" value="고성(강원)">고성(강원)&nbsp;&nbsp;
+<input type="radio" name="location" value="고양">고양&nbsp;&nbsp;
+<input type="radio" name="location" value="고흥">고흥&nbsp;&nbsp;
+<input type="radio" name="location" value="광양">광양&nbsp;&nbsp;
+<input type="radio" name="location" value="광주">광주&nbsp;&nbsp;
+<input type="radio" name="location" value="광주(경기)">광주(경기)&nbsp;&nbsp;
+<input type="radio" name="location" value="구미">구미&nbsp;&nbsp;
+<input type="radio" name="location" value="군산">군산&nbsp;&nbsp;
+<input type="radio" name="location" value="김천">김천&nbsp;&nbsp;
+<input type="radio" name="location" value="김해">김해<br>
+
+<strong>ㄴ</strong><br>
+<input type="radio" name="location" value="남원">남원&nbsp;&nbsp;
+<input type="radio" name="location" value="남해">남해<br>
+
+<strong>ㄷ</strong><br>
+<input type="radio" name="location" value="대관령">대관령&nbsp;&nbsp;
+<input type="radio" name="location" value="대구">대구&nbsp;&nbsp;
+<input type="radio" name="location" value="대덕">대덕&nbsp;&nbsp;
+<input type="radio" name="location" value="대전">대전&nbsp;&nbsp; 
+<input type="radio" name="location" value="독도">독도&nbsp;&nbsp;
+<input type="radio" name="location" value="동해">동해<br>
+
+<strong>ㅁ</strong><br>
+<input type="radio" name="location" value="마산">마산&nbsp;&nbsp;
+<input type="radio" name="location" value="목포">목포&nbsp;&nbsp;
+<input type="radio" name="location" value="무안">무안&nbsp;&nbsp;
+<input type="radio" name="location" value="밀양">밀양<br>
+
+<strong>ㅂ</strong><br>
+<input type="radio" name="location" value="변산">변산&nbsp;&nbsp;
+<input type="radio" name="location" value="보령">보령&nbsp;&nbsp;
+<input type="radio" name="location" value="보성">보성&nbsp;&nbsp;
+<input type="radio" name="location" value="보현산">보현산&nbsp;&nbsp; 
+<input type="radio" name="location" value="부산">부산&nbsp;&nbsp;
+<input type="radio" name="location" value="부안">부안&nbsp;&nbsp;
+<input type="radio" name="location" value="부천">부천<br>
+
+<strong>ㅅ</strong><br>
+<input type="radio" name="location" value="사천">사천&nbsp;&nbsp;
+<input type="radio" name="location" value="삼척">삼척&nbsp;&nbsp; 
+<input type="radio" name="location" value="상주">상주&nbsp;&nbsp; 
+<input type="radio" name="location" value="서귀포">서귀포&nbsp;&nbsp;
+<input type="radio" name="location" value="서산">서산&nbsp;&nbsp;
+<input type="radio" name="location" value="서울">서울&nbsp;&nbsp; 
+<input type="radio" name="location" value="서천">서천&nbsp;&nbsp;
+<input type="radio" name="location" value="성산일출봉">성산일출봉&nbsp;&nbsp; 
+<input type="radio" name="location" value="세종">세종&nbsp;&nbsp;
+<input type="radio" name="location" value="소백산">소백산&nbsp;&nbsp; 
+<input type="radio" name="location" value="속초">속초&nbsp;&nbsp;
+<input type="radio" name="location" value="수원">수원&nbsp;&nbsp;
+<input type="radio" name="location" value="순천">순천&nbsp;&nbsp;
+<input type="radio" name="location" value="승주">승주&nbsp;&nbsp; 
+<input type="radio" name="location" value="시흥">시흥<br>
+
+<strong>ㅇ</strong><br>
+<input type="radio" name="location" value="아산">아산&nbsp;&nbsp; 
+<input type="radio" name="location" value="안동">안동&nbsp;&nbsp;
+<input type="radio" name="location" value="안산">안산&nbsp;&nbsp; 
+<input type="radio" name="location" value="안양">안양&nbsp;&nbsp;
+<input type="radio" name="location" value="양양">양양&nbsp;&nbsp; 
+<input type="radio" name="location" value="양평">양평&nbsp;&nbsp;
+<input type="radio" name="location" value="여수">여수&nbsp;&nbsp;
+<input type="radio" name="location" value="여수공항">여수공항&nbsp;&nbsp;
+<input type="radio" name="location" value="여주">여주&nbsp;&nbsp;
+<input type="radio" name="location" value="영광">영광&nbsp;&nbsp;
+<input type="radio" name="location" value="영덕">영덕&nbsp;&nbsp;
+<input type="radio" name="location" value="영월">영월&nbsp;&nbsp; 
+<input type="radio" name="location" value="영주">영주&nbsp;&nbsp;
+<input type="radio" name="location" value="영천">영천&nbsp;&nbsp;
+<input type="radio" name="location" value="완도">완도&nbsp;&nbsp;
+<input type="radio" name="location" value="용인">용인&nbsp;&nbsp;
+<input type="radio" name="location" value="울릉도">울릉도&nbsp;&nbsp;
+<input type="radio" name="location" value="울산">울산&nbsp;&nbsp;
+<input type="radio" name="location" value="울진">울진&nbsp;&nbsp;
+<input type="radio" name="location" value="원주">원주&nbsp;&nbsp;
+<input type="radio" name="location" value="의성">의성&nbsp;&nbsp;
+<input type="radio" name="location" value="익산">익산&nbsp;&nbsp;
+<input type="radio" name="location" value="인천">인천&nbsp;&nbsp;
+<input type="radio" name="location" value="임실">임실<br>
+
+<strong>ㅈ</strong><br>
+<input type="radio" name="location" value="장수">장수&nbsp;&nbsp;
+<input type="radio" name="location" value="장흥">장흥&nbsp;&nbsp; 
+<input type="radio" name="location" value="전주">전주&nbsp;&nbsp;
+<input type="radio" name="location" value="정읍">정읍&nbsp;&nbsp;
+<input type="radio" name="location" value="제주">제주&nbsp;&nbsp;
+<input type="radio" name="location" value="제천">제천&nbsp;&nbsp;
+<input type="radio" name="location" value="주문진">주문진&nbsp;&nbsp;
+<input type="radio" name="location" value="진도">진도&nbsp;&nbsp;
+<input type="radio" name="location" value="진주">진주&nbsp;&nbsp;
+<input type="radio" name="location" value="진해">진해<br>
+
+<strong>ㅊ</strong><br>
+<input type="radio" name="location" value="창원">창원&nbsp;&nbsp;
+<input type="radio" name="location" value="천안">천안&nbsp;&nbsp;
+<input type="radio" name="location" value="청주">청주&nbsp;&nbsp;
+<input type="radio" name="location" value="청주공항">청주공항&nbsp;&nbsp;
+<input type="radio" name="location" value="추풍령">추풍령&nbsp;&nbsp; 
+<input type="radio" name="location" value="춘양">춘양&nbsp;&nbsp;
+<input type="radio" name="location" value="춘천">춘천&nbsp;&nbsp;
+<input type="radio" name="location" value="충주">충주<br>
+
+<strong>ㅌ</strong><br>
+<input type="radio" name="location" value="태백">태백&nbsp;&nbsp; 
+<input type="radio" name="location" value="태안">태안&nbsp;&nbsp;
+<input type="radio" name="location" value="통영">통영<br>
+
+<strong>ㅍ</strong><br>
+<input type="radio" name="location" value="파주">파주&nbsp;&nbsp;
+<input type="radio" name="location" value="평택">평택&nbsp;&nbsp;
+<input type="radio" name="location" value="포항">초항<br>
+
+<strong>ㅎ</strong><br>
+<input type="radio" name="location" value="해남">해남&nbsp;&nbsp; 
+<input type="radio" name="location" value="화성">화성&nbsp;&nbsp;
+<input type="radio" name="location" value="흑산도">흑산도<br><br>
+
+<div id="resultLayout2"></div>
+</div>
+
+<!-- 
+<hr>
+
+<h1>추천일 조회</h1>
+<hr>
+
+
+<div id="form">
 <form action="./date" method="post">
-지역 <input id="form1" name="recomLoc" type="text" style="width: 300px; height: 130px; display: none;">
-추천일 <input id="form2" name="recomDate" type="text" style="width: 300px; height: 130px; display: none;"><br>
-<input type="submit" value="등록" class="btn btn-primary btn-xs" style="margin-left: 120px">
+
+<label for="form1">지역</label><br>
+<input id="form1" name="recomLoc" type="text" style="width: 300px; height: 50px;"><br><br>
+
+<label for="form2">추천일</label><br>
+<input id="form2" name="recomDate" type="text" style="width: 300px; height: 50px;"><br><br>
+
+<label for="form3">추천시간</label><br>
+<input id="form3" name="recomTime" type="text" style="width: 300px; height: 50px;"><br><br>
+
+<label for="form4">강수확률</label><br>
+<input id="form4" name="rain" type="text" style="width: 300px; height: 50px;"><br><br>
+
+<label for="form4">하늘상태</label><br>
+<input id="form5" name="sky" type="text" style="width: 300px; height: 50px;"><br><br>
+
+<input type="submit" value="등록" class="btn btn-primary">
 </form>
 </div>
+
+<hr>
+
+<div>
+<form action="./date" method="post" enctype="multipart/form-data">
+
+<div class="form-group">
+	<label for="recomLoc">지역</label>
+	<input type="text" id="recomLoc" name="recomLoc" class="form-control">
+</div>
+<div class="form-group">
+	<label for="recomDate">추천일</label>
+	<input type="text" id="recomDate" name="recomDate" class="form-control">
+</div>
+<div class="form-group">
+	<label for="recomTime">추천 시간</label>
+	<input type="text" id="recomTime" name="recomTime" class="form-control">
+</div>
+<div class="form-group">
+	<label for="rain">강수 확률</label>
+	<input type="text" id="rain" name="rain" class="form-control">
+</div>
+<div class="form-group">
+	<label for="sky">기상 상태</label>
+	<input type="text" id="sky" name="sky" class="form-control">
+</div>
+
+<br><br>
+
+<div class="text-center">
+	<button class="btn btn-default btn-sm" id="btnList">목록</button>
+	<button class="btn btn-primary btn-sm" id="btnUpload">등록</button>
+	<input type="reset" id="cancel" class="btn btn-danger btn-sm" value="작성 취소">
+</div>
+</form>
+</div>
+ 
+ -->
+ 
 <c:import url="../layout/footer.jsp" />

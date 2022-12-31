@@ -6,48 +6,38 @@
 
 <c:import url="../layout/header.jsp" />
 
-<style type="text/css">
-table {
-	table-layout: fixed;
-}
-
-table, th {
-	text-align: center;
-}
-
-td:nth-child(2) {
-	text-align: left;
-}
-</style>
-
 <script type="text/javascript">
-
-//전체 선택
-function selectAll(selectAll)  {
-	var checkboxes 
-	   = document.querySelectorAll('input[type="checkbox"]');
-	
-	checkboxes.forEach((checkbox) => {
-	  checkbox.checked = selectAll.checked
-	})
-}
 
 $(document).ready(function() {
 	
-	//선택
-	$('#select').click(function() {
-		var sel = $('input[name="select"]:checked').val()
-		console.log(sel)
-		
-		//왜 위의 2개만 인식하지...
-		//삭제
-		$('#delOk').click(function() {
-			if (confirm('삭제하시면 복구할 수 없습니다. \n정말로 삭제하시겠습니까?')) {
-				location.href = "./delete?galleryNo=" + sel
-			}
-		})
-	})
+	//checkBox 선택된 게시글 삭제
+	$(".selectDelete_btn").click(function(){
+	  var confirm_val = confirm("[게시글] \n삭제하시면 복구할 수 없습니다. \n정말로 삭제하시겠습니까?");
+	  
+	  if(confirm_val) {
+	   var checkArr = new Array();
+	   
+	   $("input[class='chBox']:checked").each(function(){
+	    checkArr.push($(this).attr("select_data"));
+	   });
+	    
+	   $.ajax({
+	    url : "./deletee",
+	    type : "post",
+	    data : { chbox : checkArr },
+	    success : function(result){
+		     if(result == 1) {            
+		      alert("게시글이 삭제되었습니다");
+		      history.go(0);
+		     } else {
+		      alert("삭제 실패");
+		     }
+		    }
+	   });
+	  } 
+	 });
 
+	//검색
 	$("#btnSearch").click(function() {
 		location.href = "./search?keyword" + $('input[name="keyword"]:checked').val();
 	})
@@ -77,13 +67,13 @@ $(document).ready(function() {
 
 </script>
 
-<h1>갤러리 리스트</h1>
+<h1 style="text-align: center;">갤러리 리스트</h1>
 <hr>
 
 <select id="category" name="category" required onchange="window.open(value,'_self')">
     <option value="" disabled selected>카테고리</option>
     <option value="/admin/gallery/list">갤러리</option>
-    <option value="/admin/goods/list">상품리뷰</option>
+    <!-- <option value="/admin/goods/list">상품리뷰</option> -->
     <option value="/admin/place/list">명소후기</option>
 </select>
 
@@ -95,14 +85,27 @@ $(document).ready(function() {
         <option value="uId">작성자</option>
     </select> -->
     <input id="keyword" name="keyword" type="text" placeholder="검색할 아이디를 입력하세요" value="">
-	<button class="btnSearch">검색</button>
+	<button class="btnSearch btn btn-default">검색</button>
 </form>
+
 <br><br>
 
 <table class="table table-hover">
 <thead>
 	<tr class="warning">
-		<th><input type='checkbox' name='all' value='selectall' onclick='selectAll(this)'/> 전체선택</th>
+		<th style="width: 10%;"><input type="checkbox" name="allCheck" id="allCheck" /></th>
+		
+		<script>
+		$("#allCheck").click(function(){
+		 var chk = $("#allCheck").prop("checked");
+		 if(chk) {
+		  $(".chBox").prop("checked", true);
+		 } else {
+		  $(".chBox").prop("checked", false);
+		 }
+		});
+		</script>
+		
 		<th>작성자</th>
 		<th>제목</th>
 		<th>내용</th>
@@ -114,9 +117,19 @@ $(document).ready(function() {
 <tbody>
 <c:forEach items="${boardList }" var="b">
 	<tr>
-		<td><input id="select" type="checkbox" name="select" value="${b.galleryNo }"></td>
+		<td><input type="checkbox" name="chBox" class="chBox" select_data="${b.galleryNo }"></td>
+		
+		<script>
+		 $(".chBox").click(function(){
+		  $("#allCheck").prop("checked", false);
+		 });
+		</script>
+		
 		<td>${b.uId }</td>
-		<td><a href="./view?galleryNo=${b.galleryNo }">${b.galleryTitle }</a></td>
+		<td>
+			<a href="./view?galleryNo=${b.galleryNo }">${b.galleryTitle }</a><br>
+			<a href="/gallery/view?galleryNo=${b.galleryNo }">게시글 확인</a>
+		</td>
 		<td>${b.galleryContent }</td>
 		<td>${b.galleryLoc }</td>
 		<td>${b.galleryTag }</td>
@@ -128,7 +141,7 @@ $(document).ready(function() {
 
 <span class="pull-right">total : ${paging.totalCount }</span><br><br>
 
-<button id="delOk" class="btn btn-danger" style="float: right">삭제</button><br>
+<button type="button" class="selectDelete_btn btn btn-danger" style="float: right;">선택 삭제</button> 
 
 <c:import url="../layout/paging.jsp" />
 

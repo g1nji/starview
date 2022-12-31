@@ -6,42 +6,41 @@
 <c:import url="../layout/header.jsp" />
 
 <script type="text/javascript">
+
 $(document).ready(function() {
 	
-	//상품 목록으로 돌아가기
+	//상품 목록으로 이동
 	$("#btnList").click(function() {
 		location.href = "./list"
 	})
 	
-	//상품 수정 버튼
+	//상품 수정
 	$("#btnUpdate").click(function() {
 		location.href = "./update?gId=${viewProd.gId }"
 	})
 	
-	//상품 삭제 버튼
+	//상품 삭제
 	$("#btnDelete").click(function() {
 		if(confirm('삭제하시면 복구할 수 없습니다. \n정말로 삭제하시겠습니까?') == true) {
 			alert("상품이 삭제되었습니다")
-			document.location.href = "./delete?galleryNo=${viewBoard.galleryNo }"
+			location.href = "./delete?gId=${viewProd.gId }"
 		}
 	})
 })
+
 </script>
 
-<style type="text/css">
-table {
-	table-layout: fixed;
-}
-</style>
-
-<h1>상품 상세 조회</h1>
+<h1 style="text-align: center;">상품 상세 조회</h1>
 <hr>
 
-<table class="table table-condensed">
-<tr>
-	<td rowspan="5">
+<table class="table">
+<tr class="">
+	<!-- 파일이 있는 경우만 -->
+	<c:if test="${not empty prodFile}">
+	<th rowspan="5">
 		<img src='/prodFile/${prodFile.fileName }' style="width: 400px; height: 400px;" /><br>
-	</td>
+	</th>
+	</c:if>
 	<th class="warning" style="width: 10%">상품명</th><td>${viewProd.gName}</td>
 	</tr>
 	<tr>
@@ -60,12 +59,12 @@ table {
 
 <br>
 
-<div class="text-center">
-	<button id="btnList" class="btn btn-default btn-sm">목록</button>
+<div class="btns" style="text-align: center">
+<button id="btnList" class="btn btn-default" style="display: inline-block;">목록</button>
 	
 	<!-- 아이디 추가 -->
-	<button id="btnUpdate" class="btn btn-primary btn-sm">수정</button>
-	<button id="btnDelete" class="btn btn-danger ">삭제</button>
+	<button id="btnUpdate" class="btn btn-primary"  style="display: inline-block;">수정</button>
+	<button id="btnDelete" class="btn btn-danger" style="display: inline-block;">삭제</button>
 </div>
 
 <c:import url="../layout/footer.jsp" />

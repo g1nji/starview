@@ -47,4 +47,8 @@
 		WHERE u_id = #{uId }
 	</select>
 
+	<select id="findName" resultType="String" parameterType="ydg.dto.Users">
+		SELECT u_name FROM users
+		WHERE u_id = #{uId }
+	</select>
 </mapper>

@@ -20,5 +20,20 @@
 		WHERE gallery_no = #{galleryNo }
 	</select>
 	
+	<update id="modify" parameterType="hyeri.dto.GComment">
+		UPDATE g_comment SET cm_content = #{cmContent }
+		WHERE cm_no = #{cmNo }
+	</update>
+	
+	<delete id="delete" parameterType="hyeri.dto.GComment">
+		DELETE g_comment
+		WHERE cm_no = #{cmNo }
+	</delete>
+	
+	<!-- 댓글 신고 -->
+	<insert id="insertBoard" parameterType="hyeri.dto.GComment">
+		INSERT INTO admin_comment_report (report_code, cm_no)
+		VALUES (acr_seq.nextval, #{cmNo })
+	</insert>
 
 </mapper>

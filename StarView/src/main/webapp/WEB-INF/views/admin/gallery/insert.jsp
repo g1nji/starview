@@ -22,7 +22,7 @@ $(document).ready(function() {
 
 </script>
 
-<h1>사진 갤러리 업로드</h1>
+<h1 style="text-align: center;">사진 갤러리 업로드</h1>
 <hr>
 
 <!-- <form action="./insert" method="post"> -->
@@ -74,6 +74,5 @@ $(document).ready(function() {
 	<input type="reset" id="cancel" class="btn btn-danger btn-sm" value="작성 취소">
 </div>
 </form>
-
 
 <c:import url="../layout/footer.jsp" />

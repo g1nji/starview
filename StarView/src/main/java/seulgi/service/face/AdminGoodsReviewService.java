@@ -9,5 +9,9 @@ public interface AdminGoodsReviewService {
 
 	public Paging getPaging(int curPage);
 	public List<AdminGoodsReview> list(Paging paging);
+	public AdminGoodsReview view(AdminGoodsReview viewBoard);
+	public void delete(AdminGoodsReview board);
+	public List<AdminGoodsReview> search(String keyword);
+	public void delete2(AdminGoodsReview board);
 
 }

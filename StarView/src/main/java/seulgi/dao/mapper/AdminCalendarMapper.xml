@@ -7,9 +7,49 @@
 
 <mapper namespace="seulgi.dao.face.AdminCalendarDao">
 
+	<!-- 추천일 등록 -->
 	<insert id="insertDate" parameterType="seulgi.dto.AdminCalendar">
-		INSERT INTO admin_calendar(recom_code, recom_date, recom_loc)
-		VALUES (admin_calendar_seq.nextval, #{recomDate }, #{recomLoc })
+		INSERT INTO admin_calendar(recom_code, recom_date, recom_time, recom_loc, rain, sky)
+		VALUES (admin_calendar_seq.nextval, #{recomDate }, #{recomTime }, #{recomLoc }, #{rain }, #{sky })
 	</insert>
+	
+	<!-- 추천일 리스트 -->
+	<select id="selectAll" resultType="seulgi.dto.AdminCalendar">
+		SELECT * FROM (
+			SELECT rownum rnum, A.* FROM (
+				SELECT * FROM admin_calendar
+				ORDER BY recom_code DESC
+			) A
+		) admin_calendar
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
+	
+	<!-- 추천일 개수 조회 -->
+	<select id="selectCntAll" resultType="int">
+		select count(*) from admin_calendar
+	</select>
+	
+	<!-- 추천일 상세 조회 -->
+	<select id="selectBoard" resultType="seulgi.dto.AdminCalendar" parameterType="seulgi.dto.AdminCalendar">
+		SELECT * FROM admin_calendar
+		WHERE recom_code = #{recomCode }
+	</select>
+	
+	<!-- 추천일 수정 -->
+	<update id="updateBoard" parameterType="seulgi.dto.AdminCalendar">
+		UPDATE admin_calendar
+		SET recom_loc = #{recomLoc }
+			, recom_date = #{recomDate }
+			, recom_time = #{recomTime }
+			, rain = #{rain }
+			, sky = #{sky }
+		WHERE recom_code = #{recomCode }
+	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="delete" parameterType="seulgi.dto.AdminCalendar">
+		DELETE admin_calendar
+		WHERE recom_code = #{recomCode }
+	</delete>
 	
 </mapper>

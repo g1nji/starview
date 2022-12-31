@@ -28,5 +28,18 @@ public class CommentServiceImpl implements CommentService {
 		return commentDao.selectGalleryNo(galleryNo);
 	}
 
+	@Override
+	public void delete(GComment gComment) {
+		
+		commentDao.delete(gComment);
+		
+	}
+	
+	@Override
+	public void report(GComment board) {
+		//logger.info("report() 사용");
+		
+		commentDao.insertBoard(board);
+	}
 	
 }

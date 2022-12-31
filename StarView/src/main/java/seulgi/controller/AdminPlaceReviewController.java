@@ -34,6 +34,8 @@ public class AdminPlaceReviewController {
 		//페이징 추가
 		Paging paging = adminBoardService.getPaging3(curPage);
 		logger.info("페이징 정보: {}", paging);
+		
+		//모델값 전달
 		model.addAttribute("paging", paging);
 		
 		//게시글 리스트
@@ -44,5 +46,10 @@ public class AdminPlaceReviewController {
 		
 		model.addAttribute("boardList", boardList);
 	}
+	
+	//상세
+	//삭제
+	//선택 삭제
+	//검색-장소명, 페이징
 	
 }

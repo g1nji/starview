@@ -13,16 +13,16 @@ public class AfterOrder {
 	private int productAmount;		//상품갯수
 	private int paymentAmount;		//결제금액
 	private String buyerEmail;		//구매자이메일
-	private String huyerName;		//구매자이름
-	private int buyerPhone;			//구매자전화번호
+	private String buyerName;		//구매자이름
+	private String buyerPhone;			//구매자전화번호
 	private String buyerAddress;	//구매자 주소
 	private String uId;				//회원아이디(FK)
 	
 	public AfterOrder() {}
 
 	public AfterOrder(int orderAfterNo, String orderProcess, String paymentMethod, String perchantUid,
-			String productName, int productAmount, int paymentAmount, String buyerEmail, String huyerName,
-			int buyerPhone, String buyerAddress, String uId) {
+			String productName, int productAmount, int paymentAmount, String buyerEmail, String buyerName,
+			String buyerPhone, String buyerAddress, String uId) {
 		super();
 		this.orderAfterNo = orderAfterNo;
 		this.orderProcess = orderProcess;
@@ -32,7 +32,7 @@ public class AfterOrder {
 		this.productAmount = productAmount;
 		this.paymentAmount = paymentAmount;
 		this.buyerEmail = buyerEmail;
-		this.huyerName = huyerName;
+		this.buyerName = buyerName;
 		this.buyerPhone = buyerPhone;
 		this.buyerAddress = buyerAddress;
 		this.uId = uId;
@@ -42,8 +42,8 @@ public class AfterOrder {
 	public String toString() {
 		return "AfterOrder [orderAfterNo=" + orderAfterNo + ", orderProcess=" + orderProcess + ", paymentMethod="
 				+ paymentMethod + ", perchantUid=" + perchantUid + ", productName=" + productName + ", productAmount="
-				+ productAmount + ", paymentAmount=" + paymentAmount + ", buyerEmail=" + buyerEmail + ", huyerName="
-				+ huyerName + ", buyerPhone=" + buyerPhone + ", buyerAddress=" + buyerAddress + ", uId=" + uId + "]";
+				+ productAmount + ", paymentAmount=" + paymentAmount + ", buyerEmail=" + buyerEmail + ", buyerName="
+				+ buyerName + ", buyerPhone=" + buyerPhone + ", buyerAddress=" + buyerAddress + ", uId=" + uId + "]";
 	}
 
 	public int getOrderAfterNo() {
@@ -110,19 +110,19 @@ public class AfterOrder {
 		this.buyerEmail = buyerEmail;
 	}
 
-	public String getHuyerName() {
-		return huyerName;
+	public String getBuyerName() {
+		return buyerName;
 	}
 
-	public void setHuyerName(String huyerName) {
-		this.huyerName = huyerName;
+	public void setBuyerName(String buyerName) {
+		this.buyerName = buyerName;
 	}
 
-	public int getBuyerPhone() {
+	public String getBuyerPhone() {
 		return buyerPhone;
 	}
 
-	public void setBuyerPhone(int buyerPhone) {
+	public void setBuyerPhone(String buyerPhone) {
 		this.buyerPhone = buyerPhone;
 	}
 
@@ -141,5 +141,5 @@ public class AfterOrder {
 	public void setuId(String uId) {
 		this.uId = uId;
 	}
-	
+
 }

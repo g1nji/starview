@@ -78,7 +78,7 @@ public interface AdminGalleryService {
 	public void update(AdminGallery board);
 
 	/**
-	 * 게시글 삭제 + 첨부파일 삭제하기
+	 * 게시글 삭제 + 첨부파일 + 댓글 삭제하기
 	 * 
 	 * @param board - 삭제할 게시글 정보 객체
 	 */
@@ -87,6 +87,8 @@ public interface AdminGalleryService {
 	
 	public List<AdminGallery> search(String keyword);
 	//public List<AdminBoard> search(Search search);
+
+	public void report(AdminGallery board);
 
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

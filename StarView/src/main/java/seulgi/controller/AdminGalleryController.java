@@ -2,8 +2,6 @@ package seulgi.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import seulgi.dto.AdminGallery;
 import seulgi.dto.AdminBoardFile;
 import seulgi.dto.AdminComment;
+import seulgi.dto.AdminGallery;
 import seulgi.service.face.AdminCommentService;
 import seulgi.service.face.AdminGalleryService;
 import seulgi.util.Paging;
@@ -44,6 +43,8 @@ public class AdminGalleryController {
 		//페이징 추가
 		Paging paging = adminBoardService.getPaging(curPage);
 		logger.info("페이징 정보: {}", paging);
+		
+		//모델값 전달
 		model.addAttribute("paging", paging);
 		
 		//게시글 리스트
@@ -55,9 +56,9 @@ public class AdminGalleryController {
 		model.addAttribute("boardList", boardList);
 	}
 	
-	//게시글 상세 페이지
+	//게시글 상세 조회
 	@RequestMapping("/view")
-	public String viewGalley(AdminGallery viewBoard, Model model, int galleryNo) {
+	public String viewGalley(AdminGallery viewBoard, Model model) {
 		logger.info("/view 주소 연결");
 
 		//잘못된 게시글 번호 처리
@@ -72,15 +73,18 @@ public class AdminGalleryController {
 		//모델값 전달
 		model.addAttribute("viewBoard", viewBoard);
 		
-		//첨부파일 모델값 전달
+		//첨부파일 조회
 		AdminBoardFile boardFile = adminBoardService.getAttachFile(viewBoard);
+		
+		//모델값 전달
 		model.addAttribute("boardFile", boardFile);
 		
 		//댓글 조회
-		List<AdminComment> commentList = adminCommentService.list(galleryNo);
+		List<AdminComment> viewComm = adminCommentService.view(viewBoard);
+		logger.info("게시글 번호: {}", viewBoard.getGalleryNo());
 		
 		//모델값 전달
-		model.addAttribute("commentList", commentList);
+		model.addAttribute("viewComm", viewComm);
 		
 		return "admin/gallery/view";
 	}
@@ -107,14 +111,11 @@ public class AdminGalleryController {
 	//테스트용
 	//게시글 업로드
 	@RequestMapping(value="/insert", method = RequestMethod.POST)
-	public String insertGalleryProc(AdminGallery board, MultipartFile file, HttpSession session) {
+	public String insertGalleryProc(AdminGallery board, MultipartFile file) {
 		logger.info("/insert 주소 연결 - [POST]");
 		logger.info("게시글 정보: {}", board);
 		logger.info("파일 정보: {}", file);
 		
-		//작성자 정보 추가
-		board.setuId( (String) session.getAttribute("uId") );
-
 		//게시글, 첨부파일 처리
 		adminBoardService.upload(board, file);
 		
@@ -173,7 +174,27 @@ public class AdminGalleryController {
 		return "redirect:/admin/gallery/view?galleryNo=" + board.getGalleryNo();
 	}
 	
-	//게시글 삭제
+	//게시글 삭제 - list에서
+	@ResponseBody
+	@RequestMapping("/deletee")
+	public int deleteeGallery(@RequestParam(value = "chbox[]") List<String> chArr, AdminGallery board) {
+		logger.info("/deletee 주소 연결");
+		
+		int result = 0;
+		int select_data = 0;
+		 
+		for(String i : chArr) {   
+			select_data = Integer.parseInt(i);
+			board.setGalleryNo(select_data);
+			adminBoardService.delete(board);
+		}
+		
+		result = 1;
+			  
+		return result;  
+	}
+	
+	//게시글 삭제 - view에서
 	@RequestMapping("/delete")
 	public String deleteGallery(AdminGallery board) {
 		logger.info("/delete 주소 연결");
@@ -182,8 +203,8 @@ public class AdminGalleryController {
 		
 		return "redirect:/admin/gallery/list";
 	}
-	
-	//나중에 페이징 처리도 할 것
+		
+	//페이징 추가
 	//게시글 검색
 	@RequestMapping("/search")
 	//public void searchGallery(Model model, @RequestParam(value="option", required = false) String option, @RequestParam(value="keyword", required = false) String keyword) {
@@ -195,7 +216,7 @@ public class AdminGalleryController {
 		List<AdminGallery> searchList = adminBoardService.search(keyword);
 		
 		//for (AdminBoard b : searchList)
-		logger.info("검색된 게시글: {}", searchList);
+		//logger.info("검색된 게시글: {}", searchList);
 		
 		//String option = search.getOption();
 		//String keyword = search.getKeyword();
@@ -206,6 +227,33 @@ public class AdminGalleryController {
 		model.addAttribute("searchList", searchList);
 		//model.addAttribute("option", option);
 		model.addAttribute("keyword", keyword);
+	}
+	
+	//게시글 신고
+	@ResponseBody
+	@RequestMapping("/reportt")
+	public int reportGallery(@RequestParam(value = "chbox[]") List<String> chArr, AdminGallery board) {
+		logger.info("/report 주소 연결");
+		
+		int result = 0;
+		int select_data = 0;
+		 
+		for(String i : chArr) {   
+			select_data = Integer.parseInt(i);
+			board.setGalleryNo(select_data);
+			adminBoardService.report(board);
+		}
+		
+		result = 1;
+			  
+		return result; 
+	}
+	
+	//페이징 추가
+	//게시글 신고 리스트
+	@RequestMapping(value="/report")
+	public void reportList() {
+		logger.info("/report 주소 연결");
 	}
 	
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

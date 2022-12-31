@@ -65,6 +65,12 @@ public interface UsersService {
 	 */
 	public String finduNick(Users users);
 
-
+	/**
+	 * 로그인 시 유저 이름 가져오기
+	 * 
+	 * @param users
+	 * @return
+	 */
+	public String findName(Users users);
 
 }

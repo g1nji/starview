@@ -5,6 +5,7 @@
 <c:import url="../layout/header.jsp" />
 
 <script type="text/javascript">
+
 $(document).ready(function() {
 	
 	if( ${empty prodFile} ) {
@@ -17,7 +18,7 @@ $(document).ready(function() {
 
 </script>
 
-<h1>상품 수정</h1>
+<h1 style="text-align: center;">상품 수정</h1>
 <hr>
 
 <form action="./update" method="post" enctype="multipart/form-data">

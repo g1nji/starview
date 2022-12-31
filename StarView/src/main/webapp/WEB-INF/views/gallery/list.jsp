@@ -40,7 +40,6 @@ $(document).ready(function(){
 	text-decoration: underline;
 }
 
-
 .title {
 	text-align: center;
 }
@@ -64,6 +63,11 @@ $(document).ready(function(){
 
 .galleryImg {
 	height: 270px;
+	transition: all 0.2s linear;
+}
+
+.galleryImg:hover {
+	transform: scale(1.2);
 }
 
 .gtitle {
@@ -82,13 +86,19 @@ $(document).ready(function(){
 }
 
 #btnWrite {
-	float: right;
+    float: right;
+    width: 70px;
+    height: 30px;
+    border-radius: 30px;
+    border: none;
+    background-color: #FFB703;
+    font-weight: 500;
 }
 
 </style>
 
 <h1 class="title">갤러리</h1>
-<button id="btnWrite" class="btn btn-primary">글쓰기</button>
+<button id="btnWrite">업로드</button>
 <div class="clearfix"></div>
 <hr>
 <div class="clearfix"></div>
@@ -131,7 +141,7 @@ $(document).ready(function(){
 </div>
 
 <!-- 게시글이 12개 이상일 경우 한 페이지에 12개만 보이기 -->
-<c:if test="${list.size() > 12 }">
+<c:if test="${list.size() >= 12 }">
 	<c:forEach items="${list }" var="gallery">
 		<table class="gallerylist">
 		<tr>

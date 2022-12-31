@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import seulgi.dto.AdminGoodsReview;
 import seulgi.dto.AdminProduct;
 import seulgi.dto.AdminProductFile;
 import seulgi.util.Paging;
@@ -30,7 +31,6 @@ public interface AdminProductService {
 	 */
 	public Paging getPaging(int curPage);
 	
-
 	/**
 	 * 상품 번호 이용하여 상품 상세 조회하기
 	 * 
@@ -76,4 +76,11 @@ public interface AdminProductService {
 	 * @param prod - 삭제할 상품 정보 객체
 	 */
 	public void delete(AdminProduct prod);
+
+	public AdminProductFile getAttachFile(AdminGoodsReview viewBoard);
+
+	public AdminProduct view(AdminGoodsReview viewBoard);
+
+	public List<AdminProduct> search(String keyword);
+	
 }

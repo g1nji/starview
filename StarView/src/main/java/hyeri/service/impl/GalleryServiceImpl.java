@@ -18,7 +18,6 @@ import hyeri.dto.GComment;
 import hyeri.dto.GTag;
 import hyeri.dto.Gallery;
 import hyeri.dto.GalleryFile;
-import hyeri.dto.GalleryLike;
 import hyeri.service.face.GalleryService;
 import hyeri.util.Paging;
 
@@ -129,14 +128,12 @@ public class GalleryServiceImpl implements GalleryService {
 		
 		//---------------------------------------------------
 		
-		GTag gTag = new GTag();
-		for( int i=0; i<tagList.size(); i++ ) {
-			String t= tagList.get(i).getTagName();
-			gTag.setTagName(t);
-			gTag.setGalleryNo( gallery.getGalleryNo() );
-		}
+		//태그 처리
 		
-		galleryDao.insertTag(gTag);
+		for(GTag t : tagList) {
+			t.setGalleryNo(gallery.getGalleryNo());
+		}
+		galleryDao.insertTag(tagList);
 		
 	}
 	
@@ -203,8 +200,68 @@ public class GalleryServiceImpl implements GalleryService {
 	}
 	
 	@Override
-	public void update(Gallery viewGallery, MultipartFile file) {
+	public void delete(Gallery viewGallery) {
 		
+		//첨부파일 삭제
+		galleryDao.deleteFile(viewGallery);
+		
+		//태그 삭제
+		galleryDao.deleteTag(viewGallery);
+		
+		//덧글 삭제
+		galleryDao.deleteComment(viewGallery);
+		
+		//게시글 삭제
+		galleryDao.delete(viewGallery);
+	}
+	
+	
+	@Override
+	public List<Gallery> search(String keywordInput) {
+		
+		return galleryDao.selectByKeyword(keywordInput);
+	}
+	
+	@Override
+	public List<GComment> clist(Paging paging) {
+		return galleryDao.selectCList(paging);
+	}
+	
+	@Override
+	public List<GTag> viewTag(int galleryNo) {
+		return galleryDao.selectGalleryNo(galleryNo);
+	}
+	
+	@Override
+	public int findLike(int galleryNo, String uId) {
+		return galleryDao.findLike(galleryNo, uId);
+	}
+	
+	@Override
+	public void likeUp(int galleryNo, String uId) {
+		galleryDao.likeUp(galleryNo, uId);
+		
+		galleryDao.updateLike(galleryNo);
+		
+		galleryDao.updateHit2(galleryNo);
+	}
+	
+	@Override
+	public void likeDown(int galleryNo, String uId) {
+		galleryDao.likeDown(galleryNo, uId);
+		
+		galleryDao.updateLike(galleryNo);
+		
+		galleryDao.updateHit2(galleryNo);
+	}
+	
+	@Override
+	public int getLike(int galleryNo) {
+		return galleryDao.getLike(galleryNo);
+	}
+	
+	@Override
+	public void update(Gallery viewGallery, MultipartFile file, List<GTag> tagList) {
 		//게시글 처리
 		if( "".equals( viewGallery.getGalleryTitle() ) ) {
 			viewGallery.setGalleryTitle("(무제)");
@@ -243,6 +300,7 @@ public class GalleryServiceImpl implements GalleryService {
 			e.printStackTrace();
 		}
 		
+		
 		//---------------------------------------------------
 		
 		//첨부파일 정보 DB 기록
@@ -252,38 +310,97 @@ public class GalleryServiceImpl implements GalleryService {
 		galleryFile.setuId( viewGallery.getuId() );
 		galleryFile.setOriginName(originName);
 		galleryFile.setStoredName(storedName);
+		galleryFile.setFilepath(storedPath);
 		
-		//기존에 게시글에 연결된 첨부파일 삭제
-		galleryDao.deleteFile(galleryFile);
+		//기존에 연결된 첨부파일 삭제
+		galleryDao.deleteFile(viewGallery);
 		
 		galleryDao.insertPhoto(galleryFile);
 		
-	}
-	
-	@Override
-	public void delete(Gallery gallery, GalleryFile galleryFile) {
-
-		//첨부파일 삭제
-		galleryDao.deleteFile(galleryFile);
+		//---------------------------------------------------
 		
-		//게시글 삭제
-		galleryDao.delete(gallery);
-	}
-	
-	@Override
-	public List<Gallery> search(String keywordInput) {
+		galleryDao.updateFilepath(viewGallery);
 		
-		return galleryDao.selectByKeyword(keywordInput);
+		//---------------------------------------------------
+		
+		//태그 처리
+		
+		for(GTag t : tagList) {
+			t.setGalleryNo(viewGallery.getGalleryNo());
+		}
+		galleryDao.insertTag(tagList);
+		
 	}
 	
 	@Override
-	public List<GComment> clist(Paging paging) {
-		return galleryDao.selectCList(paging);
+	public void update2(Gallery viewGallery, MultipartFile file) {
+		//게시글 처리
+		if( "".equals( viewGallery.getGalleryTitle() ) ) {
+			viewGallery.setGalleryTitle("(무제)");
+		}
+		
+		galleryDao.updatePhoto(viewGallery);
+		
+		//---------------------------------------------------
+		
+		//첨부파일 처리
+		
+		//빈 파일일 경우
+		if( file.getSize() <= 0 ) {
+			return;
+		}
+		
+		//파일이 저장될 경로
+		String storedPath = context.getRealPath("upload");
+		File storedFolder = new File( storedPath );
+		if( !storedFolder.exists() ) {
+			storedFolder.mkdir();
+		}
+		
+		//파일이 저장될 이름
+		String originName = file.getOriginalFilename();
+		String storedName = originName + UUID.randomUUID().toString().split("-")[4];
+		
+		//저장할 파일의 정보 객체
+		File dest = new File( storedFolder, storedName );
+		
+		try {
+			file.transferTo(dest);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+		//---------------------------------------------------
+		
+		//첨부파일 정보 DB 기록
+		
+		GalleryFile galleryFile = new GalleryFile();
+		galleryFile.setGalleryNo( viewGallery.getGalleryNo() );
+		galleryFile.setuId( viewGallery.getuId() );
+		galleryFile.setOriginName(originName);
+		galleryFile.setStoredName(storedName);
+		galleryFile.setFilepath(storedPath);
+		
+		//기존에 연결된 첨부파일 삭제
+		galleryDao.deleteFile(viewGallery);
+		
+		galleryDao.insertPhoto(galleryFile);
+		
+		//---------------------------------------------------
+		
+		galleryDao.updateFilepath(viewGallery);
+		
 	}
 	
+	//게시글 신고
 	@Override
-	public List<GTag> viewTag(int galleryNo) {
-		return galleryDao.selectGalleryNo(galleryNo);
+	public void report(Gallery board) {
+		//logger.info("report() 사용");
+		
+		galleryDao.insertBoard(board);
 	}
 	
 }

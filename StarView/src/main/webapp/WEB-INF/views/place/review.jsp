@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+
 <script type="text/javascript">
 $(document).ready(function() {
 	
@@ -40,6 +43,13 @@ $(document).ready(function() {
 		}
 	})
 	
+	lightbox.option({
+    resizeDuration: 200,
+    wrapAround: true,
+    disableScrolling: false,
+    fitImagesInViewport:false
+})
+	
 })
 </script>
 
@@ -48,10 +58,10 @@ $(document).ready(function() {
 	border: none;
     border-radius: 10px;
     display: flex;
-    font-size: 16px;
+    font-size: 14px;
     align-items: center;
     width: 70px;
-    height: 35px;
+    height: 46px;
     background-color: #FFEBBA;
     justify-content: center;
     font-weight: 500;
@@ -63,7 +73,7 @@ $(document).ready(function() {
 	border: none;
     border-radius: 10px;
     display: flex;
-    font-size: 16px;
+    font-size: 14px;
     align-items: center;
     width: 70px;
     height: 46px;
@@ -116,21 +126,25 @@ td {
 					<c:if test="${uId eq review.uId }">
 						<td style="width:10%; font-weight:600; text-align: center;">${review.uNick }</td>
 						<td style="width:10%; color: #ccc;"><fmt:formatDate value="${review.sreviewDate }" pattern="yy.MM.dd HH:mm"/></td>
-						<td style="width:68%;">${review.sreviewContent }</td>
+						<td style="width:68%; padding-left: 20px;">${review.sreviewContent }</td>
 						<td style="width:10%;">
-							<img src="/imagepath/${review.storedName }" style="width:100%;">
+							<a href="/imagepath/${review.storedName }" data-title="${review.sreviewContent }" data-lightbox="example-set">
+								<img src="/imagepath/${review.storedName }" style="width:100%;">
+							</a>
 						</td>
 						<td style="width:2%; text-align: center;">
-							<a href="/place/review-delete?sreviewNo=${review.sreviewNo }" class="deleteBtn">X</a>
+							<a href="/place/review-delete?sreviewNo=${review.sreviewNo }" class="deleteBtn"><span class="glyphicon glyphicon-remove"></span></a>
 						</td>
 					</c:if>
 					<!-- 작성자 != 로그인한사람 -->
 					<c:if test="${uId ne review.uId }">
 						<td style="width:10%; font-weight:600; text-align: center;">${review.uNick }</td>
 						<td style="width:10%; color: #ccc;"><fmt:formatDate value="${review.sreviewDate }" pattern="yy.MM.dd HH:mm"/></td>
-						<td style="width:70%;">${review.sreviewContent }</td>
+						<td style="width:70%; padding-left: 20px;">${review.sreviewContent }</td>
 						<td style="width:10%;">
-							<img src="/imagepath/${review.storedName }" style="width:100%;">
+							<a href="/imagepath/${review.storedName }" data-title="${review.sreviewContent }" data-lightbox="example-set">
+								<img src="/imagepath/${review.storedName }" style="width:100%;">
+							</a>
 						</td>
 					</c:if>
 				</c:if>
@@ -142,16 +156,16 @@ td {
 					<c:if test="${uId eq review.uId }">
 						<td style="width:10%; font-weight:600; text-align: center;">${review.uNick }</td>
 						<td style="width:10%; color: #ccc;"><fmt:formatDate value="${review.sreviewDate }" pattern="yy.MM.dd HH:mm"/></td>
-						<td style="width:78%;">${review.sreviewContent }</td>
+						<td style="width:78%; padding-left: 20px;">${review.sreviewContent }</td>
 						<td style="width:2%; text-align: center;">
-							<a href="/place/review-delete?sreviewNo=${review.sreviewNo }" class="deleteBtn">X</a>
+							<a href="/place/review-delete?sreviewNo=${review.sreviewNo }" class="deleteBtn"><span class="glyphicon glyphicon-remove"></span></a>
 						</td>
 					<!-- 작성자 != 로그인한사람 -->
 					</c:if>
 					<c:if test="${uId ne review.uId }">
 						<td style="width:10%; font-weight:600; text-align: center;">${review.uNick }</td>
 						<td style="width:10%; color: #ccc;"><fmt:formatDate value="${review.sreviewDate }" pattern="yy.MM.dd HH:mm"/></td>
-						<td style="width:80%;">${review.sreviewContent }</td>
+						<td style="width:80%; padding-left: 20px;">${review.sreviewContent }</td>
 					</c:if>
 				</c:if>
 			</tr>

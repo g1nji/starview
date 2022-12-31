@@ -35,12 +35,15 @@ table {
 
 td { 
 	width: 70px; 
+	padding: 3px 0;
 }
 
 .detail-img {
 	border-top: 2px solid black;
 	margin-top: 100px;
 }
+
+#selectQty { width: 50px; }
 
 .btn {
 	padding: 15px 30px;
@@ -291,7 +294,7 @@ function addCart(){
 			</c:when>
 			<c:otherwise>
 				<c:choose>
-					<c:when test="${likeCheck eq '0' or empty likeCheck }">
+					<c:when test="${findLike eq '0' or empty findLike }">
 						<button class="heart-icon" id="login" style="background: url(/resources/img/empty_heart.png) no-repeat center 1px/38px;">
 					</c:when>
 					<c:otherwise>

@@ -161,6 +161,8 @@ public class AdminGalleryServiceImpl implements AdminGalleryService {
 		adminBoardDao.insertFile(boardFile);
 	}
 	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	//첨부파일 정보 얻어오기
 	@Override
 	public AdminBoardFile getAttachFile(AdminGallery viewBoard) {
@@ -259,6 +261,9 @@ public class AdminGalleryServiceImpl implements AdminGalleryService {
 		//첨부파일 삭제
 		adminBoardDao.deleteFile(board);
 		
+		//댓글 삭제
+		adminBoardDao.deleteComm(board);
+		
 		//게시글 삭제
 		adminBoardDao.delete(board);
 	}
@@ -268,7 +273,18 @@ public class AdminGalleryServiceImpl implements AdminGalleryService {
 	//게시글 검색
 	@Override
 	public List<AdminGallery> search(String keyword) {
+		logger.info("search() 사용");
+		
 		return adminBoardDao.searchBoard(keyword);
 	}
 	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	//게시글 신고
+	@Override
+	public void report(AdminGallery board) {
+		logger.info("report() 사용");
+		
+		adminBoardDao.insertBoard2(board);
+	}
 }
