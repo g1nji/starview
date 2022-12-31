@@ -36,8 +36,7 @@ public class AdminReportController {
 	@Autowired
 	private AdminCommentService adminCommentService;
 	
-	//조회-페이징
-	//게시글 리스트
+	//신고 게시글 리스트
 	@RequestMapping(value="/boardList")
 	public void getReportGalleyList(Model model, @RequestParam(defaultValue = "0") int curPage) {
 		logger.info("/list 주소 연결");
@@ -49,16 +48,14 @@ public class AdminReportController {
 		//모델값 전달
 		model.addAttribute("paging", paging);
 		
-		//게시글 리스트
+		//신고 게시글 리스트
 		List<AdminReport> boardList = adminReportService.list(paging);
 		
-		//for (AdminBoard b : boardList)
-			//logger.info("{}", b);
-		
+		//모델값 전달
 		model.addAttribute("boardList", boardList);
 	}
 	
-	//댓글 리스트
+	//신고 댓글 리스트
 	@RequestMapping(value="/commList")
 	public void getReportcommList(Model model, @RequestParam(defaultValue = "0") int curPage) {
 		logger.info("/list 주소 연결");
@@ -70,7 +67,7 @@ public class AdminReportController {
 		//모델값 전달
 		model.addAttribute("paging", paging);
 		
-		//댓글 리스트
+		//신고 댓글 리스트
 		List<AdminReport> commList = adminReportService.list2(paging);
 		
 		//모델값 전달

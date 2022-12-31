@@ -44,10 +44,12 @@ $(document).ready(function() {
 <h1 style="text-align: center;">신고 글 리스트</h1>
 <hr>
 
+<!-- 
 <form id="searchForm" action="./search" method="get" style="float: right;">
     <input id="keyword" name="keyword" type="text" placeholder="검색할 아이디를 입력하세요" value="">
 	<button class="btnSearch">검색</button>
 </form>
+ -->
 
 <br><br>
 
@@ -89,6 +91,10 @@ $(document).ready(function() {
 </tbody>
 </table>
 
-<button type="button" class="selectDelete_btn btn btn-danger" style="float: right;">선택 삭제</button>
+<span class="pull-right">total : ${paging.totalCount }</span><br><br>
+
+<button type="button" class="selectDelete_btn btn btn-danger" style="float: right;">선택 삭제</button> 
+
+<c:import url="../layout/paging.jsp" />
 
 <c:import url="../layout/footer.jsp" />

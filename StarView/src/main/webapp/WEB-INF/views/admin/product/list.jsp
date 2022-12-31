@@ -70,7 +70,7 @@ $(document).ready(function() {
 <hr>
 
 <form id="searchForm" action="./search" method="get" style="float: right;">
-    <input id="keyword" name="keyword" type="text" placeholder="검색할 아이디를 입력하세요" value="">
+    <input id="keyword" name="keyword" type="text" placeholder="검색할 상품명을 입력하세요" value="">
 	<button class="btnSearch btn btn-default">검색</button>
 </form>
 
@@ -111,7 +111,10 @@ $(document).ready(function() {
 		 });
 		</script>
 		
-		<td><a href="./view?gId=${p.gId }">${p.gName }</a></td>
+		<td>
+			<a href="./view?gId=${p.gId }">${p.gName }</a>&nbsp;
+			<button id="btnUpdate" class="btn btn-primary btn-xs" onclick="location.href='./update?gId=${p.gId }'" style="display: inline-block;">수정</button>
+		</td>
 		<td>${p.gPrice }</td>
 		<td>${p.gDetail }</td>
 		<td>${p.delPrice }</td>
