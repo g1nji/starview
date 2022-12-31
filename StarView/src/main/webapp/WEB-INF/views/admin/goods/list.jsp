@@ -28,7 +28,7 @@ $(document).ready(function() {
 	    data : { chbox : checkArr },
 	    success : function(result){
 	     if(result == 1) {            
-	      alert("댓글이 삭제되었습니다");
+	      alert("게시글이 삭제되었습니다");
 	      history.go(0);
 	     } else {
 	      alert("삭제 실패");

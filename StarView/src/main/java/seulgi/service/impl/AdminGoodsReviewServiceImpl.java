@@ -99,6 +99,4 @@ public class AdminGoodsReviewServiceImpl implements AdminGoodsReviewService {
 		return adminBoardDao.searchBoard(keyword);
 	}
 	
-	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 }

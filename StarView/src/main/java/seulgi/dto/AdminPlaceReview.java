@@ -13,11 +13,12 @@ public class AdminPlaceReview {
 	private String sreviewContent;
 	private Date sreviewDate;
 	private int arrivalNum;
-
+	private String storedName;
+	
 	public AdminPlaceReview() {}
 
 	public AdminPlaceReview(String uId, String uNick, int sreviewNo, String sreviewContent, Date sreviewDate,
-			int arrivalNum) {
+			int arrivalNum, String storedName) {
 		super();
 		this.uId = uId;
 		this.uNick = uNick;
@@ -25,12 +26,14 @@ public class AdminPlaceReview {
 		this.sreviewContent = sreviewContent;
 		this.sreviewDate = sreviewDate;
 		this.arrivalNum = arrivalNum;
+		this.storedName = storedName;
 	}
 
 	@Override
 	public String toString() {
 		return "AdminPlaceReview [uId=" + uId + ", uNick=" + uNick + ", sreviewNo=" + sreviewNo + ", sreviewContent="
-				+ sreviewContent + ", sreviewDate=" + sreviewDate + ", arrivalNum=" + arrivalNum + "]";
+				+ sreviewContent + ", sreviewDate=" + sreviewDate + ", arrivalNum=" + arrivalNum + ", storedName="
+				+ storedName + "]";
 	}
 
 	public String getuId() {
@@ -79,6 +82,14 @@ public class AdminPlaceReview {
 
 	public void setArrivalNum(int arrivalNum) {
 		this.arrivalNum = arrivalNum;
+	}
+
+	public String getStoredName() {
+		return storedName;
+	}
+
+	public void setStoredName(String storedName) {
+		this.storedName = storedName;
 	}
 
 }

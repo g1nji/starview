@@ -459,7 +459,7 @@ var selectDate = (d)=>{
 </script>
 
 <h1 style="text-align: center;">추천일 조회&nbsp;
-<button class="btn" style="background-color: #9BA3EB;" onclick="window.open('http://localhost:8888/admin/calendar/upload','추천일 등록','width=500,height=500,top=500px,left=500px');">추천일 등록</button></h1>
+<button class="btn" style="background-color: #9BA3EB;" onclick="window.open('http://localhost:8888/admin/calendar/upload','추천일 등록','width=600,height=500,top=500px,left=300px');">추천일 등록</button></h1>
 <hr>
 
 <div id="dateDiv">
