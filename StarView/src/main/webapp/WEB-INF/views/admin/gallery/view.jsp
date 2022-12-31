@@ -99,7 +99,7 @@ $(document).ready(function() {
 
 </script>
 
-<h1 style="text-align: center;">게시글 상세 조회</h1>
+<h1 style="text-align: center;">'${viewBoard.galleryTitle }' 상세 조회</h1>
 <hr>
 
 <table class="table">

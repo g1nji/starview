@@ -30,7 +30,7 @@ $(document).ready(function() {
 
 </script>
 
-<h1 style="text-align: center;">상품 상세 조회</h1>
+<h1 style="text-align: center;">'${viewProd.gName}' 상세 조회</h1>
 <hr>
 
 <table class="table">
@@ -44,6 +44,7 @@ $(document).ready(function() {
 	</tr>
 	<tr>
 	<th class="warning">상품명</th><td>${viewProd.gName}</td>
+	</tr>
 	<tr>
 	<th class="warning">상품 등록일</th><td><fmt:formatDate value="${viewProd.regDate }" pattern="yy-MM-dd HH:mm:ss"/></td>
 	</tr>
