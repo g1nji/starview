@@ -276,8 +276,8 @@ td:nth-child(2) {
 			<ul>
 				<li><a href="../gallery/list">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;회원 글 조회</a></li>
 				<li><a href="../comment/list">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;회원 댓글 조회</a></li>
-				<li><a href="../gallery/report">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;신고 글 조회</a></li>
-				<li><a href="../comment/report">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;신고 댓글 조회</a></li>
+				<li><a href="../report/boardList">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;신고 글 조회</a></li>
+				<li><a href="../report/commList">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;신고 댓글 조회</a></li>
 			</ul>
 		</li>
 			<br>
