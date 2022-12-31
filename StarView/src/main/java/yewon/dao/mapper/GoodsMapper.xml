@@ -148,10 +148,5 @@
     		AND g.g_id = #{gId }
     </select>
     
-    <select id="selectLikeCnt" resultType="int">
-	   	select NVL(like_cnt, 0) as likeCnt from goods
-	   	where g_id = #{gId }
-    </select>
-
     </mapper>
 

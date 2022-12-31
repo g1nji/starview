@@ -79,6 +79,14 @@ span {
 .thumb {
 	width: 230px;
 	height: 230px;
+	transition: all 0.2s linear;
+	
+}
+
+.thumb:hover {
+	box-shadow: 1px 1px 20px #ddd;
+	transform: scale(1.2);
+	
 }
 
 #btn {

@@ -18,7 +18,7 @@ public interface CartService {
 
 	public void updateQty(Cart cart);
 
-	public void cartUpdate(Cart cart);
+//	public void cartUpdate(Cart cart);
 
 	public Cart nonuserCart(Cart goods);
 
