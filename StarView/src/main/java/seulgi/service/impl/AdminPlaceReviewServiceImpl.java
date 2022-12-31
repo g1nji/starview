@@ -50,4 +50,37 @@ public class AdminPlaceReviewServiceImpl implements AdminPlaceReviewService {
 		return adminBoardDao.selectAll(paging);
 	}
 	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	//게시글 상세 조회
+	@Override
+	public AdminPlaceReview view(AdminPlaceReview viewBoard) {
+		logger.info("view() 사용");
+		
+		return adminBoardDao.selectBoard(viewBoard);
+	}
+	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	//게시글 삭제
+	@Override
+	public void delete(AdminPlaceReview board) {
+		logger.info("delete() 사용");
+		
+		//게시글 삭제
+		adminBoardDao.delete(board);
+		
+	}
+	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	//게시글 검색
+	@Override
+	public List<AdminPlaceReview> search(String keyword) {
+		logger.info("search() 사용");
+		
+		return adminBoardDao.searchBoard(keyword);
+	}
+		
+	
 }

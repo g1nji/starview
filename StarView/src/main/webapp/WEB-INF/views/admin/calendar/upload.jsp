@@ -40,6 +40,17 @@ body {
 	margin: 0 auto;
 }
 
+.form-control {
+  width: 300px;
+  height: 40px;
+  font-size: 15px;
+  border: 0;
+  border-radius: 15px;
+  outline: none;
+  padding-left: 10px;
+  background-color: #F3F1F5;
+}
+
 </style>
 
 </head>
@@ -77,7 +88,6 @@ body {
 <br><br>
 
 <div class="text-center">
-	<button class="btn btn-default btn-sm" id="btnList">목록</button>
 	<button class="btn btn-primary btn-sm" id="btnUpload">등록</button>
 	<input type="reset" id="cancel" class="btn btn-danger btn-sm" value="작성 취소">
 </div>

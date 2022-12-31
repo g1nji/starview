@@ -179,7 +179,7 @@ html .container {
   border-radius: 15px;
   outline: none;
   padding-left: 10px;
-  background-color: #EEF2FF;
+  background-color: #F3F1F5;
 }
 
 #keyword {
@@ -190,7 +190,7 @@ html .container {
   border-radius: 15px;
   outline: none;
   padding-left: 10px;
-  background-color: #EEF2FF;
+  background-color: #F3F1F5;
 }
 
 .form-control {
@@ -201,7 +201,7 @@ html .container {
   border-radius: 15px;
   outline: none;
   padding-left: 10px;
-  background-color: #EEF2FF;
+  background-color: #F3F1F5;
 }
 
 textarea {
@@ -212,7 +212,7 @@ textarea {
   border-radius: 15px;
   outline: none;
   padding-left: 10px;
-  background-color: #EEF2FF;
+  background-color: #F3F1F5;
 }
 
 select {
@@ -229,14 +229,19 @@ table {
 	border-collapse: collapse;
     border-radius: 1em;
     overflow: hidden;
-    border-radius: 10px;
-    width: 1150px;
-    box-shadow: 0 0 20px rgb(0 0 0 / 10%);
+	border-radius:6px;
+	width: 1150px;
     height: auto;
 }
 
 table, th {
 	text-align: center;
+	justify-content: center;
+	vertical-align: middle;
+}
+
+td:nth-child(2) {
+	text-align: left;
 }
 
 </style>

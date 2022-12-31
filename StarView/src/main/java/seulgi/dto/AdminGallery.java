@@ -29,6 +29,7 @@ public class AdminGallery {
 	private int cmNo;
 	private String cmContent;
 	private Date cmDate;
+	private int commentCnt;
 	
 	private String storedName;
 
@@ -38,7 +39,7 @@ public class AdminGallery {
 
 	public AdminGallery(int galleryNo, String galleryTitle, String galleryContent, Date galleryDate, int galleryHit,
 			int galleryLike, String galleryLoc, String galleryTag, int tagNo, String uId, String uNick, int cmNo,
-			String cmContent, Date cmDate, String storedName, int photoNo) {
+			String cmContent, Date cmDate, int commentCnt, String storedName, int photoNo) {
 		super();
 		this.galleryNo = galleryNo;
 		this.galleryTitle = galleryTitle;
@@ -54,6 +55,7 @@ public class AdminGallery {
 		this.cmNo = cmNo;
 		this.cmContent = cmContent;
 		this.cmDate = cmDate;
+		this.commentCnt = commentCnt;
 		this.storedName = storedName;
 		this.photoNo = photoNo;
 	}
@@ -64,7 +66,7 @@ public class AdminGallery {
 				+ galleryContent + ", galleryDate=" + galleryDate + ", galleryHit=" + galleryHit + ", galleryLike="
 				+ galleryLike + ", galleryLoc=" + galleryLoc + ", galleryTag=" + galleryTag + ", tagNo=" + tagNo
 				+ ", uId=" + uId + ", uNick=" + uNick + ", cmNo=" + cmNo + ", cmContent=" + cmContent + ", cmDate="
-				+ cmDate + ", storedName=" + storedName + ", photoNo=" + photoNo + "]";
+				+ cmDate + ", commentCnt=" + commentCnt + ", storedName=" + storedName + ", photoNo=" + photoNo + "]";
 	}
 
 	public int getGalleryNo() {
@@ -177,6 +179,14 @@ public class AdminGallery {
 
 	public void setCmDate(Date cmDate) {
 		this.cmDate = cmDate;
+	}
+
+	public int getCommentCnt() {
+		return commentCnt;
+	}
+
+	public void setCommentCnt(int commentCnt) {
+		this.commentCnt = commentCnt;
 	}
 
 	public String getStoredName() {
