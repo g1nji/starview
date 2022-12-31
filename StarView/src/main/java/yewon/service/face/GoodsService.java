@@ -28,10 +28,4 @@ public interface GoodsService {
 
 	public List<Goods> latestMore(Map<String, Integer> map);
 
-	public int getLikeCnt(Map<String, Object> map);
-
-	public void likeCntUp(Map<String, Object> map);
-
-	public void likeCntDown(Map<String, Object> map);
-
 }

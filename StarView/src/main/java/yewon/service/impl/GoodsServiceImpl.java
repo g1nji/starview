@@ -81,21 +81,5 @@ public class GoodsServiceImpl implements GoodsService {
 		return goodsInfo;
 	}
 
-	@Override
-	public int getLikeCnt(Map<String, Object> map) {
-		int likeCnt = goodsDao.selectLikeCnt(map);
-		return likeCnt;
-	}
-
-	@Override
-	public void likeCntUp(Map<String, Object> map) {
-		goodsDao.likeCntUp(map);
-	}
-
-	@Override
-	public void likeCntDown(Map<String, Object> map) {
-		goodsDao.likeCntDown(map);
-	}
-
 
 }
