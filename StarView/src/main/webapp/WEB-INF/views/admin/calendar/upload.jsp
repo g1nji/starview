@@ -89,7 +89,6 @@ body {
 
 <div class="text-center">
 	<button class="btn btn-primary btn-sm" id="btnUpload">등록</button>
-	<input type="reset" id="cancel" class="btn btn-danger btn-sm" value="작성 취소">
 </div>
 </form>
 

@@ -11,5 +11,7 @@ public interface AdminReportService {
 	public List<AdminReport> list(Paging paging);
 	public Paging getPaging2(int curPage);
 	public List<AdminReport> list2(Paging paging);
+	public void delete(AdminReport board);
+	public void delete2(AdminReport board);
 
 }

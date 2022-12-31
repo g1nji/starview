@@ -66,8 +66,24 @@ public class AdminReportServiceImpl implements AdminReportService {
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	//게시글 삭제
-	//신고글 테이블, 갤러리 테이블 동시에 삭제되도록
+	//신고 글, 갤러리 테이블 동시에 삭제되도록
+	@Override
+	public void delete(AdminReport board) {
+		logger.info("delete() 사용");
+		
+		//신고 테이블 삭제
+		adminReportDao.delete(board);
+	}
+	
 	
 	//댓글 삭제
-	//신고댓글 테이블, 갤러리 댓글 테이블 동시에 삭제되도록
+	//신고 댓글, 갤러리 댓글 테이블 동시에 삭제되도록
+	@Override
+	public void delete2(AdminReport board) {
+		logger.info("delete2() 사용");
+		
+		//신고 테이블 삭제
+		adminReportDao.delete2(board);
+	}
+	
 }

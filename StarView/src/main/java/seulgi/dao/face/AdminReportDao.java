@@ -11,5 +11,7 @@ public interface AdminReportDao {
 	public int selectCntAll2();
 	public List<AdminReport> selectAll(Paging paging);
 	public List<AdminReport> selectAll2(Paging paging);
+	public void delete(AdminReport board);
+	public void delete2(AdminReport board);
 
 }

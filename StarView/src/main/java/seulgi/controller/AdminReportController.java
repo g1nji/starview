@@ -9,8 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import seulgi.dto.AdminComment;
+import seulgi.dto.AdminGallery;
 import seulgi.dto.AdminReport;
+import seulgi.service.face.AdminCommentService;
+import seulgi.service.face.AdminGalleryService;
 import seulgi.service.face.AdminReportService;
 import seulgi.util.Paging;
 
@@ -24,6 +29,12 @@ public class AdminReportController {
 	//서비스 객체
 	@Autowired
 	private AdminReportService adminReportService;
+	
+	@Autowired
+	private AdminGalleryService adminBoardService;
+	
+	@Autowired
+	private AdminCommentService adminCommentService;
 	
 	//조회-페이징
 	//게시글 리스트
@@ -66,4 +77,57 @@ public class AdminReportController {
 		model.addAttribute("commList", commList);
 	}
 	
+	//게시글 삭제 - list에서
+	//신고 글, 갤러리 테이블에서 동시에 삭제되도록
+	@ResponseBody
+	@RequestMapping("/deletee")
+	public int deleteeReportBoard(@RequestParam(value = "chbox[]") List<String> chArr, AdminReport board, AdminGallery gallery) {
+		logger.info("/deletee 주소 연결");
+		
+		int result = 0;
+		int select_data = 0;
+		 
+		for(String i : chArr) {   
+			select_data = Integer.parseInt(i);
+			
+			//신고 글 삭제
+			board.setGalleryNo(select_data);
+			adminReportService.delete(board);
+
+			//갤러리 삭제
+			gallery.setGalleryNo(select_data);
+			adminBoardService.delete(gallery);
+		}
+		
+		result = 1;
+			  
+		return result;  
+	}
+	
+	//댓글 삭제 - list에서
+	//신고 댓글, 갤러리 댓글 테이블에서 동시에 삭제되도록
+	@ResponseBody
+	@RequestMapping("/deleteee")
+	public int deleteeeReportComm(@RequestParam(value = "chbox[]") List<String> chArr, AdminReport board, AdminComment comment) {
+		logger.info("/deleteee 주소 연결");
+		
+		int result = 0;
+		int select_data = 0;
+		 
+		for(String i : chArr) {   
+			select_data = Integer.parseInt(i);
+			
+			//신고 댓글 삭제
+			board.setCmNo(select_data);
+			adminReportService.delete2(board);
+			
+			//갤러리 댓글 테이블
+			comment.setCmNo(select_data);
+			adminCommentService.delete(comment);
+		}
+		
+		result = 1;
+			  
+		return result;  
+	}
 }
