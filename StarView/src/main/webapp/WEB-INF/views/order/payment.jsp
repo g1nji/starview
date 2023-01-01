@@ -32,10 +32,10 @@
           pay_method : 'card',
           merchant_uid : 'merchant_' + new Date().getTime(),
           name : '별 보러 가자',
-          amount : '${amount}',		//결제할 금액
-          buyer_name : '${buyerName}',	//주문자명
-          buyer_tel : '${buyerTel}',		//주문자 연락처
-          buyer_email : '${buyerEmail}',	//주문자 이메일
+          amount : '${OrderList.paymentAmount}',		//결제할 금액
+          buyer_name : '${OrderList.buyerName}',	//주문자명
+          buyer_tel : '${OrderList.buyerPhone}',		//주문자 연락처
+          buyer_email : '${OrderList.buyerEmail}',	//주문자 이메일
           //m_redirect_url : 'http://www.naver.com'
       }, function(rsp) {
           if ( rsp.success ) {
@@ -45,10 +45,9 @@
                   type: 'POST',
                   dataType: 'json',
                   data: {
-                      perchantUid : rsp.imp_uid
-                      buyerName : rsp.buyer_name
-                      buyerTel : rsp.buyer_tel
-                      buyerEmail : rsp.buyer_email
+                      perchantUid : rsp.imp_uid,
+                      orderList : '${OrderList }'
+                      
                       //기타 필요한 데이터가 있으면 추가 전달
                   }
               }).done(function(data) {

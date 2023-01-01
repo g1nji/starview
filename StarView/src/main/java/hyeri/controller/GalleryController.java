@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
@@ -282,9 +283,9 @@ public class GalleryController {
 	}
 	
 //	게시글 검색
+	
 	@PostMapping("/search")
-	public String search(String keywordInput, Model model) {
-		
+	public String searchPost(String keywordInput, Model model) {
 		logger.info("{}", "/search");
 		logger.info("{}", keywordInput);
 		
@@ -292,25 +293,37 @@ public class GalleryController {
 			
 			List<Gallery> gallery = galleryService.search(keywordInput);
 			
-			model.addAttribute("gallery", gallery);
-			
 			logger.info("검색결과 : {}", gallery);
 			
 			if( gallery.isEmpty() ) {
+				
+				logger.info("검색결과 없음");
+				
 				return "redirect:./search_not-found";
+				
+			} else {
+				
+				model.addAttribute("gallery", gallery);
+				logger.info("검색결과 있음 : {}", gallery);
+				return "redirect:./search_list?keywordInput=" + keywordInput;			
+				
 			}
 			
-			return "redirect:./search_list?keyword=" + keywordInput;
 
 		} else {
 		
+			logger.info("검색어 입력안함");
+			
 			return "redirect:./search_not-found";
 		}
-		
 	}
 	
 	@RequestMapping("/search_list")
-	public void searchList() {
+	public void searchList(String keywordInput, Model model) {
+		logger.info("{}", keywordInput);
+			
+		List<Gallery> gallery = galleryService.search(keywordInput);
+		model.addAttribute("gallery", gallery);
 		
 	}
 

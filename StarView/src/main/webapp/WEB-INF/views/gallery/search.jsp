@@ -11,7 +11,7 @@
 <c:forEach items="${gallery }" var="gallery">
 <table>
 	<tr>
-		<td><img src="/imagepath/${gallery.storedName }" style="width:150px;"></td>
+		<td>이미지</td>
 		<td>${gallery.galleryTitle }</td>
 		<td>${gallery.galleryContent }</td>
 		<td>${gallery.uNick }</td>
@@ -20,4 +20,4 @@
 </c:forEach>
 </div>
 
-<c:import url="../layout/footer.jsp" />
+<c:import url="../layout/footer.jsp" />"G:/공부/★파이널프로젝트/별 보러 가자_05.pptx"
