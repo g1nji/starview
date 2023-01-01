@@ -45,7 +45,8 @@ $(document).ready(() => {
 				, numOfRows: "10"
 				, regId: $('input[name="regId"]:checked').val()
 				//, tmFc: document.getElementById('Date').value
-				, tmFc: caseHour(hour)
+				//, tmFc: caseHour(hour)
+				, tmFc: 202212311800
 			},
 			dataType: "xml",
 			success: res=>{
@@ -186,7 +187,7 @@ $(document).ready(() => {
 				var $rows = $(res).find("item");
 				
 				//결과 화면 지우기
-				resultLayout.innerHTML = '';
+				resultLayout2.innerHTML = '';
 				
 				var $table = $("<br><table class='table table-bordered'>")
 				var tHead = "<tr class='warning'>"
@@ -248,7 +249,7 @@ var ymd3 = year + "/" + month + "/" + date;
 //어제 날짜
 var ymd2 = year + "" + month + "" + (date-1);
 
-//console.log(ymd +" ::: " + ymd3 + " ::: " + ymd2);
+console.log(ymd +" ::: " + ymd3 + " ::: " + ymd2);
 
 //현재 시
 var hour = today.getHours();
