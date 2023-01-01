@@ -52,8 +52,8 @@
 			SELECT goods_seq.nextval FROM dual
 		</selectKey>
 	
-		INSERT INTO goods (g_id, g_name, g_price, g_detail)
-		VALUES (#{gId }, #{gName }, #{gPrice }, #{gDetail })
+		INSERT INTO goods (g_id, g_name, g_price, g_detail, del_price)
+		VALUES (#{gId }, #{gName }, #{gPrice }, #{gDetail }, #{delPrice})
 	</insert>
 	
 	<!-- 파일 업로드 -->
