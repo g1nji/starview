@@ -41,7 +41,7 @@
 	<!-- 게시글 검색 -->
 	<select id="searchBoard" resultType="seulgi.dto.AdminGoodsReview" parameterType="String">
 		<![CDATA[
-		SELECT * FROM review r
+		SELECT * FROM review
         WHERE u_id LIKE '%'||#{uId }||'%'
 		ORDER BY r_id DESC
 		]]>

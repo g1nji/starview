@@ -122,7 +122,7 @@ var ymd = year + "년 " + month + "월 " +date + "일";
 		<td>${b.recomLoc }</td>
 		<td>${b.recomDate }</td>
 		<td>${b.recomTime }</td>
-		<td><span style="color: #FF9494;">${b.rain}%</span>의 강수 확률로 예상되며, 기상 상태는 <span style="color: #FF9494;">${b.sky}</span>으로 예상됩니다.</td>
+		<td><span style="color: #FF9494;">${b.rain}%</span>의 강수 확률로 예상되며,<br> 기상 상태는 <span style="color: #FF9494;">${b.sky}</span>으로 예상됩니다.</td>
 	</tr>
 </c:forEach>
 </tbody>

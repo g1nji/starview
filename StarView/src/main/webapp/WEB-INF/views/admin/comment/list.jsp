@@ -118,7 +118,7 @@ $(document).ready(function() {
 		<td>
 			<a href="../gallery/view?galleryNo=${c.galleryNo }">${c.cmContent }</a>
 			<br>
-			<a href="/gallery/view?galleryNo=${c.galleryNo }">댓글 확인</a>
+			<a href="/gallery/view?galleryNo=${c.galleryNo }"><button class="btn btn-default btn-xs">댓글 확인</button></a>
 		</td>
 		<td><fmt:formatDate value="${c.cmDate }" pattern="yy-MM-dd HH:mm:ss"/></td>
 	</tr>

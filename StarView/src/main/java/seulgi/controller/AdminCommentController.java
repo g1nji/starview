@@ -28,7 +28,7 @@ public class AdminCommentController {
 	
 	//댓글 리스트
 	@RequestMapping(value="/list")
-	public void commList(Model model, @RequestParam(defaultValue = "0") int curPage) {
+	public void getcommList(Model model, @RequestParam(defaultValue = "0") int curPage) {
 		logger.info("/list 주소 연결");
 		
 		//페이징 추가
@@ -43,7 +43,6 @@ public class AdminCommentController {
 		
 		//모델값 전달
 		model.addAttribute("commList", commList);
-		
 	}
 
 	//댓글 삭제 - list에서

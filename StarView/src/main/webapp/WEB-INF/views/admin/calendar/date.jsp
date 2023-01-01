@@ -45,7 +45,8 @@ $(document).ready(() => {
 				, numOfRows: "10"
 				, regId: $('input[name="regId"]:checked').val()
 				//, tmFc: document.getElementById('Date').value
-				, tmFc: caseHour(hour)
+				//, tmFc: caseHour(hour)
+				, tmFc: 202212311800
 			},
 			dataType: "xml",
 			success: res=>{
@@ -186,7 +187,7 @@ $(document).ready(() => {
 				var $rows = $(res).find("item");
 				
 				//결과 화면 지우기
-				resultLayout.innerHTML = '';
+				resultLayout2.innerHTML = '';
 				
 				var $table = $("<br><table class='table table-bordered'>")
 				var tHead = "<tr class='warning'>"
@@ -248,7 +249,7 @@ var ymd3 = year + "/" + month + "/" + date;
 //어제 날짜
 var ymd2 = year + "" + month + "" + (date-1);
 
-//console.log(ymd +" ::: " + ymd3 + " ::: " + ymd2);
+console.log(ymd +" ::: " + ymd3 + " ::: " + ymd2);
 
 //현재 시
 var hour = today.getHours();
@@ -458,8 +459,9 @@ var selectDate = (d)=>{
 
 </script>
 
-<h1 style="text-align: center;">추천일 조회&nbsp;
-<button class="btn" style="background-color: #9BA3EB;" onclick="window.open('http://localhost:8888/admin/calendar/upload','추천일 등록','width=500,height=500,top=500px,left=500px');">추천일 등록</button></h1>
+<h1 style="text-align: center;">추천일 조회
+<button class="btn" style="background-color: #9BA3EB;" onclick="window.open('http://localhost:8888/admin/calendar/upload','추천일 등록','width=600,height=500,top=500px,left=500px');">추천일 등록</button>
+<button class="btn btn-defalut" style="background-color: #9BA3EB;" onclick="window.open('http://localhost:8888/admin/calendar/list2','추천일 조회','width=500,height=500,top=500px,left=500px');">추천일 확인</button></h1>
 <hr>
 
 <div id="dateDiv">

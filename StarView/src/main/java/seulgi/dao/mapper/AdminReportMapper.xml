@@ -7,4 +7,46 @@
 
 <mapper namespace="seulgi.dao.face.AdminReportDao">
 
+	<!-- 게시글 리스트 -->
+	<select id="selectAll" resultType="seulgi.dto.AdminReport">
+		SELECT * FROM (
+			SELECT rownum rnum, A.* FROM (
+				SELECT * FROM admin_board_report
+				ORDER BY report_code DESC
+			) A
+		) admin_board_report
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
+	
+	<select id="selectCntAll" resultType="int">
+		select count(*) from admin_board_report
+	</select>
+	
+	<!-- 댓글 리스트 -->
+	<select id="selectAll2" resultType="seulgi.dto.AdminReport">
+		SELECT * FROM (
+			SELECT rownum rnum, A.* FROM (
+				SELECT * FROM admin_comment_report
+				ORDER BY report_code DESC
+			) A
+		) admin_comment_report
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
+	
+	<select id="selectCntAll2" resultType="int">
+		select count(*) from admin_comment_report
+	</select>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="delete" parameterType="seulgi.dto.AdminReport">
+		DELETE admin_board_report
+		WHERE gallery_no = #{galleryNo }
+	</delete>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="delete2" parameterType="seulgi.dto.AdminReport">
+		DELETE admin_comment_report
+		WHERE cm_no = #{cmNo }
+	</delete>
+	
 </mapper>

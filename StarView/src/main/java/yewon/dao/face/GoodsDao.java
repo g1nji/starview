@@ -28,9 +28,4 @@ public interface GoodsDao {
 
 	public Goods selectGoods(Wish wish);
 
-	public int selectLikeCnt(Map<String, Object> map);
-
-	public void likeCntUp(Map<String, Object> map);
-
-	public void likeCntDown(Map<String, Object> map);
 }

@@ -37,6 +37,10 @@ $(document).ready(function() {
 	<input type="text" id="gPrice" name="gPrice" class="form-control">
 </div>
 <div class="form-group">
+	<label for="delPrice">배송비</label>
+	<input type="text" id="delPrice" name="delPrice" class="form-control">
+</div>
+<div class="form-group">
 	<label for="gDetail">상품 내용</label>
 	<textarea rows="10" style="width: 100%;" id="gDetail" name="gDetail"></textarea>
 </div>

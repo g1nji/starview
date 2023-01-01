@@ -9,6 +9,7 @@
 
 <script>
     function sample6_execDaumPostcode() {
+    	
         new daum.Postcode({
             oncomplete: function(data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -49,6 +50,7 @@
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('sample6_postcode').value = data.zonecode;
+                $("#sample6_address").attr("disabled", false);
                 document.getElementById("sample6_address").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
                 document.getElementById("sample6_detailAddress").focus();
@@ -67,6 +69,8 @@ const autoHyphen2 = (target) => {
 
 <script type="text/javascript">
 $(document).ready(function() {
+	
+	$("#sample6_address").attr("disabled", true);
 	
 	//상품 금액 합계 계산
 	$(".totalPrice").each(function() {
@@ -262,7 +266,8 @@ h2 {
 	<tr>
 		<th class="buyerset">주문자명</th>
 		<td style="padding-left: 20px;">${uName }
-		<input type="hidden" value="${uId }">
+		<input type="hidden" value="${uName }" name="buyerName">
+		<input type="hidden" value="${uId }" name="uId">
 		</td>
 	</tr>
 	<tr>
@@ -282,37 +287,37 @@ h2 {
 <table style="border-top: 2px solid black; border-bottom: 1px solid #eee; width: 100%; text-align: left;">
 	<tr>
 		<th class="buyerset">받으실분</th>
-		<td style="padding-left: 20px;"><input type="text"></td>
+		<td style="padding-left: 20px;"><input type="text" name="recieverName"></td>
 	</tr>
 	<tr>
 		<th class="buyerset" rowspan="3">받으실곳</th>
 		<td style="padding-left: 20px;">
-			<input type="text" id="sample6_postcode" placeholder="우편번호" style="width:250px;" onclick="sample6_execDaumPostcode()">
+			<input type="text" id="sample6_postcode" placeholder="우편번호" style="width:250px;" onclick="sample6_execDaumPostcode()" name="postcode">
 			<input type="button" onclick="sample6_execDaumPostcode()" value="주소찾기" style="width:80px;" id="addbtn"><br>
 		</td>
 	</tr>
 	<tr>
 		<td style="padding-left: 20px;">
-			<input type="text" id="sample6_address" name="uAdd1" placeholder="주소" disabled="disabled">
-			<input type="text" id="sample6_extraAddress" placeholder="참고항목">
+			<input type="text" id="sample6_address" placeholder="주소" name="buyerAddress">
+			<input type="text" id="sample6_extraAddress" placeholder="참고항목" name="buyerAddress3">
 		</td>
 	</tr>
 	<tr>
 		<td style="padding-left: 20px;">
-			<input type="text" id="sample6_detailAddress" name="uAdd2" placeholder="상세주소"><br>
-			<input type="text" id="uAddress" name="uAddress" hidden="hidden">
+			<input type="text" id="sample6_detailAddress" name="buyerAddress2" placeholder="상세주소"><br>
+<!-- 			<input type="text" id="uAddress" name="buyerAddress" hidden="hidden"> -->
 		</td>
 	</tr>
 	<tr>
 		<th class="buyerset">전화번호</th>
 		<td style="padding-left: 20px;">
-			<input type="text" id="uPhone" name="uPhone" oninput="autoHyphen2(this)" maxlength="13">
+			<input type="text" id="uPhone" name="buyerPhone2" oninput="autoHyphen2(this)" maxlength="13">
 		</td>
 	</tr>
 	<tr>
 		<th class="buyerset">배송요청사항</th>
 		<td style="padding-left: 20px;">
-			<textarea style="width:100%; height: 100px;"></textarea>
+			<textarea style="width:100%; height: 100px;" name="deliverReq"></textarea>
 		</td>
 	</tr>
 </table>

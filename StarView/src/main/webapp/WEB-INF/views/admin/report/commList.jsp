@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -20,58 +21,36 @@ $(document).ready(function() {
 	    checkArr.push($(this).attr("select_data"));
 	   });
 	    
-	   console.log(checkArr);
-	   
 	   $.ajax({
-	    url : "./deletee",
+	    url : "./deleteee",
 	    type : "post",
 	    data : { chbox : checkArr },
 	    success : function(result){
-	     if(result == 1) {            
-	      alert("게시글이 삭제되었습니다");
-	      history.go(0);
-	     } else {
-	      alert("삭제 실패");
-	     }
-		}
+		     if(result == 1) {            
+		      alert("댓글이 삭제되었습니다");
+		      history.go(0);
+		     } else {
+		      alert("삭제 실패");
+		     }
+		    }
 	   });
 	  } 
 	 });
 
-	//검색
-	$("#btnSearch").click(function() {
-		location.href = "./search?keyword" + $('input[name="keyword"]:checked').val();
-	})
-	
-	var searchForm = $('#searchForm');
-	$('#searchForm button').on('click', function(e) {
-		if (!searchForm.find('input[name="keyword"]').val()) {
-			alert('검색어를 입력하세요');
-			return false;
-		}
-		e.preventDefault();
-		searchForm.submit();
-		location.href = "./search?keyword=" + document.getElementById('keyword').value;
-	});
 })
 
 </script>
 
-<h1 style="text-align: center;">명소 후기 리스트</h1>
+<h1 style="text-align: center;">신고 댓글 리스트</h1>
 <hr>
 
-<select id="category" name="category" required onchange="window.open(value,'_self')">
-    <option value="" disabled selected>카테고리</option>
-    <option value="/admin/gallery/list">갤러리</option>
-    <!-- <option value="/admin/goods/list">상품리뷰</option> -->
-    <option value="/admin/place/list">명소후기</option>
-</select>
-
+<!-- 
 <form id="searchForm" action="./search" method="get" style="float: right;">
     <input id="keyword" name="keyword" type="text" placeholder="검색할 아이디를 입력하세요" value="">
-	<button class="btnSearch btn btn-default">검색</button>
+	<button class="btnSearch">검색</button>
 </form>
-
+ -->
+ 
 <br><br>
 
 <table class="table table-hover">
@@ -90,28 +69,24 @@ $(document).ready(function() {
 		});
 		</script>
 		
-		<th>작성자</th>
-		<th>내용</th>
-		<th>등록일</th>
+		<th>댓글번호</th>
+		<th>신고일</th>
 	</tr>
 </thead>	
 <tbody>
-<c:forEach items="${boardList }" var="b">
+<c:forEach items="${commList }" var="c">
 	<tr>
-		<td><input type="checkbox" name="chBox" class="chBox" select_data="${b.sreviewNo }"></td>
+		<td><input type="checkbox" name="chBox" class="chBox" select_data="${c.cmNo }"></td>
 		
 		<script>
 		 $(".chBox").click(function(){
 		  $("#allCheck").prop("checked", false);
 		 });
 		</script>
-		<td>${b.uId }</td>
-		<td>
-			<a href="./view?sreviewNo=${b.sreviewNo }">${b.sreviewContent }</a>
-			<br>
-			<a href="/place/view?arrivalNum=${b.arrivalNum }"><button class="btn btn-default btn-xs">게시글 확인</button></a>
-		</td>
-		<td><fmt:formatDate value="${b.sreviewDate }" pattern="yy-MM-dd HH:mm:ss"/></td>
+		
+		<td><a href="../gallery/view?galleryNo=${c.galleryNo }">${c.cmNo }<br>
+		<a href="/gallery/view?galleryNo=${c.galleryNo }"><button class="btn btn-default btn-xs">댓글 확인</button></td>
+		<td>${c.reportDate }</td>
 	</tr>
 </c:forEach>
 </tbody>

@@ -75,7 +75,7 @@ h2 {
 <c:if test="${uId ne null }">
 ${uNick }님의 주문이 완료되었습니다.<br>
 </c:if>
-주문확인 번호는 <span style="color:#FFB703;">${perchantUid }</span> 입니다.<br>
+주문확인 번호는 <span style="color:#FFB703;">${orderList.perchantUid }</span> 입니다.<br>
 </div>
 
 <h3>주문요약정보</h3>
@@ -86,19 +86,19 @@ ${uNick }님의 주문이 완료되었습니다.<br>
 	</tr>
 	<tr>
 		<th class="th">결제금액</th>
-		<td class="td">${amount }</td>
+		<td class="td">${orderList.paymentAmount }</td>
 	</tr>
 	<tr>
 		<th class="th">주문자명</th>
-		<td class="td">${buyerName }</td>
+		<td class="td">${orderList.buyerName }</td>
 	</tr>
 	<tr>
 		<th class="th">연락처</th>
-		<td class="td">${buyerTel }</td>
+		<td class="td">${orderList.buyerPhone }</td>
 	</tr>
 	<tr>
 		<th class="th">이메일</th>
-		<td class="td">${buyerEmail }</td>
+		<td class="td">${orderList.buyerEmail }</td>
 	</tr>
 </table>
 

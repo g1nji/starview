@@ -128,7 +128,7 @@ $(document).ready(function() {
 		<td>${b.uId }</td>
 		<td>
 			<a href="./view?galleryNo=${b.galleryNo }">${b.galleryTitle }</a><br>
-			<a href="/gallery/view?galleryNo=${b.galleryNo }">게시글 확인</a>
+			<a href="/gallery/view?galleryNo=${b.galleryNo }"><button class="btn btn-default btn-xs">게시글 확인</button></a>
 		</td>
 		<td>${b.galleryContent }</td>
 		<td>${b.galleryLoc }</td>
