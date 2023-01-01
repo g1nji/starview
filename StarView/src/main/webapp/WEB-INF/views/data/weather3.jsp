@@ -113,7 +113,11 @@ $(document).ready(() => {
 	var week = new Array('일','월','화','수','목','금','토');
 	var year= today.getFullYear();
 	var month= today.getMonth()+1;
+	if(month<10) month = "0"+month;
+	
 	var day= today.getDate();
+	if(day<10) day = "0"+day;
+	
 	var hours =today.getHours();
 	var minutes = today.getMinutes();
 	var hours_al = new Array('02','05','08','11','14','17','20','23');
@@ -149,8 +153,10 @@ $(document).ready(() => {
 		hours='0'+day;
 	}
 	today = year + "" +month +"" +day;
-	var yester= today-1;
-	console.log(yester)
+	console.log(today)
+	
+/* 	var yester= today-1;
+	console.log(yester) */
 	
 	$.each(korea, function(j,k){
 			var _nx=korea[j].nx, _ny=korea[j].ny, region=korea[j].region,

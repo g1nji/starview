@@ -55,7 +55,7 @@ button{
 <br>
 
 <h3>${users.uName }님의 회원가입을 축하합니다.</h3>
-<h3>아이디는 ${users.uId }입니다.</h3>
+<h3>아이디는 "${users.uId }"입니다.</h3>
 <br>
 
 <button type="button" onclick="location.href='/'">메인화면</button>
