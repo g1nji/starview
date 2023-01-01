@@ -7,6 +7,17 @@
 
 <div class="wrap">
 <h1>서치리스트</h1>
+
+<c:forEach items="${gallery }" var="gallery">
+<table>
+	<tr>
+		<td><img src="/imagepath/${gallery.storedName }" style="width:150px;"></td>
+		<td>${gallery.galleryTitle }</td>
+		<td>${gallery.galleryContent }</td>
+		<td>${gallery.uNick }</td>
+	</tr>
+</table>
+</c:forEach>
 </div>
 
 <c:import url="../layout/footer.jsp" />

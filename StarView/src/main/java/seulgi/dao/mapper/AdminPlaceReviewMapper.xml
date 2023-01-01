@@ -23,4 +23,28 @@
 		SELECT count(*) FROM place_review
 	</select>
 	
+	<!-- 게시글 상세 조회 -->
+	<select id="selectBoard" resultType="seulgi.dto.AdminPlaceReview" parameterType="seulgi.dto.AdminPlaceReview">
+		SELECT p.*, u.u_id, u.u_nick
+ 		FROM place_review p
+        LEFT OUTER JOIN users u
+           ON p.u_id = u.u_id
+		WHERE sreview_no = #{sreviewNo }
+	</select>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="delete" parameterType="seulgi.dto.AdminPlaceReview">
+		DELETE place_review
+		WHERE sreview_no = #{sreviewNo }
+	</delete>
+	
+	<!-- 게시글 검색 -->
+	<select id="searchBoard" resultType="seulgi.dto.AdminPlaceReview" parameterType="String">
+		<![CDATA[
+		SELECT * FROM place_review
+        WHERE u_id LIKE '%'||#{uId }||'%'
+		ORDER BY sreview_no DESC
+		]]>
+	</select>
+	
 </mapper>

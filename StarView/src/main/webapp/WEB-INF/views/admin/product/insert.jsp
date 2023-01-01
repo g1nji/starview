@@ -5,6 +5,7 @@
 <c:import url="../layout/header.jsp" />
 
 <script type="text/javascript">
+
 $(document).ready(function() {
 	
 	$("#btnUpload").click(function() {
@@ -16,7 +17,7 @@ $(document).ready(function() {
 
 </script>
 
-<h1>상품 업로드</h1>
+<h1 style="text-align: center;">상품 업로드</h1>
 <hr>
 
 <!-- <form action="./insert" method="post"> -->
@@ -34,6 +35,10 @@ $(document).ready(function() {
 <div class="form-group">
 	<label for="gPrice">상품 가격</label>
 	<input type="text" id="gPrice" name="gPrice" class="form-control">
+</div>
+<div class="form-group">
+	<label for="delPrice">배송비</label>
+	<input type="text" id="delPrice" name="delPrice" class="form-control">
 </div>
 <div class="form-group">
 	<label for="gDetail">상품 내용</label>

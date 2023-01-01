@@ -61,6 +61,14 @@ public interface UsersDao {
 	 */
 	public String finduNick(Users users);
 
+	/**
+	 * 로그인 정보로 찾기
+	 * 
+	 * @param users
+	 * @return
+	 */
+	public String findName(Users users);
+
 
 
 

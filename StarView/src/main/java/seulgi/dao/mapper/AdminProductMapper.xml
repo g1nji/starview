@@ -8,7 +8,7 @@
 <mapper namespace="seulgi.dao.face.AdminProductDao">
 
 	<!-- 상품 리스트 -->
-	<!-- <select id="selectAll" resultType="seulgi.dto.AdminProduct">
+	<select id="selectAll" resultType="seulgi.dto.AdminProduct">
 		SELECT * FROM (
 			SELECT rownum rnum, G.* FROM (
 				SELECT * FROM goods
@@ -16,19 +16,19 @@
 			) G
 		) goods
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
-	</select> -->
+	</select> 
 	
-	<select id="selectAll" resultType="seulgi.dto.AdminProduct">
+	<!-- <select id="selectAll" resultType="seulgi.dto.AdminProduct">
 	SELECT * FROM (
 	    SELECT ROWNUM rnum, t.* FROM (
 	      SELECT g.*, i.file_name 
 	    	FROM goods g, goods_img i
 		    	WHERE g.g_id = i.g_id
-		    	<!-- AND i.file_type = 'main_img' -->
+		    	AND i.file_type = 'main_img'
 		   		ORDER BY g.g_id DESC
 	        ) t
 	    ) GOODS
-    </select>
+    </select> -->
 	
 	<!-- 상품 개수 조회 -->
 	<select id="selectCntAll" resultType="int">
@@ -52,8 +52,8 @@
 			SELECT goods_seq.nextval FROM dual
 		</selectKey>
 	
-		INSERT INTO goods (g_id, g_name, g_price, g_detail)
-		VALUES (#{gId }, #{gName }, #{gPrice }, #{gDetail })
+		INSERT INTO goods (g_id, g_name, g_price, g_detail, del_price)
+		VALUES (#{gId }, #{gName }, #{gPrice }, #{gDetail }, #{delPrice})
 	</insert>
 	
 	<!-- 파일 업로드 -->
@@ -91,7 +91,7 @@
 	</update>
 
 	<!-- 상품 삭제 -->
-	<delete id="delete" parameterType="seulgi.dto.AdminProduct">
+	<delete id="deleteProd" parameterType="seulgi.dto.AdminProduct">
 		DELETE goods
 		WHERE g_id = #{gId }
 	</delete>
@@ -106,5 +106,14 @@
 		DELETE goods_img
 		WHERE g_id = #{gId }	
 	</delete>
+	
+	<!-- 상품 검색 -->
+	<select id="searchProd" resultType="seulgi.dto.AdminProduct" parameterType="String">
+		<![CDATA[
+		SELECT * FROM goods
+		WHERE g_name LIKE '%'||#{g_name }||'%'
+		ORDER BY g_id DESC
+		]]>
+	</select>
 	
 </mapper>

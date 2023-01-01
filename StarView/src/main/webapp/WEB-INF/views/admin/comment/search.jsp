@@ -6,19 +6,7 @@
 
 <c:import url="../layout/header.jsp" />
 
-<style type="text/css">
-table {
-	table-layout: fixed;
-}
-
-table, th {
-	text-align: center;
-}
-
-</style>
-
-
-<h1>'${keyword }'의 검색 결과</h1>
+<h1 style="text-align: center;">'${keyword }'의 검색 결과</h1>
 <hr>
 
 <table class="table table-hover">

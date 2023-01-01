@@ -6,6 +6,7 @@
 <c:import url="../layout/header.jsp" />
 
 <script type="text/javascript">
+
 $(document).ready(function() {
 	
 	//상품 목록으로 이동
@@ -26,35 +27,35 @@ $(document).ready(function() {
 		}
 	})
 })
+
 </script>
 
-<style type="text/css">
-table {
-	table-layout: fixed;
-}
-</style>
-
-<h1>상품 상세 조회</h1>
+<h1 style="text-align: center;">'${viewProd.gName}' 상세 조회</h1>
 <hr>
 
 <table class="table">
 <tr class="">
-	<td rowspan="5">
-		<img src='/prodFile/${prodFile.fileName }' style="width: 400px; height: 400px;" /><br>
-	</td>
-	<th class="warning" style="width: 10%">상품명</th><td>${viewProd.gName}</td>
+	<!-- 파일이 있는 경우만 -->
+	<c:if test="${not empty prodFile}">
+	<th rowspan="6" colspan="2">
+		<img src='/prodFile/${prodFile.fileName }' style="width: 500px; height: 450px;" /><br>
+	</th>
+	</c:if>
 	</tr>
 	<tr>
-	<th class="warning" >상품 등록일</th><td><fmt:formatDate value="${viewProd.regDate }" pattern="yy-MM-dd HH:mm:ss"/></td>
+	<th class="warning">상품명</th><td>${viewProd.gName}</td>
 	</tr>
 	<tr>
-	<th class="warning" >상품 가격</th><td>${viewProd.gPrice }</td>
+	<th class="warning">상품 등록일</th><td><fmt:formatDate value="${viewProd.regDate }" pattern="yy-MM-dd HH:mm:ss"/></td>
 	</tr>
 	<tr>
-	<th class="warning" >배송비</th><td>${viewProd.delPrice }</td>
+	<th class="warning">상품 가격</th><td>${viewProd.gPrice }</td>
 	</tr>
 	<tr>
-	<th class="warning" >상품 설명</th><td>${viewProd.gDetail }</td>
+	<th class="warning">배송비</th><td>${viewProd.delPrice }</td>
+	</tr>
+	<tr>
+	<th class="warning">상품 설명</th><td>${viewProd.gDetail }</td>
 	</tr>
 </table>
 

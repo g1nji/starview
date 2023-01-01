@@ -40,7 +40,6 @@ $(document).ready(function(){
 	text-decoration: underline;
 }
 
-
 .title {
 	text-align: center;
 }
@@ -87,13 +86,19 @@ $(document).ready(function(){
 }
 
 #btnWrite {
-	float: right;
+    float: right;
+    width: 70px;
+    height: 30px;
+    border-radius: 30px;
+    border: none;
+    background-color: #FFB703;
+    font-weight: 500;
 }
 
 </style>
 
 <h1 class="title">갤러리</h1>
-<button id="btnWrite" class="btn btn-primary">글쓰기</button>
+<button id="btnWrite">업로드</button>
 <div class="clearfix"></div>
 <hr>
 <div class="clearfix"></div>

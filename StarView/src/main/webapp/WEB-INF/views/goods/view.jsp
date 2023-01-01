@@ -172,12 +172,12 @@ function like_func(){
 			if(data.findLike==1){
 				$('#login').css('background', 'url(/resources/img/empty_heart.png) no-repeat center 1px/38px');
 				$('#like-cnt').html(data.totalLike);
-				alert('위시리스트에서 삭제했습니다')
+				alert('상품이 위시리스트에서 삭제되었습니다.')
 				
 			} else {
 				$('#login').css('background', 'url(/resources/img/heart.png) no-repeat center 1px/38px');
 				$('#like-cnt').html(data.totalLike);
-				alert('위시리스트에 담겼습니다')
+				alert('상품이 위시리스트에 담겼습니다.')
 				
 			}
 		}

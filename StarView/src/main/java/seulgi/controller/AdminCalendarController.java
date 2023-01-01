@@ -36,10 +36,32 @@ public class AdminCalendarController {
 	
 	//추천일 등록
 	@RequestMapping(value="/date", method = RequestMethod.POST)
-	public void insertCalendarProc(AdminCalendar calendar) {
+	public String insertCalendarProc(AdminCalendar calendar) {
 		logger.info("/date 연결 - [POST]");
 		
 		adminCalendarService.upload(calendar);
+		
+		return "redirect:/admin/calendar/upload2";
+	}
+	
+	@RequestMapping(value="/upload", method = RequestMethod.GET)
+	public void insertCalendar2(AdminCalendar calendar) {
+		logger.info("/upload 연결 - [GET]");
+	}
+	
+	@RequestMapping(value="/upload", method = RequestMethod.POST)
+	public String insertCalendarProc2(AdminCalendar calendar) {
+		logger.info("/upload 연결 - [POST]");
+		
+		adminCalendarService.upload(calendar);
+		
+		return "redirect:/admin/calendar/list";
+	}
+	
+	//추천일 등록 완료 페이지
+	@RequestMapping("/upload2")
+	public void insertCalendar3(AdminCalendar calendar) {
+		logger.info("/upload2 연결");
 	}
 	
 	//관측 시간 API 조회

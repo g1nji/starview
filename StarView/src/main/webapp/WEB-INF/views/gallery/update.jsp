@@ -5,12 +5,14 @@
 
 <c:import url="../layout/header.jsp" />
 
-<script src="https://unpkg.com/@yaireo/tagify"></script>
-<!--<script src="https://unpkg.com/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>-->
-<link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
-
+<!-- 웹에디터 -->
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+<!-- 태그 -->
+<script src="https://unpkg.com/@yaireo/tagify"></script>
+<script src="https://unpkg.com/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
+<link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -40,7 +42,7 @@ $(document).ready(function() {
 
             	 ]
 	        },
-	        placeholder: '자세한 내용을 입력해 주세요!',
+	        placeholder: '내용을 입력해 주세요',
 	        theme: 'snow'
 	    };
 
@@ -55,9 +57,8 @@ $(document).ready(function() {
 	
 	$("#btnUpdate").click(function() {
 		
-		//에디터에 작성된 내용을 #galleryContent에 반영
 		var delta = quill.getContents();
-
+		
 		$("form").submit();
 	})
 	
@@ -83,7 +84,6 @@ $(document).ready(function() {
 <style type="text/css">
 .wrap {
 	margin: 0 auto;
-	padding: 20px 0;
 }
 
 #galleryTitle {
@@ -94,38 +94,177 @@ $(document).ready(function() {
 #galleryContent {
 	border: none;
 }
+
+.filebox {
+    border-radius: 10px;
+    display: flex;
+    font-size: 16px;
+    align-items: center;
+    width: 80px;
+    height: 35px;
+    background-color: #FFEBBA;
+    justify-content: center;
+    font-weight: 500;
+}
+
+.filebox:hover {
+	background-color: #FFB703;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#image {
+
+	display: none;
+}
+
+#image_container > img {
+	width: 50px;
+	margin-right: 8px;
+}
+
+.tag {
+	margin-left: -5px;
+    width: 100%;
+    border: none;
+}
 </style>
 
 <div class="wrap">
 
 <form action="/gallery/update" method="post" enctype="multipart/form-data">
 
-<input type="text" style="width: 100%;" id="galleryTitle" name="galleryTitle" class="gallerytitle" value="${updateGallery.galleryTitle }">
+<!-- 제목 -->
+<input type="text" style="width: 100%;" id="galleryTitle" name="galleryTitle" class="gallerytitle" value="${updateGallery.galleryTitle }" placeholder="제목을 입력하세요">
 <hr>
 
-<div id="fileBox">
+<!-- 파일첨부 -->
+<label for="image">
+	<div class="filebox">사진첨부</div>
+</label>
 
 	<div id="originFile">
 		<a href="/imagepath/${galleryFile.storedName }">${galleryFile.originName }</a>
-		<span id="deleteFile">X</span>
+		<a id="deleteFile">X</a>
 	</div>
 
 	<div id="newFile">
-		<label for="file">새로운 첨부파일</label>
-		<input type="file" id="file" name="file">
+		<label for="file">새 사진 첨부</label>
+		<input type="file" id="image" name="file" accept="image/*" onchange="setThumbnail(event)" multiple="multiple">
+		<div id="image_container"></div>
 	</div>
-	
-</div>
-	
+
+<script>
+      function setThumbnail(event) {
+        for (var image of event.target.files) {
+          var reader = new FileReader();
+
+          reader.onload = function(event) {
+            var img = document.createElement("img");
+            img.setAttribute("src", event.target.result);
+            document.querySelector("div#image_container").appendChild(img);
+          };
+
+          console.log(image);
+          reader.readAsDataURL(image);
+        }
+      }
+</script>
+
+<!-- 내용 -->
 <div id="editor" style="height:400px;">
 ${updateGallery.galleryContent }
 <input type="hidden" id="quill_html" name="galleryContent">
 </div>
 
 <br>
-<br>
-<span>지도 추가</span>
-<br>
+<span>장소 추가</span>
+<input type="text" id="address_kakao" name="galleryLoc" placeholder="${updateGallery.galleryLoc }" />
+<!-- <input type="text" name="address_detail" /> -->
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+window.onload = function(){
+    document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
+        //카카오 지도 발생
+        new daum.Postcode({
+            oncomplete: function(data) { //선택시 입력값 세팅
+                document.getElementById("address_kakao").value = data.address; // 주소 넣기
+//                 document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
+            }
+        }).open();
+    });
+}
+</script>
+
+<button type="button" id="searchBtn">검색</button>
+
+<div id="map"></div>
+
+	<!-- kakao API -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c7734a4a4f9eea96e74458a7dba40614&libraries=services"></script>
+	<script>
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+	// 버튼을 click했을때
+	$('#searchBtn').click(function(){
+	
+	$('#map').css({"width":"500px","height":"300px"})
+	
+	// 지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
+	
+	console.log($('#address_kakao').val());
+	
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch($('#address_kakao').val(), function(result, status) {
+
+	    // 정상적으로 검색이 완료됐으면 
+	     if (status === kakao.maps.services.Status.OK) {
+	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	        
+	        // 추출한 좌표를 통해 도로명 주소 추출
+	        let lat = result[0].y;
+	        let lng = result[0].x;
+	        getAddr(lat,lng);
+	        function getAddr(lat,lng){
+	            let geocoder = new kakao.maps.services.Geocoder();
+
+	            let coord = new kakao.maps.LatLng(lat, lng);
+	            let callback = function(result, status) {
+	                if (status === kakao.maps.services.Status.OK) {
+	                	// 추출한 도로명 주소를 해당 input의 value값으로 적용
+	                    $('#address_kakao').val(result[0].road_address.address_name);
+	                }
+	            }
+	            geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
+	        }
+	        
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	        var marker = new kakao.maps.Marker({
+	            map: map,
+	            position: coords
+	        });
+
+	        // 인포윈도우로 장소에 대한 설명을 표시합니다
+	        var infowindow = new kakao.maps.InfoWindow({
+	            content: '<div style="width:150px;text-align:center;padding:6px 0;">장소</div>'
+	        });
+	        infowindow.open(map, marker);
+
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	    } 
+	});  
+});
+</script>
 <br>
 
 <input placeholder="type tags" class="tag" type="hidden" name="gTag"><br>

@@ -7,7 +7,7 @@ public class AdminProduct {
 	private String uId;
 	private String uNick;
 	
-	//상품 리뷰
+	//상품
 	private int gId;
 	private String gName;
 	private int gPrice;

@@ -3,6 +3,7 @@ package hyeri.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -12,10 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
@@ -24,7 +26,6 @@ import hyeri.dto.GComment;
 import hyeri.dto.GTag;
 import hyeri.dto.Gallery;
 import hyeri.dto.GalleryFile;
-import hyeri.dto.GalleryLike;
 import hyeri.service.face.CommentService;
 import hyeri.service.face.GalleryService;
 import hyeri.util.Paging;
@@ -181,7 +182,7 @@ public class GalleryController {
 	
 //	게시글 수정 get
 	@GetMapping("/update")
-	public String update(Gallery viewGallery, Model model) {
+	public String update(Gallery viewGallery, GTag tag, Model model) {
 		logger.info("{}", viewGallery);
 		
 		//게시글 조회
@@ -191,23 +192,62 @@ public class GalleryController {
 		//모델값 전달
 		model.addAttribute("updateGallery", viewGallery);
 		
+		//태그 조회
+		List<GTag> list2 = null;
+		list2 = galleryService.viewTag(viewGallery.getGalleryNo());
+		
+		logger.info("태그 리스트 : {}", list2);
+		
+		//모델값 전달
+		model.addAttribute("updateTag", list2);
+		
 		//첨부파일 모델값 전달
 		GalleryFile galleryFile = galleryService.getAttachFile(viewGallery);
 		model.addAttribute("galleryFile", galleryFile);
 		
-		logger.info("updateGallery {}", viewGallery);
-		logger.info("galleryFile {}", galleryFile);
+//		logger.info("updateGallery {}", viewGallery);
+//		logger.info("galleryFile {}", galleryFile);
 		return "/gallery/update";
 	}
 	
 	
 //	게시글 수정 post
 	@PostMapping("/update")
-	public String updateProcess(Gallery viewGallery, MultipartFile file) {
+	public String updateProcess(Gallery viewGallery, MultipartFile file, HttpServletRequest req, String tag) {
 		logger.info("/update [POST]");
 		
-//		galleryService.update(viewGallery, file);
+		logger.info("viewGallery : {}", viewGallery);
+		logger.info("file : {}", file);
+		logger.info("tag : {}", tag);
 		
+//		태그가 있을 경우
+		if( tag != null && !tag.equals("") ) {
+			
+			JsonArray jsonArray = JsonParser.parseString(tag).getAsJsonArray();
+			logger.info("jsonArray {}", jsonArray );
+			
+			List<GTag> tagList = new ArrayList<GTag>();
+			
+			for( int i=0; i<jsonArray.size(); i++) {
+				String t = jsonArray.get(i).getAsJsonObject().get("value").getAsString();
+				logger.info("t {}", t);
+				
+				tagList.add( new GTag(0, t, 0) );
+			}
+			
+			logger.info("tagList {}", tagList);
+			
+			//게시글, 첨부파일, 태그
+			galleryService.update(viewGallery, file, tagList);
+			
+			
+//		태그가 없을 경우
+		} else {
+			galleryService.update2(viewGallery, file);
+		}
+		
+//		String referer = req.getHeader("Referer");
+//	    return "redirect:"+ referer;
 		return "redirect:/gallery/view?galleryNo=" + viewGallery.getGalleryNo();
 	}
 	
@@ -222,10 +262,30 @@ public class GalleryController {
 		return "redirect:./list";
 	}
 	
-//	게시글 검색
-	@PostMapping("/search")
-	public String search(String keywordInput, Model model) {
+//	게시글 신고
+	@ResponseBody
+	@RequestMapping("/reportt")
+	public int reportGallery(@RequestParam(value = "chbox[]") List<String> chArr, Gallery board) {
+		//logger.info("/reportt 주소 연결");
 		
+		int result = 0;
+		int select_data = 0;
+		 
+		for(String i : chArr) {   
+			select_data = Integer.parseInt(i);
+			board.setGalleryNo(select_data);
+			galleryService.report(board);
+		}
+		
+		result = 1;
+			  
+		return result; 
+	}
+	
+//	게시글 검색
+	
+	@PostMapping("/search")
+	public String searchPost(String keywordInput, Model model) {
 		logger.info("{}", "/search");
 		logger.info("{}", keywordInput);
 		
@@ -233,25 +293,37 @@ public class GalleryController {
 			
 			List<Gallery> gallery = galleryService.search(keywordInput);
 			
-			model.addAttribute("gallery", gallery);
-			
 			logger.info("검색결과 : {}", gallery);
 			
 			if( gallery.isEmpty() ) {
+				
+				logger.info("검색결과 없음");
+				
 				return "redirect:./search_not-found";
+				
+			} else {
+				
+				model.addAttribute("gallery", gallery);
+				logger.info("검색결과 있음 : {}", gallery);
+				return "redirect:./search_list?keywordInput=" + keywordInput;			
+				
 			}
 			
-			return "redirect:./search_list?keyword=" + keywordInput;
 
 		} else {
 		
+			logger.info("검색어 입력안함");
+			
 			return "redirect:./search_not-found";
 		}
-		
 	}
 	
 	@RequestMapping("/search_list")
-	public void searchList() {
+	public void searchList(String keywordInput, Model model) {
+		logger.info("{}", keywordInput);
+			
+		List<Gallery> gallery = galleryService.search(keywordInput);
+		model.addAttribute("gallery", gallery);
 		
 	}
 

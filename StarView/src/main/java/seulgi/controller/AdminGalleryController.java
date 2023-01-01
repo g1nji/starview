@@ -232,7 +232,7 @@ public class AdminGalleryController {
 	//게시글 신고
 	@ResponseBody
 	@RequestMapping("/reportt")
-	public int reportGallerysel(@RequestParam(value = "chbox[]") List<String> chArr, AdminGallery board) {
+	public int reportGallery(@RequestParam(value = "chbox[]") List<String> chArr, AdminGallery board) {
 		logger.info("/report 주소 연결");
 		
 		int result = 0;

@@ -26,13 +26,7 @@ $(document).ready(function() {
 
 </script>
 
-<style type="text/css">
-table {
-	table-layout: fixed;
-}
-</style>
-
-<h1>상품 리뷰 상세 조회</h1>
+<h1 style="text-align: center;">상품 리뷰 상세 조회</h1>
 <hr>
 
 <table class="table">

@@ -57,5 +57,10 @@ public class MypageController {
 		for( GComment c : clist ) logger.info("{}", c);
 		model.addAttribute("clist", clist);
 	}
+	
+	@RequestMapping("/orderList")
+	public void orderList() {
+		
+	}
 
 }

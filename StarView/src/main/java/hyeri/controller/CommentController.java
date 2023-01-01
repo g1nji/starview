@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import hyeri.dto.GComment;
 import hyeri.dto.Gallery;
@@ -73,13 +75,24 @@ public class CommentController {
 	    return "redirect:"+ referer;
 	}
 	
-	
-	
-//	덧글 신고
-	@PostMapping("/report")
-	public String cmReport() {
+	//댓글 신고 - /gallery/view에서
+	@ResponseBody
+	@RequestMapping("/reportt")
+	public int reportComment(@RequestParam String checkArr, GComment board) {
+		//logger.info("/reportt 주소 연결");
 		
-		return "";
+		int result = 0;
+		int select_data = 0;
+		 
+		select_data = Integer.parseInt(checkArr);
+		board.setCmNo(select_data);
+		
+		commentService.report(board);
+		
+		result = 1;
+			  
+		return result;  
 	}
+	
 	
 }

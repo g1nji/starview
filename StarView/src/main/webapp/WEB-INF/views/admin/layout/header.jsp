@@ -141,6 +141,7 @@ ul.nav > li > ul {
 	height: 60px;
 	width: 100%;
 	bottom: 0;
+	left:0;
 	padding: 20px 0;
 }
 
@@ -163,11 +164,84 @@ html .container {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #FCF8E3;
+  background-color: black;
 }
 
 ::-webkit-scrollbar-track {
   background-color: grey;
+}
+
+#datepicker {
+  width: 200px;
+  height: 40px;
+  font-size: 15px;
+  border: 0;
+  border-radius: 15px;
+  outline: none;
+  padding-left: 10px;
+  background-color: #F3F1F5;
+}
+
+#keyword {
+  width: 500px;
+  height: 40px;
+  font-size: 15px;
+  border: 0;
+  border-radius: 15px;
+  outline: none;
+  padding-left: 10px;
+  background-color: #F3F1F5;
+}
+
+.form-control {
+  width: 1150px;
+  height: 40px;
+  font-size: 15px;
+  border: 0;
+  border-radius: 15px;
+  outline: none;
+  padding-left: 10px;
+  background-color: #F3F1F5;
+}
+
+textarea {
+  width: 800px;
+  height: 300px;
+  font-size: 15px;
+  border: 0;
+  border-radius: 15px;
+  outline: none;
+  padding-left: 10px;
+  background-color: #F3F1F5;
+}
+
+select {
+	width: 150px; 
+	padding: 10px;
+	border: 1px solid #999;
+	font-family: inherit;  
+	border-radius: 0px; 
+}
+
+table {
+	margin-top: 20px;
+	table-layout: fixed;
+	border-collapse: collapse;
+    border-radius: 1em;
+    overflow: hidden;
+	border-radius:6px;
+	width: 1150px;
+    height: auto;
+}
+
+table, th {
+	text-align: center;
+	justify-content: center;
+	vertical-align: middle;
+}
+
+td:nth-child(2) {
+	text-align: left;
 }
 
 </style>
@@ -202,8 +276,8 @@ html .container {
 			<ul>
 				<li><a href="../gallery/list">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;회원 글 조회</a></li>
 				<li><a href="../comment/list">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;회원 댓글 조회</a></li>
-				<li><a href="../gallery/report">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;신고 글 조회</a></li>
-				<li><a href="../comment/report">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;신고 댓글 조회</a></li>
+				<li><a href="../report/boardList">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;신고 글 조회</a></li>
+				<li><a href="../report/commList">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;신고 댓글 조회</a></li>
 			</ul>
 		</li>
 			<br>

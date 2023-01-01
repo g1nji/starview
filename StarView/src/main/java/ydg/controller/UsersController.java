@@ -61,12 +61,14 @@ public class UsersController {
 			
 			//유저 닉네임 조회
 			String uNick = usersService.finduNick(users);
-			
 			logger.info("{}", uNick);
+			
+			//유저 이름 조회
+			String uName = usersService.findName(users);
 			
 			session.setAttribute("uId", users.getuId());
 			session.setAttribute("uNick", uNick);
-			session.setAttribute("uName", users.getuName());
+			session.setAttribute("uName", uName);
 			
 			//쿠키 저장
 			Cookie cookie = new Cookie("userInputId", users.getuId());
