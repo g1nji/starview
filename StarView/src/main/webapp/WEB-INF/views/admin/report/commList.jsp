@@ -84,7 +84,8 @@ $(document).ready(function() {
 		 });
 		</script>
 		
-		<td><a href="/gallery/view?galleryNo=${c.galleryNo }">${c.cmNo }</td>
+		<td><a href="../gallery/view?galleryNo=${c.galleryNo }">${c.cmNo }<br>
+		<a href="/gallery/view?galleryNo=${c.galleryNo }"><button class="btn btn-default btn-xs">댓글 확인</button></td>
 		<td>${c.reportDate }</td>
 	</tr>
 </c:forEach>

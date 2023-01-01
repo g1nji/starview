@@ -84,7 +84,8 @@ $(document).ready(function() {
 		 });
 		</script>
 		
-		<td><a href="../gallery/view?galleryNo=${b.galleryNo }">${b.galleryNo }</td>
+		<td><a href="../gallery/view?galleryNo=${b.galleryNo }">${b.galleryNo }<br>
+		<a href="/gallery/view?galleryNo=${b.galleryNo }"><button class="btn btn-default btn-xs">게시글 확인</button></td>
 		<td>${b.reportDate }</td>
 	</tr>
 </c:forEach>
