@@ -75,7 +75,7 @@ h2 {
 <c:if test="${uId ne null }">
 ${uNick }님의 주문이 완료되었습니다.<br>
 </c:if>
-주문확인 번호는 <span style="color:#FFB703;">${perchantUid }</span> 입니다.<br>
+주문확인 번호는 <span style="color:#FFB703;">${OrderList.perchantUid }</span> 입니다.<br>
 </div>
 
 <h3>주문요약정보</h3>
