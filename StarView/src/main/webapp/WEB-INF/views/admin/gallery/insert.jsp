@@ -38,10 +38,14 @@ $(document).ready(function() {
 	<input type="text" id="cateCode" name="cateCode" class="form-control">
 </div> -->
 
-<!-- 아이디 불러오도록 수정 -->
 <div class="form-group">
 	<label for="uId">작성자</label>
 	<input type="text" id="uId" name="uId" class="form-control">
+</div>
+
+<div class="form-group">
+	<label for="uNick">닉네임</label>
+	<input type="text" id="uNick" name="uNick" class="form-control">
 </div>
 
 <div class="form-group">
