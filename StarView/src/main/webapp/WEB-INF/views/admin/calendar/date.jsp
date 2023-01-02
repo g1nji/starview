@@ -45,6 +45,8 @@ $(document).ready(() => {
 				, numOfRows: "10"
 				, regId: $('input[name="regId"]:checked').val()
 				//, tmFc: document.getElementById('Date').value
+				//하지만 10월 이후일 때 또 수정해야 함...
+				//지금은 머리가 안 돌아가네요...
 				, tmFc: caseHour(hour)
 				//, tmFc: 202212311800
 			},
@@ -244,7 +246,8 @@ console.log(date+3);
 
 //오늘 날짜
 //10월 이하면 0이 추가되도록해야 함
-var ymd = year + "" + month + "" +date;
+//하지만 귀찮다 일단 0을 추가해서 사용하고 나중에 고치자...
+var ymd = year + "0" + month + "0" +date;
 var ymd3 = year + "/" + month + "/" + date;
 
 //어제 날짜
