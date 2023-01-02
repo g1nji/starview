@@ -210,6 +210,14 @@
     background-color: transparent;
 }
 
+#recombtn {
+	position: relative;
+    border: none;
+    background-color: transparent;
+    float: right;
+    left: 380px;
+    top: 15px;
+}
 
 
 </style>
@@ -430,6 +438,9 @@ $(document).ready(function() {
 
 <!-- 캘린더 폼 띄우기 -->
 	<div id="calendarForm" ></div>
+	<button id="recombtn" class="btn btn-defalut" 
+	onclick="window.open('http://localhost:8888/admin/calendar/list2','추천일 조회','width=500,height=500,top=500px,left=500px');">
+	⭐</button>
 	
 <!-- todolist 폼 -->
 	<div id="todolist" style="display:none;">

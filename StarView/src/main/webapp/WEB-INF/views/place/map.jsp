@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <body>
-	<div id="map" style="width:500px;height:400px;"></div>
+	<div id="map" style="width:500px;height:400px;top: 50px; left: 50px;"></div>
 	
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f07fd274b828fac20dcda324b400f383"></script>
 	

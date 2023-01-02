@@ -12,31 +12,110 @@
 
 <style type="text/css">
 
+/* 지역 선택하기 */
 #locDiv {
-	width: 371px;
-	height: 500px;
-	float:right;
-    right: 115px;
+    width: 371px;
+    height: 500px;
+	top: 10px;
+    left: 100px;
+    margin-bottom: 30px;
     position: relative;
+    /* float: right; */
 }
+
+/* 지도화면 */
 .locBg {
 	background-image:url("/resources/starImg/sunset_map.png");
 }
-
+/* label 위치 조정하기 위해 position 설정 */
 label {
 	position: relative;
+
 }
 
+/* 폰트 색 white로 변경 */
 span {
 	color: white;
+	vertical-align: middle;
 }
 
+/* 라디오 버튼 수정 */
+
+[type="radio"] {
+	vertical-align: middle;
+ 	appearance: none;
+	border: 1px solid white;
+	background-color: white;
+	border-radius: 50%;
+	width: 10px;
+	height: 10px;
+}
+
+[type="radio"]:checked {
+	background-color: #FFB703;
+	border: 1px solid #FFB703;
+}
+
+[type="radio"]:focus-visible {
+  outline-offset: max(2px, 0.1em);
+  outline: max(2px, 0.1em) dotted #FFEBBA;
+  cursor: pointer;
+}
+
+/* 지역/날짜 선택 글씨 수정 */
+.selectH {
+position: relative;
+color: #696966;
+}
+
+/* 날짜 선택하기 */
+#selectDate {
+	width: 158px;
+    height: 320px;
+    float: right;
+    right: 176px;
+    position: relative;
+}
+
+#btn {
+	position: relative;
+    width: 125px;
+    height: 26px;
+    float: right;
+    right: 203px;
+    bottom: 520px;
+    border: 0;
+    border-radius: 4px;
+    color: #696969;
+    background-color: #FFEBBA;
+}
+
+#btn:hover {
+	color: #FFB703;
+}
+/* 출력될 글자 */
+
+#locTr {
+	color: #4c4c4c;
+    font-weight: 700;
+    font-size: 15px;
+    position: relative;
+    bottom: 403px;
+    left: 638px;
+    padding: 33px;
+    display: flex;
+    background-color: #fbebb9;
+    border-radius: 7px;
+    border: 1px solid #fbebb9;
+    box-shadow: 3px 3px 3px #c8bfbf;
+}
 
 </style>
 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
@@ -132,10 +211,10 @@ $(document).ready(() => {
 						return "&nbsp;" +h + "시&nbsp;" + m + "분&nbsp; 입니다"
 					};
 					
-					$("<tr>")
+					$("<tr id='locTr'>")
 					.append(locdate)
 // 					.append( $("<td>").html($(row).find("locdate").text() ) )
-					.append( $("<td>").html($(row).find("location").text() +"의 일몰 시간은" ) )
+					.append( $("<td id=<'locTd'>").html($(row).find("location").text() +"의 일몰 시간은" ) )
 // 					.append( $("<td>").html($(row).find("longitude").text() ) )-
 // 					.append( $("<td>").html($(row).find("latitude").text() ) )
 // 					.append( $("<td>").html($(row).find("sunset").text() ) )
@@ -158,128 +237,135 @@ $(document).ready(() => {
 </head>
 <body>
 
-<h1>일몰 시간 나타내기</h1>
+<h1 style="position: relative; left: 80px; color: #505050;">일몰 시간 확인</h1>
 
-<h4>날짜 선택</h4>
-<input type="text" id="Date" style="width:80px;">
 
+<div id="selectDate">
+<h2 class="selectH" style="top: 16px; right: 154px; text-shadow: 1px 1px 2px #cecece;">날짜 선택</h2>
+<hr style= "position: relative; top: -1px; right: 160px; width: 350px; border-color: #a3a1a154;">
+<input type="text" id="Date" style="width:135px; position: relative; right: 150px;" placeholder="날짜를 선택해주세요"/>
+</div>
+
+
+<div>
+<h2 class="selectH" style="left: 117px; top: 27px; text-shadow: 1px 1px 2px #cecece;">지역 선택</h2>
+<hr style= "position: relative; top: 9px; right: 202px; width: 350px; border-color: #a3a1a185;">
+</div>
 
 <div class="locBg" id="locDiv">
-<h4>지역 선택</h4>
-
-<label for="loc1" style="top:30px; left:212px;">
+<label for="loc1" style="top:73px; left:214px;">
 <span>강릉</span>
 <input type="radio" name="location" id="loc1" value="강릉">
 </label>
 
-<label for="loc2" style="top:83px; left:40px;">
+<label for="loc2" style="top:127px; left:45px;">
 <input type="radio" name="location" id="loc2" value="강화도">
 <span>강화도</span>
 </label>
 
-<label for="loc3" style="top:68px; left:89px;">
+<label for="loc3" style="top:99px; left:104px;">
 <input type="radio" name="location" id="loc3" value="대관령">
 <span>대관령</span>
 </label>
 
-<label for="loc4" style="top:230px; left:44px;">
+<label for="loc4" style="top:272px; left:64px;">
 <input type="radio" name="location" id="loc4" value="대구">
 <span>대구</span>
 </label>
 
-<label for="loc5" style="top:298px; left:18px;">
-<input type="radio" name="location" id="loc5" value="부산">
+<label for="loc5" style="top:327px; left:21px;">
 <span>부산</span>
+<input type="radio" name="location" id="loc5" value="부산">
 </label>
 
-<label for="loc6" style="top:60px; right: 140px;">
+<label for="loc6" style="top:101px; right: 124px;">
 <input type="radio" name="location" id="loc6" value="서울">
 <span>서울</span>
 </label>
 
-<label for="loc7" style="top:7px; right:110px;">
+<label for="loc7" style="top:44px; right:81px;">
 <span>양양</span>
 <input type="radio" name="location" id="loc7" value="양양">
 </label>
 
-<label for="loc8" style="top:54px; left:154px;">
+<label for="loc8" style="top:114px; right:170px;">
 <input type="radio" name="location" id="loc8" value="양평">
 <span>양평</span>
 </label>
 
-<label for="loc9" style="top:73px; left:188px;">
+<label for="loc9" style="top:109px; left:230px;">
 <input type="radio" name="location" id="loc9" value="태백">
 <span>태백</span>
 </label>
 
-<label for="loc10" style="top:236px; left:28px;">
+<label for="loc10" style="top:274px; left:82px;">
 <input type="radio" name="location" id="loc10" value="남원">
 <span>남원</span>
 </label>
 
-<label for="loc11" style="top:395px; right:55px;">
+<label for="loc11" style="top:435px; right:10px;">
 <input type="radio" name="location" id="loc11" value="제주">
 <span>제주</span>
 </label>
 
-<label for="loc12" style="top:46px; left:140px;">
+<label for="loc12" style="top:82px; left:195px;">
 <input type="radio" name="location" id="loc12" value="울릉도">
 <span style="color: black;">울릉도</span>
 </label>
 
-<label for="loc13" style="top:80px; left:101px;">
+<label for="loc13" style="top:117px; left:159px;">
 <input type="radio" name="location" id="loc13" value="독도">
 <span style="color: black;">독도</span>
 </label>
 
-<label for="loc14" style="top:284px; right:112px;">
+<label for="loc14" style="top:331px; right:43px;">
 <input type="radio" name="location" id="loc3" value="진주">
 <span>진주</span>
 </label>
 
-<label for="loc3" style="top:88px; left:97px;">
+<label for="loc3" style="top:144px; right: 141px;">
 <input type="radio" name="location" id="loc3" value="천안">
 <span>천안</span>
 </label>
 
-<label for="loc3" style="top:114px; left:81px;">
+<label for="loc3" style="top: 177px; right: 185px;">
 <input type="radio" name="location" id="loc3" value="대전">
 <span>대전</span>
 </label>
 
-<label for="loc3" style="top:203px; left:155px;">
+<label for="loc3" style="top:246px; left:235px;">
 <span>울산</span>
 <input type="radio" name="location" id="loc14" value="울산">
 </label>
 
-<label for="loc15" style="top:178px; right:20px;">
+<label for="loc15" style="top:223px; left:68px;">
 <input type="radio" name="location" id="loc15" value="전주">
 <span>전주</span>
 </label>
 
-<label for="loc16" style="top:43px; left:5px;">
+<label for="loc16" style="top:78px; left:104px;">
 <input type="radio" name="location" id="loc16" value="영월">
 <span>영월</span>
 </label>
 
-<label for="loc17" style="top:241px; right:137px;">
-<input type="radio" name="location" id="loc17" value="광주">
+<label for="loc17" style="top:278px; right:61px;">
 <span>광주</span>
+<input type="radio" name="location" id="loc17" value="광주">
 </label>
 
-<label for="loc18" style="top:164px; right:19px;">
+<label for="loc18" style="top:191px; left: 73px;">
 <span>포항</span>
 <input type="radio" name="location" id="loc18" value="포항">
 </label>
 
-<label for="loc19" style="top:303px; right:205px;">
+<label for="loc19" style="top:339px; right:92px;">
 <span>여수</span>
 <input type="radio" name="location" id="loc19" value="여수">
 </label>
 
-</div>
+</div> <!-- 지역선택 전체 div 끝 -->
 
-<button id="btn">일몰시간 출력하기</button>
+<button id="btn">일몰시간 확인</button>
 
 <div id="resultLayout"></div>
 

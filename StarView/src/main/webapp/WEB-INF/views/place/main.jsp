@@ -20,17 +20,47 @@ $(document).ready(function() {
 	
 </script>
 
+<style type="text/css">
+p {
+	margin: 0 10px 10px 10px;
+    top: 4px;
+    position: relative;
+}
+
+#Ptable {
+	background-color: transparent;
+    position: relative;
+    bottom: 378px;
+	right: 30px;
+    float: right;
+/*     border-collapse: separate; */
+/*     border: 2px solid #535353; */
+/*     border-radius: 5px; */
+    color: #535353;
+    font-size: 15px;
+}
+
+span {
+    font-size: 12px;
+    bottom: 3px;
+    position: relative;
+    margin-left: 10px;
+}
+
+tr:hover {
+	background-color: #FFEBBA;
+}
+
+</style>
 </head>
 
 <body>
 
-<h1>명소 목록 조회</h1>
-
-<table>
+<h2 style="position: relative; bottom: 416px; left: 70px; color: #535353;">🌠 별 사진 명소</h2>
+<h4 style=" float: right; bottom: 422px; right: 475px; position: relative; color: #535353;">추천 명소</h4>
+<table id="Ptable">
 <thead>
 <tr>
-<!-- 	<th>번호</th> -->
-	<th>명소</th>
 </tr>	
 </thead>
 
@@ -39,9 +69,9 @@ $(document).ready(function() {
 
 <tr>
 <%-- 	<td>${StarPlace.arrivalNum }</td> --%>
-	<td><a href="/place/view?arrivalNum=${StarPlace.arrivalNum }">${StarPlace.arrival }</a></td>
+	<td><span>⭐	</span><a href="/place/view?arrivalNum=${StarPlace.arrivalNum }">${StarPlace.arrival }</a></td>
 	<td><p>${StarPlace.pAdr }</p></td>
-	<td><a href="https://map.kakao.com/link/to/${StarPlace.arrival },${StarPlace.eLttd },${StarPlace.eLngtd }">길찾기</a></td>
+	<td><a style="margin-right: 10px;" href="https://map.kakao.com/link/to/${StarPlace.arrival },${StarPlace.eLttd },${StarPlace.eLngtd }">길찾기</a></td>
 <!-- 	<td><button id="findplace" type="button" onclick="">편의시설 조회</button></td> -->
 </tr>
 
