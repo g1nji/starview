@@ -45,7 +45,7 @@
 		<td>
 			<a href="./view?sreviewNo=${b.sreviewNo }">${b.sreviewContent }</a>
 			<br>
-			<a href="/place/view?sreviewNo=${b.sreviewNo }">게시글로 이동</a>
+			<a href="/place/view?arrivalNum=${b.arrivalNum }"><button class="btn btn-default btn-xs">게시글 확인</button></a>
 		</td>
 		<td><fmt:formatDate value="${b.sreviewDate }" pattern="yy-MM-dd HH:mm:ss"/></td>
 	</tr>
