@@ -276,7 +276,6 @@ function validatePW( uPw ) {
 					    toastr.options.positionClass = "toast-bottom-center";
 						toastr.warning('중복된 닉네임입니다!','닉네임 중복', {timeOut: 5000}); 
 					}else{
-					/* 	$("#nickmsg").text("사용 가능") */
 						toastr.options.escapeHtml = true;
 					    toastr.options.newestOnTop = true;
 					    toastr.options.positionClass = "toast-bottom-center";
