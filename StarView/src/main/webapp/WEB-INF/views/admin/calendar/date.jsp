@@ -45,8 +45,8 @@ $(document).ready(() => {
 				, numOfRows: "10"
 				, regId: $('input[name="regId"]:checked').val()
 				//, tmFc: document.getElementById('Date').value
-				//, tmFc: caseHour(hour)
-				, tmFc: 202212311800
+				, tmFc: caseHour(hour)
+				//, tmFc: 202212311800
 			},
 			dataType: "xml",
 			success: res=>{
@@ -243,11 +243,14 @@ console.log(date);
 console.log(date+3);
 
 //오늘 날짜
+//10월 이하면 0이 추가되도록해야 함
 var ymd = year + "" + month + "" +date;
 var ymd3 = year + "/" + month + "/" + date;
 
 //어제 날짜
-var ymd2 = year + "" + month + "" + (date-1);
+//10월 이하면 0이 추가되도록해야 함
+//하지만 귀찮다 일단 0을 추가해서 사용하고 나중에 고치자...
+var ymd2 = year + "0" + month + "0" + (date-1);
 
 console.log(ymd +" ::: " + ymd3 + " ::: " + ymd2);
 

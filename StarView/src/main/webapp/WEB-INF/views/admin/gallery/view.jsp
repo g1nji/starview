@@ -151,6 +151,8 @@ $(document).ready(function() {
 <!-- 
 <button id="btnReport" class="btn btn-primary" style="display: inline-block;" value="${viewBoard.galleryNo }" select_data="${viewBoard.galleryNo }">신고</button>
  -->
+<button id="btnList" class="btn btn-default" style="display: inline-block;">목록</button>
+ 
 <button id="btnDelete" class="btn btn-danger" style="display: inline-block;">삭제</button>
 </div>
 
@@ -166,7 +168,6 @@ $(document).ready(function() {
 				<!-- 
 				<button type="button" class="report_btn btn-primary btn-sm" value="${c.cmNo }" select_data="${c.cmNo }">신고</button>
 				 -->
-				
 				<button type="button" class="delete_btn btn-danger btn-sm" value="${c.cmNo }" select_data="${c.cmNo }">삭제</button>
 			</td>
 		</tr>
