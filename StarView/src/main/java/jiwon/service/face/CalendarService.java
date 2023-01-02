@@ -21,6 +21,13 @@ public interface CalendarService {
 	
 	public List<Calendar> sDateTodolist(String sDate);
 
+	/**
+	 * 선택한 게시글 삭제하기
+	 * @param sNo
+	 */
+	public void delete(int sNo);
+
+
 //	/**
 //	 * 조회할 게시글 번호 객체
 //	 * 
