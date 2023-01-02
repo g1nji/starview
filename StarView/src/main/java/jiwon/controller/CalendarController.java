@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -66,6 +67,7 @@ public class CalendarController<TodolistData> {
 			cal.setuId( (String) session.getAttribute("uId"));
 			cal.setTodoList(calMap.get("todoList").toString());
 			cal.setsDate(calMap.get("sDate").toString());
+//			cal.setsNo( (int) calMap.get("sNo") );
 			
 			calendarservice.write(cal); 
 			List<Calendar> todoList = calendarservice.sDateTodolist(calMap.get("sDate").toString());
@@ -80,6 +82,30 @@ public class CalendarController<TodolistData> {
 		return map;
 	}
 
-	
+	@ResponseBody
+	@RequestMapping("/delete")
+	public Map<String, Object> delete(@RequestParam int sNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+			logger.info("/delete/");
+			logger.info("sNo {}", sNo);
+			
+		try {
+			Calendar calendar = new Calendar();
+			
+			calendar.setsNo(sNo);
+			calendarservice.delete(sNo);
+			
+			map.put("sNo", sNo);
+			map.put("result", "success");
+		}catch(Exception e) {
+			e.printStackTrace();
+			map.put("result", false);
+		}
+		
+//		return "redirect:/calendar/listview";
+		return map;
+		
+	}
 	
 }
